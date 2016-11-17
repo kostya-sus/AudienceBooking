@@ -3,6 +3,7 @@
 **/App_Data
 *.dbmdl
 *.log
+*.jfm
 
 *.suo
 *.user
