@@ -1,6 +1,7 @@
 **/packages
 **/.vs
 **/App_Data
+*.dbmdl
 
 *.suo
 *.user
