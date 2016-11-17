@@ -2,6 +2,7 @@
 **/.vs
 **/App_Data
 *.dbmdl
+*.log
 
 *.suo
 *.user
