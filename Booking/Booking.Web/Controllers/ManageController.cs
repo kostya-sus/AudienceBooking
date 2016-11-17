@@ -3,10 +3,10 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
+using Booking.Web.ViewModels.Manage;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
-using Booking.Web.Models;
 
 namespace Booking.Web.Controllers
 {
