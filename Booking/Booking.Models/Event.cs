@@ -1,3 +1,5 @@
+using Booking.Enums;
+
 namespace Booking.Models
 {
     using System;
@@ -31,7 +33,7 @@ namespace Booking.Models
 
         public bool IsPublic { get; set; }
 
-        public int AudienceId { get; set; }
+        public Rooms AudienceId { get; set; }
 
         public bool IsAuthorShown { get; set; }
 

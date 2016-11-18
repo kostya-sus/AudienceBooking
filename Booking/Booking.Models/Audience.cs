@@ -1,3 +1,5 @@
+using Booking.Enums;
+
 namespace Booking.Models
 {
     using System.Collections.Generic;
@@ -13,7 +15,7 @@ namespace Booking.Models
         }
 
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
-        public int Id { get; set; }
+        public Rooms Id { get; set; }
 
         public int SeatsCount { get; set; }
 
