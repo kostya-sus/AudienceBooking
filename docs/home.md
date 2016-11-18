@@ -29,7 +29,9 @@ and received popup is rendered on the page.
 * If user clicks on free cell, popup for new event creation is shown.
  * ajax GET request to /Event/CreateNew is sent.
  * received partial view is rendered into popup.
+ 
 ___
+
 ## Requests
 <a name="get_index">
 * GET /Home/Index
