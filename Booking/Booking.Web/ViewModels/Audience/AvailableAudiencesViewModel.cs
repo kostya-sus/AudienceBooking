@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
 using Booking.Enums;
 
-namespace Booking.Web.ViewModels.Home
+namespace Booking.Web.ViewModels.Audience
 {
-    public class AvailableRoomsViewModel
+    public class AvailableAudiencesViewModel
     {
         public IEnumerable<Rooms> AvailableRooms { get; set; }
     }

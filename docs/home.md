@@ -6,7 +6,7 @@ ___
 ajax GET request to
 [/Home/GetDaySchedule/{date}](#get_dayschedule)
 is sent,
-[DayScheduleViewModel](..\Booking\Booking.Web\ViewModels\Home\DayScheduleViewModel.cs)
+[DayScheduleViewModel](https://github.com/anshox/AudienceBooking/blob/contracts-definitions/Booking/Booking.Web/ViewModels/Home/DayScheduleViewModel.cs)
  is received and
 received events information is rendered to the schedule table, slider position is set.
 * Slider movements are handled by JS/jQuery code (changes rooms colors on room map, horizontally scrolls
@@ -14,7 +14,7 @@ schedule table contents if needed and adds "Now" button if static "now" slider h
 * When user hovers onto the audience at the room map, ajax GET request to
 [/Audience/GetAudienceInfo/{audienceId}](#get_audienceinfo)
 is sent and received
-[AudienceInfoViewModel](..\Booking\Booking.Web\ViewModels\Audience\AudienceInfoViewModel.cs)
+[AudienceInfoViewModel](https://github.com/anshox/AudienceBooking/blob/contracts-definitions/Booking/Booking.Web/ViewModels/Audience/AudienceInfoViewModel.cs)
 is rendered.
 * When user clicks on the audience at the room map, he gets redirected to /Audience/{audienceId}
 * When user clicks on event at the schedule table, ajax GET request to
@@ -35,18 +35,18 @@ ___
 * GET /Home/Index
 </a>
  * Returns whole page with layout.
- * Razor engine uses passed [AvailableRoomsViewModel](..\Booking\Booking.Web\ViewModels\Home\AvailableRoomsViewModel.cs)
+ * Razor engine uses passed [AvailableAudiencesViewModel](https://github.com/anshox/AudienceBooking/blob/contracts-definitions/Booking/Booking.Web/ViewModels/Audience/AvailableAudiencesViewModel.cs)
  to render empty schedule table with headers and row names.
 <a name="get_dayschedule">
 * GET /Home/GetDaySchedule/{date}
 </a>
- * Returns JSON (serialized [DayScheduleViewModel](..\Booking\Booking.Web\ViewModels\Home\DayScheduleViewModel.cs)).
+ * Returns JSON (serialized [DayScheduleViewModel](https://github.com/anshox/AudienceBooking/blob/contracts-definitions/Booking/Booking.Web/ViewModels/Home/DayScheduleViewModel.cs)).
 <a name="get_audienceinfo">
 * GET /Audience/GetAudienceInfo/{audienceId}
 </a>
- * Returns JSON (serialized [AudienceInfoViewModel](..\Booking\Booking.Web\ViewModels\Audience\AudienceInfoViewModel.cs)).
+ * Returns JSON (serialized [AudienceInfoViewModel](https://github.com/anshox/AudienceBooking/blob/contracts-definitions/Booking/Booking.Web/ViewModels/Audience/AudienceInfoViewModel.cs)).
 <a name="get_displayeventpopup">
 * GET /Event/DisplayEventPopup
 </a>
- * Returns PartialView, rendered using a [DisplayEventPopupViewModel](..\Booking\Booking.Web\ViewModels\Event\DisplayEventPopupViewModel.cs).
+ * Returns PartialView, rendered using a [DisplayEventPopupViewModel](https://github.com/anshox/AudienceBooking/blob/contracts-definitions/Booking/Booking.Web/ViewModels/Event/DisplayEventPopupViewModel.cs).
  * If user is logged in and is author of the event, edit and cancel buttons are rendered too.
