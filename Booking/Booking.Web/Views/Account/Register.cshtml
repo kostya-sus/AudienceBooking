@@ -1,6 +1,8 @@
-﻿@model Booking.Web.Models.RegisterViewModel
+﻿@using Booking.Web.Localization
+@model Booking.Web.Models.RegisterViewModel
 @{
-    ViewBag.Title = "Register";
+    ViewBag.Title = @Localization.Register;
+    ViewBag.ActiveLink = "Register";
 }
 
 <h2>@ViewBag.Title.</h2>
