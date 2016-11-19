@@ -17,6 +17,8 @@ namespace Booking.Models
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public Rooms Id { get; set; }
 
+        public string Name { get; set; }
+
         public int SeatsCount { get; set; }
 
         public int BoardsCount { get; set; }

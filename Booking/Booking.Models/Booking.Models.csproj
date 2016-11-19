@@ -72,6 +72,10 @@
     <Compile Include="Migrations\201611191020341_Event_Added_IsJoinAvailable_Field.Designer.cs">
       <DependentUpon>201611191020341_Event_Added_IsJoinAvailable_Field.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201611191046367_Audience_Name_Attr_Added.cs" />
+    <Compile Include="Migrations\201611191046367_Audience_Name_Attr_Added.Designer.cs">
+      <DependentUpon>201611191046367_Audience_Name_Attr_Added.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -91,6 +95,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201611191020341_Event_Added_IsJoinAvailable_Field.resx">
       <DependentUpon>201611191020341_Event_Added_IsJoinAvailable_Field.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201611191046367_Audience_Name_Attr_Added.resx">
+      <DependentUpon>201611191046367_Audience_Name_Attr_Added.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

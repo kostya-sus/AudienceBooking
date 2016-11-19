@@ -182,9 +182,10 @@
     <Compile Include="ViewModels\Account\ResetPasswordViewModel.cs" />
     <Compile Include="ViewModels\Account\SendCodeViewModel.cs" />
     <Compile Include="ViewModels\Account\VerifyCodeViewModel.cs" />
-    <Compile Include="ViewModels\Audience\AudienceInfoViewModel.cs" />
+    <Compile Include="ViewModels\Audience\AudienceViewModel.cs" />
     <Compile Include="ViewModels\Event\CreateEditEventViewModel.cs" />
     <Compile Include="ViewModels\Audience\AvailableAudiencesViewModel.cs" />
+    <Compile Include="ViewModels\Event\DisplayEventViewModel.cs" />
     <Compile Include="ViewModels\Home\DayScheduleViewModel.cs" />
     <Compile Include="ViewModels\Home\DaySheduleItemViewModel.cs" />
     <Compile Include="ViewModels\Event\DisplayEventPopupViewModel.cs" />

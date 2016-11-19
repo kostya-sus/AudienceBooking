@@ -1,8 +1,9 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace Booking.Web.ViewModels.Event
 {
-    public class DisplayEventPopupViewModel
+    public class DisplayEventViewModel
     {
         public Guid Id { get; set; }
 
@@ -19,5 +20,7 @@ namespace Booking.Web.ViewModels.Event
         public int ParticipantsCount { get; set; }
 
         public bool IsJoinAvailable { get; set; }
+
+        public IEnumerable<string> ParticipantsEmails { get; set; }
     }
 }
