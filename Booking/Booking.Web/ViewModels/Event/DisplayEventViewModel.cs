@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using Booking.Enums;
+using Booking.Web.ViewModels.Audience;
 
 namespace Booking.Web.ViewModels.Event
 {
@@ -24,5 +26,7 @@ namespace Booking.Web.ViewModels.Event
         public IEnumerable<string> ParticipantsEmails { get; set; }
 
         public bool CanEdit { get; set; }
+
+        public AudiencesNamesViewModel AudiencesNames { get; set; }
     }
 }

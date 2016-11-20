@@ -35,7 +35,7 @@ namespace Booking.Models
 
         public bool IsJoinAvailable { get; set; }
 
-        public Rooms AudienceId { get; set; }
+        public Audiences AudienceId { get; set; }
 
         public bool IsAuthorShown { get; set; }
 

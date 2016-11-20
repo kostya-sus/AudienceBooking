@@ -3,8 +3,8 @@ using Booking.Enums;
 
 namespace Booking.Web.ViewModels.Audience
 {
-    public class AvailableAudiencesViewModel
+    public class AudiencesNamesViewModel
     {
-        public IEnumerable<Rooms> AvailableRooms { get; set; }
+        public IDictionary<Audiences, string> Names { get; set; }
     }
 }

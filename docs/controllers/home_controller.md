@@ -6,7 +6,7 @@
 * GET /Home/Index
 </a>
  * Returns ViewResult.
- * Razor engine uses passed [AvailableAudiencesViewModel](https://github.com/anshox/AudienceBooking/blob/contracts-definitions/Booking/Booking.Web/ViewModels/Audience/AvailableAudiencesViewModel.cs)
+ * Razor engine uses passed [HomeViewModel](https://github.com/anshox/AudienceBooking/blob/contracts-definitions/Booking/Booking.Web/ViewModels/Audience/HomeViewModel.cs)
  to render empty schedule table with headers and row names.
  * Divs that represent the rooms contain links to corresponding views.
  If the user is admin, all rooms have such links, otherwise - only available for booking rooms have it.

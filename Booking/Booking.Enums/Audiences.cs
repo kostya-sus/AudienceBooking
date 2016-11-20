@@ -1,6 +1,6 @@
 ﻿namespace Booking.Enums
 {
-    public enum Rooms
+    public enum Audiences
     {
         HrOffice = 0,
         EinsteinClassroom = 1,

@@ -27,7 +27,8 @@ is sent and if user can view information about this event, popup is received and
  [/Event/{eventId}](controllers/event_controller.md#get_event)
  * If user enters email and clicks join button, email is validated and then ajax POST request to
  [/Event/Participate/{email}](controllers/event_controller.md#participate)
- is sent. If respond indicated fail, fail reason is displayed in popup dialog.
+ is sent. If respond indicated fail, fail reason is displayed in popup dialog. Otherwise
+ success message is displayed.
 
 ### Logged in user
 * If user clicks on free cell, popup for new event creation is shown.
@@ -37,6 +38,8 @@ is sent and if user can view information about this event, popup is received and
  [/Event/Create/{createEditEventViewModel}](controllers/event_controller.md#create) is sent after
  client-side validation.
 * If user is author of the opened in DisplayEventPopup event or admin, he can edit or cancel the event.
+ * When user changes audience or booking period, ajax GET request is sent to
+ [/Room/IsFree/{roomId, dateTime, duration}](controllers/audience_controller.md#is_free). If respond contains false, corresponding message is displayed.
  * If user clicks cancel button, DisplayEventPopup is hidden and yes/no dialog is shown. If user confirms cancelation, ajax DELETE request to
  [/Event/Cancel/{eventId}](controllers/event_controller.md#cancel) is sent,
  both popups are hidden, event removed from schedule. Otherwise yes/no dialog is hidden, DisplayEventPopup is shown.

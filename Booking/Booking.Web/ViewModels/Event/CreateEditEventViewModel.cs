@@ -1,4 +1,5 @@
 ﻿using System;
+using Booking.Web.ViewModels.Audience;
 
 namespace Booking.Web.ViewModels.Event
 {
@@ -14,8 +15,12 @@ namespace Booking.Web.ViewModels.Event
 
         public string AdditionalInfo { get; set; }
 
+        public bool IsAuthorShown { get; set; }
+
         public string AuthorName { get; set; }
 
         public bool IsJoinAvailable { get; set; }
+
+        public AudiencesNamesViewModel AvailableAudiences { get; set; }
     }
 }
