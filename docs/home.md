@@ -16,7 +16,7 @@ schedule table contents if needed and adds "Now" button if static "now" slider h
 * When user hovers onto the audience at the room map, ajax GET request to
 [/Audience/GetAudienceInfo/{audienceId}](controllers/audience_controller.md#get_audienceinfo)
 is sent and received
-[AudienceViewModel](https://github.com/anshox/AudienceBooking/blob/contracts-definitions/Booking/Booking.Web/ViewModels/Audience/AudienceViewModel.cs)
+[AudienceInfoViewModel](https://github.com/anshox/AudienceBooking/blob/contracts-definitions/Booking/Booking.Web/ViewModels/Audience/AudienceInfoViewModel.cs)
 is rendered.
 * When user clicks on the audience at the room map, he gets redirected to
 [/Audience/{audienceId}](controllers/audience_controller.md#get_audience)
@@ -39,7 +39,7 @@ is sent and if user can view information about this event, popup is received and
  client-side validation.
 * If user is author of the opened in DisplayEventPopup event or admin, he can edit or cancel the event.
  * When user changes audience or booking period, ajax GET request is sent to
- [/Room/IsFree/{roomId, dateTime, duration}](controllers/audience_controller.md#is_free). If respond contains false, corresponding message is displayed.
+ [/Audience/IsFree/{audienceId, dateTime, duration}](controllers/audience_controller.md#is_free). If respond contains false, corresponding message is displayed.
  * If user clicks cancel button, DisplayEventPopup is hidden and yes/no dialog is shown. If user confirms cancelation, ajax DELETE request to
  [/Event/Cancel/{eventId}](controllers/event_controller.md#cancel) is sent,
  both popups are hidden, event removed from schedule. Otherwise yes/no dialog is hidden, DisplayEventPopup is shown.
