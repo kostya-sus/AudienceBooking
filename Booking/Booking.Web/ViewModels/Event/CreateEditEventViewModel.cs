@@ -15,5 +15,7 @@ namespace Booking.Web.ViewModels.Event
         public string AdditionalInfo { get; set; }
 
         public string AuthorName { get; set; }
+
+        public bool IsJoinAvailable { get; set; }
     }
 }

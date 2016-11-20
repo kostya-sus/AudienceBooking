@@ -31,7 +31,7 @@ is sent and if user can view information about this event, popup is received and
 
 ### Logged in user
 * If user clicks on free cell, popup for new event creation is shown.
- * ajax GET request to [/Event/Create](controllers/event_controller.md#get_create) is sent.
+ * ajax GET request to [/Event/Create/{audienceId, eventDateTime, duration}](controllers/event_controller.md#get_create_audience_id) is sent.
  * received partial view is rendered into popup.
  * when the user clicks create button, ajax POST request to
  [/Event/Create/{createEditEventViewModel}](controllers/event_controller.md#create) is sent after
@@ -39,7 +39,7 @@ is sent and if user can view information about this event, popup is received and
 * If user is author of the opened in DisplayEventPopup event or admin, he can edit or cancel the event.
  * If user clicks cancel button, DisplayEventPopup is hidden and yes/no dialog is shown. If user confirms cancelation, ajax DELETE request to
  [/Event/Cancel/{eventId}](controllers/event_controller.md#cancel) is sent,
- both popups are hidden. Otherwise yes/no dialog is hidden, DisplayEventPopup is shown.
+ both popups are hidden, event removed from schedule. Otherwise yes/no dialog is hidden, DisplayEventPopup is shown.
  * If user clicks edit button, ajax GET request to
- [/Event/Edit/{eventId}](controllers/event_controller.md#edit) is sent, received partial view is displayed in popup. When user clicks save button, ajax POST request to
+ [/Event/EditPopup/{createEditEventViewModel}](controllers/event_controller.md#edit_popup) is sent, received partial view is displayed in popup. When user clicks save button, ajax POST request to
  [/Event/Save/{createEditEventViewModel}](controllers/event_controller.md#save) is sent after client-side validation.
