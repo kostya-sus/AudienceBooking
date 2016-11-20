@@ -14,5 +14,4 @@
 * GET /Home/GetDaySchedule/{date}
 </a>
  * Returns JSON (serialized [DayScheduleViewModel](https://github.com/anshox/AudienceBooking/blob/contracts-definitions/Booking/Booking.Web/ViewModels/Home/DayScheduleViewModel.cs)).
-<a name="get_audienceinfo">
  * Used to populate schedule table when [/Home/Index](#get_index) is loaded or chosen day is changed.

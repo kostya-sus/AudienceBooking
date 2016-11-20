@@ -42,9 +42,13 @@
  </a>
   * Checks whether the user has administrator rights. Returns 401/403 status code otherwise.
   * Returns partial view with edit form.
+  * Binded with
+[AudienceInfoViewModel](https://github.com/anshox/AudienceBooking/blob/contracts-definitions/Booking/Booking.Web/ViewModels/Audience/AudienceInfoViewModel.cs)
 
 <a name="save_audience">
 * POST /Audience/Save/{audienceInfoViewModel}
 </a>
  * Checks whether the user has administrator rights. Returns 401/403 status code otherwise.
- * Saves changes.
+ * Saves changes.  
+ * Binded with
+ [AudienceInfoViewModel](https://github.com/anshox/AudienceBooking/blob/contracts-definitions/Booking/Booking.Web/ViewModels/Audience/AudienceInfoViewModel.cs)
