@@ -1,3 +1,5 @@
+using Booking.Enums;
+
 namespace Booking.Models
 {
     using System;
@@ -8,7 +10,6 @@ namespace Booking.Models
     [Table("Event")]
     public class Event
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Event()
         {
             EventParticipants = new HashSet<EventParticipant>();
@@ -31,7 +32,9 @@ namespace Booking.Models
 
         public bool IsPublic { get; set; }
 
-        public int AudienceId { get; set; }
+        public bool IsJoinAvailable { get; set; }
+
+        public Audiences AudienceId { get; set; }
 
         public bool IsAuthorShown { get; set; }
 
@@ -42,8 +45,7 @@ namespace Booking.Models
         public string AdditionalInfo { get; set; }
 
         public virtual Audience Audience { get; set; }
-
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<EventParticipant> EventParticipants { get; set; }
+        
+        public ICollection<EventParticipant> EventParticipants { get; set; }
     }
 }

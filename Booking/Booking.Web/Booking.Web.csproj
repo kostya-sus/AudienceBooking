@@ -182,6 +182,19 @@
     <Compile Include="ViewModels\Account\ResetPasswordViewModel.cs" />
     <Compile Include="ViewModels\Account\SendCodeViewModel.cs" />
     <Compile Include="ViewModels\Account\VerifyCodeViewModel.cs" />
+    <Compile Include="ViewModels\Audience\AudienceInfoViewModel.cs" />
+    <Compile Include="ViewModels\Audience\AudienceScheduleItemViewModel.cs" />
+    <Compile Include="ViewModels\Audience\AudienceScheduleViewModel.cs" />
+    <Compile Include="ViewModels\Audience\AudiencesNamesViewModel.cs" />
+    <Compile Include="ViewModels\Audience\AudienceViewModel.cs" />
+    <Compile Include="ViewModels\Contact\ContactViewModel.cs" />
+    <Compile Include="ViewModels\Event\CreateEditEventViewModel.cs" />
+    <Compile Include="ViewModels\Event\DisplayEventViewModel.cs" />
+    <Compile Include="ViewModels\Event\EventEditViewModel.cs" />
+    <Compile Include="ViewModels\Home\DayScheduleViewModel.cs" />
+    <Compile Include="ViewModels\Home\DaySheduleItemViewModel.cs" />
+    <Compile Include="ViewModels\Event\DisplayEventPopupViewModel.cs" />
+    <Compile Include="ViewModels\Home\HomeViewModel.cs" />
     <Compile Include="ViewModels\Manage\AddPhoneNumberViewModel.cs" />
     <Compile Include="ViewModels\Manage\ChangePasswordViewModel.cs" />
     <Compile Include="ViewModels\Manage\ConfigureTwoFactorViewModel.cs" />
@@ -197,6 +210,11 @@
     <Compile Include="Startup.cs" />
     <Compile Include="ViewModels\Manage\SetPasswordViewModel.cs" />
     <Compile Include="ViewModels\Manage\VerifyPhoneNumberViewModel.cs" />
+    <Compile Include="ViewModels\Profile\EditProfileViewModel.cs" />
+    <Compile Include="ViewModels\Profile\ProfileViewModel.cs" />
+    <Compile Include="ViewModels\Profile\UserInfoViewModel.cs" />
+    <Compile Include="ViewModels\Users\UsersListItemViewModel.cs" />
+    <Compile Include="ViewModels\Users\UsersViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
@@ -273,6 +291,10 @@
     <Content Include="Scripts\jquery-1.10.2.min.map" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Booking.Enums\Booking.Enums.csproj">
+      <Project>{CE3D5ABD-3457-434F-A525-EFC5D76E025D}</Project>
+      <Name>Booking.Enums</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Booking.Models\Booking.Models.csproj">
       <Project>{55DF4FDE-EA7C-47DB-B8E3-FEFC58EA1B47}</Project>
       <Name>Booking.Models</Name>
