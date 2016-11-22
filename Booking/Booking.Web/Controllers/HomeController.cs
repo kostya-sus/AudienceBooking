@@ -3,28 +3,24 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Booking.Web.ViewModels.Home;
 
 namespace Booking.Web.Controllers
 {
     public class HomeController : Controller
     {
+        [HttpGet]
         public ActionResult Index()
         {
-            return View();
+            var viewModel = new HomeViewModel();
+
+            return View(viewModel);
         }
 
-        public ActionResult About()
+        [HttpGet]
+        public ActionResult GetDatSchedule(DateTime date)
         {
-            ViewBag.Message = "Your application description page.";
-
-            return View();
-        }
-
-        public ActionResult Contact()
-        {
-            ViewBag.Message = "Your contact page.";
-
-            return View();
+            throw new NotImplementedException();
         }
     }
 }

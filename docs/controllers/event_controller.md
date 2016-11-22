@@ -2,7 +2,7 @@
 
 ## Requests
 <a name="get_displayeventpopup">
-* GET /Event/DisplayEventPopup
+* GET /Event/DisplayEventPopup/{eventId}
 </a>
  * Returns 401/403 status code if user cannot view this event information(for example,
    private events).
@@ -36,7 +36,7 @@
  * Returns empty event creation PartialView popup form.
 
  <a name="remove_participant">
-* DELETE /Event/RemoveParticipant/{participantId}
+* DELETE /Event/RemoveParticipant/{email}
  </a>
  * If the request sender is admin or event author, participant is removed.
  * Returns status code. If OK, user is removed from list on the client side.
@@ -62,7 +62,7 @@
  * Notifies participants via emails about event cancelation.
 
  <a name="edit_popup">
-* GET /Event/EditPopup/{createEditEventViewModel}
+* GET /Event/EditPopup/{eventId}
  </a>
   * Similar to [/Event/Create/{audienceId, eventDateTime, duration}](controllers/event_controller.md#get_create_audience_id),
   but with filled form fields and with cancel and save buttons.
