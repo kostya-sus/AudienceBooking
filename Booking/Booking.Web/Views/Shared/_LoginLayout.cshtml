@@ -1,0 +1,61 @@
+﻿@using Booking.Web.Localization
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title</title>
+    @Styles.Render("~/Content/css")
+    @Styles.Render("~/Content/LoginLayout.css")
+</head>
+<body>
+<div class="container-vertical-align">
+    <div id="login-container">
+        <div id="body-container">
+            <div id="title">
+                <span>@ViewBag.Title</span>
+            </div>
+            @RenderBody()
+        </div>
+        <div id="login-nav-menu">
+            <a href="@Url.Action("Index", "Home")">
+                <div class="logo-container">
+                    <img src="@Url.Content("~/Content/Images/logo.png")"/>
+                </div>
+            </a>
+            <ul>
+                <li class="@(ViewBag.ActiveLink == "Login" ? "active" : "")">
+                    @Html.ActionLink(@Localization.Login, "Login", "Account")
+                </li>
+                <li class="@(ViewBag.ActiveLink == "Register" ? "active" : "")">
+                    @Html.ActionLink(Localization.Register, "Register", "Account")
+                </li>
+                <li class="@(ViewBag.ActiveLink == "ResetPassword" ? "active" : "")">
+                    @Html.ActionLink(Localization.ResetPassword, "ResetPassword", "Account")
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+@Scripts.Render("~/bundles/jquery")
+@RenderSection("scripts", required: false)
+
+<script>
+    $(document)
+        .ready(function () {
+            var resizeLoginContainer = function() {
+                var w = window.innerWidth;
+                var newWidth = w > 1050 ? 0.85 * w : 900;
+                document.getElementById("login-container").setAttribute("style", "width:" + newWidth + "px;");
+            }
+
+            resizeLoginContainer();
+
+            $(window)
+                .on('resize', resizeLoginContainer);
+        });
+</script>
+
+</body>
+</html>
