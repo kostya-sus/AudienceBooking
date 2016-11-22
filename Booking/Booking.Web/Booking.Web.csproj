@@ -182,8 +182,12 @@
     <Compile Include="ViewModels\Account\ResetPasswordViewModel.cs" />
     <Compile Include="ViewModels\Account\SendCodeViewModel.cs" />
     <Compile Include="ViewModels\Account\VerifyCodeViewModel.cs" />
+    <Compile Include="ViewModels\Audience\AudienceInfoViewModel.cs" />
+    <Compile Include="ViewModels\Audience\AudienceScheduleItemViewModel.cs" />
+    <Compile Include="ViewModels\Audience\AudienceScheduleViewModel.cs" />
     <Compile Include="ViewModels\Audience\AudiencesNamesViewModel.cs" />
     <Compile Include="ViewModels\Audience\AudienceViewModel.cs" />
+    <Compile Include="ViewModels\Contact\ContactViewModel.cs" />
     <Compile Include="ViewModels\Event\CreateEditEventViewModel.cs" />
     <Compile Include="ViewModels\Event\DisplayEventViewModel.cs" />
     <Compile Include="ViewModels\Home\DayScheduleViewModel.cs" />
@@ -200,6 +204,11 @@
     <Compile Include="Startup.cs" />
     <Compile Include="ViewModels\Manage\SetPasswordViewModel.cs" />
     <Compile Include="ViewModels\Manage\VerifyPhoneNumberViewModel.cs" />
+    <Compile Include="ViewModels\Profile\EditProfileViewModel.cs" />
+    <Compile Include="ViewModels\Profile\ProfileViewModel.cs" />
+    <Compile Include="ViewModels\Profile\UserInfoViewModel.cs" />
+    <Compile Include="ViewModels\Users\UsersListItemViewModel.cs" />
+    <Compile Include="ViewModels\Users\UsersViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
