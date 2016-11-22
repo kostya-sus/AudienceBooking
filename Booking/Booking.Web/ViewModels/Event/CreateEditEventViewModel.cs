@@ -21,6 +21,8 @@ namespace Booking.Web.ViewModels.Event
 
         public bool IsJoinAvailable { get; set; }
 
+        public bool IsPublic { get; set; }
+
         public AudiencesNamesViewModel AvailableAudiences { get; set; }
     }
 }

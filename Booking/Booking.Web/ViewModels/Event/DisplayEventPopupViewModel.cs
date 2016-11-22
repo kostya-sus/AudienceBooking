@@ -20,6 +20,8 @@ namespace Booking.Web.ViewModels.Event
 
         public bool IsJoinAvailable { get; set; }
 
+        public bool IsPublic { get; set; }
+
         public bool CanEdit { get; set; }
     }
 }

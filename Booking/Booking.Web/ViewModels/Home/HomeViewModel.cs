@@ -11,5 +11,7 @@ namespace Booking.Web.ViewModels.Home
         public IEnumerable<Audiences> AvailableAudiences { get; set; }
 
         public bool IsAdmin { get; set; }
+
+        public bool IsLoggedIn { get; set; }
     }
 }
