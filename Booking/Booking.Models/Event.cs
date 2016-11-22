@@ -10,7 +10,6 @@ namespace Booking.Models
     [Table("Event")]
     public class Event
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Event()
         {
             EventParticipants = new HashSet<EventParticipant>();
@@ -46,8 +45,7 @@ namespace Booking.Models
         public string AdditionalInfo { get; set; }
 
         public virtual Audience Audience { get; set; }
-
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<EventParticipant> EventParticipants { get; set; }
+        
+        public ICollection<EventParticipant> EventParticipants { get; set; }
     }
 }

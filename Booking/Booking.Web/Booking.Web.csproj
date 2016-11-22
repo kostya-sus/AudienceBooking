@@ -190,6 +190,7 @@
     <Compile Include="ViewModels\Contact\ContactViewModel.cs" />
     <Compile Include="ViewModels\Event\CreateEditEventViewModel.cs" />
     <Compile Include="ViewModels\Event\DisplayEventViewModel.cs" />
+    <Compile Include="ViewModels\Event\EventEditViewModel.cs" />
     <Compile Include="ViewModels\Home\DayScheduleViewModel.cs" />
     <Compile Include="ViewModels\Home\DaySheduleItemViewModel.cs" />
     <Compile Include="ViewModels\Event\DisplayEventPopupViewModel.cs" />
