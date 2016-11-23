@@ -79,3 +79,66 @@ body {
     display: table-cell;
     vertical-align: middle;
 }
+
+.loginInput {
+
+    border: 1px  #cccccc;
+    border-radius: 50px;
+    margin-left: 20px;
+    background: #f5f6fb !important;
+    outline: none;
+    height: 35px;
+    width: 270px;
+    color: #656d7f;
+    font-size: 13px;
+    padding: 15px;
+}
+.loginInput[type=password] {
+    letter-spacing: 5px;
+}
+
+::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+    letter-spacing: normal;
+    color: #a6abb6;
+}
+::-moz-placeholder { /* Firefox 19+ */
+  letter-spacing: normal;
+}
+:-ms-input-placeholder { /* IE 10+ */
+  letter-spacing: normal;
+}
+:-moz-placeholder { /* Firefox 18- */
+  letter-spacing: normal;
+}
+.loginSubmit:disabled {
+    background: #c8cdd9;
+    color: #e9ebf0;
+}
+.loginSubmit {
+
+    background:#f95752;
+    margin-left: 80px;
+    margin-top: 10px;
+    width: 130px;
+    height: 30px;
+    border:0 none;
+    cursor:pointer;
+    border-radius: 50px;
+    font-size: 11px;
+    color: #8b92a0;
+    
+}
+
+.ValidationError {
+    color: #656d7f;
+    height: 10px;
+
+    font-size: 9px;
+    margin-left: 22px;
+}
+
+.ValidationSummaryError {
+    color: #656d7f;
+    height: 10px;
+    font-size: 15px;
+}
