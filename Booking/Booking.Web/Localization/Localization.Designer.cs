@@ -61,6 +61,15 @@ namespace Booking.Web.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Обратная связь.
+        /// </summary>
+        public static string Feedback {
+            get {
+                return ResourceManager.GetString("Feedback", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Вход.
         /// </summary>
         public static string Login {
@@ -84,6 +93,15 @@ namespace Booking.Web.Localization {
         public static string ResetPassword {
             get {
                 return ResourceManager.GetString("ResetPassword", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Расписание.
+        /// </summary>
+        public static string Schedule {
+            get {
+                return ResourceManager.GetString("Schedule", resourceCulture);
             }
         }
     }
