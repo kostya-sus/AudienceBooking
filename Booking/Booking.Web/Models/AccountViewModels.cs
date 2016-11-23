@@ -70,7 +70,7 @@ namespace Booking.Web.Models
         public string UserName { get; set; }
 
         [Required(ErrorMessage = " ")]
-        [EmailAddress(ErrorMessage="Неверный адресс электронной почты")]
+        [EmailAddress(ErrorMessage="Неверный адрес электронной почты")]
         [Display(Name = "Email")]
         public string Email { get; set; }
 
