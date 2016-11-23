@@ -1,0 +1,159 @@
+﻿
+body {
+    padding: 0;
+    margin: 0;
+    background-color: #f4f6fb;
+    width: 900px;
+    display: table;
+    position: absolute;
+    height: 100%;
+    width: 100%;
+}
+header {
+    background-color: #ffffff !important;
+}
+
+.panel-footer {
+  background-color: #F4F6FB;
+  border-top: 1px solid #D4D9E4;
+  border-bottom-right-radius: 3px;
+  border-bottom-left-radius: 3px;
+   
+}
+
+
+  .right {
+    right: 0;
+    left: auto;
+  }
+
+
+.logo-container {
+    border-bottom: 1px solid #a4abc0;
+    padding: 20px 5px;
+    margin: 5px auto;
+    width: 162px;
+}
+
+.logoTOP-container {
+   padding: 5px 5px;
+   margin: 5px auto;
+}
+
+.divMap {
+    background-color: #F4F6FB;
+    text-align: center;
+    margin: 5px auto;
+}
+
+.container {
+  padding-right: 15px;
+  padding-left: 15px;
+  margin-right: auto;
+  margin-left: auto;
+}
+.nav > li {
+  position: relative;
+  display: block;
+}
+
+.nav > li > a {
+  position: relative;
+  display: block;
+  padding: 10px 15px;
+}
+
+.nav > li > a:hover,
+.nav > li > a:focus {
+  text-decoration: none;
+  background-color: #F4F6FB;
+  border-bottom: 10px solid #F96C68;
+    
+}
+
+.nav > li.disabled > a {
+  color: #999999;
+}
+
+.nav > li.disabled > a:hover,
+.nav > li.disabled > a:focus {
+  color: #999999;
+  text-decoration: none;
+  cursor: not-allowed;
+  background-color: transparent;
+}
+
+.room {
+
+
+
+    position: relative;
+    bottom: 345px;
+    left: 265px;
+    width: 165px;
+    height: 100px;
+    background-color: #00008b !important;
+}
+
+
+.room1 {
+    position: relative;
+     bottom: 445px;
+    left: 465px;
+    width: 165px;
+    height: 100px;
+    background-color: #000000;
+}
+.room2 {
+    position: absolute;
+    bottom: 20px;
+    right: 121px;
+    background-color: #000000;
+}
+.room3 {
+    position: absolute;
+    bottom: 208px;
+    right: 121px;
+    background-color: #000000;
+}
+.room4 {
+    position: absolute;
+    bottom: 208px;
+    right: 121px;
+    background-color: #000000;
+}
+.room5 {
+    position: absolute;
+    bottom: 208px;
+    right: 121px;
+    background-color: #000000;
+}
+.room6 {
+    position: absolute;
+    bottom: 208px;
+    right: 121px;
+    background-color: #000000;
+}
+.room7 {
+    position: absolute;
+    bottom: 208px;
+    right: 121px;
+    background-color: #000000;
+}
+.room8 {
+    position: absolute;
+    bottom: 208px;
+    right: 121px;
+    background-color: #ffff00;
+}
+
+.room9 {
+    position: absolute;
+    bottom: 208px;
+    right: 121px;
+    background-color: #000000;
+}
+
+
+
+
