@@ -5,44 +5,36 @@
     ViewBag.ActiveLink = "Register";
 }
 
-@*<h2>@ViewBag.Title.</h2>*@
-
 @using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
 {
     @Html.AntiForgeryToken()
-    @*<h4>Create a new account.</h4>
-    <hr />*@
     <br/>
-    @Html.ValidationSummary("", new { @class = "text-danger" })
-    <div class="form-group">
+   
+    @Html.ValidationSummary(true,"", new { @class = "ValidationSummaryError" })
+
+    <div class="col-md-10" style="font-size: 10px !important;">
+        @Html.ValidationMessageFor(m => m.UserName, "", new { @class = "ValidationError" })
+        @Html.TextBoxFor(m => m.UserName, new { @class = "loginInput", placeholder = Localization.UserNamePlaceholder })
+    </div>
+
+    <div class="col-md-10" style="font-size: 10px !important;">
+        @Html.ValidationMessageFor(m => m.Email, "", new { @class = "ValidationError" })
+        @Html.TextBoxFor(m => m.Email, new { @class = "loginInput", placeholder = Localization.EmailAddressPlaceholder })
+    </div>
+
+    <div class="col-md-10" style="font-size: 10px !important;">
+        @Html.ValidationMessageFor(m => m.Password, "", new { @class = "ValidationError" })
+        @Html.PasswordFor(m => m.Password, new { @class = "loginInput", placeholder = Localization.PasswordPlaceholder })
+    </div>
+
+    <div class="col-md-10" style="font-size: 10px !important;">
+        @Html.ValidationMessageFor(m => m.ConfirmPassword, "", new { @class = "ValidationError" })
+        @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "loginInput", placeholder = Localization.ConfirmPasswordPlaceholder })
+    </div>
+
         <div class="col-md-10">
-            @Html.ValidationMessageFor(m => m.UserName, "", new { @class = "text-danger" })
-            @Html.TextBoxFor(m => m.UserName, new {@class = "loginInput", placeholder = "  Имя Фамилия"})
+            <input type="submit" disabled="disabled" class="loginSubmit" value=@Localization.RegisterSubmit />
         </div>
-    </div>
-    <div class="form-group">
-        <div class="col-md-10">
-            @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
-            @Html.TextBoxFor(m => m.Email, new {@class = "loginInput", placeholder = "  Адрес электронной почты"})
-        </div>
-    </div>
-    <div class="form-group">
-        <div class="col-md-10">
-            @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
-            @Html.PasswordFor(m => m.Password, new {@class = "loginInput", placeholder = "  Пароль"})
-        </div>
-    </div>
-    <div class="form-group">
-        <div class="col-md-10">
-            @Html.ValidationMessageFor(m => m.ConfirmPassword, "", new { @class = "text-danger" })
-            @Html.PasswordFor(m => m.ConfirmPassword, new {@class = "loginInput", placeholder = "  Повторить пароль"})
-        </div>
-    </div>
-    <div class="form-group">
-        <div class="col-md-offset-2 col-md-10">
-            <input type="submit" disabled class="loginSubmit" style="margin-left:37px !Important" value="Зарегистрироваться" />
-        </div>
-    </div>
 }
 
 @section Scripts {
