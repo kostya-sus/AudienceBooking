@@ -16,30 +16,22 @@
                 @Html.AntiForgeryToken()
                 <br/>
                 <br/>
-                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                <div class="form-group">
-                    <div class="col-md-10">
-                        @Html.TextBoxFor(m => m.Email, new { @class = "loginInput", placeholder="  Адрес электронной почты" })
-                    </div>
+                @Html.ValidationSummary(true, "", new { @class = "ValidationError" })
+
+                <div class="col-md-10" style="font-size: 20px !important;">
+                    @Html.TextBoxFor(m => m.Email, new { @class = "loginInput", placeholder = Localization.EmailAddressPlaceholder })
                 </div>
-                <div class="form-group">
-                    <div class="col-md-10">
-                        @Html.PasswordFor(m => m.Password, new { @class = "loginInput", placeholder="  Пароль" })
-                    </div>
+
+                <div class="col-md-10" style="margin-top: 20px !important;">
+                    @Html.PasswordFor(m => m.Password, new { @class = "loginInput", placeholder = Localization.PasswordPlaceholder })
                 </div>
-                <div class="form-group">
-                    <div class="col-md-10">
-                        <input type="submit" value="Войти" class="loginSubmit" />
-                    </div>
+
+                <div class="col-md-10" style="font-size: 20px !important">
+                    <input type="submit" disabled="disabled" class="loginSubmit" value=@Localization.LoginSubmit />
                 </div>
             }
         </section>
     </div>
-    @*<div class="col-md-4">
-        <section id="socialLoginForm">
-            @Html.Partial("_ExternalLoginsListPartial", new ExternalLoginListViewModel { ReturnUrl = ViewBag.ReturnUrl })
-        </section>
-    </div>*@
 </div>
 
 @section Scripts {
