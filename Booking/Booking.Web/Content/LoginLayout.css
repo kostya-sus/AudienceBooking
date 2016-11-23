@@ -79,3 +79,32 @@ body {
     display: table-cell;
     vertical-align: middle;
 }
+
+.loginInput {
+
+    border: 1px  #cccccc;
+    border-radius: 10px;
+    margin-left: 20px;
+    background: #f5f6fb !important;
+    outline: none;
+    height: 35px;
+    width: 270px;
+    color: #a6abb6;
+    font-size: 13px;
+    font-family: Tahoma;
+
+}
+input[type=submit]:disabled {
+    color: #e9ebf0;
+}
+.loginSubmit {
+
+    background:#dadbdf;
+    margin-left: 80px;
+    width: 130px;
+    height: 30px;
+    border:0 none;
+    cursor:pointer;
+    border-radius: 10px;
+    font-size: 11px;
+}
