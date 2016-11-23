@@ -10,8 +10,8 @@
 
 namespace Booking.Web.Localization {
     using System;
-    
-    
+
+
     /// <summary>
     ///   A strongly-typed resource class, for looking up localized strings, etc.
     /// </summary>
@@ -23,15 +23,15 @@ namespace Booking.Web.Localization {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     public class Localization {
-        
+
         private static global::System.Resources.ResourceManager resourceMan;
-        
+
         private static global::System.Globalization.CultureInfo resourceCulture;
-        
+
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
         internal Localization() {
         }
-        
+
         /// <summary>
         ///   Returns the cached ResourceManager instance used by this class.
         /// </summary>
@@ -45,7 +45,7 @@ namespace Booking.Web.Localization {
                 return resourceMan;
             }
         }
-        
+
         /// <summary>
         ///   Overrides the current thread's CurrentUICulture property for all
         ///   resource lookups using this strongly typed resource class.
@@ -59,7 +59,7 @@ namespace Booking.Web.Localization {
                 resourceCulture = value;
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Повторить пароль.
         /// </summary>
@@ -68,7 +68,7 @@ namespace Booking.Web.Localization {
                 return ResourceManager.GetString("ConfirmPasswordPlaceholder", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Адрес электронной почты.
         /// </summary>
@@ -77,7 +77,14 @@ namespace Booking.Web.Localization {
                 return ResourceManager.GetString("EmailAddressPlaceholder", resourceCulture);
             }
         }
-        
+        ///   Looks up a localized string similar to Обратная связь.
+        /// </summary>
+        public static string Feedback {
+            get {
+                return ResourceManager.GetString("Feedback", resourceCulture);
+            }
+        }
+
         /// <summary>
         ///   Looks up a localized string similar to Вход.
         /// </summary>
@@ -86,7 +93,7 @@ namespace Booking.Web.Localization {
                 return ResourceManager.GetString("Login", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Войти.
         /// </summary>
@@ -95,7 +102,7 @@ namespace Booking.Web.Localization {
                 return ResourceManager.GetString("LoginSubmit", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Пароль.
         /// </summary>
@@ -104,7 +111,7 @@ namespace Booking.Web.Localization {
                 return ResourceManager.GetString("PasswordPlaceholder", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Регистрация.
         /// </summary>
@@ -113,7 +120,7 @@ namespace Booking.Web.Localization {
                 return ResourceManager.GetString("Register", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Зарегистрироваться.
         /// </summary>
@@ -122,7 +129,7 @@ namespace Booking.Web.Localization {
                 return ResourceManager.GetString("RegisterSubmit", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Смена пароля.
         /// </summary>
@@ -131,13 +138,20 @@ namespace Booking.Web.Localization {
                 return ResourceManager.GetString("ResetPassword", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Имя Фамилия.
         /// </summary>
         public static string UserNamePlaceholder {
             get {
                 return ResourceManager.GetString("UserNamePlaceholder", resourceCulture);
+            }
+        }
+        ///   Looks up a localized string similar to Расписание.
+        /// </summary>
+        public static string Schedule {
+            get {
+                return ResourceManager.GetString("Schedule", resourceCulture);
             }
         }
     }
