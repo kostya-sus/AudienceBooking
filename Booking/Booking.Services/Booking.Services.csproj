@@ -57,9 +57,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Interfaces\IAudienceService.cs" />
+    <Compile Include="Interfaces\IContactService.cs" />
     <Compile Include="Interfaces\IEmailNotificationService.cs" />
     <Compile Include="Interfaces\IEventService.cs" />
     <Compile Include="Interfaces\IScheduleService.cs" />
+    <Compile Include="Interfaces\IUsersService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
