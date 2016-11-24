@@ -4,22 +4,26 @@ namespace Booking.Web.ViewModels.Account
 {
     public class RegisterViewModel
     {
-        [Required]
-        [RegularExpression(@"^([A-ZА-ЯЁЇІЄ][a-zа-яёіїє']+ -)+[A-ZА-ЯЁЇІЄ][a-zа-яёіїє']+$",
-             ErrorMessage = "Неправильный формат имени и фамилии.")]
+        [Required(ErrorMessage = @" ")]
+        [RegularExpression(@"^([A-ZА-ЯЁЇІЄ][a-zа-яёіїє']+)([ -][A-ZА-ЯЁЇІЄ][a-zа-яёіїє']+)+$",
+            ErrorMessageResourceType = typeof(Localization.Localization),
+            ErrorMessageResourceName = "RegisterViewModel_UserName_ValidationMessage")]
         public string UserName { get; set; }
 
-        [Required]
-        [EmailAddress(ErrorMessage = "Неверный адрес электронной почты")]
+        [Required(ErrorMessage = @" ")]
+        [EmailAddress(ErrorMessageResourceType = typeof(Localization.Localization),
+            ErrorMessageResourceName = "RegisterViewModel_Email_ValidationMessage")]
         public string Email { get; set; }
 
-        [Required]
-        [StringLength(15, ErrorMessage = "Пароль должен содержать 8-15 символов", MinimumLength = 8)]
+        [Required(ErrorMessage = @" ")]
+        [StringLength(15, ErrorMessageResourceType = typeof(Localization.Localization),
+            ErrorMessageResourceName = "RegisterViewModel_Password_ValidationMessage", MinimumLength = 8)]
         [DataType(DataType.Password)]
         public string Password { get; set; }
 
-        [Required]
-        [Compare("Password", ErrorMessage = "Пароли не совпадают")]
+        [Required(ErrorMessage = @" ")]
+        [Compare("Password", ErrorMessageResourceType = typeof(Localization.Localization),
+            ErrorMessageResourceName = "RegisterViewModel_ConfirmPassword_ValidationMessage")]
         public string ConfirmPassword { get; set; }
     }
 }

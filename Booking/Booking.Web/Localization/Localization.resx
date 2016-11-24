@@ -150,4 +150,16 @@
   <data name="Schedule" xml:space="preserve">
     <value>Расписание</value>
   </data>
+  <data name="RegisterViewModel_UserName_ValidationMessage" xml:space="preserve">
+    <value>Неправильный формат имени и фамилии.</value>
+  </data>
+  <data name="RegisterViewModel_Email_ValidationMessage" xml:space="preserve">
+    <value>Неверный адрес электронной почты</value>
+  </data>
+  <data name="RegisterViewModel_Password_ValidationMessage" xml:space="preserve">
+    <value>Пароль должен содержать 8-15 символов</value>
+  </data>
+  <data name="RegisterViewModel_ConfirmPassword_ValidationMessage" xml:space="preserve">
+    <value>Пароли не совпадают</value>
+  </data>
 </root>
