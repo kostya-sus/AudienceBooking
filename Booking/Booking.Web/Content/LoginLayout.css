@@ -66,14 +66,12 @@ body {
 }
 
 
-#login-nav-menu ul li a:hover{
+#login-nav-menu ul li a:hover {
     color: #a4abc0;
     text-decoration: underline;
 }
 
-#login-nav-menu .active {
-    font-weight: bold;
-}
+#login-nav-menu .active { font-weight: bold; }
 
 .container-vertical-align {
     display: table-cell;
@@ -81,8 +79,7 @@ body {
 }
 
 .loginInput {
-
-    border: 1px  #cccccc;
+    border: 1px #cccccc;
     border-radius: 50px;
     margin-left: 20px;
     background: #f5f6fb !important;
@@ -93,40 +90,50 @@ body {
     font-size: 13px;
     padding: 15px;
 }
+
 .loginInput[type=password] {
     letter-spacing: 5px;
+    font-size: 20px;
 }
 
-::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+.loginInput[type=password]::-webkit-input-placeholder { /* Chrome/Opera/Safari */
     letter-spacing: normal;
-    color: #a6abb6;
+    font-size: 13px;
+    /*color: #a6abb6;*/
 }
-::-moz-placeholder { /* Firefox 19+ */
-  letter-spacing: normal;
+
+.loginInput[type=password]::-moz-placeholder { /* Firefox 19+ */
+    letter-spacing: normal;
+    font-size: 13px;
 }
-:-ms-input-placeholder { /* IE 10+ */
-  letter-spacing: normal;
+
+.loginInput[type=password]:-ms-input-placeholder { /* IE 10+ */
+    letter-spacing: normal;
+    font-size: 13px;
 }
-:-moz-placeholder { /* Firefox 18- */
-  letter-spacing: normal;
+
+.loginInput[type=password]:-moz-placeholder { /* Firefox 18- */
+    letter-spacing: normal;
+    font-size: 13px;
 }
+
 .loginSubmit:disabled {
     background: #c8cdd9;
     color: #e9ebf0;
 }
+
 .loginSubmit {
 
-    background:#f95752;
+    background: #f95752;
     margin-left: 80px;
     margin-top: 10px;
     width: 130px;
     height: 30px;
-    border:0 none;
-    cursor:pointer;
+    border: 0 none;
+    cursor: pointer;
     border-radius: 50px;
     font-size: 11px;
-    color: #8b92a0;
-    
+    color: #8b92a0;    
 }
 
 .ValidationError {
