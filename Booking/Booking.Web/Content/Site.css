@@ -22,3 +22,11 @@ select,
 textarea {
     max-width: 280px;
 }
+
+.page-container {
+    width: 1021px;
+}
+
+.navbar {
+    background-color: #ffffff;
+}

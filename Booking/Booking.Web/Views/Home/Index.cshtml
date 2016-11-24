@@ -4,30 +4,48 @@
     ViewBag.Title = "Home Page";
 }
 
-<div >
-    <div>
-        <img style="position: absolute; left: 100px; top: 50px" src="@Url.Content("~/Content/Images/walls.png")"/>
+@section styles{
+    @Styles.Render("~/Content/room-styles.css")
+    @Styles.Render("~/Content/home-page.css")
+}
+
+<div class="page-container">
+    <div id="room-map-container">
+        <img src="@Url.Content("~/Content/Images/walls.png")"/>
+        <div style="position: relative; left: 115px; top: 157px; height: 97px; width: 165px; background-color: black !important">
+            room
+        </div>
+        <div style="position: relative; left: 287px; top: 158px; height: 100px; width: 224px; background-color: black !important">
+            room1
+        </div>
+        <div style="position: relative; left: 514px; top: 158px; height: 100px; width: 184px; background-color: black !important">
+            room2
+        </div>
+        <div style="position: relative; left: 701px; top: 158px; height: 97px; width: 85px; background-color: black !important">
+            room3
+        </div>
+        <div style="position: relative; left: 788px; top: 158px; height: 93px; width: 98px; background-color: black !important">
+            room4
+        </div>
+        <div style="position: relative; left: 890px; top: 158px; height: 98px; width: 90px; background-color: black !important">
+            room5
+        </div>
+        <div style="position: relative; left: 984px; top: 158px; height: 98px; width: 88px; background-color: black !important">
+            room6
+        </div>
+        <div style="position: relative; left: 1074px; top: 158px; height: 143px; width: 40px; background-color: black !important">
+            room7
+        </div>
+        <div style="position: relative; left: 412px; top: 309px; height: 85px; width: 188px; background-color: black !important">
+            room8
+        </div>
+        <div style="position: relative; left: 604px; top: 309px; height: 85px; width: 188px; background-color: black !important">
+            room9
+        </div>
+
     </div>
-    <div style="position: absolute; left: 115px; top: 157px;
-height: 97px; width: 165px;background-color: black !important">room</div>
-    <div style="position: absolute; left: 287px; top: 158px;
-height: 100px; width: 224px;background-color: black !important">room1</div>
-    <div style="position: absolute; left: 514px; top: 158px;
-height: 100px; width: 184px;background-color: black !important">room2</div>
-    <div style="position: absolute; left: 701px; top: 158px;
-height: 97px; width: 85px;background-color: black !important">room3</div>
-    <div style="position: absolute; left: 788px; top: 158px;
-height: 93px; width: 98px;background-color: black !important">room4</div>
-    <div style="position: absolute; left: 890px; top: 158px;
-height: 98px; width: 90px;background-color: black !important">room5</div>
-    <div style="position: absolute; left: 984px; top: 158px;
-height: 98px; width: 88px;background-color: black !important">room6</div>
-    <div style="position: absolute; left: 1074px; top: 158px;
-height: 143px; width: 40px;background-color: black !important">room7</div>
-    <div style="position: absolute; left: 412px; top: 309px;
-height: 85px; width: 188px;background-color: black !important">room8</div>
-    <div style="position: absolute; left: 604px; top: 309px;
-height: 85px; width: 188px;background-color: black !important">room9</div>
-       
+
+    <div id="schedule-container"></div>
 </div>
 
+<div id="map-container" style="height: 400px; width: auto; background-color: red"></div>

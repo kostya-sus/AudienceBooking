@@ -1,45 +1,40 @@
 ﻿@using Booking.Web.Localization;
 
-
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="utf-8" />
+    <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title</title>
     @Styles.Render("~/Content/css")
-    @Styles.Render("~/Content/HomeLayout.css")
     @Scripts.Render("~/bundles/modernizr")
-
+    @RenderSection("styles", required: false)
 </head>
 <body>
-<<<<<<< HEAD
-<header>
-<div class="navbar navbar-fixed-top" style="background-color: #ffffff !important">
-    <div class="container">
-        <a href="@Url.Action("Index", "Home")">
-            <div class="logoTOP-container navbar-left">
-                <img src="@Url.Content("~/Content/Images/logo-red.png")"/>
-
+<div class="container">
+        <header>
+            <div class="navbar navbar-fixed-top">
+                <div class="container page-container">
+                    <a href="@Url.Action(" Index", "Home" )">
+                        <div class="logo-nav-container navbar-left">
+                            <img src="@Url.Content("~/Content/Images/logo-red.png")"/>
+                        </div>
+                    </a>
+                    <div class="nav navbar-nav navbar-right">
+                        <ul class="nav navbar-nav">
+                            <li>@Html.ActionLink("Schedule", "Index", "Home")</li>
+                            <li>@Html.ActionLink("Feedback", "Index", "Home")</li>
+                            <li>@Html.ActionLink("Login", "Login", "Account", routeValues: null, htmlAttributes: new {id = "loginLink"})</li>
+                        </ul>
+                    </div>
+                </div>
             </div>
-        </a>
-        <div class="nav navbar-nav navbar-right">
-            <ul class="nav navbar-nav">
-                <li>@Html.ActionLink("Schedule", "Index", "Home")</li>
-                <li>@Html.ActionLink("Feedback", "Index", "Home")</li>
-                <li>@Html.ActionLink("Login", "Login", "Account", routeValues: null, htmlAttributes: new {id = "loginLink"})</li>
-            </ul>
-        </div>
-    </div>
-</div>
+        </header>
 
-
-></header>
-
-<div>
     @RenderBody()
+
     <hr/>
-    <footer class="panel-footer nav navbar-fixed-bottom">
+    <footer class="panel-footer">
         <div style="text-align: center;">
             <div class="logo-container">
                 <img src="@Url.Content("~/Content/Images/logo.png")"/>

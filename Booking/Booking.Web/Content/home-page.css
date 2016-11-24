@@ -1,5 +1,4 @@
-﻿
-body {
+﻿body {
     padding: 0;
     margin: 0;
     background-color: #f4f6fb;
@@ -35,7 +34,7 @@ header {
     width: 162px;
 }
 
-.logoTOP-container {
+.logo-nav-container {
    padding: 5px 5px;
    margin: 5px auto;
 }
@@ -46,12 +45,6 @@ header {
     margin: 5px auto;
 }
 
-.container {
-  padding-right: 15px;
-  padding-left: 15px;
-  margin-right: auto;
-  margin-left: auto;
-}
 .nav > li {
   position: relative;
   display: block;
@@ -84,74 +77,12 @@ header {
 }
 
 .room {
-
-
-
     position: relative;
     bottom: 345px;
     left: 265px;
     width: 165px;
     height: 100px;
     background-color: #00008b !important;
-}
-
-
-.room1 {
-    position: relative;
-     bottom: 445px;
-    left: 465px;
-    width: 165px;
-    height: 100px;
-    background-color: #000000;
-}
-.room2 {
-    position: absolute;
-    bottom: 20px;
-    right: 121px;
-    background-color: #000000;
-}
-.room3 {
-    position: absolute;
-    bottom: 208px;
-    right: 121px;
-    background-color: #000000;
-}
-.room4 {
-    position: absolute;
-    bottom: 208px;
-    right: 121px;
-    background-color: #000000;
-}
-.room5 {
-    position: absolute;
-    bottom: 208px;
-    right: 121px;
-    background-color: #000000;
-}
-.room6 {
-    position: absolute;
-    bottom: 208px;
-    right: 121px;
-    background-color: #000000;
-}
-.room7 {
-    position: absolute;
-    bottom: 208px;
-    right: 121px;
-    background-color: #000000;
-}
-.room8 {
-    position: absolute;
-    bottom: 208px;
-    right: 121px;
-    background-color: #ffff00;
-}
-
-.room9 {
-    position: absolute;
-    bottom: 208px;
-    right: 121px;
-    background-color: #000000;
 }
 
 
