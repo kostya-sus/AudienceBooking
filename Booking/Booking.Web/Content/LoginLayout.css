@@ -78,73 +78,76 @@ body {
     vertical-align: middle;
 }
 
-.loginInput {
+.login-input {
     border: 1px #cccccc;
     border-radius: 50px;
-    margin-left: 20px;
     background: #f5f6fb !important;
+    margin: auto;
     outline: none;
     height: 35px;
-    width: 270px;
+    width: 290px;
     color: #656d7f;
     font-size: 13px;
     padding: 15px;
 }
 
-.loginInput[type=password] {
+.login-input[type=password] {
     letter-spacing: 5px;
     font-size: 20px;
 }
 
-.loginInput[type=password]::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+.login-input[type=password]::-webkit-input-placeholder { /* Chrome/Opera/Safari */
     letter-spacing: normal;
     font-size: 13px;
     /*color: #a6abb6;*/
 }
 
-.loginInput[type=password]::-moz-placeholder { /* Firefox 19+ */
+.login-input[type=password]::-moz-placeholder { /* Firefox 19+ */
     letter-spacing: normal;
     font-size: 13px;
 }
 
-.loginInput[type=password]:-ms-input-placeholder { /* IE 10+ */
+.login-input[type=password]:-ms-input-placeholder { /* IE 10+ */
     letter-spacing: normal;
     font-size: 13px;
 }
 
-.loginInput[type=password]:-moz-placeholder { /* Firefox 18- */
+.login-input[type=password]:-moz-placeholder { /* Firefox 18- */
     letter-spacing: normal;
     font-size: 13px;
 }
 
-.loginSubmit:disabled {
+.login-submit:disabled {
     background: #c8cdd9;
     color: #e9ebf0;
 }
 
-.loginSubmit {
+.login-submit {
     background: #f95752;
     margin-left: 80px;
     margin-top: 10px;
-    width: 130px;
+    min-width: 150px;
     height: 30px;
     border: 0 none;
     cursor: pointer;
     border-radius: 50px;
-    font-size: 11px;
-    color: #8b92a0;    
+    font-size: 12px;
+    color: white;
+    padding: 5px 15px; 
 }
 
-
-
-.ValidationError {
+.validation-error {
     color: #656d7f;
     height: 10px;
     font-size: 9px;
-    margin-left: 22px;
+    margin-left: 0;
 }
 
-.ValidationSummaryError {
+.validation-error i {
+    color: #f95752;
+}
+
+.validation-summary-error {
     color: #656d7f;
     height: 10px;
     font-size: 15px;

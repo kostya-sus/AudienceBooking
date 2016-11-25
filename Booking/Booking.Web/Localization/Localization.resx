@@ -162,4 +162,7 @@
   <data name="RegisterViewModel_ConfirmPassword_ValidationMessage" xml:space="preserve">
     <value>&lt;i class="fa fa-exclamation-circle" aria-hidden="true"&gt;&lt;/i&gt; Пароли не совпадают</value>
   </data>
+  <data name="ValidationMessage_Required" xml:space="preserve">
+    <value>&lt;i class="fa fa-exclamation-circle" aria-hidden="true"&gt;&lt;/i&gt; Поле должно быть заполнено.</value>
+  </data>
 </root>

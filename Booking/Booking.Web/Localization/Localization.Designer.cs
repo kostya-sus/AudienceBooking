@@ -194,5 +194,14 @@ namespace Booking.Web.Localization {
                 return ResourceManager.GetString("UserNamePlaceholder", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &lt;i class=&quot;fa fa-exclamation-circle&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt; Поле должно быть заполнено..
+        /// </summary>
+        public static string ValidationMessage_Required {
+            get {
+                return ResourceManager.GetString("ValidationMessage_Required", resourceCulture);
+            }
+        }
     }
 }

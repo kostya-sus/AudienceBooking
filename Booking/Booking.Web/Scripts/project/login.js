@@ -4,7 +4,7 @@
         var validator = form.data("validator");
         
         validator.settings.showErrors = function() {
-            $('input[type="submit"]').prop('disabled', (this.numberOfInvalids() === 0));
+            $('input[type="submit"]').prop('disabled', (this.numberOfInvalids() !== 0));
             this.defaultShowErrors();
         };
     });
