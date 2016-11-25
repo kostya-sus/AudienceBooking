@@ -12,27 +12,20 @@
 
     @Html.ValidationSummary(true, "", new {@class = "validation-summary-error"})
 
-    <div class="form-group">
-        @Html.ValidationMessageFor(m => m.UserName, "", new {@class = "validation-error"})
-        @Html.TextBoxFor(m => m.UserName, new {@class = "login-input", placeholder = Localization.UserNamePlaceholder})
-    </div>
+    @Html.ValidationMessageFor(m => m.UserName, "", new {@class = "validation-error"})
+    @Html.TextBoxFor(m => m.UserName, new {@class = "login-input", placeholder = Localization.UserNamePlaceholder})
 
-    <div class="form-group">
-        @Html.ValidationMessageFor(m => m.Email, "", new {@class = "validation-error"})
-        @Html.TextBoxFor(m => m.Email, new {@class = "login-input", placeholder = Localization.EmailAddressPlaceholder})
-    </div>
+    @Html.ValidationMessageFor(m => m.Email, "", new {@class = "validation-error"})
+    @Html.TextBoxFor(m => m.Email, new {@class = "login-input", placeholder = Localization.EmailAddressPlaceholder})
 
-    <div class="form-group">
-        @Html.ValidationMessageFor(m => m.Password, "", new {@class = "validation-error"})
-        @Html.PasswordFor(m => m.Password, new {@class = "login-input", placeholder = Localization.PasswordPlaceholder})
-    </div>
+    @Html.ValidationMessageFor(m => m.Password, "", new {@class = "validation-error"})
+    @Html.PasswordFor(m => m.Password, new {@class = "login-input", placeholder = Localization.PasswordPlaceholder})
 
-    <div class="form-group">
-        @Html.ValidationMessageFor(m => m.ConfirmPassword, "", new {@class = "validation-error"})
-        @Html.PasswordFor(m => m.ConfirmPassword, new {@class = "login-input", placeholder = Localization.ConfirmPasswordPlaceholder})
+    @Html.ValidationMessageFor(m => m.ConfirmPassword, "", new {@class = "validation-error"})
+    @Html.PasswordFor(m => m.ConfirmPassword, new {@class = "login-input", placeholder = Localization.ConfirmPasswordPlaceholder})
+    <div style="width: 100%;">
+        <input type="submit" disabled="disabled" value=@Localization.RegisterSubmit class="login-submit"/>
     </div>
-
-    <input type="submit" disabled="disabled" value=@Localization.RegisterSubmit class="login-submit"/>
 }
 
 @section Scripts {

@@ -11,7 +11,10 @@ body {
     width: 100%;
 }
 
-.body-content { height: 100%; }
+.body-content {
+    width: 280px;
+    height: 100%;
+}
 
 #login-container {
     margin-left: auto;
@@ -82,13 +85,13 @@ body {
     border: 1px #cccccc;
     border-radius: 50px;
     background: #f5f6fb !important;
-    margin: auto;
+    margin: 5px auto;
     outline: none;
     height: 35px;
-    width: 290px;
     color: #656d7f;
     font-size: 13px;
     padding: 15px;
+    width: 100%;
 }
 
 .login-input[type=password] {
@@ -124,8 +127,8 @@ body {
 
 .login-submit {
     background: #f95752;
-    margin-left: 80px;
-    margin-top: 10px;
+    display: block;
+    margin: 5px auto;
     min-width: 150px;
     height: 30px;
     border: 0 none;
@@ -133,7 +136,6 @@ body {
     border-radius: 50px;
     font-size: 12px;
     color: white;
-    padding: 5px 15px; 
 }
 
 .validation-error {
@@ -143,9 +145,7 @@ body {
     margin-left: 0;
 }
 
-.validation-error i {
-    color: #f95752;
-}
+.validation-error i { color: #f95752; }
 
 .validation-summary-error {
     color: #656d7f;
