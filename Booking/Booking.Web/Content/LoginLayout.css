@@ -123,7 +123,6 @@ body {
 }
 
 .loginSubmit {
-
     background: #f95752;
     margin-left: 80px;
     margin-top: 10px;
@@ -136,10 +135,11 @@ body {
     color: #8b92a0;    
 }
 
+
+
 .ValidationError {
     color: #656d7f;
     height: 10px;
-
     font-size: 9px;
     margin-left: 22px;
 }

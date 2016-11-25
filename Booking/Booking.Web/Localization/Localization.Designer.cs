@@ -133,7 +133,7 @@ namespace Booking.Web.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Пароли не совпадают.
+        ///   Looks up a localized string similar to &lt;i class=&quot;fa fa-exclamation-circle&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt; Пароли не совпадают.
         /// </summary>
         public static string RegisterViewModel_ConfirmPassword_ValidationMessage {
             get {
@@ -142,7 +142,7 @@ namespace Booking.Web.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Неверный адрес электронной почты.
+        ///   Looks up a localized string similar to &lt;i class=&quot;fa fa-exclamation-circle&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt; Неверный адрес электронной почты.
         /// </summary>
         public static string RegisterViewModel_Email_ValidationMessage {
             get {
@@ -151,7 +151,7 @@ namespace Booking.Web.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Пароль должен содержать 8-15 символов.
+        ///   Looks up a localized string similar to &lt;i class=&quot;fa fa-exclamation-circle&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt; Пароль должен содержать 8-15 символов.
         /// </summary>
         public static string RegisterViewModel_Password_ValidationMessage {
             get {
@@ -160,7 +160,7 @@ namespace Booking.Web.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to ыввва.
+        ///   Looks up a localized string similar to &lt;i class=&quot;fa fa-exclamation-circle&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt; Неправильный формат имени и фамилии..
         /// </summary>
         public static string RegisterViewModel_UserName_ValidationMessage {
             get {
