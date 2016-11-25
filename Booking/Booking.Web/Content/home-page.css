@@ -17,9 +17,7 @@ header {
   border-top: 1px solid #D4D9E4;
   border-bottom-right-radius: 3px;
   border-bottom-left-radius: 3px;
-   
 }
-
 
   .right {
     right: 0;
@@ -78,11 +76,24 @@ header {
 
 .room {
     position: relative;
-    bottom: 345px;
-    left: 265px;
-    width: 165px;
-    height: 100px;
-    background-color: #00008b !important;
+    background-color: #D7D9DE !important;
+}
+.room-active{
+    position: relative;
+    background-color: #F96C68;
+}
+.room-avalible{
+    position: relative;
+    background-color: #9FA6B6 ;
+}
+
+.room-div{
+    position: relative;
+    background-color: #9FA6B6;
+    margin: auto;
+    vertical-align: middle;
+    
+
 }
 
 
