@@ -1,4 +1,6 @@
-﻿using Booking.Models;
+﻿using System.Collections.Generic;
+using Booking.Enums;
+using Booking.Models;
 
 namespace Booking.Services.Interfaces
 {
@@ -11,5 +13,9 @@ namespace Booking.Services.Interfaces
         bool CloseAudience(int audienceId);
 
         bool OpenAudience(int audienceId);
+
+        IEnumerable<Audience> GetAllAudiences();
+
+        IEnumerable<Audiences> GetAvailableAudiencesIds();
     }
 }
