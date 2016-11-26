@@ -233,6 +233,7 @@
     </Content>
     <Content Include="Content\Images\logo-red.png" />
     <Content Include="Content\Images\logo.png" />
+    <Content Include="Content\Images\marker_red.png" />
     <Content Include="Content\Images\walls.png" />
     <Content Include="Content\LoginLayout.css" />
     <Content Include="Content\room-styles.css" />
@@ -248,9 +249,11 @@
     <Content Include="Content\font-awesome\fonts\fontawesome-webfont.woff2" />
     <Content Include="Content\font-awesome\fonts\FontAwesome.otf" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
+    <Content Include="Scripts\initializers.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery.mapit.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
