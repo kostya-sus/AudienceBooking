@@ -88,6 +88,15 @@ namespace Booking.Web.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Неверные данные.
+        /// </summary>
+        public static string InvalidLoginAttempt_Message {
+            get {
+                return ResourceManager.GetString("InvalidLoginAttempt_Message", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Вход.
         /// </summary>
         public static string Login {

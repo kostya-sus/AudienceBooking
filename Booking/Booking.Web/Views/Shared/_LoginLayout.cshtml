@@ -44,7 +44,7 @@
 
 <script>
     $(document)
-        .ready(function () {
+        .ready(function() {
             var resizeLoginContainer = function() {
                 var w = window.innerWidth;
                 var newWidth = w > 1050 ? 0.85 * w : 900;
@@ -53,8 +53,7 @@
 
             resizeLoginContainer();
 
-            $(window)
-                .on('resize', resizeLoginContainer);
+            $(window).on('resize', resizeLoginContainer);
         });
 </script>
 

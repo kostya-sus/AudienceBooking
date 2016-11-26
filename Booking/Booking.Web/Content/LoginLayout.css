@@ -155,10 +155,7 @@ body {
     color: #656d7f;
     height: 20px;
     font-size: 13px;
-}
-
-.validation-summary-error > span {
-    
+    text-align: center;
 }
 
 .validation-summary-error > i {

@@ -10,13 +10,19 @@
 @using (Html.BeginForm("Login", "Account", new {ReturnUrl = ViewBag.ReturnUrl}, FormMethod.Post, new {@class = "form-horizontal", role = "form"}))
 {
     @Html.AntiForgeryToken()
-    <br/>
-    @Html.ValidationSummary(true, "", new {@class = "validation-error"})
 
-    <span class="validation-error"></span>
+    <div class="validation-summary-error">
+        @if (ViewData["InvalidLoginAttempt"] != null)
+        {
+            <i class="fa fa-exclamation-circle" aria-hidden="true"></i>
+            <span>@ViewData["InvalidLoginAttempt"]</span>
+        }
+    </div>
+
+    @Html.ValidationMessageFor(m => m.Email, "", new { @class = "validation-error" })
     @Html.TextBoxFor(m => m.Email, new {@class = "login-input", placeholder = Localization.EmailAddressPlaceholder})
 
-    <span class="validation-error"></span>
+    @Html.ValidationMessageFor(m => m.Password, "", new { @class = "validation-error" })
     @Html.PasswordFor(m => m.Password, new {@class = "login-input", placeholder = Localization.PasswordPlaceholder})
 
     <div style="width: 100%;">
@@ -26,4 +32,5 @@
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/Scripts/project/login-scripts.js")
 }
