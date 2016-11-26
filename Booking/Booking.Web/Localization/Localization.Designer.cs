@@ -124,6 +124,15 @@ namespace Booking.Web.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Пользователь с такими данными уже существует.
+        /// </summary>
+        public static string RegisterAction_UserAlreadyExists {
+            get {
+                return ResourceManager.GetString("RegisterAction_UserAlreadyExists", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Зарегистрироваться.
         /// </summary>
         public static string RegisterSubmit {
