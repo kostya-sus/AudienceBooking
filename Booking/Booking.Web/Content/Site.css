@@ -18,6 +18,7 @@
 
 .page-container {
     width: 1021px;
+    min-width: 1021px;
 }
 
 .navbar {

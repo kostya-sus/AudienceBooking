@@ -1,0 +1,43 @@
+﻿#schedule-table {
+    display: table;
+    padding: 10px;
+}
+
+#schedule-rooms-column, #schedule-contents {
+    float: left;
+    display: inline-table;
+    margin: 0;
+    padding: 0;
+}
+
+#schedule-table th, #schedule-table td {
+    width: 140px;
+    border-color: #f5f6fb;
+    border-style: solid;
+    border-width: 3px;
+}
+
+#schedule-rooms-column th, #schedule-rooms-column td {
+    border-right-width: 0;
+}
+
+#schedule-table th { height: 30px; }
+
+#schedule-table td { height: 50px; }
+
+
+#schedule-table tr { margin: 0; }
+
+#schedule-viewport {
+    float: left;
+    margin: 0;
+    padding: 0;
+    overflow-y: hidden;
+    display: inline;
+    height: auto;
+    width: 600px;
+}
+
+#schedule-rooms-column th { width: 100px !important; }
+
+#schedule-rooms-column td { width: 100px !important; }
