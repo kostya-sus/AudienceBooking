@@ -30,3 +30,9 @@ textarea {
 .navbar {
     background-color: #ffffff;
 }
+
+#map_canvas {
+	height: 400px;
+	width: 100%;
+}
+

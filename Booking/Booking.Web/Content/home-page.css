@@ -9,7 +9,15 @@
     width: 100%;
 }
 header {
-    background-color: #ffffff !important;
+    background-color: #ffffff ;
+}
+
+.nav-default {
+min-width: 1021px !important;
+}
+.list-header {
+    position: relative;
+    display: block;
 }
 
 .panel-footer {
@@ -81,10 +89,12 @@ header {
 .room-active{
     position: relative;
     background-color: #F96C68;
+    z-index:  1;
 }
 .room-avalible{
     position: relative;
     background-color: #9FA6B6 ;
+    z-index:  1;
 }
 
 .room-div{
@@ -92,8 +102,6 @@ header {
     background-color: #9FA6B6;
     margin: auto;
     vertical-align: middle;
-    
-
 }
 
 

@@ -13,15 +13,15 @@
 <body>
 <div class="container page-container">
         <header>
-            <div class="navbar navbar-fixed-top">
-                <div class="container page-container">
+            <div class="navbar navbar-fixed-top" style="min-width: 1021px">
+                <div class="container page-container" style="min-width: 1021px">
                     <a href="@Url.Action("Index", "Home" )">
-                        <div class="logo-nav-container navbar-left">
+                        <div class="logo-nav-container navbar-left" >
                             <img src="@Url.Content("~/Content/Images/logo-red.png")"/>
                         </div>
                     </a>
                     <div class="nav navbar-nav navbar-right">
-                        <ul class="nav navbar-nav">
+                        <ul class="nav navbar-nav" >
                             <li>@Html.ActionLink("Schedule", "Index", "Home")</li>
                             <li>@Html.ActionLink("Feedback", "Index", "Home")</li>
                             <li>@Html.ActionLink("Login", "Login", "Account", routeValues: null, htmlAttributes: new {id = "loginLink"})</li>

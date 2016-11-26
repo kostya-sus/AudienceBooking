@@ -7,39 +7,49 @@
 @section styles{
     @Styles.Render("~/Content/room-styles.css")
     @Styles.Render("~/Content/home-page.css")
+    @Styles.Render("~/Content/Site.css")
+@Styles.Render("http://fonts.googleapis.com/css?family=Nunito:400,300,700")
 }
+
+@section scripts
+{
+    @Scripts.Render("https://ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js")
+@Scripts.Render("~/Scripts/jquery.mapit.js")
+@Scripts.Render("~/Scripts/initializers.js")
+}
+
 
 <div class="page-container">
     <div id="room-map-container">
-        <img src="@Url.Content("~/Content/Images/walls.png")"/>
+        <img src="@Url.Content("~/Content/Images/walls.png")" style="position: relative; z-index: 50;"/>
         <div style=" left: 14px; top: -345px; height: 95px; width: 165px;", class="room-active" >
             <div class="room-div">room</div>
         </div>
-        <div style=" left: 186px; top: -441px; height: 99px; width: 225px; ", class="room-active">
+        <div style=" left: 186px; top: -440px; height: 99px; width: 225px;", class="room-active">
             room1
         </div>
-        <div style=" left: 414px; top: -539px; height: 99px; width: 184px; ", class="room-active">
+        <div style=" left: 414px; top: -539px; height: 99px; width: 184px;", class="room-active">
             room2
         </div>
-        <div style=" left: 600px; top: -638px; height: 97px; width: 86px; ", class="room-active">
+        <div style=" left: 600px; top: -638px; height: 98px; width: 86px;", class="room-active">
             room3
         </div>
-        <div style=" left: 688px; top: -736px; height: 93px; width: 98px; ", class="room-active">
+        <div style=" left: 688px; top: -736px; height: 93px; width: 98px;", class="room-active">
             room4
         </div>
-        <div style=" left: 789px; top: -829px; height: 98px; width: 91px; ", class="room-active">
+        <div style=" left: 789px; top: -829px; height: 98px; width: 91px;", class="room-active">
             room5
         </div>
-        <div style=" left: 883px; top: -927px; height: 98px; width: 89px; ", class="room-active">
+        <div style=" left: 883px; top: -927px; height: 98px; width: 89px;", class="room-active">
             room6
         </div>
-        <div style=" left: 974px; top: -1024px; height: 143px; width: 40px; ", class="room-active">
+        <div style=" left: 974px; top: -1024px; height: 143px; width: 40px;", class="room-active">
             room7
         </div>
-        <div style=" left: 311px; top: -1018px; height: 85px; width: 188px; ", class="room-active">
+        <div style=" left: 311px; top: -1018px; height: 85px; width: 188px;", class="room-active">
             room8
         </div>
-        <div style=" left: 503px; top: -1102px; height: 85px; width: 188px; ", class="room-active">
+        <div style=" left: 503px; top: -1102px; height: 85px; width: 188px;", class="room-active">
             room9
         </div>
 
@@ -48,4 +58,6 @@
     <div id="schedule-container"></div>
 </div>
 
-<div id="map-container" style="height: 400px; width: auto; background-color: red"></div>
+<div id="map-container" style="height: 400px; width: auto; ">
+    <div id="map_canvas"></div>
+</div>
