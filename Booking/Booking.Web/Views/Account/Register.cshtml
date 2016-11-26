@@ -23,6 +23,7 @@
 
     @Html.ValidationMessageFor(m => m.ConfirmPassword, "", new {@class = "validation-error"})
     @Html.PasswordFor(m => m.ConfirmPassword, new {@class = "login-input", placeholder = Localization.ConfirmPasswordPlaceholder})
+
     <div style="width: 100%;">
         <input type="submit" disabled="disabled" value=@Localization.RegisterSubmit class="login-submit"/>
     </div>
@@ -30,5 +31,16 @@
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
-    @Scripts.Render("~/Scripts/project/login.js")
+    <script>
+        $(document)
+            .ready(function() {
+                var form = $("form");
+                var validator = form.data("validator");
+
+                validator.settings.showErrors = function() {
+                    $('input[type="submit"]').prop('disabled', (this.numberOfInvalids() !== 0));
+                    this.defaultShowErrors();
+                };
+            });
+    </script>
 }
