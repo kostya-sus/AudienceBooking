@@ -1,31 +1,34 @@
-﻿@model Booking.Web.ViewModels.Audience.AudiencesNamesViewModel
+﻿@model Booking.Web.ViewModels.ScheduleTableViewModel
 
 <div id="schedule-table">
     <table id="schedule-rooms-column">
         <tr>
-            <th>fdg</th>
+            <th></th>
         </tr>
-        <tr>
-            <td>DD</td>
-        </tr>
-        <tr>
-            <td>DD</td>
-        </tr>
+        @foreach (string name in Model.AvailableAudiences.Names.Values)
+        {
+            <tr>
+                <td>@name</td>
+            </tr>
+        }
     </table>
     <div id="schedule-viewport">
-        <table id="schedule-contents">
+        <table id="schedule-contents-table">
             <tr>
-                <th>12:00</th>
-                <th>13:00</th>
+                @for (int hour = Model.LowerHourBound; hour <= Model.UpperHourBound; ++hour)
+                {
+                    <th>@string.Format("{0}:00", hour.ToString("D2"))</th>
+                }
             </tr>
-            <tr>
-                <td>DD</td>
-                <td>DD</td>
-            </tr>
-            <tr>
-                <td>DD</td>
-                <td>DD</td>
-            </tr>
+            @foreach (string name in Model.AvailableAudiences.Names.Values)
+            {
+                <tr>
+                    @for (int hour = Model.LowerHourBound; hour <= Model.UpperHourBound; ++hour)
+                    {
+                        <td></td>
+                    }
+                </tr>
+            }
         </table>
     </div>
 </div>

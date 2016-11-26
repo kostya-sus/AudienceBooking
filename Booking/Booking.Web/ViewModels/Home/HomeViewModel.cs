@@ -8,7 +8,7 @@ namespace Booking.Web.ViewModels.Home
     {
         public AudiencesNamesViewModel AllAudiencesNames { get; set; }
 
-        public AudiencesNamesViewModel AvailableAudiences { get; set; }
+        public ScheduleTableViewModel ScheduleTable { get; set; }
 
         public bool IsAdmin { get; set; }
 

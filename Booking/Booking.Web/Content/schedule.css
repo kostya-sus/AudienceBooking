@@ -1,9 +1,9 @@
 ﻿#schedule-table {
     display: table;
-    padding: 10px;
+    padding: 10px 0;
 }
 
-#schedule-rooms-column, #schedule-contents {
+#schedule-rooms-column, #schedule-contents-table {
     float: left;
     display: inline-table;
     margin: 0;
@@ -12,18 +12,25 @@
 
 #schedule-table th, #schedule-table td {
     width: 140px;
-    border-color: #f5f6fb;
+    min-width: 140px;
+    border-color: #ebedf9;
     border-style: solid;
-    border-width: 3px;
+    border-width: 2px;
 }
 
-#schedule-rooms-column th, #schedule-rooms-column td {
-    border-right-width: 0;
+#schedule-contents-table th, #schedule-contents-table td { border-left-width: 0; }
+
+#schedule-table th {
+    text-align: center;
+    font-weight: normal;
+    height: 30px;
+    color: #adb2d4;
 }
 
-#schedule-table th { height: 30px; }
-
-#schedule-table td { height: 50px; }
+#schedule-table td {
+    height: 50px;
+    padding-left: 10px;
+}
 
 
 #schedule-table tr { margin: 0; }
@@ -32,12 +39,13 @@
     float: left;
     margin: 0;
     padding: 0;
-    overflow-y: hidden;
+    overflow-x: hidden;
     display: inline;
     height: auto;
     width: 600px;
 }
 
-#schedule-rooms-column th { width: 100px !important; }
-
-#schedule-rooms-column td { width: 100px !important; }
+#schedule-rooms-column th, #schedule-rooms-column td {
+    min-width: 110px !important;
+    width: 110px !important;
+}
