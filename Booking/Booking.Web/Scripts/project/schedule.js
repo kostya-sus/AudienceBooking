@@ -13,10 +13,14 @@ function timeToPos(l, u, w, time) {
     return (hours - l) * w + (w / 60) * minutes;
 }
 
+function moveSlider(slider, pos) {
+    slider.css("left", pos + "px");
+}
+
 function moveSliderNow(l, u, w) {
     var time = new Date();
     var pos = timeToPos(l, u, w, time);
-    $("#slider-now").css("left", pos + "px");
+    moveSlider($("#slider-now"), pos);
 }
 
 function timeToStringHHMM(time) {
@@ -42,7 +46,10 @@ $(document)
         var upperHourBound = parseInt($("#UpperHourBound").val());
         var tdWidth = parseInt($("#schedule-contents-table td").css("width"));
 
-        moveSliderNow(lowerHourBound, upperHourBound, tdWidth);
+        var pos = timeToPos(lowerHourBound, upperHourBound, tdWidth, new Date());
+        moveSlider($("#slider-now"), pos);
+        moveSlider($("#slider-draggable"), pos);
+        $("#schedule-viewport-outer").scrollLeft(pos);
 
         setInterval(function() {
                 moveSliderNow(lowerHourBound, upperHourBound, tdWidth);

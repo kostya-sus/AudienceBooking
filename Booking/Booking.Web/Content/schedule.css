@@ -97,3 +97,35 @@
     overflow-x: hidden;
     width: 600px;
 }
+
+.schedule-mode-buttons-container {
+    height: 30px;
+    width: 80px;
+    margin: 5px 0;
+    border-color: #ebedf9;
+    border-width: 2px;
+    border-style: solid;
+    border-radius: 20px;
+}
+
+.schedule-mode-buttons-container i {
+    color: #ebedf9;
+    margin-top: 5px;
+    margin-bottom: 4px;
+    font-size: 18px;
+}
+
+#schedule-mode-table-only {
+    float: left;
+    margin-left: 12px;
+}
+
+#schedule-mode-with-calendar {
+    float: right;
+    margin-right: 12px;
+}
+
+.schedule-mode-buttons-container i:hover {
+    color: #9fa6b6;
+    cursor: pointer;
+}

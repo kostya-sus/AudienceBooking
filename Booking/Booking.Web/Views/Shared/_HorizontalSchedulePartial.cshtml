@@ -4,6 +4,11 @@
 @Html.HiddenFor(m => m.LowerHourBound)
 @Html.HiddenFor(m => m.UpperHourBound)
 
+<div class="schedule-mode-buttons-container">
+    <i id="schedule-mode-table-only" class="fa fa-align-justify" aria-hidden="true"></i>
+    <i id="schedule-mode-with-calendar" class="fa fa-th-list" aria-hidden="true"></i>
+</div>
+
 <div id="schedule-table">
     <table id="schedule-rooms-column">
         <tr>
@@ -27,7 +32,7 @@
             <div id="slider-draggable" class="schedule-slider">
                 <img class="schedule-slider-top" src="@Url.Content("~/Content/Images/schedule/today-active-top.png")"/>
                 <img class="schedule-slider-bottom" src="@Url.Content("~/Content/Images/schedule/today-active-bottom.png")"/>
-                <div class="slider-caption">16:10</div>
+                <div class="slider-caption"></div>
             </div>
             <table id="schedule-contents-table">
                 <tr>
