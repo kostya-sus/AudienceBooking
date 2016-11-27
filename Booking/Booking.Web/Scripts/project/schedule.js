@@ -43,11 +43,13 @@ function setDraggableSliderCaption(caption) {
 function toggleTableOnlyMode() {
     $("#schedule-mode-table-only").addClass("mode-button-selected");
     $("#schedule-mode-with-calendar").removeClass("mode-button-selected");
+    $("#schedule-viewport-outer").width(870);
 }
 
 function toggleWithCalendarMode() {
     $("#schedule-mode-with-calendar").addClass("mode-button-selected");
     $("#schedule-mode-table-only").removeClass("mode-button-selected");
+    $("#schedule-viewport-outer").width(590);
 }
 
 $(document)
