@@ -115,6 +115,15 @@ namespace Booking.Web.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Сейчас.
+        /// </summary>
+        public static string Now {
+            get {
+                return ResourceManager.GetString("Now", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Пароль.
         /// </summary>
         public static string PasswordPlaceholder {

@@ -1,4 +1,5 @@
-﻿@model Booking.Web.ViewModels.ScheduleTableViewModel
+﻿@using Booking.Web.Localization
+@model Booking.Web.ViewModels.ScheduleTableViewModel
 
 <div id="schedule-table">
     <table id="schedule-rooms-column">
@@ -14,9 +15,16 @@
     </table>
     <div id="schedule-viewport-outer">
         <div id="schedule-viewport">
-            <div id="slider-draggable" class="schedule-slider">
+            <div id="slider-now" class="schedule-slider">
                 <img class="schedule-slider-top" src="@Url.Content("~/Content/Images/schedule/today-top.png")"/>
                 <img class="schedule-slider-bottom" src="@Url.Content("~/Content/Images/schedule/today-bottom.png")"/>
+                <div class="slider-caption">@Localization.Now</div>
+            </div>
+
+            <div id="slider-draggable" class="schedule-slider">
+                <img class="schedule-slider-top" src="@Url.Content("~/Content/Images/schedule/today-active-top.png")" />
+                <img class="schedule-slider-bottom" src="@Url.Content("~/Content/Images/schedule/today-active-bottom.png")"/>
+                <div class="slider-caption">16:10</div>
             </div>
             <table id="schedule-contents-table">
                 <tr>

@@ -1,6 +1,6 @@
 ﻿#schedule-table {
     display: table;
-    padding: 10px 0;
+    padding: 10px 0 50px 0;
 }
 
 #schedule-rooms-column, #schedule-contents-table {
@@ -32,7 +32,6 @@
     padding-left: 10px;
 }
 
-
 #schedule-table tr { margin: 0; }
 
 #schedule-viewport {
@@ -57,12 +56,13 @@
     height: 100%;
     width: auto;
     width: 2px;
-    background-color: #9fa6b6;
 }
 
-#slider-draggable:hover {
-    cursor: w-resize;
-}
+#slider-now { background-color: #9fa6b6; }
+
+#slider-draggable { background-color: black; }
+
+#slider-draggable:hover { cursor: w-resize; }
 
 .schedule-slider-top, .schedule-slider-bottom {
     position: absolute;
@@ -73,11 +73,25 @@
 
 .schedule-slider-bottom { bottom: -8px; }
 
+.slider-caption {
+    position: absolute;
+    left: -14px;
+    font-size: 12px;
+}
+
+#slider-now .slider-caption {
+    bottom: -40px;
+}
+
+#slider-draggable .slider-caption {
+    bottom: -25px;
+}
+
 #schedule-viewport-outer {
     margin-top: -15px;
     padding-top: 15px;
-    margin-bottom: -15px;
-    padding-bottom: 15px;
+    margin-bottom: -50px;
+    padding-bottom: 50px;
     position: relative;
     overflow-x: hidden;
     width: 600px;
