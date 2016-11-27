@@ -75,6 +75,10 @@ $(document)
                 drag: function(event, ui) {
                     var time = posToTime(lowerHourBound, upperHourBound, tdWidth, ui.position.left);
                     setDraggableSliderCaption(timeToStringHHMM(time));
+                },
+                stop: function(event, ui) {
+                    var pos = ui.position.left;
+                    $("#schedule-viewport-outer").scrollLeft(pos);
                 }
             });
 
