@@ -26,10 +26,10 @@
                     <li  class="@(ViewBag.ActiveLink == "Login" ? "active" : "")">
                         @Html.ActionLink(@Localization.Login, "Login", "Account")
                     </li>
-                    <li class="@(ViewBag.ActiveLink == "Index" ? "active" : "")">
+                    <li class="@(ViewBag.ActiveLink == "Feedback" ? "active" : "")">
                         @Html.ActionLink(@Localization.Feedback, "Index", "Home")
                     </li>
-                    <li class="@(ViewBag.ActiveLink == "Schedule" ? "active" : "")">
+                    <li class="@(ViewBag.ActiveLink == "Index" ? "active" : "")">
                         @Html.ActionLink(@Localization.Schedule, "Index", "Home")
                     </li>
                 </ul>
