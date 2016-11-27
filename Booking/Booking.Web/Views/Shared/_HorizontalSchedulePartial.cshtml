@@ -12,23 +12,29 @@
             </tr>
         }
     </table>
-    <div id="schedule-viewport">
-        <table id="schedule-contents-table">
-            <tr>
-                @for (int hour = Model.LowerHourBound; hour <= Model.UpperHourBound; ++hour)
-                {
-                    <th>@string.Format("{0}:00", hour.ToString("D2"))</th>
-                }
-            </tr>
-            @foreach (string name in Model.AvailableAudiences.Names.Values)
-            {
+    <div id="schedule-viewport-outer">
+        <div id="schedule-viewport">
+            <div class="schedule-slider">
+                <img class="schedule-slider-top" src="@Url.Content("~/Content/Images/schedule/today-top.png")"/>
+                <img class="schedule-slider-bottom" src="@Url.Content("~/Content/Images/schedule/today-bottom.png")"/>
+            </div>
+            <table id="schedule-contents-table">
                 <tr>
                     @for (int hour = Model.LowerHourBound; hour <= Model.UpperHourBound; ++hour)
                     {
-                        <td></td>
+                        <th>@string.Format("{0}:00", hour.ToString("D2"))</th>
                     }
                 </tr>
-            }
-        </table>
+                @foreach (var key in Model.AvailableAudiences.Names.Keys)
+                {
+                    <tr>
+                        @for (int hour = Model.LowerHourBound; hour <= Model.UpperHourBound; ++hour)
+                        {
+                            <td></td>
+                        }
+                    </tr>
+                }
+            </table>
+        </div>
     </div>
 </div>

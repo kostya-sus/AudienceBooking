@@ -36,16 +36,48 @@
 #schedule-table tr { margin: 0; }
 
 #schedule-viewport {
+    margin-top: -20px;
+    padding-top: 20px;
+    position: relative;
     float: left;
     margin: 0;
     padding: 0;
-    overflow-x: hidden;
+    overflow: visible;
     display: inline;
     height: auto;
-    width: 600px;
 }
 
 #schedule-rooms-column th, #schedule-rooms-column td {
     min-width: 110px !important;
     width: 110px !important;
+}
+
+.schedule-slider {
+    position: absolute;
+    margin-left: 20px;
+    height: 100%;
+    width: auto;
+    width: 0;
+    border-color: #9fa6b6;
+    border-style: solid;
+    border-width: 1px;
+}
+
+.schedule-slider-top, .schedule-slider-bottom {
+    position: absolute;
+    left: -7px;
+}
+
+.schedule-slider-top { top: -8px; }
+
+.schedule-slider-bottom { bottom: -8px; }
+
+#schedule-viewport-outer {
+    margin-top: -15px;
+    padding-top: 15px;
+    margin-bottom: -15px;
+    padding-bottom: 15px;
+    position: relative;
+    overflow-x: hidden;
+    width: 600px;
 }

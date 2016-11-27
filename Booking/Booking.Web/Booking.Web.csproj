@@ -229,6 +229,10 @@
     <Content Include="Content\font-awesome\css\font-awesome.min.css" />
     <Content Include="Content\font-awesome\fonts\fontawesome-webfont.svg" />
     <Content Include="Content\home-page.css" />
+    <Content Include="Content\Images\schedule\today-active-bottom.png" />
+    <Content Include="Content\Images\schedule\today-active-top.png" />
+    <Content Include="Content\Images\schedule\today-bottom.png" />
+    <Content Include="Content\Images\schedule\today-top.png" />
     <Content Include="Content\schedule.css" />
     <Content Include="Content\Images\login-background.svg">
       <SubType>Designer</SubType>
