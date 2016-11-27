@@ -1,6 +1,9 @@
 ﻿@using Booking.Web.Localization
 @model Booking.Web.ViewModels.ScheduleTableViewModel
 
+@Html.HiddenFor(m => m.LowerHourBound)
+@Html.HiddenFor(m => m.UpperHourBound)
+
 <div id="schedule-table">
     <table id="schedule-rooms-column">
         <tr>
@@ -22,13 +25,13 @@
             </div>
 
             <div id="slider-draggable" class="schedule-slider">
-                <img class="schedule-slider-top" src="@Url.Content("~/Content/Images/schedule/today-active-top.png")" />
+                <img class="schedule-slider-top" src="@Url.Content("~/Content/Images/schedule/today-active-top.png")"/>
                 <img class="schedule-slider-bottom" src="@Url.Content("~/Content/Images/schedule/today-active-bottom.png")"/>
                 <div class="slider-caption">16:10</div>
             </div>
             <table id="schedule-contents-table">
                 <tr>
-                    @for (int hour = Model.LowerHourBound; hour <= Model.UpperHourBound; ++hour)
+                    @for (int hour = Model.LowerHourBound; hour < Model.UpperHourBound; ++hour)
                     {
                         <th>@string.Format("{0}:00", hour.ToString("D2"))</th>
                     }
@@ -36,7 +39,7 @@
                 @foreach (var key in Model.AvailableAudiences.Names.Keys)
                 {
                     <tr>
-                        @for (int hour = Model.LowerHourBound; hour <= Model.UpperHourBound; ++hour)
+                        @for (int hour = Model.LowerHourBound; hour < Model.UpperHourBound; ++hour)
                         {
                             <td></td>
                         }

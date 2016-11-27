@@ -28,7 +28,7 @@ namespace Booking.Web.Controllers
                         }
                     },
                     LowerHourBound = 10,
-                    UpperHourBound = 19
+                    UpperHourBound = 20
                 },
                 IsAdmin = User.IsInRole("admin"),
                 IsLoggedIn = User.Identity.IsAuthenticated
