@@ -78,7 +78,11 @@ $(document)
                 },
                 stop: function(event, ui) {
                     var pos = ui.position.left;
-                    $("#schedule-viewport-outer").scrollLeft(pos);
+                    var viewportWidth = $("#schedule-viewport-outer").width();
+                    var currentScrollPos = $("#schedule-viewport-outer").scrollLeft();
+                    if (currentScrollPos > pos || currentScrollPos < pos + viewportWidth) {
+                        $("#schedule-viewport-outer").scrollLeft(pos - viewportWidth / 2);
+                    }
                 }
             });
 
