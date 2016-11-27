@@ -75,15 +75,16 @@
 
 .slider-caption {
     position: absolute;
-    left: -14px;
     font-size: 12px;
 }
 
 #slider-now .slider-caption {
+    left: -20px;
     bottom: -40px;
 }
 
 #slider-draggable .slider-caption {
+    left: -14px;
     bottom: -25px;
 }
 

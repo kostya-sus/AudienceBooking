@@ -7,6 +7,18 @@
     return time;
 }
 
+function timeToPos(l, u, w, time) {
+    var hours = time.getHours();
+    var minutes = time.getMinutes();
+    return (hours - l) * w + (w / 60) * minutes;
+}
+
+function moveSliderNow(l, u, w) {
+    var time = new Date();
+    var pos = timeToPos(l, u, w, time);
+    $("#slider-now").css("left", pos + "px");
+}
+
 function timeToStringHHMM(time) {
     var hours = time.getHours();
     if (hours < 10) {
@@ -29,7 +41,13 @@ $(document)
         var lowerHourBound = parseInt($("#LowerHourBound").val());
         var upperHourBound = parseInt($("#UpperHourBound").val());
         var tdWidth = parseInt($("#schedule-contents-table td").css("width"));
-        console.log(tdWidth);
+
+        moveSliderNow(lowerHourBound, upperHourBound, tdWidth);
+
+        setTimeout(function() {
+                moveSliderNow(lowerHourBound, upperHourBound, tdWidth);
+            },
+            60000);
 
         $("#slider-draggable")
             .draggable({

@@ -27,8 +27,8 @@ namespace Booking.Web.Controllers
                             {AudiencesEnum.TeslaClassroom, "Tesla Classroom"}
                         }
                     },
-                    LowerHourBound = 10,
-                    UpperHourBound = 20
+                    LowerHourBound = 0,
+                    UpperHourBound = 24
                 },
                 IsAdmin = User.IsInRole("admin"),
                 IsLoggedIn = User.Identity.IsAuthenticated
