@@ -81,6 +81,7 @@
 #slider-now .slider-caption {
     left: -20px;
     bottom: -40px;
+    color: #9fa6b6; 
 }
 
 #slider-draggable .slider-caption {
@@ -108,8 +109,11 @@
     border-radius: 20px;
 }
 
-.schedule-mode-buttons-container i {
+.schedule-mode-buttons-container {
     color: #ebedf9;
+}
+
+.schedule-mode-buttons-container i {
     margin-top: 5px;
     margin-bottom: 4px;
     font-size: 18px;
@@ -126,6 +130,8 @@
 }
 
 .schedule-mode-buttons-container i:hover {
-    color: #9fa6b6;
+    color: black;
     cursor: pointer;
 }
+
+.mode-button-selected { color: #9fa6b6; }

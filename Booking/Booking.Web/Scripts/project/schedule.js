@@ -40,13 +40,25 @@ function setDraggableSliderCaption(caption) {
     $("#slider-draggable .slider-caption").text(caption);
 }
 
+function toggleTableOnlyMode() {
+    $("#schedule-mode-table-only").addClass("mode-button-selected");
+    $("#schedule-mode-with-calendar").removeClass("mode-button-selected");
+}
+
+function toggleWithCalendarMode() {
+    $("#schedule-mode-with-calendar").addClass("mode-button-selected");
+    $("#schedule-mode-table-only").removeClass("mode-button-selected");
+}
+
 $(document)
     .ready(function() {
         var lowerHourBound = parseInt($("#LowerHourBound").val());
         var upperHourBound = parseInt($("#UpperHourBound").val());
         var tdWidth = parseInt($("#schedule-contents-table td").css("width"));
 
-        var pos = timeToPos(lowerHourBound, upperHourBound, tdWidth, new Date());
+        var time = new Date();
+        var pos = timeToPos(lowerHourBound, upperHourBound, tdWidth, time);
+        setDraggableSliderCaption(timeToStringHHMM(time));
         moveSlider($("#slider-now"), pos);
         moveSlider($("#slider-draggable"), pos);
         $("#schedule-viewport-outer").scrollLeft(pos);
@@ -65,4 +77,9 @@ $(document)
                     setDraggableSliderCaption(timeToStringHHMM(time));
                 }
             });
+
+
+        $("#schedule-mode-table-only").click(toggleTableOnlyMode);
+        $("#schedule-mode-with-calendar").click(toggleWithCalendarMode);
+        toggleTableOnlyMode();
     });
