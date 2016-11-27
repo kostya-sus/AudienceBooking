@@ -10,27 +10,24 @@
 }
 header {
     background-color: #ffffff ;
+    width: 100%;
+    position: fixed;
+    top: 0;
+    z-index: 1030;
 }
 
-.nav-default {
-min-width: 1021px !important;
-}
-.list-header {
-    position: relative;
-    display: block;
-}
-
-.panel-footer {
+footer {
   background-color: #F4F6FB;
   border-top: 1px solid #D4D9E4;
   border-bottom-right-radius: 3px;
   border-bottom-left-radius: 3px;
+  width: 100%
 }
 
-  .right {
-    right: 0;
-    left: auto;
-  }
+#map_canvas {
+    width: 100%;
+}
+
 
 
 .logo-container {
@@ -45,63 +42,39 @@ min-width: 1021px !important;
    margin: 5px auto;
 }
 
-.divMap {
-    background-color: #F4F6FB;
+
+.navb >li:first-child {
+    float: left;
+}
+
+.navb > ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #FFFFFF;
+}
+
+.navb > li {
+    float: right;
+}
+
+.navb > li > a {
+    display: block;
+    color: #000000;
     text-align: center;
-    margin: 5px auto;
+    padding: 14px 16px;
+    text-decoration: none;
 }
 
-.nav > li {
-  position: relative;
-  display: block;
+.navb > li > a:hover {
+    color: #F95752;
 }
 
-.nav > li > a {
-  position: relative;
-  display: block;
-  padding: 10px 15px;
-}
-
-.nav > li > a:hover,
-.nav > li > a:focus {
-  text-decoration: none;
-  background-color: #F4F6FB;
-  border-bottom: 10px solid #F96C68;
-    
-}
-
-.nav > li.disabled > a {
-  color: #999999;
-}
-
-.nav > li.disabled > a:hover,
-.nav > li.disabled > a:focus {
-  color: #999999;
-  text-decoration: none;
-  cursor: not-allowed;
-  background-color: transparent;
-}
-
-.room {
-    position: relative;
-    background-color: #D7D9DE !important;
-}
-.room-active{
-    position: relative;
-    background-color: #F96C68;
-    z-index:  1;
-}
-.room-avalible{
-    position: relative;
-    background-color: #9FA6B6 ;
-    z-index:  1;
-}
-
-.room-div{
-    position: relative;
-    background-color: #9FA6B6;
-    margin: auto;
-    vertical-align: middle;
+#navb  .active {
+     background-color: #F4F6FB;
+     border-bottom: 3px solid #F95752;
+     
 }
 
 

@@ -104,29 +104,7 @@ document.write('<scr'+'ipt type="text/javascript" src="https://maps.googleapis.c
 				var infowindow = new google.maps.InfoWindow();
 				var marker, i;
 				var markers = [];
-
-				for (i = 0; i < options.locations.length; i++) {
-
-					// Add Markers
-					marker = new google.maps.Marker({
-						position: new google.maps.LatLng(options.locations[i][0], options.locations[i][1]),
-						map: 			map,
-						icon: 		new google.maps.MarkerImage(options.locations[i][2] || options.marker.icon),
-						title: 		options.locations[i][3]
-					});
-
-					// Create an array of the markers
-					markers.push(marker);
-
-					// Init info for each marker
-					google.maps.event.addListener(marker, 'click', (function(marker, i) {
-						return function() {
-							infowindow.setContent(options.locations[i][4]);
-							infowindow.open(map, marker);
-						}
-					})(marker, i));
-
-				};
+				
 
 				// Directions
 				var directionsService = new google.maps.DirectionsService();
@@ -144,13 +122,7 @@ document.write('<scr'+'ipt type="text/javascript" src="https://maps.googleapis.c
 					});
 				});
 
-				// Hide Markers Once (helper)
-				$this.on ('hide_all', function() {
-					for (var i=0; i<options.locations.length; i++) {
-						markers[i].setVisible(false);
-					};
-				});
-
+				
 				// Show Markers Per Category (helper)
 				$this.on ('show', function(event, category) {
 					$this.trigger('hide_all');
