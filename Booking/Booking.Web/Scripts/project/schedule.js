@@ -44,7 +44,7 @@ $(document)
 
         moveSliderNow(lowerHourBound, upperHourBound, tdWidth);
 
-        setTimeout(function() {
+        setInterval(function() {
                 moveSliderNow(lowerHourBound, upperHourBound, tdWidth);
             },
             60000);
