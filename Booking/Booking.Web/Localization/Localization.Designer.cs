@@ -97,6 +97,15 @@ namespace Booking.Web.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Этаж.
+        /// </summary>
+        public static string Floor {
+            get {
+                return ResourceManager.GetString("Floor", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Неверные данные.
         /// </summary>
         public static string InvalidLoginAttempt_Message {

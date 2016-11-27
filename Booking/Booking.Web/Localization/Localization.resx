@@ -174,4 +174,7 @@
   <data name="All_rights_reserved" xml:space="preserve">
     <value>Все права защищены</value>
   </data>
+  <data name="Floor" xml:space="preserve">
+    <value>Этаж</value>
+  </data>
 </root>
