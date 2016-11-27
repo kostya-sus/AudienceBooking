@@ -1,15 +1,14 @@
-﻿.room {
-    
-}
+﻿
 
-.room-active {
-    
-}
+.room-active {    position: relative;    background-color: #F95752;    z-index: 1;    text-align: center;
+}
 
-.room-available {
-    
-}
+.room-available {    position: relative;    background-color: #9FA6B6;    z-index: 1;    text-align: center;}
 
-.room > div {
-    
-}
+.room-not-available  {    position: relative;    background-color:  #D7D9DE;    z-index: 1;
+    text-align: center;}
+
+.room {    line-height: 1.5;    display: inline-block;    vertical-align: middle;    border-color: #ffffff;    border-radius: 10px;    background-color: rgba(0, 0, 0, 0.2);}
+.room > p {        color: #ffffff;    margin: 0px 5px;}
+    
+
