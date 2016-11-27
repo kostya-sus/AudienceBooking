@@ -71,10 +71,10 @@ footer {
     color: #F95752;
 }
 
-#navb > li > .active {
-     font-weight: bold;
+#navb  .active {
      background-color: #F4F6FB;
-     border-bottom: #F95752;
+     border-bottom: 2px solid #F95752;
+     
 }
 
 

@@ -23,7 +23,7 @@
                             </a>
                         </div>
                     </li>
-                    <li class="@(ViewBag.ActiveLink == "Login" ? "active" : "")">
+                    <li  class="@(ViewBag.ActiveLink == "Login" ? "active" : "")">
                         @Html.ActionLink(@Localization.Login, "Login", "Account")
                     </li>
                     <li class="@(ViewBag.ActiveLink == "Index" ? "active" : "")">
