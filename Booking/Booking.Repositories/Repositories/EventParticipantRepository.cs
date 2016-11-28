@@ -41,5 +41,25 @@ namespace Booking.Repositories.Repositories
         {
             _context.SaveChanges();
         }
+        
+        private bool _disposed;
+
+        public virtual void Dispose(bool disposing)
+        {
+            if (!_disposed)
+            {
+                if (disposing)
+                {
+                    _context.Dispose();
+                }
+            }
+            _disposed = true;
+        }
+
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
     }
 }
