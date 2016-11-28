@@ -1,4 +1,5 @@
 ﻿using System;
+using Booking.Enums;
 using Booking.Web.ViewModels.Audience;
 
 namespace Booking.Web.ViewModels.Event
@@ -7,9 +8,17 @@ namespace Booking.Web.ViewModels.Event
     {
         public Guid Id { get; set; }
 
-        public DateTime EventDateTime { get; set; }
+        public int EventDay { get; set; }
 
-        public int Duration { get; set; }
+        public int EventMonth { get; set; }
+
+        public int StartHour { get; set; }
+
+        public int StartMinute { get; set; }
+
+        public int EndHour { get; set; }
+
+        public int EndMinute { get; set; }
 
         public string Title { get; set; }
 
@@ -24,5 +33,11 @@ namespace Booking.Web.ViewModels.Event
         public bool IsPublic { get; set; }
 
         public AudiencesNamesViewModel AvailableAudiences { get; set; }
+
+        public AudiencesEnum ChosenAudience { get; set; }
+
+        public int LowerHourBound { get; set; }
+
+        public int HigherHourBound { get; set; }
     }
 }

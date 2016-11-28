@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Booking.Enums;
 using Booking.Models;
 
@@ -8,14 +9,20 @@ namespace Booking.Services.Interfaces
     {
         Audience GetAudience(int audienceId);
 
-        bool EditAudience(Audience audience);
+        void UpdateAudience(Audience audience);
 
-        bool CloseAudience(int audienceId);
+        void CloseAudience(int audienceId);
 
-        bool OpenAudience(int audienceId);
+        void OpenAudience(int audienceId);
+
+        bool IsFree(int audienceId, DateTime dateTime, int duration);
 
         IEnumerable<Audience> GetAllAudiences();
 
         IEnumerable<AudiencesEnum> GetAvailableAudiencesIds();
+
+        IDictionary<AudiencesEnum, string> GetAllAudiencesNames();
+
+        IDictionary<AudiencesEnum, string> GetAvailableAudiencesNames();
     }
 }
