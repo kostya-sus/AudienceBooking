@@ -4,7 +4,7 @@ using Booking.Models;
 
 namespace Booking.Repositories.Interfaces
 {
-    public interface IEventParticipantRepository
+    public interface IEventParticipantRepository : IDisposable
     {
         IQueryable GetAllEventParticipants();
 

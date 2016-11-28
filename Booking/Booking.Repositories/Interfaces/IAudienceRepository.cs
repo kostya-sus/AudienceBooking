@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using Booking.Enums;
 using Booking.Models;
 
 namespace Booking.Repositories.Interfaces
@@ -8,7 +9,7 @@ namespace Booking.Repositories.Interfaces
     {
         IQueryable<Audience> GetAllAudiences();
 
-        Audience GetAudienceById(int id);
+        Audience GetAudienceById(AudiencesEnum id);
 
         void UpdateAudience(Audience audience);
 
