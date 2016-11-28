@@ -13,6 +13,7 @@ namespace Booking.Repositories
     public class UnitOfWork:IUnitOfWork
     {
         private readonly BookingDbContext _context = new BookingDbContext();
+
         private AudienceRepository _audienceRepository;
         private EventRepository _eventRepository;
         private EventParticipantRepository _eventParticipantRepository;

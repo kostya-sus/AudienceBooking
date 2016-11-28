@@ -22,27 +22,11 @@ namespace Booking.Repositories.Repositories
         public IQueryable<Audience> GetAllAudiences()
         {
             return _context.Audiences;
-            ////return _context.Audiences.Select(x => new Audience
-            ////{
-            ////    Id = x.Id,
-            ////    Name = x.Name,
-            ////    SeatsCount = x.SeatsCount,
-            ////    BoardsCount = x.BoardsCount,
-            ////    LaptopsCount = x.LaptopsCount,
-            ////    PrintersCount = x.PrintersCount,
-            ////    ProjectorsCount = x.ProjectorsCount,
-            ////    IsBookingAvailable = x.IsBookingAvailable,
-            ////    Events = x.Events
-            ////});
-
         }
 
-        public Audience GetAudienceById(int id)
+        public Audience GetAudienceById(AudiencesEnum id)
         {
             return _context.Audiences.Find(id);
-            ////return _context.Audiences.Where(x => x.Id == (Audiences) id) as Audience;
-            //// return _context.Audiences.FirstOrDefault(aud => aud.Id == (Audiences) id);
-            // need test!
         }
 
         public void UpdateAudience(Audience audience)
