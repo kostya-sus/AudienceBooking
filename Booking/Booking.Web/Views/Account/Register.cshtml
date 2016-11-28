@@ -5,38 +5,35 @@
     ViewBag.ActiveLink = "Register";
 }
 
-@using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+@using (Html.BeginForm("Register", "Account", FormMethod.Post, new {@class = "form-horizontal", role = "form"}))
 {
     @Html.AntiForgeryToken()
-    <br/>
-   
-    @Html.ValidationSummary(true,"", new { @class = "ValidationSummaryError" })
-
-    <div class="col-md-10" style="font-size: 10px !important;">
-        @Html.ValidationMessageFor(m => m.UserName, "", new { @class = "ValidationError" })
-        @Html.TextBoxFor(m => m.UserName, new { @class = "loginInput", placeholder = Localization.UserNamePlaceholder })
+    <div class="validation-summary-error">
+        @if (ViewData["UserExistsError"] != null)
+        {
+            <i class="fa fa-exclamation-circle" aria-hidden="true"></i>
+            <span>@ViewData["UserExistsError"]</span>
+        }
     </div>
 
-    <div class="col-md-10" style="font-size: 10px !important;">
-        @Html.ValidationMessageFor(m => m.Email, "", new { @class = "ValidationError" })
-        @Html.TextBoxFor(m => m.Email, new { @class = "loginInput", placeholder = Localization.EmailAddressPlaceholder })
-    </div>
+    @Html.ValidationMessageFor(m => m.UserName, "", new {@class = "validation-error"})
+    @Html.TextBoxFor(m => m.UserName, new {@class = "login-input", placeholder = Localization.UserNamePlaceholder})
 
-    <div class="col-md-10" style="font-size: 10px !important;">
-        @Html.ValidationMessageFor(m => m.Password, "", new { @class = "ValidationError" })
-        @Html.PasswordFor(m => m.Password, new { @class = "loginInput", placeholder = Localization.PasswordPlaceholder })
-    </div>
+    @Html.ValidationMessageFor(m => m.Email, "", new {@class = "validation-error"})
+    @Html.TextBoxFor(m => m.Email, new {@class = "login-input", placeholder = Localization.EmailAddressPlaceholder})
 
-    <div class="col-md-10" style="font-size: 10px !important;">
-        @Html.ValidationMessageFor(m => m.ConfirmPassword, "", new { @class = "ValidationError" })
-        @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "loginInput", placeholder = Localization.ConfirmPasswordPlaceholder })
-    </div>
+    @Html.ValidationMessageFor(m => m.Password, "", new {@class = "validation-error"})
+    @Html.PasswordFor(m => m.Password, new {@class = "login-input", placeholder = Localization.PasswordPlaceholder})
 
-        <div class="col-md-10">
-            <input type="submit" disabled="disabled" class="loginSubmit" value=@Localization.RegisterSubmit />
-        </div>
+    @Html.ValidationMessageFor(m => m.ConfirmPassword, "", new {@class = "validation-error"})
+    @Html.PasswordFor(m => m.ConfirmPassword, new {@class = "login-input", placeholder = Localization.ConfirmPasswordPlaceholder})
+
+    <div style="width: 100%;">
+        <input type="submit" disabled="disabled" value=@Localization.RegisterSubmit class="login-submit"/>
+    </div>
 }
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/Scripts/project/login-scripts.js")
 }

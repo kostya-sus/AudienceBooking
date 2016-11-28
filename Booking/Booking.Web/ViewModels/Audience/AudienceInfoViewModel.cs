@@ -4,7 +4,7 @@ namespace Booking.Web.ViewModels.Audience
 {
     public class AudienceInfoViewModel
     {
-        public Audiences Id { get; set; }
+        public AudiencesEnum Id { get; set; }
 
         public string Name { get; set; }
 

@@ -11,7 +11,10 @@ body {
     width: 100%;
 }
 
-.body-content { height: 100%; }
+.body-content {
+    width: 280px;
+    height: 100%;
+}
 
 #login-container {
     margin-left: auto;
@@ -78,74 +81,84 @@ body {
     vertical-align: middle;
 }
 
-.loginInput {
+.login-input {
     border: 1px #cccccc;
     border-radius: 50px;
-    margin-left: 20px;
-    background: #f5f6fb !important;
+    background: #f5f6fb;
+    margin: 0 auto;
     outline: none;
     height: 35px;
-    width: 270px;
     color: #656d7f;
     font-size: 13px;
     padding: 15px;
+    width: 100%;
 }
 
-.loginInput[type=password] {
+.login-input[type=password] {
     letter-spacing: 5px;
     font-size: 20px;
 }
 
-.loginInput[type=password]::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+.login-input[type=password]::-webkit-input-placeholder { /* Chrome/Opera/Safari */
     letter-spacing: normal;
     font-size: 13px;
     /*color: #a6abb6;*/
 }
 
-.loginInput[type=password]::-moz-placeholder { /* Firefox 19+ */
+.login-input[type=password]::-moz-placeholder { /* Firefox 19+ */
     letter-spacing: normal;
     font-size: 13px;
 }
 
-.loginInput[type=password]:-ms-input-placeholder { /* IE 10+ */
+.login-input[type=password]:-ms-input-placeholder { /* IE 10+ */
     letter-spacing: normal;
     font-size: 13px;
 }
 
-.loginInput[type=password]:-moz-placeholder { /* Firefox 18- */
+.login-input[type=password]:-moz-placeholder { /* Firefox 18- */
     letter-spacing: normal;
     font-size: 13px;
 }
 
-.loginSubmit:disabled {
+.login-submit:disabled {
     background: #c8cdd9;
     color: #e9ebf0;
 }
 
-.loginSubmit {
-
+.login-submit {
     background: #f95752;
-    margin-left: 80px;
-    margin-top: 10px;
-    width: 130px;
+    display: block;
+    margin: 10px auto;
+    min-width: 150px;
     height: 30px;
     border: 0 none;
     cursor: pointer;
     border-radius: 50px;
-    font-size: 11px;
-    color: #8b92a0;    
+    font-size: 12px;
+    color: white;
 }
 
-.ValidationError {
+.validation-error {
+    display: block;
     color: #656d7f;
-    height: 10px;
-
     font-size: 9px;
-    margin-left: 22px;
+    margin-left: 0;
+    height: 12px;
 }
 
-.ValidationSummaryError {
+.validation-error i { color: #f95752; }
+
+.validation-summary-error {
+    margin-top: 7px;
+    margin-left: -30px;
+    margin-right: -30px;
     color: #656d7f;
-    height: 10px;
-    font-size: 15px;
+    height: 20px;
+    font-size: 13px;
+    text-align: center;
+}
+
+.validation-summary-error > i {
+    color: #f95752;
+    font-size: 20px;
 }

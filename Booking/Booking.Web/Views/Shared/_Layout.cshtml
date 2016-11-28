@@ -8,44 +8,51 @@
     <title>@ViewBag.Title</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
-    @RenderSection("styles", required: false)
+    @RenderSection("styles", false)
 </head>
 <body>
-<div class="container">
-        <header>
-            <div class="navbar navbar-fixed-top">
-                <div class="container page-container">
-                    <a href="@Url.Action(" Index", "Home" )">
-                        <div class="logo-nav-container navbar-left">
-                            <img src="@Url.Content("~/Content/Images/logo-red.png")"/>
+<div>
+    <header>
+        <div class="page-container">
+            <div class="navb">
+                <ul id="navb" class="navb">
+                    <li>
+                        <div class="logo-nav-container">
+                            <a href="@Url.Action("Index", "Home")">
+                                <img src="@Url.Content("~/Content/Images/logo-red.png")"/>
+                            </a>
                         </div>
-                    </a>
-                    <div class="nav navbar-nav navbar-right">
-                        <ul class="nav navbar-nav">
-                            <li>@Html.ActionLink("Schedule", "Index", "Home")</li>
-                            <li>@Html.ActionLink("Feedback", "Index", "Home")</li>
-                            <li>@Html.ActionLink("Login", "Login", "Account", routeValues: null, htmlAttributes: new {id = "loginLink"})</li>
-                        </ul>
-                    </div>
-                </div>
+                    </li>
+                    <li  class="@(ViewBag.ActiveLink == "Login" ? "active" : "")">
+                        @Html.ActionLink(@Localization.Login, "Login", "Account")
+                    </li>
+                    <li class="@(ViewBag.ActiveLink == "Feedback" ? "active" : "")">
+                        @Html.ActionLink(@Localization.Feedback, "Index", "Home")
+                    </li>
+                    <li class="@(ViewBag.ActiveLink == "Index" ? "active" : "")">
+                        @Html.ActionLink(@Localization.Schedule, "Index", "Home")
+                    </li>
+                </ul>
             </div>
-        </header>
+        </div>
+    </header>
+
 
     @RenderBody()
 
-    <hr/>
+
     <footer class="panel-footer">
         <div style="text-align: center;">
             <div class="logo-container">
                 <img src="@Url.Content("~/Content/Images/logo.png")"/>
             </div>
-            <p> My ASP.NET Application&copy; @DateTime.Now.Year </p>
+            <p> @Localization.All_rights_reserved &copy; @DateTime.Now.Year </p>
         </div>
     </footer>
 </div>
 
 @Scripts.Render("~/bundles/jquery")
 @Scripts.Render("~/bundles/bootstrap")
-@RenderSection("scripts", required: false)
+@RenderSection("scripts", false)
 </body>
 </html>

@@ -4,17 +4,17 @@ namespace Booking.Web.ViewModels.Account
 {
     public class LoginViewModel
     {
-        [Required]
-        [Display(Name = "Email")]
-        [EmailAddress]
+        [Required(ErrorMessageResourceType = typeof(Localization.Localization),
+            ErrorMessageResourceName = "ValidationMessage_Required")]
+        [EmailAddress(ErrorMessageResourceType = typeof(Localization.Localization),
+            ErrorMessageResourceName = "RegisterViewModel_Email_ValidationMessage")]
         public string Email { get; set; }
 
-        [Required]
+        [Required(ErrorMessageResourceType = typeof(Localization.Localization),
+            ErrorMessageResourceName = "ValidationMessage_Required")]
         [DataType(DataType.Password)]
-        [Display(Name = "Password")]
         public string Password { get; set; }
 
-        [Display(Name = "Remember me?")]
         public bool RememberMe { get; set; }
     }
 }

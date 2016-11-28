@@ -7,6 +7,7 @@
     <title>@ViewBag.Title</title>
     @Styles.Render("~/Content/css")
     @Styles.Render("~/Content/LoginLayout.css")
+    @Styles.Render("~/Content/font-awesome/css/font-awesome.min.css")
 </head>
 <body>
 <div class="container-vertical-align">
@@ -43,7 +44,7 @@
 
 <script>
     $(document)
-        .ready(function () {
+        .ready(function() {
             var resizeLoginContainer = function() {
                 var w = window.innerWidth;
                 var newWidth = w > 1050 ? 0.85 * w : 900;
@@ -52,8 +53,7 @@
 
             resizeLoginContainer();
 
-            $(window)
-                .on('resize', resizeLoginContainer);
+            $(window).on('resize', resizeLoginContainer);
         });
 </script>
 
