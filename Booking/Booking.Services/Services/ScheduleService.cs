@@ -29,12 +29,11 @@ namespace Booking.Services.Services
             return res;
         }
 
-        public IEnumerable<Event> GetEventsByAudience(int audienceId, DateTime @from, DateTime to)
+        public IEnumerable<Event> GetEventsByAudience(int audienceId, DateTime from, DateTime to)
         {
             var res = _eventRepository.GetAllEvents();
-            res = res.Where( x => x.AudienceId == (AudiencesEnum) audienceId && x.EventDateTime <= @from &&
+            return res.Where( x => x.AudienceId == (AudiencesEnum) audienceId && x.EventDateTime <= from &&
                                                                 x.EventDateTime.AddMinutes(x.Duration) < to);
-            return res;
         }
 
         public IEnumerable<Event> GetEventsByAuthor(ApplicationUser author, DateTime day)
