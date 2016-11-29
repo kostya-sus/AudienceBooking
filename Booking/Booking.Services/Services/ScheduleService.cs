@@ -1,14 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.Remoting.Messaging;
-using System.Text;
-using System.Threading.Tasks;
 using Booking.Enums;
 using Booking.Models;
-using Booking.Repositories;
 using Booking.Repositories.Interfaces;
-using Booking.Repositories.Repositories;
 using Booking.Services.Interfaces;
 
 namespace Booking.Services.Services
@@ -24,23 +19,19 @@ namespace Booking.Services.Services
 
         public IEnumerable<Event> GetEventsByDay(DateTime day)
         {
-            var res = _eventRepository.GetAllEvents();
-            res = res.Where(x => x.EventDateTime.Date == day.Date);
-            return res;
+            return _eventRepository.GetAllEvents().Where(x => x.EventDateTime.Date == day.Date);
         }
 
-        public IEnumerable<Event> GetEventsByAudience(int audienceId, DateTime from, DateTime to)
+        public IEnumerable<Event> GetEventsByAudience(AudiencesEnum audienceId, DateTime from, DateTime to)
         {
-            var res = _eventRepository.GetAllEvents();
-            return res.Where( x => x.AudienceId == (AudiencesEnum) audienceId && x.EventDateTime <= from &&
-                                                                x.EventDateTime.AddMinutes(x.Duration) < to);
+            return _eventRepository.GetAllEvents().Where(x => x.AudienceId == audienceId && x.EventDateTime <= from &&
+                                                              x.EventDateTime.AddMinutes(x.Duration) < to);
         }
 
         public IEnumerable<Event> GetEventsByAuthor(ApplicationUser author, DateTime day)
         {
-            var res = _eventRepository.GetAllEvents();
-            res = res.Where(x => x.AuthorId == author.Id && x.EventDateTime.Date == day.Date);
-            return res;
+            return _eventRepository.GetAllEvents().Where(x => x.AuthorId == author.Id &&
+                                                              x.EventDateTime.Date == day.Date);
         }
     }
 }
