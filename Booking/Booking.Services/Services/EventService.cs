@@ -14,32 +14,30 @@ namespace Booking.Services.Services
 {
     public class EventService : IEventService
     {
-        private readonly IEventRepository _eventRepository;
-        private readonly IEventParticipantRepository _eventParticipantRepository;
+        private readonly IUnitOfWork _unitOfWork;
 
-        public EventService(IEventParticipantRepository eventParticipantRepository, IEventRepository eventRepository)
+        public EventService(IUnitOfWork unitOfWork)
         {
-            _eventParticipantRepository = eventParticipantRepository;
-            _eventRepository = eventRepository;
+            _unitOfWork = unitOfWork;
         }
 
         public void CreateEvent(Event eventEntity)
         {
-            _eventRepository.CreateEvent(eventEntity);
+            _unitOfWork.EventRepository.CreateEvent(eventEntity);
         }
 
         public Event GetEvent(Guid id)
         {
-            return _eventRepository.GetEventById(id);
+            return _unitOfWork.EventRepository.GetEventById(id);
         }
 
         public void CancelEvent(ApplicationUser editor, Guid eventId)
         {
-            var currentEvent = _eventRepository.GetEventById(eventId);
+            var currentEvent = _unitOfWork.EventRepository.GetEventById(eventId);
 
             if (editor.Roles.ToString() == "Admin" || editor.Id == currentEvent.AuthorId)
             {
-                _eventRepository.DeleteEvent(currentEvent);
+                _unitOfWork.EventRepository.DeleteEvent(currentEvent);
             }
             else
             {
@@ -51,7 +49,7 @@ namespace Booking.Services.Services
         {
             if (editor.Roles.ToString() == "Admin" || editor.Id == eventEntity.AuthorId)
             {
-                _eventRepository.UpdateEvent(eventEntity);
+                _unitOfWork.EventRepository.UpdateEvent(eventEntity);
             }
             else
             {
@@ -81,8 +79,8 @@ namespace Booking.Services.Services
 
         public void RemoveParticipant(ApplicationUser editor, Guid participantId, Event eventEntity)
         {
-            var currentParticipant = _eventParticipantRepository.GetEventParticipantById(participantId);
-            var currentEvent = _eventRepository.GetEventById(eventEntity.Id);
+            var currentParticipant = _unitOfWork.EventParticipantRepository.GetEventParticipantById(participantId);
+            var currentEvent = _unitOfWork.EventRepository.GetEventById(eventEntity.Id);
 
             if (editor.Roles.ToString() == "Admin" || editor.Id == eventEntity.AuthorId)
             {
