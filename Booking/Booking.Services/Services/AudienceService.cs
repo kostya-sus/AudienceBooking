@@ -51,23 +51,26 @@ namespace Booking.Services.Services
 
         public bool IsFree(AudiencesEnum audienceId, DateTime dateTime, int duration)
         {
-            var events = _unitOfWork.EventRepository.GetAllEvents();
-            events = events.Where(x => x.AudienceId == audienceId);
-
+            var events = _unitOfWork.EventRepository.GetAllEvents().Where(x => x.AudienceId == audienceId);
             var endOfEvent = dateTime.AddMinutes(duration);
 
-            if (endOfEvent.Hour < (int) BookingHoursBoundsEnum.Upper && (int)dateTime.DayOfWeek != 0 && (int) dateTime.DayOfWeek != 6) //check for weekend
+            if ((int)dateTime.DayOfWeek != 0 && (int)dateTime.DayOfWeek != 6)  //check for weekend
             {
-                foreach (var _event in events)
+                if ((endOfEvent.Hour < (int)BookingHoursBoundsEnum.Upper || (endOfEvent.Hour == (int)BookingHoursBoundsEnum.Upper & endOfEvent.Minute == 0))
+                     && dateTime.Hour >= (int)BookingHoursBoundsEnum.Lower)
                 {
-                    var endOfCurrentEvent = _event.EventDateTime.AddMinutes(_event.Duration);
-                    if (_event.EventDateTime >= dateTime && endOfCurrentEvent <= endOfEvent && dateTime.Hour >= (int) BookingHoursBoundsEnum.Lower)
+                    foreach (var currentEvent in events)
                     {
-                        return false;
+                        var endOfCurrentEvent = currentEvent.EventDateTime.AddMinutes(currentEvent.Duration);
+                        if ((currentEvent.EventDateTime < endOfEvent) && endOfCurrentEvent <= endOfEvent)
+                        {
+                            return false; 
+                        }
                     }
+                    return true;
                 }
             }
-            return true;
+            return false;
         }
 
         public IEnumerable<Audience> GetAllAudiences()
@@ -84,25 +87,21 @@ namespace Booking.Services.Services
         public IDictionary<AudiencesEnum, string> GetAllAudiencesNames()
         {
             var audiences = _unitOfWork.AudienceRepository.GetAllAudiences();
-
-            Dictionary<AudiencesEnum, string> names = new Dictionary<AudiencesEnum, string>();
-            foreach (var item in audiences)
-            {
-                names.Add(item.Id, item.Name);
-            }
-            return names;
+            return GetAudiencesNamesFromQuery(audiences);
         }
 
         public IDictionary<AudiencesEnum, string> GetAvailableAudiencesNames()
         {
+            var audiences = _unitOfWork.AudienceRepository.GetAllAudiences().Where(x=>x.IsBookingAvailable);
+            return GetAudiencesNamesFromQuery(audiences);
+        }
+
+        private IDictionary<AudiencesEnum, string> GetAudiencesNamesFromQuery(IQueryable<Audience> query)
+        {
             Dictionary<AudiencesEnum, string> names = new Dictionary<AudiencesEnum, string>();
-
-            var audiences = _unitOfWork.AudienceRepository.GetAllAudiences();
-            audiences = audiences.Where(x => x.IsBookingAvailable);
-
-            foreach (var item in audiences)
+            foreach (var item in query)
             {
-                names.Add(item.Id, item.Name);
+                names[item.Id] = item.Name;
             }
             return names;
         }
