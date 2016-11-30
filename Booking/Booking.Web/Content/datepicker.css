@@ -1,0 +1,16 @@
+﻿#datepicker {
+    margin: 5px 0 28px 0;
+    display: inline-block;
+}
+
+#datepicker-container { display: inline-block; }
+
+#datepicker-container .fa {
+    font-size: 26px;
+    margin-top: 0;
+}
+
+#datepicker .prev,
+#datepicker .next {
+    /*visibility: hidden !important;*/
+}

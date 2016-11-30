@@ -44,12 +44,14 @@ function toggleTableOnlyMode() {
     $("#schedule-mode-table-only").addClass("mode-button-selected");
     $("#schedule-mode-with-calendar").removeClass("mode-button-selected");
     $("#schedule-viewport-outer").width(870);
+    $("#datepicker").hide();
 }
 
 function toggleWithCalendarMode() {
     $("#schedule-mode-with-calendar").addClass("mode-button-selected");
     $("#schedule-mode-table-only").removeClass("mode-button-selected");
     $("#schedule-viewport-outer").width(590);
+    $("#datepicker").show();
 }
 
 $(document)
@@ -92,4 +94,15 @@ $(document)
         $("#schedule-mode-table-only").click(toggleTableOnlyMode);
         $("#schedule-mode-with-calendar").click(toggleWithCalendarMode);
         toggleTableOnlyMode();
+
+        $("#datepicker").datepicker({ language: "ru" });
+
+        $("#datepicker")
+            .on("changeDate",
+                function() {
+                    $("#datepicker-hidden")
+                        .val(
+                            $("#datepicker").datepicker("getFormattedDate")
+                        );
+                });
     });
