@@ -8,5 +8,7 @@ namespace Booking.Services.Interfaces
         int UsersCount { get; }
 
         IEnumerable<ApplicationUser> GetUsers(int from, int count);
+
+        bool IsAdmin(ApplicationUser user);
     }
 }
