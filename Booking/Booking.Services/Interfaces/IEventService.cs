@@ -9,12 +9,12 @@ namespace Booking.Services.Interfaces
 
         Event GetEvent(Guid id);
 
-        void CancelEvent(ApplicationUser user, Event eventEntity);
+        void CancelEvent(ApplicationUser editor, Guid eventId);
 
-        void EditEvent(ApplicationUser user, Event eventEntity);
+        void UpdateEvent(ApplicationUser editor, Event eventEntity);
 
         void AddParticipant(string email, Event eventEntity);
 
-        void RemoveParticipant(ApplicationUser user, string email, Event eventEntity);
+        void RemoveParticipant(ApplicationUser editor, Guid participantId, Event eventEntity);
     }
 }

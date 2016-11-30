@@ -3,8 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "BookingDb", "BookingDb\BookingDb.sqlproj", "{4C3F4466-B8B9-4381-8FF8-D7267F710BEA}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Booking.Models", "Booking.Models\Booking.Models.csproj", "{55DF4FDE-EA7C-47DB-B8E3-FEFC58EA1B47}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Booking.Repositories", "Booking.Repositories\Booking.Repositories.csproj", "{FD3CD658-F5A9-4DB5-9F06-3A7A8CB4C47D}"
@@ -21,12 +19,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{4C3F4466-B8B9-4381-8FF8-D7267F710BEA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{4C3F4466-B8B9-4381-8FF8-D7267F710BEA}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{4C3F4466-B8B9-4381-8FF8-D7267F710BEA}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
-		{4C3F4466-B8B9-4381-8FF8-D7267F710BEA}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{4C3F4466-B8B9-4381-8FF8-D7267F710BEA}.Release|Any CPU.Build.0 = Release|Any CPU
-		{4C3F4466-B8B9-4381-8FF8-D7267F710BEA}.Release|Any CPU.Deploy.0 = Release|Any CPU
 		{55DF4FDE-EA7C-47DB-B8E3-FEFC58EA1B47}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{55DF4FDE-EA7C-47DB-B8E3-FEFC58EA1B47}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{55DF4FDE-EA7C-47DB-B8E3-FEFC58EA1B47}.Release|Any CPU.ActiveCfg = Release|Any CPU

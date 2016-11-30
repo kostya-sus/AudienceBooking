@@ -64,6 +64,12 @@
     <Compile Include="BookingDbContext.cs" />
     <Compile Include="Event.cs" />
     <Compile Include="EventParticipant.cs" />
+    <Compile Include="Helpers\RandomChoiceExtension.cs" />
+    <Compile Include="Migrations\201611301824105_Initial.cs" />
+    <Compile Include="Migrations\201611301824105_Initial.Designer.cs">
+      <DependentUpon>201611301824105_Initial.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -75,6 +81,11 @@
       <Project>{CE3D5ABD-3457-434F-A525-EFC5D76E025D}</Project>
       <Name>Booking.Enums</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201611301824105_Initial.resx">
+      <DependentUpon>201611301824105_Initial.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

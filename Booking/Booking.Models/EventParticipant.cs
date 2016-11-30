@@ -7,8 +7,11 @@ namespace Booking.Models
     [Table("EventParticipant")]
     public class EventParticipant
     {
+        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public Guid Id { get; set; }
-
+        
+        [ForeignKey("Event")]
         public Guid EventId { get; set; }
 
         [Required]
