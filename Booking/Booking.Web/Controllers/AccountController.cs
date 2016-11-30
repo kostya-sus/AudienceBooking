@@ -61,12 +61,12 @@ namespace Booking.Web.Controllers
             {
                 return View(model);
             }
-            // This doesn't count login failures towards account lockout
-            // To enable password failures to trigger account lockout, change to shouldLockout: true
+
             ApplicationUser signedUser = UserManager.FindByEmail(model.Email);
 
-            var result =
-                await SignInManager.PasswordSignInAsync(signedUser.UserName, model.Password, model.RememberMe, false);
+            var result = signedUser != null
+                ? await SignInManager.PasswordSignInAsync(signedUser.UserName, model.Password, model.RememberMe, false)
+                : SignInStatus.Failure;
             switch (result)
             {
                 case SignInStatus.Success:
