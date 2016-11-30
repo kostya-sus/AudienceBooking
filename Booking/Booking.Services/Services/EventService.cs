@@ -16,10 +16,11 @@ namespace Booking.Services.Services
     {
         private readonly IEventRepository _eventRepository;
         private readonly IEventParticipantRepository _eventParticipantRepository;
-        public EventService(IEventRepository eventRepository, IEventParticipantRepository eventParticipantRepository)
+
+        public EventService(IEventParticipantRepository eventParticipantRepository, IEventRepository eventRepository)
         {
-            _eventRepository = eventRepository;
             _eventParticipantRepository = eventParticipantRepository;
+            _eventRepository = eventRepository;
         }
 
         public void CreateEvent(Event eventEntity)
@@ -32,11 +33,13 @@ namespace Booking.Services.Services
             return _eventRepository.GetEventById(id);
         }
 
-        public void CancelEvent(ApplicationUser user, Event eventEntity)
+        public void CancelEvent(ApplicationUser editor, Guid eventId)
         {
-            if (user.Roles.ToString() == "admin" || user.Id == eventEntity.AuthorId)
+            var currentEvent = _eventRepository.GetEventById(eventId);
+
+            if (editor.Roles.ToString() == "Admin" || editor.Id == currentEvent.AuthorId)
             {
-                _eventRepository.DeleteEvent(eventEntity);
+                _eventRepository.DeleteEvent(currentEvent);
             }
             else
             {
@@ -44,9 +47,9 @@ namespace Booking.Services.Services
             }
         }
 
-        public void EditEvent(ApplicationUser user, Event eventEntity)
+        public void UpdateEvent(ApplicationUser editor, Event eventEntity)
         {
-            if (user.Roles.ToString() == "admin" || user.Id == eventEntity.AuthorId)
+            if (editor.Roles.ToString() == "Admin" || editor.Id == eventEntity.AuthorId)
             {
                 _eventRepository.UpdateEvent(eventEntity);
             }
@@ -76,15 +79,14 @@ namespace Booking.Services.Services
             }
         }
 
-        public void RemoveParticipant(ApplicationUser user, string email, Event eventEntity)
+        public void RemoveParticipant(ApplicationUser editor, Guid participantId, Event eventEntity)
         {
-            if (user.Roles.ToString() == "admin" || user.Id == eventEntity.AuthorId)
+            var currentParticipant = _eventParticipantRepository.GetEventParticipantById(participantId);
+            var currentEvent = _eventRepository.GetEventById(eventEntity.Id);
+
+            if (editor.Roles.ToString() == "Admin" || editor.Id == eventEntity.AuthorId)
             {
-                var _event = _eventRepository.GetEventById(eventEntity.Id);
-                /// _event.EventParticipants.Remove(email)
-                var _participants = _eventParticipantRepository.GetAllEventParticipants();
-                _eventParticipantRepository.GetAllEventParticipants();
-                
+                currentEvent.EventParticipants.Remove(currentParticipant);
             }
         }
     }
