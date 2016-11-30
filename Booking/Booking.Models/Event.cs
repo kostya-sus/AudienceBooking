@@ -15,27 +15,35 @@ namespace Booking.Models
             EventParticipants = new HashSet<EventParticipant>();
         }
 
+        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public Guid Id { get; set; }
 
+        [Required]
         [Column(TypeName = "smalldatetime")]
         public DateTime EventDateTime { get; set; }
 
+        [Required]
         public int Duration { get; set; }
 
         [Required]
         [StringLength(50)]
         public string Title { get; set; }
-
-        [Required]
+        
         [StringLength(128)]
+        [ForeignKey("Author")]
         public string AuthorId { get; set; }
 
+        [Required]
         public bool IsPublic { get; set; }
 
+        [Required]
         public bool IsJoinAvailable { get; set; }
-
+        
+        [ForeignKey("Audience")]
         public AudiencesEnum AudienceId { get; set; }
 
+        [Required]
         public bool IsAuthorShown { get; set; }
 
         [StringLength(30)]
@@ -45,7 +53,9 @@ namespace Booking.Models
         public string AdditionalInfo { get; set; }
 
         public virtual Audience Audience { get; set; }
-        
-        public ICollection<EventParticipant> EventParticipants { get; set; }
+
+        public virtual ICollection<EventParticipant> EventParticipants { get; set; }
+
+        public virtual ApplicationUser Author { get; set; }
     }
 }

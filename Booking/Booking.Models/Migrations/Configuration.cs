@@ -1,5 +1,7 @@
 using System.Collections.Generic;
-using System.Data.Entity.ModelConfiguration.Configuration;
+using System.Data.Entity;
+using System.Data.Entity.Validation;
+using System.Text;
 using Booking.Enums;
 using Booking.Models.Helpers;
 using Microsoft.AspNet.Identity;
@@ -8,7 +10,6 @@ using Microsoft.AspNet.Identity.EntityFramework;
 namespace Booking.Models.Migrations
 {
     using System;
-    using System.Data.Entity;
     using System.Data.Entity.Migrations;
     using System.Linq;
 
@@ -30,7 +31,7 @@ namespace Booking.Models.Migrations
             {
                 roleStore.CreateAsync(new IdentityRole(role)).Wait();
             }
-            
+
             var eventTitles = new string[]
             {
                 "English class", "English class - Speaking for Juniors", "English class - Speaking for Seniors",
@@ -39,23 +40,30 @@ namespace Booking.Models.Migrations
 
             var dates = GetDates();
 
-            var admin = CreateUser(context, "Admin");
+            var admin = CreateUser(context, "Admin", "admin@softheme.com");
 
             var userStore = new UserStore<ApplicationUser>(context);
             var userManager = new UserManager<ApplicationUser>(userStore);
             userManager.AddToRole(admin.Id, "Admin");
 
-            var doe = CreateUser(context, "John Doe");
-            var smith = CreateUser(context, "John Smith");
+            var users = new List<ApplicationUser>
+            {
+                CreateUser(context, "John Doe", "john.doe@softheme.com"),
+                CreateUser(context, "John Smith", "john.smith@softheme.com")
+            };
+
+            var classrooms = new List<Audience>
+            {
+                context.Audiences.Find(AudiencesEnum.EinsteinClassroom),
+                context.Audiences.Find(AudiencesEnum.NewtonClassroom),
+                context.Audiences.Find(AudiencesEnum.TeslaClassroom)
+            };
 
             var random = new Random();
             foreach (var date in dates)
             {
-                CreateEvent(context, doe, date, random.Choice(eventTitles), random.Next(8) != 0,
-                    AudiencesEnum.EinsteinClassroom);
-
-                CreateEvent(context, smith, date, random.Choice(eventTitles), random.Next(8) != 0,
-                    AudiencesEnum.NewtonClassroom);
+                CreateEvent(context, random.Choice(users), date, random.Choice(eventTitles), random.Next(8) != 0,
+                    random.Choice(classrooms));
             }
         }
 
@@ -74,12 +82,12 @@ namespace Booking.Models.Migrations
                 for (int j = 0; j < 5; ++j)
                 {
                     int minimumHour = hours + 1 + minutes/60;
-                    hours = random.Next(minimumHour, minimumHour + 5);
+                    hours = random.Next(minimumHour, minimumHour + 3);
                     minutes = 30*random.Next(2);
 
                     if (hours > (int) BookingHoursBoundsEnum.Upper)
                     {
-                        hours = (int) BookingHoursBoundsEnum.Upper;
+                        hours = (int) BookingHoursBoundsEnum.Lower;
                         j = 6;
                         continue;
                     }
@@ -93,19 +101,20 @@ namespace Booking.Models.Migrations
         }
 
         private void CreateEvent(BookingDbContext context, ApplicationUser author, DateTime date, string title,
-            bool isPublic, AudiencesEnum audienceId)
+            bool isPublic, Audience audience)
         {
             var random = new Random();
 
             var eventEntity = new Event
             {
-                AudienceId = audienceId,
+                Audience = audience,
                 Title = title,
                 IsPublic = isPublic,
                 IsJoinAvailable = isPublic,
                 EventDateTime = date,
-                Duration = random.Next(2)*30,
-                AuthorId = author.Id
+                Duration = random.Next(1, 3)*30,
+                Author = author,
+                IsAuthorShown = true
             };
 
             context.Events.Add(eventEntity);
@@ -121,6 +130,8 @@ namespace Booking.Models.Migrations
                     Id = AudiencesEnum.HrOffice,
                     Name = "HR office",
                     SeatsCount = 10,
+                    BoardsCount = 0,
+                    ProjectorsCount = 0,
                     LaptopsCount = 5,
                     PrintersCount = 1,
                     IsBookingAvailable = false
@@ -133,6 +144,7 @@ namespace Booking.Models.Migrations
                     BoardsCount = 1,
                     ProjectorsCount = 1,
                     LaptopsCount = 10,
+                    PrintersCount = 0,
                     IsBookingAvailable = true
                 },
                 new Audience
@@ -140,6 +152,8 @@ namespace Booking.Models.Migrations
                     Id = AudiencesEnum.InfoCenter,
                     Name = "Info center",
                     SeatsCount = 10,
+                    BoardsCount = 0,
+                    ProjectorsCount = 0,
                     LaptopsCount = 5,
                     PrintersCount = 1,
                     IsBookingAvailable = false
@@ -149,6 +163,8 @@ namespace Booking.Models.Migrations
                     Id = AudiencesEnum.WebAndMarketing1,
                     Name = "Web & Marketing",
                     SeatsCount = 10,
+                    BoardsCount = 0,
+                    ProjectorsCount = 0,
                     LaptopsCount = 5,
                     PrintersCount = 1,
                     IsBookingAvailable = false
@@ -167,6 +183,8 @@ namespace Booking.Models.Migrations
                     Id = AudiencesEnum.WebAndMarketing3,
                     Name = "Web & Marketing",
                     SeatsCount = 10,
+                    BoardsCount = 0,
+                    ProjectorsCount = 0,
                     LaptopsCount = 5,
                     PrintersCount = 1,
                     IsBookingAvailable = false
@@ -176,6 +194,8 @@ namespace Booking.Models.Migrations
                     Id = AudiencesEnum.English,
                     Name = "English",
                     SeatsCount = 5,
+                    BoardsCount = 0,
+                    ProjectorsCount = 0,
                     LaptopsCount = 3,
                     PrintersCount = 1,
                     IsBookingAvailable = false
@@ -188,6 +208,7 @@ namespace Booking.Models.Migrations
                     BoardsCount = 1,
                     ProjectorsCount = 1,
                     LaptopsCount = 10,
+                    PrintersCount = 0,
                     IsBookingAvailable = true
                 },
                 new Audience
@@ -198,6 +219,7 @@ namespace Booking.Models.Migrations
                     BoardsCount = 1,
                     ProjectorsCount = 1,
                     LaptopsCount = 10,
+                    PrintersCount = 0,
                     IsBookingAvailable = true
                 },
             };
@@ -213,12 +235,12 @@ namespace Booking.Models.Migrations
             context.SaveChanges();
         }
 
-        private ApplicationUser CreateUser(BookingDbContext context, string username)
+        private ApplicationUser CreateUser(BookingDbContext context, string username, string email)
         {
             if (context.Users.Any(u => u.UserName == username)) return context.Users.First(u => u.UserName == username);
             var userStore = new UserStore<ApplicationUser>(context);
             var userManager = new UserManager<ApplicationUser>(userStore);
-            var userToInsert = new ApplicationUser {UserName = username};
+            var userToInsert = new ApplicationUser {UserName = username, Email = email};
             userManager.Create(userToInsert, "password");
             return userToInsert;
         }
