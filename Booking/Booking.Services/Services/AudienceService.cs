@@ -19,9 +19,9 @@ namespace Booking.Services.Services
             _unitOfWork = unitOfWork;
         }
 
-        public Audience GetAudience(int audienceId)
+        public Audience GetAudience(AudiencesEnum audienceId)
         {
-            return _unitOfWork.AudienceRepository.GetAudienceById((AudiencesEnum)audienceId);
+            return _unitOfWork.AudienceRepository.GetAudienceById(audienceId);
         }
 
         public void UpdateAudience(Audience audience)
@@ -29,20 +29,19 @@ namespace Booking.Services.Services
             _unitOfWork.AudienceRepository.UpdateAudience(audience);
         }
 
-        public void CloseAudience(int audienceId)
+        public void CloseAudience(AudiencesEnum audienceId)
         {
-            var currentAudience = _unitOfWork.AudienceRepository.GetAudienceById((AudiencesEnum)audienceId);
+            var currentAudience = _unitOfWork.AudienceRepository.GetAudienceById(audienceId);
             if (currentAudience != null)
             {
                 currentAudience.IsBookingAvailable = false;
                 _unitOfWork.AudienceRepository.UpdateAudience(currentAudience);
-
             }
         }
 
-        public void OpenAudience(int audienceId)
+        public void OpenAudience(AudiencesEnum audienceId)
         {
-            var currentAudience = _unitOfWork.AudienceRepository.GetAudienceById((AudiencesEnum)audienceId);
+            var currentAudience = _unitOfWork.AudienceRepository.GetAudienceById(audienceId);
             if (currentAudience != null)
             {
                 currentAudience.IsBookingAvailable = true;
@@ -50,10 +49,10 @@ namespace Booking.Services.Services
             }
         }
 
-        public bool IsFree(int audienceId, DateTime dateTime, int duration)
+        public bool IsFree(AudiencesEnum audienceId, DateTime dateTime, int duration)
         {
             var events = _unitOfWork.EventRepository.GetAllEvents();
-            events = events.Where(x => x.AudienceId == (AudiencesEnum) audienceId);
+            events = events.Where(x => x.AudienceId == audienceId);
 
             var endOfEvent = dateTime.AddMinutes(duration);
 
@@ -78,23 +77,16 @@ namespace Booking.Services.Services
 
         public IEnumerable<AudiencesEnum> GetAvailableAudiencesIds()
         {
-            var aud = _unitOfWork.AudienceRepository.GetAllAudiences();
-            aud = aud.Where(x => x.IsBookingAvailable);
-
-            List<AudiencesEnum> avialableAudiencesIds = new List<AudiencesEnum>();
-            foreach (var item in aud)
-            {
-                avialableAudiencesIds.Add(item.Id);
-            }
-            return avialableAudiencesIds;
+            var availableAudiences = _unitOfWork.AudienceRepository.GetAllAudiences().Where(x => x.IsBookingAvailable);
+            return availableAudiences.Select(a => a.Id);
         }
 
         public IDictionary<AudiencesEnum, string> GetAllAudiencesNames()
         {
-            var auds = _unitOfWork.AudienceRepository.GetAllAudiences();
+            var audiences = _unitOfWork.AudienceRepository.GetAllAudiences();
 
             Dictionary<AudiencesEnum, string> names = new Dictionary<AudiencesEnum, string>();
-            foreach (var item in auds)
+            foreach (var item in audiences)
             {
                 names.Add(item.Id, item.Name);
             }
@@ -105,10 +97,10 @@ namespace Booking.Services.Services
         {
             Dictionary<AudiencesEnum, string> names = new Dictionary<AudiencesEnum, string>();
 
-            var auds = _unitOfWork.AudienceRepository.GetAllAudiences();
-            auds = auds.Where(x => x.IsBookingAvailable);
+            var audiences = _unitOfWork.AudienceRepository.GetAllAudiences();
+            audiences = audiences.Where(x => x.IsBookingAvailable);
 
-            foreach (var item in auds)
+            foreach (var item in audiences)
             {
                 names.Add(item.Id, item.Name);
             }
