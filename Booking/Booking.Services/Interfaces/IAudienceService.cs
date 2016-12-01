@@ -7,15 +7,15 @@ namespace Booking.Services.Interfaces
 {
     public interface IAudienceService
     {
-        Audience GetAudience(int audienceId);
+        Audience GetAudience(AudiencesEnum audienceId);
 
         void UpdateAudience(Audience audience);
 
-        void CloseAudience(int audienceId);
+        void CloseAudience(AudiencesEnum audienceId);
 
-        void OpenAudience(int audienceId);
+        void OpenAudience(AudiencesEnum audienceId);
 
-        bool IsFree(int audienceId, DateTime dateTime, int duration);
+        bool IsFree(AudiencesEnum audienceId, DateTime dateTime, int duration);
 
         IEnumerable<Audience> GetAllAudiences();
 
