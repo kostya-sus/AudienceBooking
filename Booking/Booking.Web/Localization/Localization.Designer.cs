@@ -79,11 +79,20 @@ namespace Booking.Web.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to &lt;i class=&quot;fa fa-exclamation-circle&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt; Неправильный формат сообщения..
+        ///   Looks up a localized string similar to &lt;i class=&quot;fa fa-exclamation-circle&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt; Сообщения слишком большое, максимальная длина 2000 символов..
         /// </summary>
         public static string ContactViewModel_Message_ValidationMessage {
             get {
                 return ResourceManager.GetString("ContactViewModel_Message_ValidationMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Спасибо. Ваше сообщение отправлено администратору..
+        /// </summary>
+        public static string ContactViewModel_SucsessMessage {
+            get {
+                return ResourceManager.GetString("ContactViewModel_SucsessMessage", resourceCulture);
             }
         }
         

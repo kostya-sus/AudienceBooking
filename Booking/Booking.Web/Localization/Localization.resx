@@ -190,7 +190,7 @@
     <value>Написать сообщение</value>
   </data>
   <data name="ContactViewModel_Message_ValidationMessage" xml:space="preserve">
-    <value>&lt;i class="fa fa-exclamation-circle" aria-hidden="true"&gt;&lt;/i&gt; Неправильный формат сообщения.</value>
+    <value>&lt;i class="fa fa-exclamation-circle" aria-hidden="true"&gt;&lt;/i&gt; Сообщения слишком большое, максимальная длина 2000 символов.</value>
   </data>
   <data name="ContactViewModel_UserName_ValidationMessage" xml:space="preserve">
     <value>&lt;i class="fa fa-exclamation-circle" aria-hidden="true"&gt;&lt;/i&gt; Неправильный формат имени.</value>
@@ -200,5 +200,8 @@
   </data>
   <data name="Send" xml:space="preserve">
     <value>Отправить</value>
+  </data>
+  <data name="ContactViewModel_SucsessMessage" xml:space="preserve">
+    <value>Спасибо. Ваше сообщение отправлено администратору.</value>
   </data>
 </root>

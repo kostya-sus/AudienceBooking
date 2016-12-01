@@ -26,18 +26,21 @@ namespace Booking.Web.Controllers
         }
 
         [HttpPost]
-        public ActionResult Send()
+        public ActionResult Contact(ContactViewModel model)
         {
-
+            var viewModel = new ContactViewModel();
             if (ModelState.IsValid)
-
             {
-
                 //add feedback 
-                return Json(new { message = "Спасибо. Ваше сообщение отправлено администратору." });
+                ViewData["UserMessage"] = Localization.Localization.ContactViewModel_SucsessMessage;
 
             }
-            return null;
+            else
+            {
+                ViewData["UserMessage"] = "";
+            }
+
+            return View(viewModel);
 
         }
     }

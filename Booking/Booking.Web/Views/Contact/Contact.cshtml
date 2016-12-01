@@ -21,21 +21,24 @@
 <!DOCTYPE html>
 
 
-@using (Html.BeginForm("Send", "Contact",  FormMethod.Post, new {@class = "form-horizontal", role = "form"}))
+@using (Html.BeginForm("Contact", "Contact",  FormMethod.Post, new {@class = "form-horizontal", role = "form"}))
 {
     @Html.AntiForgeryToken()
 
-
     <div style="background-color: #ffffff; border-top: 5px solid #F4F6FB">
         <div class="page-container">
-            <div style="width: 50%; display: inline-block;">
+            <div style="width: 50%; display: inline-block">
                 <h3>@Localization.WriteMessage</h3>
                 <h5>@Localization.MessageIdea</h5>
-                <img src="@Url.Content("~/Content/Images/contact-bg.png")"/>
+                <img style="vertical-align: "src="@Url.Content("~/Content/Images/contact-bg.png")"/>
             </div>
             <div style="width: 49%; display: inline-block">
-                <div id="success message"class="validation-summary-error">
-                   
+                <div class="validation-summary-error">
+                    @if (ViewData["UserMessage"] != null)
+                    {
+                        <i class="fa fa-exclamation-circle" aria-hidden="true"></i>
+                        <span>@ViewData["UserMessage"]</span>
+                    }
                 </div>
                 <div>
                     <div style="width: 50%; display: inline-block">
