@@ -57,7 +57,7 @@ namespace Booking.Services.Services
             }
             else
             {
-                throw new UnauthorizedAccessException("You do not have access rights to cancel this event.");
+                throw new UnauthorizedAccessException("You do not have access rights edit this event.");
             }
         }
 
@@ -73,7 +73,6 @@ namespace Booking.Services.Services
                 };
 
                 eventEntity.EventParticipants.Add(newEventParticipant);
-                _unitOfWork.EventRepository.UpdateEvent(eventEntity);
                 _unitOfWork.Save();
             }
             else
@@ -90,7 +89,6 @@ namespace Booking.Services.Services
             if (_usersService.IsAdmin(editor) || editor.Id == eventEntity.AuthorId)
             {
                 currentEvent.EventParticipants.Remove(currentParticipant);
-                _unitOfWork.EventRepository.UpdateEvent(eventEntity);
                 _unitOfWork.Save();
             }
             else
