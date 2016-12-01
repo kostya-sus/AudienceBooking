@@ -17,5 +17,28 @@ namespace Booking.Web.Controllers
         {
             throw new NotImplementedException();
         }
+        [HttpGet]
+        public ActionResult Contact()
+        {
+            var viewModel = new ContactViewModel();
+
+            return View(viewModel);
+        }
+
+        [HttpPost]
+        public ActionResult Send()
+        {
+
+            if (ModelState.IsValid)
+
+            {
+
+                //add feedback 
+                return Json(new { message = "Спасибо. Ваше сообщение отправлено администратору." });
+
+            }
+            return null;
+
+        }
     }
 }

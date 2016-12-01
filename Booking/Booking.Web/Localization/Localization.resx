@@ -177,4 +177,28 @@
   <data name="Floor" xml:space="preserve">
     <value>Этаж</value>
   </data>
+  <data name="MessageIdea" xml:space="preserve">
+    <value>Напишите, если у вас есть идеи, предложения, замечания или вопросы.</value>
+  </data>
+  <data name="Name" xml:space="preserve">
+    <value>Имя</value>
+  </data>
+  <data name="Surname" xml:space="preserve">
+    <value>Фамилия</value>
+  </data>
+  <data name="WriteMessage" xml:space="preserve">
+    <value>Написать сообщение</value>
+  </data>
+  <data name="ContactViewModel_Message_ValidationMessage" xml:space="preserve">
+    <value>&lt;i class="fa fa-exclamation-circle" aria-hidden="true"&gt;&lt;/i&gt; Неправильный формат сообщения.</value>
+  </data>
+  <data name="ContactViewModel_UserName_ValidationMessage" xml:space="preserve">
+    <value>&lt;i class="fa fa-exclamation-circle" aria-hidden="true"&gt;&lt;/i&gt; Неправильный формат имени.</value>
+  </data>
+  <data name="ContactViewModel_UserSurname_ValidationMessage" xml:space="preserve">
+    <value>&lt;i class="fa fa-exclamation-circle" aria-hidden="true"&gt;&lt;/i&gt; Неправильный формат фамилии.</value>
+  </data>
+  <data name="Send" xml:space="preserve">
+    <value>Отправить</value>
+  </data>
 </root>

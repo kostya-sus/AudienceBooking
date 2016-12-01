@@ -26,8 +26,8 @@
                     <li  class="@(ViewBag.ActiveLink == "Login" ? "active" : "")">
                         @Html.ActionLink(@Localization.Login, "Login", "Account")
                     </li>
-                    <li class="@(ViewBag.ActiveLink == "Feedback" ? "active" : "")">
-                        @Html.ActionLink(@Localization.Feedback, "Index", "Home")
+                    <li class="@(ViewBag.ActiveLink == "Contact" ? "active" : "")">
+                        @Html.ActionLink(@Localization.Feedback, "Contact", "Contact")
                     </li>
                     <li class="@(ViewBag.ActiveLink == "Index" ? "active" : "")">
                         @Html.ActionLink(@Localization.Schedule, "Index", "Home")

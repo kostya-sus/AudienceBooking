@@ -229,6 +229,7 @@
     <Content Include="Content\font-awesome\fonts\fontawesome-webfont.svg" />
     <Content Include="Content\form-inputs.css" />
     <Content Include="Content\home-page.css" />
+    <Content Include="Content\Images\contact-bg.png" />
     <Content Include="Content\Images\login-background.svg">
       <SubType>Designer</SubType>
     </Content>
@@ -299,11 +300,11 @@
     <Content Include="Views\Shared\_LoginLayout.cshtml" />
     <Content Include="Views\Account\_ViewStart.cshtml" />
     <Content Include="Views\Shared\_RoomMapPartial.cshtml" />
+    <Content Include="Views\Contact\Contact.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Views\Audience\" />
-    <Folder Include="Views\Contact\" />
     <Folder Include="Views\Event\" />
     <Folder Include="Views\Profile\" />
     <Folder Include="Views\Users\" />
@@ -328,6 +329,7 @@
     <EmbeddedResource Include="Localization\Localization.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Localization.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

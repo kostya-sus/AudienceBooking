@@ -79,6 +79,33 @@ namespace Booking.Web.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to &lt;i class=&quot;fa fa-exclamation-circle&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt; Неправильный формат сообщения..
+        /// </summary>
+        public static string ContactViewModel_Message_ValidationMessage {
+            get {
+                return ResourceManager.GetString("ContactViewModel_Message_ValidationMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &lt;i class=&quot;fa fa-exclamation-circle&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt; Неправильный формат имени..
+        /// </summary>
+        public static string ContactViewModel_UserName_ValidationMessage {
+            get {
+                return ResourceManager.GetString("ContactViewModel_UserName_ValidationMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &lt;i class=&quot;fa fa-exclamation-circle&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt; Неправильный формат фамилии..
+        /// </summary>
+        public static string ContactViewModel_UserSurname_ValidationMessage {
+            get {
+                return ResourceManager.GetString("ContactViewModel_UserSurname_ValidationMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Адрес электронной почты.
         /// </summary>
         public static string EmailAddressPlaceholder {
@@ -129,6 +156,24 @@ namespace Booking.Web.Localization {
         public static string LoginSubmit {
             get {
                 return ResourceManager.GetString("LoginSubmit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Напишите, если у вас есть идеи, предложения, замечания или вопросы..
+        /// </summary>
+        public static string MessageIdea {
+            get {
+                return ResourceManager.GetString("MessageIdea", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Имя.
+        /// </summary>
+        public static string Name {
+            get {
+                return ResourceManager.GetString("Name", resourceCulture);
             }
         }
         
@@ -223,6 +268,24 @@ namespace Booking.Web.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Отправить.
+        /// </summary>
+        public static string Send {
+            get {
+                return ResourceManager.GetString("Send", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Фамилия.
+        /// </summary>
+        public static string Surname {
+            get {
+                return ResourceManager.GetString("Surname", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Имя Фамилия.
         /// </summary>
         public static string UserNamePlaceholder {
@@ -237,6 +300,15 @@ namespace Booking.Web.Localization {
         public static string ValidationMessage_Required {
             get {
                 return ResourceManager.GetString("ValidationMessage_Required", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Написать сообщение.
+        /// </summary>
+        public static string WriteMessage {
+            get {
+                return ResourceManager.GetString("WriteMessage", resourceCulture);
             }
         }
     }

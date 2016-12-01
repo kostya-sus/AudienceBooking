@@ -1,0 +1,64 @@
+﻿@using Booking.Web.Localization
+@using Booking.Web.ViewModels.Contact
+@model ContactViewModel
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Contact";
+    ViewBag.ActiveLink = "Contact";
+}
+
+@section styles{
+
+    @Styles.Render("~/Content/home-page.css")
+    @Styles.Render("~/Content/Site.css")
+    @Styles.Render("~/Content/form-inputs.css")
+}
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/Scripts/project/login-scripts.js")
+}
+
+<!DOCTYPE html>
+
+
+@using (Html.BeginForm("Send", "Contact",  FormMethod.Post, new {@class = "form-horizontal", role = "form"}))
+{
+    @Html.AntiForgeryToken()
+
+
+    <div style="background-color: #ffffff; border-top: 5px solid #F4F6FB">
+        <div class="page-container">
+            <div style="width: 50%; display: inline-block;">
+                <h3>@Localization.WriteMessage</h3>
+                <h5>@Localization.MessageIdea</h5>
+                <img src="@Url.Content("~/Content/Images/contact-bg.png")"/>
+            </div>
+            <div style="width: 49%; display: inline-block">
+                <div id="success message"class="validation-summary-error">
+                   
+                </div>
+                <div>
+                    <div style="width: 50%; display: inline-block">
+                        @Html.ValidationMessageFor(m => m.Name, "", new {@class = "validation-error"})
+                        @Html.TextBoxFor(m => m.Name, new {@class = "login-input", placeholder = Localization.Name})
+                    </div>
+                    <div style="width: 49%; display: inline-block">
+                        @Html.ValidationMessageFor(m => m.Surname, "", new {@class = "validation-error"})
+                        @Html.TextBoxFor(m => m.Surname, new {@class = "login-input", placeholder = Localization.Surname})
+                    </div>
+                </div>
+
+                @Html.ValidationMessageFor(m => m.Email, "", new {@class = "validation-error"})
+                @Html.TextBoxFor(m => m.Email, new {@class = "login-input", placeholder = Localization.EmailAddressPlaceholder})
+
+                @Html.ValidationMessageFor(m => m.Message, "", new {@class = "validation-error"})
+                @Html.TextAreaFor(m => m.Message, new {@class = "login-input-large", placeholder = ""})
+
+                <div style="width: 100%;">
+                    <input type="submit" disabled="disabled" value=@Localization.Send class="login-submit"/>
+                </div>
+
+            </div>
+        </div>
+    </div>
+}
