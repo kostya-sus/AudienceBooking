@@ -1,14 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Data.Entity;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Booking.Models;
 using Booking.Repositories.Interfaces;
 using Booking.Services.Interfaces;
-using Microsoft.AspNet.Identity;
-using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace Booking.Services.Services
 {
@@ -16,6 +9,7 @@ namespace Booking.Services.Services
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IUsersService _usersService;
+
         public EventService(IUnitOfWork unitOfWork, IUsersService usersService)
         {
             _unitOfWork = unitOfWork;
@@ -57,7 +51,7 @@ namespace Booking.Services.Services
             }
             else
             {
-                throw new UnauthorizedAccessException("You do not have access rights edit this event.");
+                throw new UnauthorizedAccessException("You do not have access rights to edit this event.");
             }
         }
 
