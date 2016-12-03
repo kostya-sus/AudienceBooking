@@ -9,6 +9,8 @@ namespace Booking.Services.Interfaces
 
         IEnumerable<ApplicationUser> GetUsers(int from, int count);
 
+        ApplicationUser GetUserById(string id);
+
         bool IsAdmin(ApplicationUser user);
 
         IEnumerable<string> GetAdminsEmails();

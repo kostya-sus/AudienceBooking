@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using Booking.Models;
 using Booking.Services.Interfaces;
@@ -28,6 +27,11 @@ namespace Booking.Services.Services
         public IEnumerable<ApplicationUser> GetUsers(int from, int count)
         {
             return _context.Users.OrderBy(u => u.UserName).Take(count).Skip(from);
+        }
+
+        public ApplicationUser GetUserById(string id)
+        {
+            return _context.Users.Find(id);
         }
 
         public bool IsAdmin(ApplicationUser user)
