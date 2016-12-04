@@ -9,26 +9,14 @@ namespace Booking.Web.Controllers
         [HttpGet]
         public ActionResult Index()
         {
-            throw new NotImplementedException();
-        }
-
-        [HttpPost]
-        public ActionResult Index(ContactViewModel contactViewModel)
-        {
-            throw new NotImplementedException();
-        }
-        [HttpGet]
-        public ActionResult Contact()
-        {
             var viewModel = new ContactViewModel();
 
             return View(viewModel);
         }
 
         [HttpPost]
-        public ActionResult Contact(ContactViewModel model)
+        public ActionResult Index(ContactViewModel contactViewModel)
         {
-            
             if (ModelState.IsValid)
             {
                 //add feedback 
@@ -41,7 +29,7 @@ namespace Booking.Web.Controllers
             }
 
             return View();
-
         }
+       
     }
 }

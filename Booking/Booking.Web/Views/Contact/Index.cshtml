@@ -12,7 +12,7 @@
     @Styles.Render("~/Content/home-page.css")
     @Styles.Render("~/Content/Site.css")
     @Styles.Render("~/Content/form-inputs.css")
-@Styles.Render("~/Content/font-awesome/css/font-awesome.css")
+    @Styles.Render("~/Content/font-awesome/css/font-awesome.css")
 }
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
@@ -22,7 +22,7 @@
 <!DOCTYPE html>
 
 
-@using (Html.BeginForm("Contact", "Contact",  FormMethod.Post, new {@class = "form-horizontal", role = "form"}))
+@using (Html.BeginForm("Index", "Contact",  FormMethod.Post))
 {
     @Html.AntiForgeryToken()
 
