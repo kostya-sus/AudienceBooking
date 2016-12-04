@@ -10,13 +10,13 @@
     padding: 15px;
     width: 100%;
 }
-.login-input-large {
+.input-large {
     border: 1px #cccccc;
     border-radius: 25px;
     background: #f5f6fb;
     margin: 0 auto;
     outline: none;
-    height: 250px;
+    height: 200px;
     color: #656d7f;
     font-size: 13px;
     padding: 15px;

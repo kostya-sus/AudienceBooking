@@ -12,6 +12,7 @@
     @Styles.Render("~/Content/home-page.css")
     @Styles.Render("~/Content/Site.css")
     @Styles.Render("~/Content/form-inputs.css")
+@Styles.Render("~/Content/font-awesome/css/font-awesome.css")
 }
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
@@ -27,16 +28,15 @@
 
     <div style="background-color: #ffffff; border-top: 5px solid #F4F6FB">
         <div class="page-container">
-            <div style="width: 50%; display: inline-block">
+            <div style="width: 50%; height: 388px; display: inline-block">
                 <h3>@Localization.WriteMessage</h3>
                 <h5>@Localization.MessageIdea</h5>
-                <img style="vertical-align: "src="@Url.Content("~/Content/Images/contact-bg.png")"/>
+                <img style="vertical-align: baseline"src="@Url.Content("~/Content/Images/contact-bg.png")"/>
             </div>
             <div style="width: 49%; display: inline-block">
-                <div class="validation-summary-error">
+                <div class="validation-summary-error" >
                     @if (ViewData["UserMessage"] != null)
                     {
-                        <i class="fa fa-exclamation-circle" aria-hidden="true"></i>
                         <span>@ViewData["UserMessage"]</span>
                     }
                 </div>
@@ -55,7 +55,7 @@
                 @Html.TextBoxFor(m => m.Email, new {@class = "login-input", placeholder = Localization.EmailAddressPlaceholder})
 
                 @Html.ValidationMessageFor(m => m.Message, "", new {@class = "validation-error"})
-                @Html.TextAreaFor(m => m.Message, new {@class = "login-input-large", placeholder = ""})
+                @Html.TextAreaFor(m => m.Message, new {@class = "input-large", placeholder = ""})
 
                 <div style="width: 100%;">
                     <input type="submit" disabled="disabled" value=@Localization.Send class="login-submit"/>

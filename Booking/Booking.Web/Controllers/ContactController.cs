@@ -28,7 +28,7 @@ namespace Booking.Web.Controllers
         [HttpPost]
         public ActionResult Contact(ContactViewModel model)
         {
-            var viewModel = new ContactViewModel();
+            
             if (ModelState.IsValid)
             {
                 //add feedback 
@@ -40,7 +40,7 @@ namespace Booking.Web.Controllers
                 ViewData["UserMessage"] = "";
             }
 
-            return View(viewModel);
+            return View();
 
         }
     }
