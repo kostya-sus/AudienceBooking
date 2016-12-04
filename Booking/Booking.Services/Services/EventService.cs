@@ -15,15 +15,17 @@ namespace Booking.Services.Services
     public class EventService : IEventService
     {
         private readonly IUnitOfWork _unitOfWork;
-
-        public EventService(IUnitOfWork unitOfWork)
+        private readonly IUsersService _usersService;
+        public EventService(IUnitOfWork unitOfWork, IUsersService usersService)
         {
             _unitOfWork = unitOfWork;
+            _usersService = usersService;
         }
 
         public void CreateEvent(Event eventEntity)
         {
             _unitOfWork.EventRepository.CreateEvent(eventEntity);
+            _unitOfWork.Save();
         }
 
         public Event GetEvent(Guid id)
@@ -35,25 +37,27 @@ namespace Booking.Services.Services
         {
             var currentEvent = _unitOfWork.EventRepository.GetEventById(eventId);
 
-            if (editor.Roles.ToString() == "Admin" || editor.Id == currentEvent.AuthorId)
+            if (_usersService.IsAdmin(editor) || editor.Id == currentEvent.AuthorId)
             {
                 _unitOfWork.EventRepository.DeleteEvent(currentEvent);
+                _unitOfWork.Save();
             }
             else
             {
-                throw new Exception("You do not have access rights for cancel this event");
+                throw new UnauthorizedAccessException("You do not have access rights to cancel this event.");
             }
         }
 
         public void UpdateEvent(ApplicationUser editor, Event eventEntity)
         {
-            if (editor.Roles.ToString() == "Admin" || editor.Id == eventEntity.AuthorId)
+            if (_usersService.IsAdmin(editor) || editor.Id == eventEntity.AuthorId)
             {
                 _unitOfWork.EventRepository.UpdateEvent(eventEntity);
+                _unitOfWork.Save();
             }
             else
             {
-                throw new Exception("You do not have access rights for cancel this event");
+                throw new UnauthorizedAccessException("You do not have access rights edit this event.");
             }
         }
 
@@ -64,16 +68,16 @@ namespace Booking.Services.Services
                 var newEventParticipant = new EventParticipant
                 {
                     EventId = eventEntity.Id,
-                    Id = Guid.NewGuid(),
                     ParticipantEmail = email,
                     Event = eventEntity
                 };
 
                 eventEntity.EventParticipants.Add(newEventParticipant);
+                _unitOfWork.Save();
             }
             else
             {
-                throw new Exception("You can't add participant for this event");
+                throw new InvalidOperationException("You can't join this event");
             }
         }
 
@@ -82,9 +86,14 @@ namespace Booking.Services.Services
             var currentParticipant = _unitOfWork.EventParticipantRepository.GetEventParticipantById(participantId);
             var currentEvent = _unitOfWork.EventRepository.GetEventById(eventEntity.Id);
 
-            if (editor.Roles.ToString() == "Admin" || editor.Id == eventEntity.AuthorId)
+            if (_usersService.IsAdmin(editor) || editor.Id == eventEntity.AuthorId)
             {
                 currentEvent.EventParticipants.Remove(currentParticipant);
+                _unitOfWork.Save();
+            }
+            else
+            {
+                throw new InvalidOperationException("You do not have access rights to remove participant.");
             }
         }
     }

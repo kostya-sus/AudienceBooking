@@ -27,6 +27,7 @@ namespace Booking.Services.Services
         public void UpdateAudience(Audience audience)
         {
             _unitOfWork.AudienceRepository.UpdateAudience(audience);
+            _unitOfWork.Save();
         }
 
         public void CloseAudience(AudiencesEnum audienceId)
@@ -36,6 +37,7 @@ namespace Booking.Services.Services
             {
                 currentAudience.IsBookingAvailable = false;
                 _unitOfWork.AudienceRepository.UpdateAudience(currentAudience);
+                _unitOfWork.Save();
             }
         }
 
@@ -46,6 +48,7 @@ namespace Booking.Services.Services
             {
                 currentAudience.IsBookingAvailable = true;
                 _unitOfWork.AudienceRepository.UpdateAudience(currentAudience);
+                _unitOfWork.Save();
             }
         }
 
