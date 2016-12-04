@@ -1,22 +1,28 @@
 ﻿using System;
 using System.Web;
 using System.Web.Mvc;
+using NLog;
 
 namespace Booking.Web.Helpers
 {
     public class HandleExceptionAttribute : HandleErrorAttribute
     {
+        private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
+
         public override void OnException(ExceptionContext filterContext)
         {
             Exception ex = filterContext.Exception;
+
+            Logger.Error(ex.Message);
+
             filterContext.ExceptionHandled = true;
 
-            var rethrowedException = ConvertInnerException(ex);
+            var rethrowedException = CreateOuterException(ex);
 
             filterContext.Result = new RedirectResult(GetRedirectUrl(rethrowedException));
         }
 
-        private Exception ConvertInnerException(Exception e)
+        private Exception CreateOuterException(Exception e)
         {
             int code = 0;
             var exceptionType = e.GetType();
