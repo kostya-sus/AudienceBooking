@@ -11,7 +11,25 @@ namespace Booking.Web.Helpers
             Exception ex = filterContext.Exception;
             filterContext.ExceptionHandled = true;
 
-            filterContext.Result = new RedirectResult(GetRedirectUrl(ex));
+            var rethrowedException = ConvertInnerException(ex);
+
+            filterContext.Result = new RedirectResult(GetRedirectUrl(rethrowedException));
+        }
+
+        private Exception ConvertInnerException(Exception e)
+        {
+            int code = 0;
+            var exceptionType = e.GetType();
+            if (exceptionType == typeof(UnauthorizedAccessException))
+            {
+                code = 403;
+            }
+            else if (exceptionType == typeof(InvalidOperationException))
+            {
+                code = 400;
+            }
+
+            return code == 0 ? e : new HttpException(code, e.Message);
         }
 
         public static string GetRedirectUrl(Exception exception)
