@@ -23,6 +23,7 @@
                             </a>
                         </div>
                     </li>
+                    
                     <li  class="@(ViewBag.ActiveLink == "Login" ? "active" : "")">
                         @Html.ActionLink(@Localization.Login, "Login", "Account")
                     </li>
@@ -32,6 +33,14 @@
                     <li class="@(ViewBag.ActiveLink == "Index" ? "active" : "")">
                         @Html.ActionLink(@Localization.Schedule, "Index", "Home")
                     </li>
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        <li>
+                            <button id="new-event-button">
+                                <i class="fa fa-plus-square fa-6" aria-hidden="false"></i>
+                            </button>
+                        </li>
+                    }
                 </ul>
             </div>
         </div>
