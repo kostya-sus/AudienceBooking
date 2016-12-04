@@ -133,3 +133,11 @@
 }
 
 .mode-button-selected { color: #9fa6b6; }
+
+.caret-arrow {
+    color: #9fa6b6;
+}
+
+.caret-arrow:hover {
+    color: black;
+}

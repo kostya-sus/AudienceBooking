@@ -1816,8 +1816,8 @@
         immediateUpdates: false,
         title: '',
         templates: {
-            leftArrow: "<i class='fa fa-caret-left' aria-hidden='true'></i>",
-            rightArrow: "<i class='fa fa-caret-right' aria-hidden='true'></i>"
+            leftArrow: "<i class='fa fa-caret-left caret-arrow' aria-hidden='true'></i>",
+            rightArrow: "<i class='fa fa-caret-right caret-arrow' aria-hidden='true'></i>"
         }
     };
     var locale_opts = $.fn.datepicker.locale_opts = [

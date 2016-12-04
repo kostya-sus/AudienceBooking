@@ -70,6 +70,13 @@ function checkAndSetDraggableSliderPosition(event, ui) {
     }
 }
 
+function setDateToday() {
+    var today = new Date();
+    // TODO figure out, why just date = new Date() doesn`t work
+    var date = new Date(today.getFullYear(), today.getMonth(), today.getDate());
+    $("#datepicker").datepicker("update", date);
+}
+
 $(document)
     .ready(function() {
         var lowerHourBound = parseInt($("#LowerHourBound").val());
@@ -105,4 +112,6 @@ $(document)
         toggleTableOnlyMode();
 
         configureDatepicker();
+
+        setDateToday();
     });
