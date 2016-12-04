@@ -1,0 +1,22 @@
+﻿@using Booking.Web.Localization
+@model Booking.Web.ViewModels.ErrorViewModel
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title>@Localization.Error</title>
+    @Styles.Render("~/Content/error.css")
+</head>
+
+<body>
+<div class="error-content">
+    <div class="error-message">@Model.ErrorMessage</div>
+    <div class="home-link-container">
+        <a href="/" class="home-link">@Localization.GoHome</a>
+    </div>
+    <div class="status-code">@Model.StatusCode</div>
+</div>
+</body>
+
+</html>

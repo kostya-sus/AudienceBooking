@@ -88,6 +88,15 @@ namespace Booking.Web.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Ошибка.
+        /// </summary>
+        public static string Error {
+            get {
+                return ResourceManager.GetString("Error", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Обратная связь.
         /// </summary>
         public static string Feedback {
@@ -102,6 +111,15 @@ namespace Booking.Web.Localization {
         public static string Floor {
             get {
                 return ResourceManager.GetString("Floor", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to На домашнюю страницу.
+        /// </summary>
+        public static string GoHome {
+            get {
+                return ResourceManager.GetString("GoHome", resourceCulture);
             }
         }
         
@@ -129,6 +147,15 @@ namespace Booking.Web.Localization {
         public static string LoginSubmit {
             get {
                 return ResourceManager.GetString("LoginSubmit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Такой страницы не существует.
+        /// </summary>
+        public static string NotFound404 {
+            get {
+                return ResourceManager.GetString("NotFound404", resourceCulture);
             }
         }
         
@@ -219,6 +246,15 @@ namespace Booking.Web.Localization {
         public static string Schedule {
             get {
                 return ResourceManager.GetString("Schedule", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Что-то пошло не так.
+        /// </summary>
+        public static string SomethingWentWrong {
+            get {
+                return ResourceManager.GetString("SomethingWentWrong", resourceCulture);
             }
         }
         

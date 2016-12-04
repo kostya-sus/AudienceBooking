@@ -4,6 +4,7 @@
 }
 
 /* Set padding to keep content from hitting the edges */
+
 .body-content {
     padding-left: 15px;
     padding-right: 15px;
@@ -12,21 +13,75 @@
 /* Override the default bootstrap behavior where horizontal description lists 
    will truncate terms that are too long to fit in the left column 
 */
-.dl-horizontal dt {
-    white-space: normal;
-}
+
+.dl-horizontal dt { white-space: normal; }
 
 .page-container {
     width: 1021px;
-    margin: 0px auto;
+    margin: 0 auto;
 }
 
-.navbar {
-    background-color: #ffffff;
-}
+.navbar { background-color: #ffffff; }
 
 #map_canvas {
-	height: 400px;
-	width: 100%;
+    height: 400px;
+    width: 100%;
 }
 
+
+header {
+    background-color: #ffffff;
+    width: 100%;
+    position: fixed;
+    top: 0;
+    z-index: 1030;
+}
+
+footer {
+    background-color: #F4F6FB;
+    border-top: 1px solid #D4D9E4;
+    border-bottom-right-radius: 3px;
+    border-bottom-left-radius: 3px;
+    width: 100%
+}
+
+
+.logo-container {
+    border-bottom: 1px solid #a4abc0;
+    padding: 20px 5px;
+    margin: 5px auto;
+    width: 162px;
+}
+
+.logo-nav-container {
+    padding: 5px 5px;
+    margin: 5px auto;
+}
+
+
+.navb > li:first-child { float: left; }
+
+.navb > ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #FFFFFF;
+}
+
+.navb > li { float: right; }
+
+.navb > li > a {
+    display: block;
+    color: #000000;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+.navb > li > a:hover { color: #F95752; }
+
+#navb .active {
+    background-color: #F4F6FB;
+    border-bottom: 3px solid #F95752;     
+}

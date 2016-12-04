@@ -177,4 +177,16 @@
   <data name="Floor" xml:space="preserve">
     <value>Этаж</value>
   </data>
+  <data name="Error" xml:space="preserve">
+    <value>Ошибка</value>
+  </data>
+  <data name="SomethingWentWrong" xml:space="preserve">
+    <value>Что-то пошло не так</value>
+  </data>
+  <data name="NotFound404" xml:space="preserve">
+    <value>Такой страницы не существует</value>
+  </data>
+  <data name="GoHome" xml:space="preserve">
+    <value>На домашнюю страницу</value>
+  </data>
 </root>
