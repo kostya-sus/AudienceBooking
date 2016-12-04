@@ -52,6 +52,22 @@ function toggleWithCalendarMode() {
     $("#schedule-mode-table-only").removeClass("mode-button-selected");
     $("#schedule-viewport-outer").width(590);
     $("#datepicker").show();
+    checkAndSetDraggableSliderPosition();
+}
+
+function configureDatepicker() {
+    $("#datepicker").datepicker({ language: "ru" });
+
+    $("#datepicker").datepicker("setDaysOfWeekDisabled", "06");
+}
+
+function checkAndSetDraggableSliderPosition(event, ui) {
+    var pos = $("#slider-draggable").position().left;
+    var viewportWidth = $("#schedule-viewport-outer").width();
+    var currentScrollPos = $("#schedule-viewport-outer").scrollLeft();
+    if (currentScrollPos > pos || currentScrollPos < pos + viewportWidth) {
+        $("#schedule-viewport-outer").scrollLeft(pos - viewportWidth / 2);
+    }
 }
 
 $(document)
@@ -80,14 +96,7 @@ $(document)
                     var time = posToTime(lowerHourBound, upperHourBound, tdWidth, ui.position.left);
                     setDraggableSliderCaption(timeToStringHHMM(time));
                 },
-                stop: function(event, ui) {
-                    var pos = ui.position.left;
-                    var viewportWidth = $("#schedule-viewport-outer").width();
-                    var currentScrollPos = $("#schedule-viewport-outer").scrollLeft();
-                    if (currentScrollPos > pos || currentScrollPos < pos + viewportWidth) {
-                        $("#schedule-viewport-outer").scrollLeft(pos - viewportWidth / 2);
-                    }
-                }
+                stop: checkAndSetDraggableSliderPosition
             });
 
 
@@ -95,14 +104,5 @@ $(document)
         $("#schedule-mode-with-calendar").click(toggleWithCalendarMode);
         toggleTableOnlyMode();
 
-        $("#datepicker").datepicker({ language: "ru" });
-
-        $("#datepicker")
-            .on("changeDate",
-                function() {
-                    $("#datepicker-hidden")
-                        .val(
-                            $("#datepicker").datepicker("getFormattedDate")
-                        );
-                });
+        configureDatepicker();
     });
