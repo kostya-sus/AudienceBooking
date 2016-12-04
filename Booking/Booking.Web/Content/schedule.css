@@ -134,10 +134,23 @@
 
 .mode-button-selected { color: #9fa6b6; }
 
-.caret-arrow {
+.caret-arrow { color: #9fa6b6; }
+
+.caret-arrow:hover { color: black; }
+
+.dow, .datepicker-switch { font-weight: normal; }
+
+.day {
     color: #9fa6b6;
+    font-size: 13px;
+    font-weight: bold;
 }
 
-.caret-arrow:hover {
-    color: black;
+.day.disabled-date, .day.old {
+    color: #D7D9DE;
+    font-weight: normal;
+}
+
+.day.active {
+    font-weight: normal;
 }
