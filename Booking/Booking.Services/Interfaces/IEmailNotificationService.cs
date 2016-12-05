@@ -1,5 +1,4 @@
-﻿using System;
-using Booking.Models;
+﻿using Booking.Models;
 
 namespace Booking.Services.Interfaces
 {
@@ -18,5 +17,7 @@ namespace Booking.Services.Interfaces
         void EventEditedNotification(ApplicationUser user, Event newEvent, Event oldEvent);
 
         void EventEditedAuthorNotification(ApplicationUser user, Event newEvent, Event oldEvent);
+
+        void SendFeedbackToAdmins(string name, string surname, string email, string message);
     }
 }

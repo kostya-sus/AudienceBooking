@@ -1,0 +1,39 @@
+﻿body, html {
+    background-color: #f4f6fb;
+    height: 90%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #BFC5D3;
+}
+
+.error-content {
+    line-height: 1.5;
+    text-align: center;
+    width: 100%;
+}
+
+.error-message { font-size: 48px; }
+
+.home-link-container { margin-top: 20px; }
+
+.home-link {
+    display: inline-block;
+    text-decoration: none;
+    width: 200px;
+    font-size: 20px;
+    padding: 15px;
+    border: 2px solid #BFC5D3;
+    border-radius: 10px;
+    color: #bfc5d3;
+}
+
+.home-link:hover {
+    color: #F95752;
+    border-color: #F95752;
+}
+
+.status-code {
+    font-size: 200px;
+}
