@@ -16,10 +16,12 @@ namespace Booking.Services.Services
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IUsersService _usersService;
-        public EventService(IUnitOfWork unitOfWork, IUsersService usersService)
+        private readonly IEmailNotificationService _emailNotificationService;
+        public EventService(IUnitOfWork unitOfWork, IUsersService usersService, IEmailNotificationService emailNotificationService)
         {
             _unitOfWork = unitOfWork;
             _usersService = usersService;
+            _emailNotificationService = emailNotificationService;
         }
 
         public void CreateEvent(Event eventEntity)
@@ -40,6 +42,9 @@ namespace Booking.Services.Services
             if (_usersService.IsAdmin(editor) || editor.Id == currentEvent.AuthorId)
             {
                 _unitOfWork.EventRepository.DeleteEvent(currentEvent);
+                _emailNotificationService.EventCancelledAuthorNotification(currentEvent);
+                _emailNotificationService.EventCancelledNotification(currentEvent);
+
                 _unitOfWork.Save();
             }
             else
@@ -50,9 +55,13 @@ namespace Booking.Services.Services
 
         public void UpdateEvent(ApplicationUser editor, Event eventEntity)
         {
+            var oldEvent = _unitOfWork.EventRepository.GetEventById(eventEntity.Id);
             if (_usersService.IsAdmin(editor) || editor.Id == eventEntity.AuthorId)
             {
                 _unitOfWork.EventRepository.UpdateEvent(eventEntity);
+                _emailNotificationService.EventEditedAuthorNotification(eventEntity, oldEvent);
+                _emailNotificationService.EventEditedNotification(eventEntity, oldEvent);
+
                 _unitOfWork.Save();
             }
             else
@@ -71,8 +80,8 @@ namespace Booking.Services.Services
                     ParticipantEmail = email,
                     Event = eventEntity
                 };
-
                 eventEntity.EventParticipants.Add(newEventParticipant);
+                _emailNotificationService.EventJoinedNotification(email, eventEntity);
                 _unitOfWork.Save();
             }
             else
@@ -89,6 +98,7 @@ namespace Booking.Services.Services
             if (_usersService.IsAdmin(editor) || editor.Id == eventEntity.AuthorId)
             {
                 currentEvent.EventParticipants.Remove(currentParticipant);
+                _emailNotificationService.RemovedFromParticipantsListNotification(_usersService.GetUserById(currentParticipant.Id.ToString()), currentEvent);
                 _unitOfWork.Save();
             }
             else
