@@ -63,7 +63,7 @@ function configureDatepicker() {
     $datepicker.datepicker("setDaysOfWeekDisabled", "06");
 
     $datepicker.on("changeDate",
-        function () {
+        function() {
             dateChangedEvent($datepicker.datepicker("getDate"));
         });
 }
@@ -78,15 +78,43 @@ function checkAndSetDraggableSliderPosition(event, ui) {
 }
 
 function dateChangedEvent(newDate) {
-    alert(newDate);
+    updateDayHeaderTitle(newDate);
+}
+
+function setDate(date) {
+    var $datepicker = $("#datepicker");
+    $datepicker.datepicker("update", date);
+    updateDayHeaderTitle(date);
+}
+
+function incrementDate() {
+    var $datepicker = $("#datepicker");
+    var date = $datepicker.datepicker("getDate");
+    date.setDate(date.getDate() + 1);
+    setDate(date);
+}
+
+function decrementDate() {
+    var $datepicker = $("#datepicker");
+    var date = $datepicker.datepicker("getDate");
+    date.setDate(date.getDate() - 1);
+    setDate(date);
 }
 
 function setDateToday() {
     var today = new Date();
     // TODO figure out, why just date = new Date() doesn`t work
     var date = new Date(today.getFullYear(), today.getMonth(), today.getDate());
-    var $datepicker = $("#datepicker");
-    $datepicker.datepicker("update", date);
+    setDate(date);
+}
+
+function updateDayHeaderTitle(date) {
+    var day = date.getDate();
+    // TODO figure out, how to get localized strings from bootstrap-datepicker
+    var daysMin = ["Вс", "Пн", "Вт", "Ср", "Чт", "Пт", "Сб"];
+    var dayOfWeek = daysMin[date.getDay()];
+    var title = day + ", " + dayOfWeek;
+    $("#day-header-title").text(title);
 }
 
 $(document)
@@ -121,6 +149,9 @@ $(document)
 
         $("#schedule-mode-table-only").click(toggleTableOnlyMode);
         $("#schedule-mode-with-calendar").click(toggleWithCalendarMode);
+
+        $("#decrement-date-button").click(decrementDate);
+        $("#increment-date-button").click(incrementDate);
 
         configureDatepicker();
 
