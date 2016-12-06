@@ -1,5 +1,4 @@
-﻿using System;
-using Booking.Models;
+﻿using Booking.Models;
 
 namespace Booking.Services.Interfaces
 {
@@ -9,14 +8,18 @@ namespace Booking.Services.Interfaces
 
         void AccountRemovedNotification(ApplicationUser user);
 
-        void EventCancelledNotification(ApplicationUser user, Event eventEntity);
+        void EventCancelledNotification(Event eventEntity);
 
-        void EventCancelledAuthorNotification(ApplicationUser user, Event eventEntity);
+        void EventCancelledAuthorNotification(Event eventEntity);
 
         void RemovedFromParticipantsListNotification(ApplicationUser user, Event eventEntity);
 
-        void EventEditedNotification(ApplicationUser user, Event newEvent, Event oldEvent);
+        void EventJoinedNotification(string email, Event eventEntity);
 
-        void EventEditedAuthorNotification(ApplicationUser user, Event newEvent, Event oldEvent);
+        void EventEditedNotification(Event newEvent, Event oldEvent);
+
+        void EventEditedAuthorNotification(Event newEvent, Event oldEvent);
+
+        void SendFeedbackToAdmins(string name, string surname, string email, string message);
     }
 }
