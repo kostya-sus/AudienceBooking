@@ -61,7 +61,7 @@ namespace Booking.Services.Services
             }
             else
             {
-                throw new UnauthorizedAccessException("You do not have access rights to edit this event.");
+                throw new UnauthorizedAccessException(Resources.Resources.YouHaveNotRightsToEditEvent);
             }
         }
 
@@ -84,7 +84,7 @@ namespace Booking.Services.Services
             }
             else
             {
-                throw new InvalidOperationException("You can't join this event");
+                throw new InvalidOperationException(Resources.Resources.YouCantJoinEvent);
             }
         }
 
@@ -104,7 +104,7 @@ namespace Booking.Services.Services
             }
             else
             {
-                throw new InvalidOperationException("You do not have access rights to remove participant.");
+                throw new InvalidOperationException(Resources.Resources.YouHaveNotRightsToRemoveParticipant);
             }
         }
     }
