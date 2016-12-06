@@ -56,9 +56,16 @@ function toggleWithCalendarMode() {
 }
 
 function configureDatepicker() {
-    $("#datepicker").datepicker({ language: "ru" });
+    var $datepicker = $("#datepicker");
 
-    $("#datepicker").datepicker("setDaysOfWeekDisabled", "06");
+    $datepicker.datepicker({ language: "ru" });
+
+    $datepicker.datepicker("setDaysOfWeekDisabled", "06");
+
+    $datepicker.on("changeDate",
+        function () {
+            dateChangedEvent($datepicker.datepicker("getDate"));
+        });
 }
 
 function checkAndSetDraggableSliderPosition(event, ui) {
@@ -70,11 +77,16 @@ function checkAndSetDraggableSliderPosition(event, ui) {
     }
 }
 
+function dateChangedEvent(newDate) {
+    alert(newDate);
+}
+
 function setDateToday() {
     var today = new Date();
     // TODO figure out, why just date = new Date() doesn`t work
     var date = new Date(today.getFullYear(), today.getMonth(), today.getDate());
-    $("#datepicker").datepicker("update", date);
+    var $datepicker = $("#datepicker");
+    $datepicker.datepicker("update", date);
 }
 
 $(document)
@@ -109,9 +121,10 @@ $(document)
 
         $("#schedule-mode-table-only").click(toggleTableOnlyMode);
         $("#schedule-mode-with-calendar").click(toggleWithCalendarMode);
-        toggleTableOnlyMode();
 
         configureDatepicker();
 
         setDateToday();
+
+        toggleWithCalendarMode();
     });
