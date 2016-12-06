@@ -178,6 +178,7 @@
 .btn-goto-today {
     color: #9fa6b6;
     font-size: 12px;
+    cursor: pointer;
 }
 
 #btn-goto-today-left { float: left; }

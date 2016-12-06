@@ -110,8 +110,17 @@ function checkIfNewDateIsToday(newDate) {
     var $slider = $("#slider-now");
     if (isToday) {
         $slider.css("visibility", "visible");
+        $("#btn-goto-today-left").css("visibility", "hidden");
+        $("#btn-goto-today-right").css("visibility", "hidden");
     } else {
         $slider.css("visibility", "hidden");
+        if (today > newDate) {
+            $("#btn-goto-today-left").css("visibility", "hidden");
+            $("#btn-goto-today-right").css("visibility", "visible");
+        } else {
+            $("#btn-goto-today-left").css("visibility", "visible");
+            $("#btn-goto-today-right").css("visibility", "hidden");
+        }
     }
 }
 
@@ -172,4 +181,6 @@ $(document)
         setDateToday();
 
         toggleWithCalendarMode();
+
+        $(".btn-goto-today").click(setDateToday);
     });
