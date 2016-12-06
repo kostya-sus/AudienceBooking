@@ -11,7 +11,8 @@ namespace Booking.Services.Services
         private readonly IUsersService _usersService;
         private readonly IEmailNotificationService _emailNotificationService;
 
-        public EventService(IUnitOfWork unitOfWork, IUsersService usersService, IEmailNotificationService emailNotificationService)
+        public EventService(IUnitOfWork unitOfWork, IUsersService usersService,
+            IEmailNotificationService emailNotificationService)
         {
             _unitOfWork = unitOfWork;
             _usersService = usersService;
@@ -49,8 +50,8 @@ namespace Booking.Services.Services
 
         public void UpdateEvent(ApplicationUser editor, Event eventEntity)
         {
-            var oldEvent = _unitOfWork.EventRepository.GetEventById(eventEntity.Id);
-            if (_usersService.IsAdmin(editor) || editor.Id == eventEntity.AuthorId)
+            var oldEvent = _unitOfWork.EventRepository.GetEventCloneById(eventEntity.Id);
+            if (_usersService.IsAdmin(editor) || editor.Id == oldEvent.AuthorId)
             {
                 _unitOfWork.EventRepository.UpdateEvent(eventEntity);
                 _emailNotificationService.EventEditedAuthorNotification(eventEntity, oldEvent);
@@ -64,8 +65,10 @@ namespace Booking.Services.Services
             }
         }
 
-        public void AddParticipant(string email, Event eventEntity)
+        public void AddParticipant(string email, Guid eventId)
         {
+            var eventEntity = _unitOfWork.EventRepository.GetEventById(eventId);
+
             if (eventEntity.IsJoinAvailable)
             {
                 var newEventParticipant = new EventParticipant
@@ -74,6 +77,7 @@ namespace Booking.Services.Services
                     ParticipantEmail = email,
                     Event = eventEntity
                 };
+
                 eventEntity.EventParticipants.Add(newEventParticipant);
                 _emailNotificationService.EventJoinedNotification(email, eventEntity);
                 _unitOfWork.Save();
@@ -84,16 +88,19 @@ namespace Booking.Services.Services
             }
         }
 
-        public void RemoveParticipant(ApplicationUser editor, Guid participantId, Event eventEntity)
+        public void RemoveParticipant(ApplicationUser editor, Guid participantId, Guid eventId)
         {
-            var currentParticipant = _unitOfWork.EventParticipantRepository.GetEventParticipantById(participantId);
-            var currentEvent = _unitOfWork.EventRepository.GetEventById(eventEntity.Id);
+            var eventEntity = _unitOfWork.EventRepository.GetEventById(eventId);
 
             if (_usersService.IsAdmin(editor) || editor.Id == eventEntity.AuthorId)
             {
-                currentEvent.EventParticipants.Remove(currentParticipant);
-                _emailNotificationService.RemovedFromParticipantsListNotification(_usersService.GetUserById(currentParticipant.Id.ToString()), currentEvent);
+                var participant = _unitOfWork.EventParticipantRepository.GetEventParticipantById(participantId);
+
+                eventEntity.EventParticipants.Remove(participant);
                 _unitOfWork.Save();
+
+                _emailNotificationService.RemovedFromParticipantsListNotification(participant.ParticipantEmail,
+                    eventEntity);
             }
             else
             {

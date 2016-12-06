@@ -13,8 +13,8 @@ namespace Booking.Services.Interfaces
 
         void UpdateEvent(ApplicationUser editor, Event eventEntity);
 
-        void AddParticipant(string email, Event eventEntity);
+        void AddParticipant(string email, Guid eventId);
 
-        void RemoveParticipant(ApplicationUser editor, Guid participantId, Event eventEntity);
+        void RemoveParticipant(ApplicationUser editor, Guid participantId, Guid eventId);
     }
 }

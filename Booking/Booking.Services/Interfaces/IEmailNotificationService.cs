@@ -12,7 +12,7 @@ namespace Booking.Services.Interfaces
 
         void EventCancelledAuthorNotification(Event eventEntity);
 
-        void RemovedFromParticipantsListNotification(ApplicationUser user, Event eventEntity);
+        void RemovedFromParticipantsListNotification(string email, Event eventEntity);
 
         void EventJoinedNotification(string email, Event eventEntity);
 
