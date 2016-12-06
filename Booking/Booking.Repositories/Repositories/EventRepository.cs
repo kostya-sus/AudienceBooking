@@ -28,12 +28,6 @@ namespace Booking.Repositories.Repositories
             return _context.Events.Find(id);
         }
 
-        public Event GetEventCloneById(Guid id)
-        {
-            var entity = GetEventById(id);
-            return (Event) _context.Entry(entity).CurrentValues.ToObject();
-        }
-
         public void CreateEvent(Event eventEntity)
         {
             _context.Events.Add(eventEntity);

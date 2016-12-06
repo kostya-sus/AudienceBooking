@@ -10,8 +10,6 @@ namespace Booking.Repositories.Interfaces
 
         Event GetEventById(Guid id);
 
-        Event GetEventCloneById(Guid id);
-
         void CreateEvent(Event eventEntity);
         
         void UpdateEvent(Event eventEntity);

@@ -50,7 +50,7 @@ namespace Booking.Services.Services
 
         public void UpdateEvent(ApplicationUser editor, Event eventEntity)
         {
-            var oldEvent = _unitOfWork.EventRepository.GetEventCloneById(eventEntity.Id);
+            var oldEvent = _unitOfWork.EventRepository.GetEventById(eventEntity.Id);
             if (_usersService.IsAdmin(editor) || editor.Id == oldEvent.AuthorId)
             {
                 _unitOfWork.EventRepository.UpdateEvent(eventEntity);
