@@ -64,6 +64,8 @@
     <Compile Include="Interfaces\IScheduleService.cs" />
     <Compile Include="Interfaces\IUsersService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\AudienceService.cs" />
+    <Compile Include="Services\EventService.cs" />
     <Compile Include="Services\ScheduleService.cs" />
     <Compile Include="Services\UsersService.cs" />
   </ItemGroup>
