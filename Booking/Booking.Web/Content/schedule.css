@@ -110,7 +110,7 @@
 }
 
 .schedule-mode-buttons-container {
-     color: #ebedf9;
+    color: #ebedf9;
     display: inline-block;
 }
 
@@ -154,9 +154,7 @@
     font-weight: normal;
 }
 
-.day.active {
-    font-weight: normal;
-}
+.day.active { font-weight: normal; }
 
 #schedule-day-header > div {
     display: inline-block;
@@ -171,14 +169,23 @@
 
 #schedule-day-header .fa { font-size: 26px; }
 
-#schedule-day-header .fa-caret-right {
-    float: right;
+#schedule-day-header .fa-caret-right { float: right; }
+
+#schedule-day-header .fa-caret-left { float: left; }
+
+#day-header-table { width: 100%; }
+
+.btn-goto-today {
+    color: #9fa6b6;
+    font-size: 12px;
 }
 
-#schedule-day-header .fa-caret-left {
-    float: left;
-}
+#btn-goto-today-left { float: left; }
 
-#day-header-table {
-    width: 100%;
+#btn-goto-today-right { float: right; }
+
+#schedule-control-container {
+    display: inline-block;
+    width: auto;
+    vertical-align: top;
 }

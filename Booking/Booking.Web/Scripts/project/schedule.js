@@ -44,14 +44,14 @@ function toggleTableOnlyMode() {
     $("#schedule-mode-table-only").addClass("mode-button-selected");
     $("#schedule-mode-with-calendar").removeClass("mode-button-selected");
     $("#schedule-viewport-outer").width(870);
-    $("#datepicker").hide();
+    $("#datepicker-container").hide();
 }
 
 function toggleWithCalendarMode() {
     $("#schedule-mode-with-calendar").addClass("mode-button-selected");
     $("#schedule-mode-table-only").removeClass("mode-button-selected");
     $("#schedule-viewport-outer").width(590);
-    $("#datepicker").show();
+    $("#datepicker-container").show();
     checkAndSetDraggableSliderPosition();
 }
 
@@ -79,12 +79,13 @@ function checkAndSetDraggableSliderPosition(event, ui) {
 
 function dateChangedEvent(newDate) {
     updateDayHeaderTitle(newDate);
+    checkIfNewDateIsToday(newDate);
 }
 
 function setDate(date) {
     var $datepicker = $("#datepicker");
     $datepicker.datepicker("update", date);
-    updateDayHeaderTitle(date);
+    dateChangedEvent(date);
 }
 
 function incrementDate() {
@@ -99,6 +100,19 @@ function decrementDate() {
     var date = $datepicker.datepicker("getDate");
     date.setDate(date.getDate() - 1);
     setDate(date);
+}
+
+function checkIfNewDateIsToday(newDate) {
+    var today = new Date();
+    var isToday = today.getDate() === newDate.getDate() &&
+        today.getMonth() === newDate.getMonth() &&
+        today.getFullYear() === newDate.getFullYear();
+    var $slider = $("#slider-now");
+    if (isToday) {
+        $slider.css("visibility", "visible");
+    } else {
+        $slider.css("visibility", "hidden");
+    }
 }
 
 function setDateToday() {
