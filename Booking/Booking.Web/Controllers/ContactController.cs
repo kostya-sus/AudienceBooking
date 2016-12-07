@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Web.Mvc;
+using Booking.Services.Services;
 using Booking.Web.ViewModels.Contact;
+
 
 namespace Booking.Web.Controllers
 {
@@ -23,7 +25,7 @@ namespace Booking.Web.Controllers
                 string surname = contactViewModel.Surname;
                 string message = contactViewModel.Message;
                 string email = contactViewModel.Email;
-                // var mail = ContactService.SendMessage(name,surname,email,message);
+                ContactService.SendMessage(name,surname,email,message);
                
                 ViewData["UserMessage"] = Localization.Localization.ContactViewModel_SucsessMessage;
 

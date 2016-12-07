@@ -9,25 +9,43 @@ using Booking.Services.Interfaces;
 
 namespace Booking.Services.Services
 {
-    class ContactService : IContactService
+    public class ContactService 
     {
-        public bool SendMessage(string name, string surname, string email, string text)
+        public static bool SendMessage(string name, string surname, string email, string text)
         {
-            using (MailMessage mm = new MailMessage("Name <from@yandex.ru>", "to@site.com"))
+            MailAddress from = new MailAddress(email);
+            MailAddress to = new MailAddress("audiencebookingtest@gmail.com");
+            MailMessage mail = new MailMessage(from, to)
             {
-                mm.Subject = "Mail Subject";
-                mm.Body = "Mail Body";
-                mm.IsBodyHtml = false;
-                using (SmtpClient sc = new SmtpClient("smtp.yandex.ru", 25))
-                {
-                    sc.EnableSsl = true;
-                    sc.DeliveryMethod = SmtpDeliveryMethod.Network;
-                    sc.UseDefaultCredentials = false;
-                    sc.Credentials = new NetworkCredential("testazure@yandex.ru", "Azuretest");
-                    sc.Send(mm);
-                }
+                Body = text,
+                Subject = "Feedback ||"+ email +"|| "+ surname + " " + name ,
+                BodyEncoding = Encoding.Unicode
+            };
+
+            SmtpClient smtp = new SmtpClient("smtp.gmail.com", 587)
+            {
+                Host = "smtp.gmail.com",
+                Port = 587,
+                Credentials = new NetworkCredential("audiencebookingtest@gmail.com", "Qwer123!"),
+                EnableSsl = true
+            };
+
+            try
+            {
+                smtp.Send(mail);
             }
+            catch (Exception ex)
+            {
+                var smtpEx = ex as SmtpException;
+                if (smtpEx != null)
+                {
+                    var error = smtpEx.StatusCode;
+                }
+                    
+            }
+
             return true;
         }
+        
     }
 }
