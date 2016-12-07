@@ -10,6 +10,7 @@
     @Styles.Render("~/Content/home-page.css")
     @Styles.Render("~/Content/Site.css")
     @Scripts.Render("~/bundles/modernizr")
+    @Styles.Render("~/Content/font-awesome/css/font-awesome.min.css")
     @RenderSection("styles", false)
 </head>
 <body>
@@ -25,7 +26,7 @@
                             </a>
                         </div>
                     </li>
-                    <li  class="@(ViewBag.ActiveLink == "Login" ? "active" : "")">
+                    <li class="@(ViewBag.ActiveLink == "Login" ? "active" : "")">
                         @Html.ActionLink(@Localization.Login, "Login", "Account")
                     </li>
                     <li class="@(ViewBag.ActiveLink == "Feedback" ? "active" : "")">
@@ -39,9 +40,7 @@
         </div>
     </header>
 
-
     @RenderBody()
-
 
     <footer class="panel-footer">
         <div style="text-align: center;">

@@ -225,18 +225,26 @@
     <Compile Include="ViewModels\Profile\EditProfileViewModel.cs" />
     <Compile Include="ViewModels\Profile\ProfileViewModel.cs" />
     <Compile Include="ViewModels\Profile\UserInfoViewModel.cs" />
+    <Compile Include="ViewModels\ScheduleTableViewModel.cs" />
     <Compile Include="ViewModels\Users\UsersListItemViewModel.cs" />
     <Compile Include="ViewModels\Users\UsersViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\bootstrap-datepicker.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\error.css" />
+    <Content Include="Content\datepicker.css" />
     <Content Include="Content\font-awesome\css\font-awesome.css" />
     <Content Include="Content\font-awesome\css\font-awesome.min.css" />
     <Content Include="Content\font-awesome\fonts\fontawesome-webfont.svg" />
     <Content Include="Content\form-inputs.css" />
     <Content Include="Content\home-page.css" />
+    <Content Include="Content\Images\schedule\today-active-bottom.png" />
+    <Content Include="Content\Images\schedule\today-active-top.png" />
+    <Content Include="Content\Images\schedule\today-bottom.png" />
+    <Content Include="Content\Images\schedule\today-top.png" />
+    <Content Include="Content\schedule.css" />
     <Content Include="Content\Images\login-background.svg">
       <SubType>Designer</SubType>
     </Content>
@@ -250,6 +258,8 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Scripts\bootstrap-datepicker\js\bootstrap-datepicker.js" />
+    <Content Include="Scripts\bootstrap-datepicker\locales\bootstrap-datepicker.ru.min.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Content\font-awesome\fonts\fontawesome-webfont.eot" />
@@ -272,6 +282,7 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\project\login-scripts.js" />
+    <Content Include="Scripts\project\schedule.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\_references.js" />
@@ -311,6 +322,7 @@
     <Content Include="Views\Account\_ViewStart.cshtml" />
     <Content Include="Views\Shared\_RoomMapPartial.cshtml" />
     <Content Include="Views\Error\_ViewStart.cshtml" />
+    <Content Include="Views\Shared\_HorizontalSchedulePartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

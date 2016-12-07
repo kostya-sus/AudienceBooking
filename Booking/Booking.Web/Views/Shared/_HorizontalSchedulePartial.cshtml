@@ -1,0 +1,96 @@
+﻿@using Booking.Web.Localization
+@model Booking.Web.ViewModels.ScheduleTableViewModel
+
+@Html.HiddenFor(m => m.LowerHourBound)
+@Html.HiddenFor(m => m.UpperHourBound)
+
+<div id="main-schedule-container">
+    <div id="schedule-control-container">
+        <table id="day-header-table" class="table-header-footer">
+            <tr>
+                <th id="schedule-mode-buttons" class="first-th">
+                    <div class="schedule-mode-buttons-container">
+                        <i id="schedule-mode-table-only" class="fa fa-align-justify" aria-hidden="true"></i>
+                        <i id="schedule-mode-with-calendar" class="fa fa-th-list" aria-hidden="true"></i>
+                    </div>
+                </th>
+                <th id="schedule-day-header" class="second-th">
+                    <div>
+                        <i id="decrement-date-button" class='fa fa-caret-left caret-arrow' aria-hidden='true'></i>
+                        <span id="day-header-title"></span>
+                        <i id="increment-date-button" class='fa fa-caret-right caret-arrow' aria-hidden='true'></i>
+                    </div>
+                </th>
+            </tr>
+        </table>
+
+        <div id="schedule-table">
+            <table id="schedule-rooms-column">
+                <tr>
+                    <th></th>
+                </tr>
+                @foreach (string name in Model.AvailableAudiences.Names.Values)
+                {
+                    <tr>
+                        <td>@name</td>
+                    </tr>
+                }
+            </table>
+            <div id="schedule-viewport-outer">
+                <div id="schedule-viewport">
+                    <div id="slider-now" class="schedule-slider">
+                        <img class="schedule-slider-top" src="@Url.Content("~/Content/Images/schedule/today-top.png")"/>
+                        <img class="schedule-slider-bottom" src="@Url.Content("~/Content/Images/schedule/today-bottom.png")"/>
+                        <div class="slider-caption">@Localization.Now</div>
+                    </div>
+
+                    <div id="slider-draggable" class="schedule-slider">
+                        <img class="schedule-slider-top" src="@Url.Content("~/Content/Images/schedule/today-active-top.png")"/>
+                        <img class="schedule-slider-bottom" src="@Url.Content("~/Content/Images/schedule/today-active-bottom.png")"/>
+                        <div class="slider-caption"></div>
+                    </div>
+                    <table id="schedule-contents-table">
+                        <tr>
+                            @for (int hour = Model.LowerHourBound; hour < Model.UpperHourBound; ++hour)
+                            {
+                                <th>@string.Format("{0}:00", hour.ToString("D2"))</th>
+                            }
+                        </tr>
+                        @foreach (var key in Model.AvailableAudiences.Names.Keys)
+                        {
+                            <tr>
+                                @for (int hour = Model.LowerHourBound; hour < Model.UpperHourBound; ++hour)
+                                {
+                                    <td></td>
+                                }
+                            </tr>
+                        }
+                    </table>
+                </div>
+            </div>
+        </div>
+
+
+        <table class="table-header-footer">
+            <tr style="height: 22px"></tr>
+            <tr>
+                <th class="first-th">
+                </th>
+                <th class="second-th">
+                    <span id="btn-goto-now-left" class="btn-goto-now"><i class="fa fa-long-arrow-left" aria-hidden="true"></i> @Localization.Now</span>
+                    <span id="btn-goto-now-right" class="btn-goto-now">@Localization.Now <i class="fa fa-long-arrow-right" aria-hidden="true"></i></span>
+                </th>
+            </tr>
+        </table>
+    </div>
+
+    <div id="datepicker-container">
+        <!--<i class='fa fa-caret-left caret-arrow' aria-hidden='true'></i>-->
+        <div id="datepicker"></div>
+        <!--<i class='fa fa-caret-right caret-arrow' aria-hidden='true'></i>-->
+        <div>
+            <span id="btn-goto-today-left" class="btn-goto-today"><i class="fa fa-long-arrow-left" aria-hidden="true"></i> @Localization.Today</span>
+            <span id="btn-goto-today-right" class="btn-goto-today">@Localization.Today <i class="fa fa-long-arrow-right" aria-hidden="true"></i></span>
+        </div>
+    </div>
+</div>

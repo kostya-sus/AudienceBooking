@@ -153,9 +153,15 @@ namespace Booking.Web.Localization {
         /// <summary>
         ///   Looks up a localized string similar to Такой страницы не существует.
         /// </summary>
-        public static string NotFound404 {
+        public static string NotFound404
+        {
+            get { return ResourceManager.GetString("NotFound404", resourceCulture); }
+        }
+        ///   Looks up a localized string similar to Сейчас.
+        /// </summary>
+        public static string Now {
             get {
-                return ResourceManager.GetString("NotFound404", resourceCulture);
+                return ResourceManager.GetString("Now", resourceCulture);
             }
         }
         
@@ -252,9 +258,16 @@ namespace Booking.Web.Localization {
         /// <summary>
         ///   Looks up a localized string similar to Что-то пошло не так.
         /// </summary>
-        public static string SomethingWentWrong {
+        public static string SomethingWentWrong
+        {
+            get { return ResourceManager.GetString("SomethingWentWrong", resourceCulture); }
+        }
+
+        ///   Looks up a localized string similar to Сегодня.
+        /// </summary>
+        public static string Today {
             get {
-                return ResourceManager.GetString("SomethingWentWrong", resourceCulture);
+                return ResourceManager.GetString("Today", resourceCulture);
             }
         }
         
