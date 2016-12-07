@@ -21,12 +21,14 @@
 	*/
 
 
-document.write('<scr'+'ipt type="text/javascript" src="https://maps.googleapis.com/maps/api/js?sensor=false" ></scr'+'ipt>');
+document.write('<scr' + 'ipt type="text/javascript" src="https://maps.googleapis.com/maps/api/js?sensor=false" ></scr' + 'ipt>');
+
+
 
 
 ;(function($, window, undefined) {
 	"use strict";
-
+	
 	$.fn.mapit = function(options) {
 
 		var defaults = {
@@ -44,7 +46,8 @@ document.write('<scr'+'ipt type="text/javascript" src="https://maps.googleapis.c
 				center: 		true
 			}, 
 			address: '<h2>Softheme</h2><p>town Kiev, streat Dilova 5A </p><p>softheme.com<br />info@softheme.com</p>',			
-			styles: 'GRAYSCALE',
+	    styles: 'GRAYSCALE',
+        
 						
 		};
         

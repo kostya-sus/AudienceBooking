@@ -51,6 +51,13 @@
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="NLog, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c, processorArchitecture=MSIL">
       <HintPath>..\packages\NLog.4.3.11\lib\net45\NLog.dll</HintPath>
+    </Reference>
+    <Reference Include="Postal, Version=1.0.0.0, Culture=neutral, PublicKeyToken=45719375b8b4d528, processorArchitecture=MSIL">
+      <HintPath>..\packages\Postal.Mvc5.1.2.0\lib\net45\Postal.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="RazorEngine, Version=3.4.1.0, Culture=neutral, PublicKeyToken=9ee697374c7e744a, processorArchitecture=MSIL">
+      <HintPath>..\packages\RazorEngine.3.4.1\lib\net45\RazorEngine.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
@@ -247,6 +254,7 @@
     <Content Include="Content\Images\schedule\today-bottom.png" />
     <Content Include="Content\Images\schedule\today-top.png" />
     <Content Include="Content\schedule.css" />
+    <Content Include="Content\Images\contact-bg.png" />
     <Content Include="Content\Images\login-background.svg">
       <SubType>Designer</SubType>
     </Content>
@@ -283,6 +291,7 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
+    <Content Include="Scripts\project\contact-scripts.js" />
     <Content Include="Scripts\project\login-scripts.js" />
     <Content Include="Scripts\project\schedule.js" />
     <Content Include="Scripts\respond.js" />
@@ -297,7 +306,6 @@
     </Content>
     <Content Include="Views\Web.config" />
     <Content Include="Views\_ViewStart.cshtml" />
-    <Content Include="Views\Error\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Account\_ExternalLoginsListPartial.cshtml" />
@@ -323,13 +331,16 @@
     <Content Include="Views\Shared\_LoginLayout.cshtml" />
     <Content Include="Views\Account\_ViewStart.cshtml" />
     <Content Include="Views\Shared\_RoomMapPartial.cshtml" />
-    <Content Include="Views\Error\_ViewStart.cshtml" />
     <Content Include="Views\Shared\_HorizontalSchedulePartial.cshtml" />
+    <Content Include="Views\Contact\Index.cshtml">
+      <BrowseToURL>~/Contact/Index</BrowseToURL>
+    </Content>
+    <Content Include="Views\Error\Error.cshtml" />
+    <Content Include="Views\Error\_ViewStart.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Views\Audience\" />
-    <Folder Include="Views\Contact\" />
     <Folder Include="Views\Event\" />
     <Folder Include="Views\Profile\" />
     <Folder Include="Views\Users\" />
@@ -353,6 +364,7 @@
     <EmbeddedResource Include="Localization\Localization.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Localization.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <ProjectReference Include="..\Booking.Repositories\Booking.Repositories.csproj">
       <Project>{FD3CD658-F5A9-4DB5-9F06-3A7A8CB4C47D}</Project>

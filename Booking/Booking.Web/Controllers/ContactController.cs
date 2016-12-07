@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Web.Mvc;
+using Booking.Services.Services;
 using Booking.Web.ViewModels.Contact;
+
 
 namespace Booking.Web.Controllers
 {
@@ -9,13 +11,32 @@ namespace Booking.Web.Controllers
         [HttpGet]
         public ActionResult Index()
         {
-            throw new NotImplementedException();
+            var viewModel = new ContactViewModel();
+
+            return View(viewModel);
         }
 
         [HttpPost]
         public ActionResult Index(ContactViewModel contactViewModel)
         {
-            throw new NotImplementedException();
+            if (ModelState.IsValid)
+            {
+                string name = contactViewModel.Name;
+                string surname = contactViewModel.Surname;
+                string message = contactViewModel.Message;
+                string email = contactViewModel.Email;
+                ContactService.SendMessage(name,surname,email,message);
+               
+                ViewData["UserMessage"] = Localization.Localization.ContactViewModel_SucsessMessage;
+
+            }
+            else
+            {
+                ViewData["UserMessage"] = "";
+            }
+
+            return View();
         }
+       
     }
 }

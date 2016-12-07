@@ -2,6 +2,6 @@
 {
     public interface IContactService
     {
-        bool SendMessage(string name, string surname, string email, string text);
+       bool SendMessage(string name, string surname, string email, string text);
     }
 }
