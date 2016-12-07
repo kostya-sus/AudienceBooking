@@ -1,4 +1,7 @@
-﻿function posToTime(l, u, w, pos) {
+﻿var lowerHourBound;
+var upperHourBound;
+
+function posToTime(l, u, w, pos) {
     var time = new Date();
     var hours = Math.floor(l + pos / w);
     time.setHours(hours);
@@ -19,6 +22,22 @@ function moveSlider(slider, pos) {
 
 function moveSliderNow(l, u, w) {
     var time = new Date();
+
+    var currentHour = time.getHours();
+    if (time.getMinutes() > 0) {
+        currentHour++;
+    }
+
+    var isSliderNowInsideBounds = currentHour > lowerHourBound && currentHour <= upperHourBound;
+
+    if (isSliderNowInsideBounds) {
+        $("#slider-now").css("visibility", "visible");
+    } else {
+        $("#slider-now").css("visibility", "hidden");
+        time.setHours(l);
+        time.setMinutes(0);
+    }
+
     var pos = timeToPos(l, u, w, time);
     moveSlider($("#slider-now"), pos);
     checkSliderNowPosition();
@@ -164,7 +183,7 @@ function checkSliderNowPosition() {
         today.getMonth() === date.getMonth() &&
         today.getFullYear() === date.getFullYear();
 
-    if (isInsideViewport || !isToday) {
+    if (isInsideViewport || !isToday || $("#slider-now").css("visibility") === "hidden") {
         $(".btn-goto-now").css("visibility", "hidden");
     } else {
         if (pos < left) {
@@ -186,33 +205,42 @@ function bindDraggableSliderToNow() {
 
 $(document)
     .ready(function() {
-        var lowerHourBound = parseInt($("#LowerHourBound").val());
-        var upperHourBound = parseInt($("#UpperHourBound").val());
+        lowerHourBound = parseInt($("#LowerHourBound").val());
+        upperHourBound = parseInt($("#UpperHourBound").val());
         var tdWidth = parseInt($("#schedule-contents-table td").css("width"));
 
-        var time = new Date();
-        var pos = timeToPos(lowerHourBound, upperHourBound, tdWidth, time);
-        setDraggableSliderCaption(timeToStringHHMM(time));
-        moveSlider($("#slider-now"), pos);
-        moveSlider($("#slider-draggable"), pos);
-        $("#schedule-viewport-outer").scrollLeft(pos);
-
-        setInterval(function() {
-                moveSliderNow(lowerHourBound, upperHourBound, tdWidth);
-            },
-            60000);
 
         $("#slider-draggable")
             .draggable({
                 axis: "x",
                 containment: "parent",
                 drag: function(event, ui) {
-                    var time = posToTime(lowerHourBound, upperHourBound, tdWidth, ui.position.left);
-                    setDraggableSliderCaption(timeToStringHHMM(time));
+                    var t = posToTime(lowerHourBound, upperHourBound, tdWidth, ui.position.left);
+                    setDraggableSliderCaption(timeToStringHHMM(t));
                     checkSliderNowPosition();
                 },
                 stop: checkAndSetDraggableSliderPosition
             });
+
+        var time = new Date();
+        var pos = timeToPos(lowerHourBound, upperHourBound, tdWidth, time);
+
+        if (pos > (upperHourBound - lowerHourBound) * tdWidth) {
+            pos = (upperHourBound - lowerHourBound) * tdWidth;
+        } else if (pos < 0) {
+            pos = 0;
+        }
+
+        moveSlider($("#slider-now"), pos);
+        moveSlider($("#slider-draggable"), pos);
+        $("#schedule-viewport-outer").scrollLeft(pos);
+
+        setDraggableSliderCaption(timeToStringHHMM(time));
+
+        setInterval(function() {
+                moveSliderNow(lowerHourBound, upperHourBound, tdWidth);
+            },
+            60000);
 
 
         $("#schedule-mode-table-only").click(toggleTableOnlyMode);
@@ -224,6 +252,8 @@ $(document)
         configureDatepicker();
 
         setDateToday();
+
+        moveSliderNow(lowerHourBound, upperHourBound, tdWidth);
 
         toggleWithCalendarMode();
 
