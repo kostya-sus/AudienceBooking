@@ -272,6 +272,7 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\project\login-scripts.js" />
+    <Content Include="Scripts\project\new-event.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\_references.js" />
@@ -311,6 +312,7 @@
     <Content Include="Views\Account\_ViewStart.cshtml" />
     <Content Include="Views\Shared\_RoomMapPartial.cshtml" />
     <Content Include="Views\Error\_ViewStart.cshtml" />
+    <Content Include="Views\Shared\_NewEventPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -340,6 +342,10 @@
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Localization.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <ProjectReference Include="..\Booking.Services\Booking.Services.csproj">
+      <Project>{8C8D1B88-47A6-4825-81F7-A3AA86CC3589}</Project>
+      <Name>Booking.Services</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

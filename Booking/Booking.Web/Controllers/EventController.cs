@@ -1,11 +1,23 @@
 ﻿using System;
+using System.Linq;
 using System.Web.Mvc;
+using Booking.Repositories;
+using Booking.Services.Interfaces;
+using Booking.Services.Services;
 using Booking.Web.ViewModels.Event;
 
 namespace Booking.Web.Controllers
 {
     public class EventController : Controller
     {
+        private readonly IAudienceService _audienceService;
+
+        public EventController()
+        {
+            var uof = new UnitOfWork();
+            _audienceService = new AudienceService(uof);
+        }
+
         [HttpGet]
         public ActionResult DisplayEventPopup(Guid eventId)
         {
@@ -26,9 +38,16 @@ namespace Booking.Web.Controllers
 
         [HttpGet]
         [Authorize]
-        public ActionResult Create()
+        public ActionResult GetNewEventPopup()
         {
-            throw new NotImplementedException();
+            var audiences = _audienceService.GetAllAudiences().ToList();
+            var availableAudiences = audiences.Where(a => a.IsBookingAvailable).ToDictionary(a => a.Id, a => a.Name);
+
+            var viewModel = new CreateEditEventViewModel
+            {
+                AvailableAudiences = {Names = availableAudiences}               
+            };
+            return PartialView("_NewEventPartial", viewModel);
         }
 
         [HttpDelete]

@@ -1,0 +1,65 @@
+﻿@using Booking.Web.Localization
+@model Booking.Web.ViewModels.Event.CreateEditEventViewModel
+    <div id="main" class="main">
+    <div class="header">
+        <i id="calendar-icon" class="fa fa-calendar-o" aria-hidden="true"></i>
+        <span style="margin-left: 20px;">@Localization.ReserveAudience</span>
+        <i id="close-icon" class="fa fa-times" aria-hidden="true" data-dismiss="modal"></i>
+    </div>
+    <div class="line">
+        <span>@Localization.When</span>
+    </div>
+    <div class="line">
+        <span>@Localization.Where</span>
+        @Html.DropDownListFor(m => m.ChosenAudience, new SelectList(Model.AvailableAudiences.Names,
+                               "Key", "Value"), new{@class="select-style"})
+        
+    </div>
+        <div class="line">
+            @Html.TextBoxFor(m => m.Title, new {@class = "input-style", placeholder = Localization.Title})           
+        </div>
+        <div class="line">
+            @Html.TextAreaFor(m=>m.AdditionalInfo, new {@class="textarea", placeholder=Localization.AdditionalInformation})
+        </div>
+    <div class="line">
+        <table>
+            <tr>
+                <td id="td-style">
+                    @Html.CheckBoxFor(m=>m.IsJoinAvailable, new{@class="whiteCheckbox1", id="whiteCheckbox1"})
+                    <label for="whiteCheckbox1"></label>
+                </td>
+                <td style="padding-top:10px"><p>@Localization.RegistrationTo</p></td>
+                <td style="padding-top:10px; padding-left: 30px;">
+                    <p id="public" class="public">
+                        @Localization.Public
+                    </p>
+                </td>
+                <td style="padding-top: 10px">
+                    @Html.CheckBoxFor(m => m.IsPublic, new{@id="checkboxRed", onclick="hasTickedBox()"})
+                    <label for="checkboxRed"></label>
+                </td>
+                <td style="padding-top:10px">
+                    <p id="private" class="private">
+                        @Localization.Private
+                    </p>
+                </td>
+            </tr>
+        </table>
+        <table>
+            <tr>
+                <td>
+                    <input type="checkbox" id="whiteCheckbox2" name="registr" value="registr" />
+                    <label for="whiteCheckbox2"></label>
+                </td>
+                <td style="padding-top:10px"><p>@Localization.ShowAuthor</p></td>
+                <td style="padding-top:10px; padding-left:10px"><p>@Localization.OR</p></td>
+                <td style="padding-left: 20px">
+                    @Html.TextBoxFor(m => m.AuthorName, new {@class = "input-stile-org", placeholder = Localization.ShowOrganizer})    
+                </td>
+            </tr>
+        </table>
+        <button class="btnCreate">
+            @Localization.Create
+        </button>
+    </div>
+</div>

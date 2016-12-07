@@ -61,6 +61,15 @@ namespace Booking.Web.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Дополнительная информация.
+        /// </summary>
+        public static string AdditionalInformation {
+            get {
+                return ResourceManager.GetString("AdditionalInformation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Все права защищены.
         /// </summary>
         public static string All_rights_reserved {
@@ -75,6 +84,15 @@ namespace Booking.Web.Localization {
         public static string ConfirmPasswordPlaceholder {
             get {
                 return ResourceManager.GetString("ConfirmPasswordPlaceholder", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Создать.
+        /// </summary>
+        public static string Create {
+            get {
+                return ResourceManager.GetString("Create", resourceCulture);
             }
         }
         
@@ -160,11 +178,38 @@ namespace Booking.Web.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to или.
+        /// </summary>
+        public static string OR {
+            get {
+                return ResourceManager.GetString("OR", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Пароль.
         /// </summary>
         public static string PasswordPlaceholder {
             get {
                 return ResourceManager.GetString("PasswordPlaceholder", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Приватно.
+        /// </summary>
+        public static string Private {
+            get {
+                return ResourceManager.GetString("Private", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Публично.
+        /// </summary>
+        public static string Public {
+            get {
+                return ResourceManager.GetString("Public", resourceCulture);
             }
         }
         
@@ -232,6 +277,24 @@ namespace Booking.Web.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Регистрация желающих.
+        /// </summary>
+        public static string RegistrationTo {
+            get {
+                return ResourceManager.GetString("RegistrationTo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Зарезервировать аудиторию.
+        /// </summary>
+        public static string ReserveAudience {
+            get {
+                return ResourceManager.GetString("ReserveAudience", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Смена пароля.
         /// </summary>
         public static string ResetPassword {
@@ -250,11 +313,38 @@ namespace Booking.Web.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Показать автора.
+        /// </summary>
+        public static string ShowAuthor {
+            get {
+                return ResourceManager.GetString("ShowAuthor", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Указать оргранизатора.
+        /// </summary>
+        public static string ShowOrganizer {
+            get {
+                return ResourceManager.GetString("ShowOrganizer", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Что-то пошло не так.
         /// </summary>
         public static string SomethingWentWrong {
             get {
                 return ResourceManager.GetString("SomethingWentWrong", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Заголовок.
+        /// </summary>
+        public static string Title {
+            get {
+                return ResourceManager.GetString("Title", resourceCulture);
             }
         }
         
@@ -273,6 +363,24 @@ namespace Booking.Web.Localization {
         public static string ValidationMessage_Required {
             get {
                 return ResourceManager.GetString("ValidationMessage_Required", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Когда.
+        /// </summary>
+        public static string When {
+            get {
+                return ResourceManager.GetString("When", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Где.
+        /// </summary>
+        public static string Where {
+            get {
+                return ResourceManager.GetString("Where", resourceCulture);
             }
         }
     }

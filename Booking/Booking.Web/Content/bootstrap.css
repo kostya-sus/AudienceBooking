@@ -5640,7 +5640,7 @@ body.modal-open,
 
 .modal-dialog {
   z-index: 1050;
-  width: auto;
+    width: 500px !important;
   padding: 10px;
   margin-right: auto;
   margin-left: auto;
