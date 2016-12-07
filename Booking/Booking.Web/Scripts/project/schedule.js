@@ -1,5 +1,6 @@
 ﻿var lowerHourBound;
 var upperHourBound;
+var tdWidth;
 
 function posToTime(l, u, w, pos) {
     var time = new Date();
@@ -101,6 +102,7 @@ function dateChangedEvent(newDate) {
     updateDayHeaderTitle(newDate);
     checkIfNewDateIsToday(newDate);
     checkSliderNowPosition();
+    moveSliderNow(lowerHourBound, upperHourBound, tdWidth, new Date());
 }
 
 function setDate(date) {
@@ -208,7 +210,7 @@ $(document)
     .ready(function() {
         lowerHourBound = parseInt($("#LowerHourBound").val());
         upperHourBound = parseInt($("#UpperHourBound").val());
-        var tdWidth = parseInt($("#schedule-contents-table td").css("width"));
+        tdWidth = parseInt($("#schedule-contents-table td").css("width"));
 
 
         $("#slider-draggable")

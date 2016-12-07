@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using System.Web.Mvc;
+using Booking.Enums;
 using Booking.Repositories;
 using Booking.Services.Interfaces;
 using Booking.Services.Services;
@@ -15,11 +16,13 @@ namespace Booking.Web.Controllers
     public class HomeController : Controller
     {
         private readonly IAudienceService _audienceService;
+        private readonly IScheduleService _scheduleService;
 
         public HomeController()
         {
             var uof = new UnitOfWork();
             _audienceService = new AudienceService(uof);
+            _scheduleService = new ScheduleService(uof.EventRepository);
         }
 
         [HttpGet]
@@ -44,8 +47,8 @@ namespace Booking.Web.Controllers
                 ScheduleTable = new ScheduleTableViewModel
                 {
                     AvailableAudiences = availableAudiences,
-                    LowerHourBound = 0,
-                    UpperHourBound = 24
+                    LowerHourBound = (int) BookingHoursBoundsEnum.Lower,
+                    UpperHourBound = (int) BookingHoursBoundsEnum.Upper
                 },
                 IsAdmin = User.IsInRole("admin"),
                 IsLoggedIn = User.Identity.IsAuthenticated
@@ -57,7 +60,7 @@ namespace Booking.Web.Controllers
         [HttpGet]
         public ActionResult GetDaySchedule(DateTime date)
         {
-            throw new NotImplementedException();
+            return Json(_scheduleService.GetEventsByDay(date), JsonRequestBehavior.AllowGet);
         }
     }
 }
