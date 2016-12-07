@@ -201,6 +201,7 @@ function bindDraggableSliderToNow() {
     $("#slider-draggable").css("left", $("#slider-now").position().left);
     checkAndSetDraggableSliderPosition();
     checkSliderNowPosition();
+    setDraggableSliderCaption(timeToStringHHMM(new Date()));
 }
 
 $(document)
