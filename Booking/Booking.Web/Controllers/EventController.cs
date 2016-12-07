@@ -45,7 +45,7 @@ namespace Booking.Web.Controllers
 
             var viewModel = new CreateEditEventViewModel
             {
-                AvailableAudiences = {Names = availableAudiences}               
+                AvailableAudiences =  availableAudiences             
             };
             return PartialView("_NewEventPartial", viewModel);
         }

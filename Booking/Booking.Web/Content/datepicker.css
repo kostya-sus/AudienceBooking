@@ -1,0 +1,11 @@
+﻿#datepicker-container {
+    display: inline-block;
+    margin-left: 60px;
+}
+
+.fa-caret-left, .fa-caret-right {
+    font-size: 26px;
+}
+
+#datepicker .prev,
+#datepicker .next { /*visibility: hidden !important; */ }

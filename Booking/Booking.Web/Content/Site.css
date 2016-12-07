@@ -126,9 +126,10 @@ footer {
     }
     .select-style{
         padding: 0;
-        margin: 0;
+        margin-left: 20px;
         border: 1px solid #ebeef7;
         width: 160px;
+        height: 30px;
         border-radius: 50px;
         overflow: hidden;
         background-color: #fff;
@@ -138,12 +139,14 @@ footer {
     .input-style{
         padding: 10px;
         width: 90%;
+        height: 30px;
         border-radius: 50px;
         border: 1px solid #ebeef7;
     }
     .input-stile-org{
         padding: 10px;
         width: 220px;
+        height: 30px;
         border-radius: 50px;
         border: 1px solid #ebeef7;
         margin-top: 5px;
@@ -165,7 +168,13 @@ footer {
         padding-top: 10px;
     }
     
-    .whiteCheckbox1 {
+    input[type="checkbox"] {
+    margin: 4px 0 0;
+    margin-top: 1px \9;
+    height: 25px;
+    width: 25px;
+}
+       .whiteCheckbox1 {
     	position:absolute; z-index:-1000; left:-1000px; overflow: hidden; clip: rect(0 0 0 0); height:1px; width:1px; margin:-1px; padding:0; border:0;
     }
     
@@ -243,7 +252,7 @@ footer {
         background: #f95752;
         display: block;
         margin-top: 20px;
-        margin-left: 280px ;
+        margin-left: 270px ;
         min-width: 150px;
         height: 34px;
         border: 0 none;

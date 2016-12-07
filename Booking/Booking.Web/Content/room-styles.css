@@ -1,14 +1,13 @@
-﻿
+﻿.room {    position: relative;    z-index: 1;    text-align: center;    padding: 4px;}.room-title-vertical {
+    transform: rotate(90deg);
+    margin-left: -50%;
+    transform-origin: center center;}.room-active {    background-color: #F95752;}
 
-.room-active {    position: relative;    background-color: #F95752;    z-index: 1;    text-align: center;
-}
+.room-available {    background-color: #9FA6B6;}
 
-.room-available {    position: relative;    background-color: #9FA6B6;    z-index: 1;    text-align: center;}
-
-.room-not-available  {    position: relative;    background-color:  #D7D9DE;    z-index: 1;
-    text-align: center;}
+.room-not-available  {    background-color:  #D7D9DE;}
 
 .room-title {    line-height: 1.5;    display: inline-block;    vertical-align: middle;    border-color: #ffffff;    border-radius: 10px;    background-color: rgba(0, 0, 0, 0.2);}
-.room-title > p {        color: #ffffff;    margin: 0px 5px;}
+.room-title > p {    padding: 5px;    color: #ffffff;    margin: 0 5px;}
     
 

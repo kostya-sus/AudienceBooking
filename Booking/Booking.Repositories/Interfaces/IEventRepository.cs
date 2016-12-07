@@ -11,7 +11,7 @@ namespace Booking.Repositories.Interfaces
         Event GetEventById(Guid id);
 
         void CreateEvent(Event eventEntity);
-
+        
         void UpdateEvent(Event eventEntity);
 
         void DeleteEvent(Event eventEntity);

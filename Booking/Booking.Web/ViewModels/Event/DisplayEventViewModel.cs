@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using Booking.Web.ViewModels.Audience;
+using Booking.Enums;
 
 namespace Booking.Web.ViewModels.Event
 {
@@ -26,6 +26,6 @@ namespace Booking.Web.ViewModels.Event
 
         public IEnumerable<string> ParticipantsEmails { get; set; }
 
-        public AudiencesNamesViewModel AudiencesNames { get; set; }
+        public IDictionary<AudiencesEnum, string> AudiencesNames { get; set; }
     }
 }

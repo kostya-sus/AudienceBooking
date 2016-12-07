@@ -11,7 +11,7 @@
     </div>
     <div class="line">
         <span>@Localization.Where</span>
-        @Html.DropDownListFor(m => m.ChosenAudience, new SelectList(Model.AvailableAudiences.Names,
+        @Html.DropDownListFor(m => m.ChosenAudience, new SelectList(Model.AvailableAudiences,
                                "Key", "Value"), new{@class="select-style"})
         
     </div>
@@ -25,8 +25,7 @@
         <table>
             <tr>
                 <td id="td-style">
-                    @Html.CheckBoxFor(m=>m.IsJoinAvailable, new{@class="whiteCheckbox1", id="whiteCheckbox1"})
-                    <label for="whiteCheckbox1"></label>
+                    @Html.CheckBoxFor(m=>m.IsJoinAvailable)
                 </td>
                 <td style="padding-top:10px"><p>@Localization.RegistrationTo</p></td>
                 <td style="padding-top:10px; padding-left: 30px;">
@@ -47,19 +46,18 @@
         </table>
         <table>
             <tr>
-                <td>
-                    <input type="checkbox" id="whiteCheckbox2" name="registr" value="registr" />
-                    <label for="whiteCheckbox2"></label>
+                <td id="td-style">
+                    @Html.CheckBoxFor(m => m.IsAuthorShown)
                 </td>
-                <td style="padding-top:10px"><p>@Localization.ShowAuthor</p></td>
-                <td style="padding-top:10px; padding-left:10px"><p>@Localization.OR</p></td>
+                <td style="padding-top: 10px">
+                    <p>@Localization.ShowAuthor</p></td>
+                <td style="padding-top: 10px; padding-left: 10px">
+                    <p>@Localization.OR</p></td>
                 <td style="padding-left: 20px">
-                    @Html.TextBoxFor(m => m.AuthorName, new {@class = "input-stile-org", placeholder = Localization.ShowOrganizer})    
+                    @Html.TextBoxFor(m => m.AuthorName, new {@class = "input-stile-org", placeholder = Localization.ShowOrganizer})
                 </td>
             </tr>
         </table>
-        <button class="btnCreate">
-            @Localization.Create
-        </button>
+        <input type="submit" class="btnCreate" value="@Localization.Create"/>
     </div>
 </div>

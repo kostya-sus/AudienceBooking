@@ -194,9 +194,9 @@
     <Compile Include="ViewModels\Account\SendCodeViewModel.cs" />
     <Compile Include="ViewModels\Account\VerifyCodeViewModel.cs" />
     <Compile Include="ViewModels\Audience\AudienceInfoViewModel.cs" />
+    <Compile Include="ViewModels\Audience\AudienceMapItemVm.cs" />
     <Compile Include="ViewModels\Audience\AudienceScheduleItemViewModel.cs" />
     <Compile Include="ViewModels\Audience\AudienceScheduleViewModel.cs" />
-    <Compile Include="ViewModels\Audience\AudiencesNamesViewModel.cs" />
     <Compile Include="ViewModels\Audience\AudienceViewModel.cs" />
     <Compile Include="ViewModels\Contact\ContactViewModel.cs" />
     <Compile Include="ViewModels\ErrorViewModel.cs" />
@@ -225,6 +225,7 @@
     <Compile Include="ViewModels\Profile\EditProfileViewModel.cs" />
     <Compile Include="ViewModels\Profile\ProfileViewModel.cs" />
     <Compile Include="ViewModels\Profile\UserInfoViewModel.cs" />
+    <Compile Include="ViewModels\ScheduleTableViewModel.cs" />
     <Compile Include="ViewModels\Users\UsersListItemViewModel.cs" />
     <Compile Include="ViewModels\Users\UsersViewModel.cs" />
   </ItemGroup>
@@ -342,6 +343,10 @@
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Localization.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <ProjectReference Include="..\Booking.Repositories\Booking.Repositories.csproj">
+      <Project>{FD3CD658-F5A9-4DB5-9F06-3A7A8CB4C47D}</Project>
+      <Name>Booking.Repositories</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Booking.Services\Booking.Services.csproj">
       <Project>{8C8D1B88-47A6-4825-81F7-A3AA86CC3589}</Project>
       <Name>Booking.Services</Name>
