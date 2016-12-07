@@ -19,10 +19,6 @@ namespace Booking.Services.Interfaces
 
         IEnumerable<Audience> GetAllAudiences();
 
-        IEnumerable<AudiencesEnum> GetAvailableAudiencesIds();
-
-        IDictionary<AudiencesEnum, string> GetAllAudiencesNames();
-
-        IDictionary<AudiencesEnum, string> GetAvailableAudiencesNames();
+        IEnumerable<Audience> GetAvailableAudiences();
     }
 }

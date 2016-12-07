@@ -1,6 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
 using Booking.Enums;
-using Booking.Web.ViewModels.Audience;
 
 namespace Booking.Web.ViewModels.Event
 {
@@ -32,7 +32,7 @@ namespace Booking.Web.ViewModels.Event
 
         public bool IsPublic { get; set; }
 
-        public AudiencesNamesViewModel AvailableAudiences { get; set; }
+        public IDictionary<AudiencesEnum, string> AvailableAudiences { get; set; }
 
         public AudiencesEnum ChosenAudience { get; set; }
 

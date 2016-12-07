@@ -9,7 +9,7 @@ namespace Booking.Web.ViewModels.Profile
 
         public ChangePasswordViewModel ChangePasswordForm { get; set; }
 
-        public AudiencesNamesViewModel AvailableAudiences { get; set; }
+        public ScheduleTableViewModel ScheduleTable { get; set; }
 
         public bool IsOwner { get; set; }
 
