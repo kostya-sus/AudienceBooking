@@ -21,6 +21,7 @@ function moveSliderNow(l, u, w) {
     var time = new Date();
     var pos = timeToPos(l, u, w, time);
     moveSlider($("#slider-now"), pos);
+    checkSliderNowPosition();
 }
 
 function timeToStringHHMM(time) {
@@ -80,6 +81,7 @@ function checkAndSetDraggableSliderPosition(event, ui) {
 function dateChangedEvent(newDate) {
     updateDayHeaderTitle(newDate);
     checkIfNewDateIsToday(newDate);
+    checkSliderNowPosition();
 }
 
 function setDate(date) {
@@ -110,8 +112,7 @@ function checkIfNewDateIsToday(newDate) {
     var $slider = $("#slider-now");
     if (isToday) {
         $slider.css("visibility", "visible");
-        $("#btn-goto-today-left").css("visibility", "hidden");
-        $("#btn-goto-today-right").css("visibility", "hidden");
+        $(".btn-goto-today").css("visibility", "hidden");
     } else {
         $slider.css("visibility", "hidden");
         if (today > newDate) {
@@ -140,6 +141,39 @@ function updateDayHeaderTitle(date) {
     $("#day-header-title").text(title);
 }
 
+function checkSliderNowPosition() {
+    var left = $("#schedule-viewport-outer").scrollLeft();
+    var right = left + parseInt($("#schedule-viewport-outer").css("width"));
+    var pos = $("#slider-now").position().left;
+    var isInsideViewport = pos >= left && pos <= right;
+
+    var today = new Date();
+    var $datepicker = $("#datepicker");
+    var date = $datepicker.datepicker("getDate");
+    var isToday = today.getDate() === date.getDate() &&
+        today.getMonth() === date.getMonth() &&
+        today.getFullYear() === date.getFullYear();
+
+    if (isInsideViewport || !isToday) {
+        $(".btn-goto-now").css("visibility", "hidden");
+    } else {
+        if (pos < left) {
+            $("#btn-goto-now-left").css("visibility", "visible");
+            $("#btn-goto-now-right").css("visibility", "hidden");
+        } else {
+            $("#btn-goto-now-left").css("visibility", "hidden");
+            $("#btn-goto-now-right").css("visibility", "visible");
+        }
+    }
+}
+
+function bindDraggableSliderToNow() {
+    setDateToday();
+    $("#slider-draggable").css("left", $("#slider-now").position().left);
+    checkAndSetDraggableSliderPosition();
+    checkSliderNowPosition();
+}
+
 $(document)
     .ready(function() {
         var lowerHourBound = parseInt($("#LowerHourBound").val());
@@ -165,6 +199,7 @@ $(document)
                 drag: function(event, ui) {
                     var time = posToTime(lowerHourBound, upperHourBound, tdWidth, ui.position.left);
                     setDraggableSliderCaption(timeToStringHHMM(time));
+                    checkSliderNowPosition();
                 },
                 stop: checkAndSetDraggableSliderPosition
             });
@@ -183,4 +218,8 @@ $(document)
         toggleWithCalendarMode();
 
         $(".btn-goto-today").click(setDateToday);
+
+        $(".btn-goto-now").click(bindDraggableSliderToNow);
+
+        checkSliderNowPosition();
     });

@@ -4,17 +4,17 @@
 @Html.HiddenFor(m => m.LowerHourBound)
 @Html.HiddenFor(m => m.UpperHourBound)
 
-<div>
-    <div id="schedule-control-container" style="display: inline-block; width: auto">
-        <table id="day-header-table">
+<div id="main-schedule-container">
+    <div id="schedule-control-container">
+        <table id="day-header-table" class="table-header-footer">
             <tr>
-                <th id="schedule-mode-buttons">
+                <th id="schedule-mode-buttons" class="first-th">
                     <div class="schedule-mode-buttons-container">
                         <i id="schedule-mode-table-only" class="fa fa-align-justify" aria-hidden="true"></i>
                         <i id="schedule-mode-with-calendar" class="fa fa-th-list" aria-hidden="true"></i>
                     </div>
                 </th>
-                <th id="schedule-day-header">
+                <th id="schedule-day-header" class="second-th">
                     <div>
                         <i id="decrement-date-button" class='fa fa-caret-left caret-arrow' aria-hidden='true'></i>
                         <span id="day-header-title"></span>
@@ -69,6 +69,19 @@
                 </div>
             </div>
         </div>
+
+
+        <table class="table-header-footer">
+            <tr style="height: 22px"></tr>
+            <tr>
+                <th class="first-th">
+                </th>
+                <th class="second-th">
+                    <span id="btn-goto-now-left" class="btn-goto-now"><i class="fa fa-long-arrow-left" aria-hidden="true"></i> @Localization.Now</span>
+                    <span id="btn-goto-now-right" class="btn-goto-now">@Localization.Now <i class="fa fa-long-arrow-right" aria-hidden="true"></i></span>
+                </th>
+            </tr>
+        </table>
     </div>
 
     <div id="datepicker-container">

@@ -1,6 +1,6 @@
 ﻿#schedule-table {
     display: table;
-    padding: 10px 0 50px 0;
+    padding: 10px 0 0 0;
 }
 
 #schedule-rooms-column, #schedule-contents-table {
@@ -46,7 +46,7 @@
     height: auto;
 }
 
-#schedule-rooms-column th, #schedule-rooms-column td, #schedule-mode-buttons {
+#schedule-rooms-column th, #schedule-rooms-column td, .table-header-footer .first-th {
     min-width: 110px !important;
     width: 110px !important;
 }
@@ -156,13 +156,7 @@
 
 .day.active { font-weight: normal; }
 
-#schedule-day-header > div {
-    display: inline-block;
-    width: 100%;
-    line-height: 2em;
-}
-
-#schedule-day-header {
+.table-header-footer th {
     text-align: center;
     font-weight: normal;
 }
@@ -173,20 +167,31 @@
 
 #schedule-day-header .fa-caret-left { float: left; }
 
-#day-header-table { width: 100%; }
+.table-header-footer { width: 100%; }
 
-.btn-goto-today {
+.btn-goto-today, .btn-goto-now {
     color: #9fa6b6;
     font-size: 12px;
     cursor: pointer;
 }
 
-#btn-goto-today-left { float: left; }
+#btn-goto-today-left, #btn-goto-now-left { float: left; }
 
-#btn-goto-today-right { float: right; }
+#btn-goto-today-right, #btn-goto-now-right { float: right; }
+
+.btn-goto-now {
+    position: relative;
+    
+}
+
+#btn-goto-now-left { left: 0; }
+
+#btn-goto-now-right { right: 0; }
 
 #schedule-control-container {
     display: inline-block;
     width: auto;
     vertical-align: top;
 }
+
+#main-schedule-container { margin-bottom: 50px; }
