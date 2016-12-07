@@ -39,7 +39,8 @@ namespace Booking.Web.Controllers
                     Name = a.Name
                 });
 
-            var availableAudiences = audiences.Where(a => a.IsBookingAvailable).ToDictionary(a => a.Id, a => a.Name);
+            var availableAudiences = audiences.Where(a => a.IsBookingAvailable)
+                .ToDictionary(a => (int) a.Id, a => a.Name);
 
             var viewModel = new HomeViewModel
             {
@@ -60,7 +61,20 @@ namespace Booking.Web.Controllers
         [HttpGet]
         public ActionResult GetDaySchedule(DateTime date)
         {
-            return Json(_scheduleService.GetEventsByDay(date), JsonRequestBehavior.AllowGet);
+            var viewModel = new DayScheduleViewModel
+            {
+                Items = _scheduleService.GetEventsByDay(date).Select(x => new DaySheduleItemViewModel
+                {
+                    Id = x.Id,
+                    AudienceId = x.AudienceId,
+                    Duration = x.Duration,
+                    EventDateTime = x.EventDateTime,
+                    IsPublic = x.IsPublic,
+                    Title = x.Title
+                })
+            };
+
+            return Json(viewModel, JsonRequestBehavior.AllowGet);
         }
     }
 }

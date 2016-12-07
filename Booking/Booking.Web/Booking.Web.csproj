@@ -240,6 +240,8 @@
     <Content Include="Content\font-awesome\fonts\fontawesome-webfont.svg" />
     <Content Include="Content\form-inputs.css" />
     <Content Include="Content\home-page.css" />
+    <Content Include="Content\Images\favicon.ico" />
+    <Content Include="Content\Images\private-event-bg.png" />
     <Content Include="Content\Images\schedule\today-active-bottom.png" />
     <Content Include="Content\Images\schedule\today-active-top.png" />
     <Content Include="Content\Images\schedule\today-bottom.png" />

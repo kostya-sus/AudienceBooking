@@ -1,6 +1,8 @@
 ﻿var lowerHourBound;
 var upperHourBound;
 var tdWidth;
+var tdHeight;
+var thHeight;
 
 function posToTime(l, u, w, pos) {
     var time = new Date();
@@ -107,12 +109,63 @@ function dateChangedEvent(newDate) {
     loadSchedule(newDate);
 }
 
+function refillSchedule(eventsList) {
+    $(".schedule-event-item").remove();
+
+    var $scheduleViewport = $("#schedule-viewport");
+
+    eventsList.forEach(function(event) {
+        var $div = $("<div></div>");
+        var date = parseMvcDate(event.EventDateTime);
+
+        var startTime = timeToStringHHMM(date);
+        var endTime = timeToStringHHMM(new Date(date.getTime() + event.Duration * 60000));
+        var $time = $("<span></span>");
+        $time.addClass("event-item-time");
+
+        if (!event.IsPublic) {
+            $div.addClass("schedule-event-item-private");
+        }
+
+        if (event.Duration > 40) {
+            $time.text(startTime + " - " + endTime);
+            $time.addClass("event-item-time-big");
+            var $title = $("<div></div>").text(event.Title);
+            $title.addClass("event-item-title");
+            $div.append($title);
+        } else {
+            $time.text(startTime + " - " + endTime);
+            $div.addClass("event-item-small");
+        }
+
+        $div.append($time);
+
+        $div.addClass("schedule-event-item");
+        $div.css("left", timeToPos(lowerHourBound, upperHourBound, tdWidth, date) + 1);
+        var ri = getRowIndex(event.AudienceId);
+        $div.css("top", thHeight + ri * tdHeight + 2);
+        $div.css("width", event.Duration * (tdWidth / 60.0) - 2);
+        $div.css("height", tdHeight - 2);
+        $.data($div, "event-id", event.Id);
+        $scheduleViewport.append($div);
+    });
+}
+
 function loadSchedule(date) {
     var url = $("#get-day-schedule-url").val() + "?date=" + date.toLocaleDateString();
     $.getJSON(url)
         .done(function(data) {
-            alert(data);
+            refillSchedule(data.Items);
         });
+}
+
+function getRowIndex(audienceId) {
+    var $row = $("#audience-row-" + audienceId);
+    return $row.data("row-index");
+}
+
+function parseMvcDate(dateStr) {
+    return new Date(parseInt(dateStr.replace("/Date(", "").replace(")/", ""), 10));
 }
 
 function setDate(date) {
@@ -221,7 +274,8 @@ $(document)
         lowerHourBound = parseInt($("#LowerHourBound").val());
         upperHourBound = parseInt($("#UpperHourBound").val());
         tdWidth = parseInt($("#schedule-contents-table td").css("width"));
-
+        tdHeight = parseInt($("#schedule-contents-table td").css("height"));
+        thHeight = parseInt($("#schedule-contents-table th").css("height"));
 
         $("#slider-draggable")
             .draggable({

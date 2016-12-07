@@ -52,6 +52,7 @@
 }
 
 .schedule-slider {
+    z-index: 50;
     position: absolute;
     height: 100%;
     width: auto;
@@ -195,3 +196,38 @@
     margin-top: 20px;
     margin-bottom: 30px;
 }
+
+.schedule-event-item {
+    display: inline-block;
+    position: absolute;
+    background: #F95752;
+    color: white;
+    font-size: 11px;
+    padding: 3px 5px;
+}
+
+.schedule-event-item-private {
+    background-color: #F4F6FB;
+    background-image: url(Images/private-event-bg.png);
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.schedule-event-item .event-item-title {
+    position: absolute;
+    bottom: 0;
+}
+
+.schedule-event-item .event-item-time { opacity: 0.7; }
+
+.event-item-time-big {
+    position: absolute;
+    right: 5px;
+}
+
+.event-item-small {
+    text-align: center;
+    padding: 1px 18px;
+}
+
+.schedule-event-item-private .event-item-time { color: grey; }

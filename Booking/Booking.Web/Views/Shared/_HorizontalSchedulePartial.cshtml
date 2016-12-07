@@ -30,10 +30,13 @@
                 <tr>
                     <th></th>
                 </tr>
-                @foreach (string name in Model.AvailableAudiences.Values)
+                @{
+                    int i = 0;
+                }
+                @foreach (var pair in Model.AvailableAudiences)
                 {
                     <tr>
-                        <td>@name</td>
+                        <td id="audience-row-@pair.Key" data-row-index="@(i++)">@pair.Value</td>
                     </tr>
                 }
             </table>

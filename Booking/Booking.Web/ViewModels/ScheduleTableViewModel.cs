@@ -6,7 +6,7 @@ namespace Booking.Web.ViewModels
 {
     public class ScheduleTableViewModel
     {
-        public IDictionary<AudiencesEnum, string> AvailableAudiences { get; set; }
+        public IDictionary<int, string> AvailableAudiences { get; set; }
 
         public int LowerHourBound { get; set; }
 
