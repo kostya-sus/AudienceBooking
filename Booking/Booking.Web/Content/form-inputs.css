@@ -21,6 +21,7 @@
     font-size: 13px;
     padding: 15px;
     width: 100%;
+    resize: none;
 }
 
 .login-input[type=password] {
