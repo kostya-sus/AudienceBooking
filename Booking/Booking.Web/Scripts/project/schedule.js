@@ -90,11 +90,18 @@ function setDate(date) {
     dateChangedEvent(date);
 }
 
+function isWeekend(date) {
+    return date.getDay() === 0 || date.getDay() === 6;
+}
+
 function incrementDate() {
     var $datepicker = $("#datepicker");
     var date = $datepicker.datepicker("getDate");
     date.setDate(date.getDate() + 1);
     setDate(date);
+    if (isWeekend(date)) {
+        incrementDate();
+    }
 }
 
 function decrementDate() {
@@ -102,6 +109,9 @@ function decrementDate() {
     var date = $datepicker.datepicker("getDate");
     date.setDate(date.getDate() - 1);
     setDate(date);
+    if (isWeekend(date)) {
+        decrementDate();
+    }
 }
 
 function checkIfNewDateIsToday(newDate) {
