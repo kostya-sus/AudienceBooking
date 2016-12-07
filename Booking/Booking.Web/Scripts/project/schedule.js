@@ -103,6 +103,12 @@ function dateChangedEvent(newDate) {
     checkIfNewDateIsToday(newDate);
     checkSliderNowPosition();
     moveSliderNow(lowerHourBound, upperHourBound, tdWidth, new Date());
+
+    loadSchedule(newDate);
+}
+
+function loadSchedule(date) {
+    
 }
 
 function setDate(date) {
