@@ -108,7 +108,11 @@ function dateChangedEvent(newDate) {
 }
 
 function loadSchedule(date) {
-    
+    var url = $("#get-day-schedule-url").val() + "?date=" + date.toLocaleDateString();
+    $.getJSON(url)
+        .done(function(data) {
+            alert(data);
+        });
 }
 
 function setDate(date) {

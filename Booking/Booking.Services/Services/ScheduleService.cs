@@ -19,11 +19,15 @@ namespace Booking.Services.Services
 
         public IEnumerable<Event> GetEventsByDay(DateTime day)
         {
-            return _eventRepository.GetAllEvents().Where(x => x.EventDateTime.Date == day.Date);
+            return _eventRepository.GetAllEvents()
+                .Where(x => x.EventDateTime.Day == day.Day &&
+                            x.EventDateTime.Month == day.Month &&
+                            x.EventDateTime.Year == day.Year);
         }
 
         public IEnumerable<Event> GetEventsByAudience(AudiencesEnum audienceId, DateTime from, DateTime to)
         {
+            // TODO test and maybe fix with let clause(?)
             return _eventRepository.GetAllEvents().Where(x => x.AudienceId == audienceId && x.EventDateTime <= from &&
                                                               x.EventDateTime.AddMinutes(x.Duration) < to);
         }
@@ -31,7 +35,9 @@ namespace Booking.Services.Services
         public IEnumerable<Event> GetEventsByAuthor(ApplicationUser author, DateTime day)
         {
             return _eventRepository.GetAllEvents().Where(x => x.AuthorId == author.Id &&
-                                                              x.EventDateTime.Date == day.Date);
+                                                              x.EventDateTime.Day == day.Day &&
+                                                              x.EventDateTime.Month == day.Month &&
+                                                              x.EventDateTime.Year == day.Year);
         }
     }
 }
