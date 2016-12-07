@@ -230,4 +230,5 @@
     padding: 1px 18px;
 }
 
-.schedule-event-item-private .event-item-time { color: grey; }
+.schedule-event-item-private .event-item-time,
+.schedule-event-item-private .event-item-title { color: grey; }
