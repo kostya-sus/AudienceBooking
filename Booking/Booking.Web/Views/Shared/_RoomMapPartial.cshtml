@@ -1,59 +1,69 @@
-﻿@using Booking.Web.Localization
+﻿@using Booking.Enums
+@using Booking.Web.Localization
 @model IDictionary<Booking.Enums.AudiencesEnum, Booking.Web.ViewModels.Audience.AudienceMapItemVm>
 
 <div class="page-container">
-     <h2 style="text-align: center; margin-bottom: -60px; margin-top: 40px; z-index: 60">@Localization.Floor 10</h2>
+    <h2 style="text-align: center; margin-bottom: -60px; margin-top: 40px; z-index: 60">@Localization.Floor 10</h2>
     <div id="room-map-container">
         <img src="@Url.Content("~/Content/Images/walls.png")" style="position: relative; z-index: 50;"/>
-        <div style="left: 14px; top: -345px; margin-bottom: -345px; height: 95px; width: 165px; line-height: 95px;" class="room-not-available">
+        <div style="left: 14px; top: -345px; margin-bottom: -345px; height: 95px; width: 165px; line-height: 95px;"
+             class="room">
         </div>
-        <div style="left: 186px; top: -95px; margin-bottom: -95px; height: 99px; width: 225px; line-height: 99px;" class="room-active">
+        <div style="left: 186px; top: -95px; margin-bottom: -95px; height: 99px; width: 225px; line-height: 99px;"
+             class="room @(Model[AudiencesEnum.HrOffice].IsAvailable ? "room-available" : "room-not-available")">
             <div class="room-title">
-                <p style="opacity: 2">room1 <br/> rlvndnbvkdn
-                </p>
+                <p style="opacity: 2">@Model[AudiencesEnum.HrOffice].Name</p>
             </div>
 
         </div>
-        <div style="left: 414px; top: -99px; margin-bottom: -99px; height: 99px; width: 184px; line-height: 99px;" class="room-available">
+        <div style="left: 414px; top: -99px; margin-bottom: -99px; height: 99px; width: 184px; line-height: 99px;"
+             class="room @(Model[AudiencesEnum.EinsteinClassroom].IsAvailable ? "room-available" : "room-not-available")">
             <div class="room-title">
-                <p>room2</p>
+                <p>@Model[AudiencesEnum.EinsteinClassroom].Name</p>
             </div>
 
         </div>
-        <div style="left: 600px; top: -99px; margin-bottom: -99px; height: 98px; width: 86px; line-height: 98px;" class="room-active">
+        <div style="left: 600px; top: -99px; margin-bottom: -99px; height: 98px; width: 86px; line-height: 98px;"
+             class="room @(Model[AudiencesEnum.InfoCenter].IsAvailable ? "room-available" : "room-not-available")">
             <div class="room-title">
-                <p>room3</p>
+                <p>@Model[AudiencesEnum.InfoCenter].Name</p>
             </div>
         </div>
-        <div style="left: 688px; top: -98px; margin-bottom: -93px; height: 93px; width: 98px; line-height: 93px;" class="room-active">
+        <div style="left: 688px; top: -98px; margin-bottom: -93px; height: 93px; width: 98px; line-height: 93px;"
+             class="room @(Model[AudiencesEnum.WebAndMarketing1].IsAvailable ? "room-available" : "room-not-available")">
             <div class="room-title">
-                <p>room4</p>
+                <p>@Model[AudiencesEnum.WebAndMarketing1].Name</p>
             </div>
         </div>
-        <div style="left: 789px; top: -98px; margin-bottom: -98px; height: 98px; width: 91px; line-height: 98px;" class="room-active">
+        <div style="left: 789px; top: -98px; margin-bottom: -98px; height: 98px; width: 91px; line-height: 98px;"
+             class="room @(Model[AudiencesEnum.WebAndMarketing2].IsAvailable ? "room-available" : "room-not-available")">
             <div class="room-title">
-                <p>room5</p>
+                <p>@Model[AudiencesEnum.WebAndMarketing2].Name</p>
             </div>
         </div>
-        <div style="left: 883px; top: -98px; margin-bottom: -98px; height: 98px; width: 89px; line-height: 98px;" class="room-active">
+        <div style="left: 883px; top: -98px; margin-bottom: -98px; height: 98px; width: 89px; line-height: 98px;"
+             class="room @(Model[AudiencesEnum.WebAndMarketing3].IsAvailable ? "room-available" : "room-not-available")">
             <div class="room-title">
-                <p>room6</p>
+                <p>@Model[AudiencesEnum.WebAndMarketing3].Name</p>
             </div>
         </div>
-        <div style="left: 974px; top: -98px; margin-bottom: -89px; height: 143px; width: 40px; line-height: 143px;" class="room-active">
-            <div class="room-title" style="transform: rotate(90deg);">
-                <p>room7</p>
+        <div style="left: 974px; top: -98px; margin-bottom: -89px; height: 143px; width: 40px; line-height: 143px;"
+             class="room @(Model[AudiencesEnum.English].IsAvailable ? "room-available" : "room-not-available")">
+            <div class="room-title room-title-vertical">
+                <p>@Model[AudiencesEnum.English].Name</p>
             </div>
 
         </div>
-        <div style="left: 313px; top: -11px; margin-bottom: -94px; height: 94px; width: 188px; line-height: 94px;" class="room-active">
+        <div style="left: 313px; top: -11px; margin-bottom: -94px; height: 94px; width: 188px; line-height: 94px;"
+             class="room @(Model[AudiencesEnum.TeslaClassroom].IsAvailable ? "room-available" : "room-not-available")">
             <div class="room-title">
-                <p>room8</p>
+                <p>@Model[AudiencesEnum.TeslaClassroom].Name</p>
             </div>
         </div>
-        <div style="left: 503px; top: -11px; margin-bottom: 120px; height: 94px; width: 188px; line-height: 94px;" class="room-active">
+        <div style="left: 503px; top: -11px; margin-bottom: 120px; height: 94px; width: 188px; line-height: 94px;"
+             class="room @(Model[AudiencesEnum.NewtonClassroom].IsAvailable ? "room-available" : "room-not-available")">
             <div class="room-title">
-                <p>room9</p>
+                <p>@Model[AudiencesEnum.NewtonClassroom].Name</p>
             </div>
         </div>
     </div>
