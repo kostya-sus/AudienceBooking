@@ -179,10 +179,7 @@
 
 #btn-goto-today-right, #btn-goto-now-right { float: right; }
 
-.btn-goto-now {
-    position: relative;
-    
-}
+.btn-goto-now { position: relative; }
 
 #btn-goto-now-left { left: 0; }
 
@@ -194,4 +191,7 @@
     vertical-align: top;
 }
 
-#main-schedule-container { margin-bottom: 50px; }
+#main-schedule-container {
+    margin-top: 20px;
+    margin-bottom: 30px;
+}
