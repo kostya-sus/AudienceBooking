@@ -69,7 +69,11 @@ namespace Booking.Web.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create(CreateEditEventViewModel createEditEventViewModel)
         {
-            throw new NotImplementedException();
+            if (!ModelState.IsValid)
+            {
+                return View("_NewEventPartial", createEditEventViewModel);
+            }
+            return View("_NewEventPartial", createEditEventViewModel);
         }
 
         [HttpDelete]

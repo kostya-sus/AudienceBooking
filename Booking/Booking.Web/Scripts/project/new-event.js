@@ -58,20 +58,48 @@ function decrementHourValue(id) {
     document.getElementById(id.toString()).value = value;
 }
 
-function incrementMinuteValue(id) {
-    var value = parseInt(document.getElementById(id.toString()).value);
+function incrementMinuteValue(idMinute, idHour) {
+    var value = parseInt(document.getElementById(idMinute.toString()).value);
     value = isNaN(value) ? 30 : value;
-    if (value !== 55) {
-        value+=5;
+    if (value === 55) {
+        value = 0;
+        incrementDayValue(idHour);
+    } else {
+        value += 5;
+    }
+    document.getElementById(idMinute.toString()).value = value;
+}
+
+function decrementMinuteValue(idMinute, idHour) {
+    var value = parseInt(document.getElementById(idMinute.toString()).value);
+    value = isNaN(value) ? 30 : value;
+    if (value === 0) {
+        value = 55;
+        decrementHourValue(idHour);
+    } else {
+        value-=5;
+    }
+    document.getElementById(idMinute.toString()).value = value;
+}
+
+function NextMonth(id) {
+    var value = parseInt(document.getElementById(id.toString()).value);
+    value = isNaN(value) ? 1 : value;
+    if (value !== 12) {
+        value += 1;
+    } else {
+        value = 1;
     }
     document.getElementById(id.toString()).value = value;
 }
 
-function decrementMinuteValue(id) {
+function PrevMonth(id) {
     var value = parseInt(document.getElementById(id.toString()).value);
-    value = isNaN(value) ? 30 : value;
-    if (value !== 0) {
-        value-=5;
+    value = isNaN(value) ? 1 : value;
+    if (value !== 1) {
+        value -= 1;
+    } else {
+        value = 12;
     }
     document.getElementById(id.toString()).value = value;
 }

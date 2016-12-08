@@ -128,7 +128,8 @@ footer {
         padding: 0;
         margin-left: 20px;
         border: 1px solid #ebeef7;
-        width: 160px;
+        width: 190px;
+        padding-left: 10px;
         height: 30px;
         border-radius: 50px;
         overflow: hidden;
@@ -138,25 +139,26 @@ footer {
     }
     .input-style{
         padding: 10px;
-        width: 90%;
+        width: 95%;
         height: 30px;
         border-radius: 50px;
         border: 1px solid #ebeef7;
     }
     .input-stile-org{
         padding: 10px;
-        width: 220px;
+            width: 250px;
         height: 30px;
         border-radius: 50px;
         border: 1px solid #ebeef7;
         margin-top: 5px;
     }
     .textarea{
-        width: 90%;
+        width: 95%;
         border-radius: 20px;
         border: 1px solid #ebeef7;
         height: 100px;
         resize: none;
+        padding: 10px;
     }
     .line{
         padding-left: 20px;
@@ -246,13 +248,14 @@ footer {
         color: #afb2bb;
     }
     .public{
+        
         color: #f95752;
     }
     .btnCreate{
         background: #f95752;
         display: block;
         margin-top: 20px;
-        margin-left: 270px ;
+        margin-left: 300px ;
         min-width: 150px;
         height: 34px;
         border: 0 none;
@@ -269,18 +272,19 @@ footer {
     #close-icon {
     font-size: 30px;
     color: #cfd3db;
-    margin-left: 200px;
+        margin-left: 190px;
+    margin-top: 2px;
         cursor: pointer;
     }
 
     #day {
-    width: 28px;
+    width: 30px;
     border: 1px;
     margin-left: 4px;
         background: #FFF;
     }
     #hourFrom {
-        width: 28px;
+        width: 30px;
     border: 1px;
     margin-left: 4px;
         background: #FFF;
@@ -289,11 +293,24 @@ footer {
         background: #FFF;
         border: 1px;
         margin-left: 4px;
-        width: 28px;
+        width: 30px;
     }
     #minuteFrom {
         background: #FFF;
         border: 1px;
         margin-left: 4px;
-        width: 28px;
+        width: 30px;
     }
+    #minuteTo {
+        background: #FFF;
+        border: 1px;
+        margin-left: 4px;
+        width: 30px;
+    }
+    #month {
+        background: #FFF;
+        border: 1px;
+        width: 50px;
+    }
+    ::-webkit-inner-spin-button { display: none; }
+::-webkit-calendar-picker-indicator { display: none; }
