@@ -158,10 +158,10 @@ function parseMvcDate(dateStr) {
     return new Date(parseInt(dateStr.replace("/Date(", "").replace(")/", ""), 10));
 }
 
-function setDate(date) {
+function setDate(date, loadedCallback) {
     var $datepicker = $("#datepicker");
     $datepicker.datepicker("update", date);
-    dateChangedEvent(date);
+    dateChangedEvent(date, loadedCallback);
 }
 
 function isWeekend(date) {
@@ -209,11 +209,11 @@ function checkIfNewDateIsToday(newDate) {
     }
 }
 
-function setDateToday() {
+function setDateToday(loadedCallback) {
     var today = new Date();
     // TODO figure out, why just date = new Date() doesn`t work
     var date = new Date(today.getFullYear(), today.getMonth(), today.getDate());
-    setDate(date);
+    setDate(date, loadedCallback);
 }
 
 function updateDayHeaderTitle(date) {

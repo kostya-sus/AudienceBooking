@@ -9,6 +9,10 @@ function timestampIsBetween(time, left, right) {
 }
 
 function toggleActiveAudiences(time) {
+    if (time === undefined || time === null) {
+        time = posToTime(lowerHourBound, upperHourBound, tdWidth, $("#slider-draggable").position().left);
+    }
+
     var $div;
 
     for (var k = 0; k < availableAudiencesDivs.length; ++k) {
@@ -100,11 +104,7 @@ $(document)
             function() {
                 dateChangedEvent($datepicker.datepicker("getDate"),
                     function() {
-                        var t = posToTime(lowerHourBound,
-                            upperHourBound,
-                            tdWidth,
-                            $("#slider-draggable").position().left);
-                        toggleActiveAudiences(t);
+                        toggleActiveAudiences();
                     });
             });
 
@@ -114,12 +114,18 @@ $(document)
 
         toggleWithCalendarMode();
 
-        $(".btn-goto-today").click(setDateToday);
+        $(".btn-goto-today").click(function() { setDateToday(toggleActiveAudiences); });
 
-        $(".btn-goto-now").click(bindDraggableSliderToNow);
+        $(".btn-goto-now")
+            .click(function() {
+                bindDraggableSliderToNow();
+                toggleActiveAudiences();
+            });
 
         checkSliderNowPosition();
 
         $(".room-proxy").mouseenter(onRoomProxyMouseEnter);
         $(".room-proxy").mouseleave(onRoomProxyMouseLeave);
+
+        setTimeout(toggleActiveAudiences, 300);
     });
