@@ -254,6 +254,16 @@
     <Content Include="Content\Images\audience-info-icons\icon-proect.png" />
     <Content Include="Content\Images\audience-info-icons\icon-table.png" />
     <Content Include="Content\Images\favicon.ico" />
+    <Content Include="Content\Images\line-details\line-details-einstein.png" />
+    <Content Include="Content\Images\line-details\line-details-empty.png" />
+    <Content Include="Content\Images\line-details\line-details-english.png" />
+    <Content Include="Content\Images\line-details\line-details-hr.png" />
+    <Content Include="Content\Images\line-details\line-details-info.png" />
+    <Content Include="Content\Images\line-details\line-details-newton.png" />
+    <Content Include="Content\Images\line-details\line-details-tesla.png" />
+    <Content Include="Content\Images\line-details\line-details-web-1.png" />
+    <Content Include="Content\Images\line-details\line-details-web-2.png" />
+    <Content Include="Content\Images\line-details\line-details-web-3.png" />
     <Content Include="Content\Images\private-event-bg.png" />
     <Content Include="Content\Images\schedule\today-active-bottom.png" />
     <Content Include="Content\Images\schedule\today-active-top.png" />
