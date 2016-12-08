@@ -1,6 +1,9 @@
 ﻿body {
-    padding-top: 50px;
-    padding-bottom: 20px;
+    padding: 50px 0 0 0;
+}
+html, body {
+    height: 100%;
+    margin: 0;
 }
 
 /* Set padding to keep content from hitting the edges */
@@ -23,10 +26,6 @@
 
 .navbar { background-color: #ffffff; }
 
-#map_canvas {
-    height: 400px;
-    width: 100%;
-}
 
 
 header {
@@ -35,6 +34,7 @@ header {
     position: fixed;
     top: 0;
     z-index: 1030;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
 }
 
 footer {
@@ -42,7 +42,10 @@ footer {
     border-top: 1px solid #D4D9E4;
     border-bottom-right-radius: 3px;
     border-bottom-left-radius: 3px;
-    width: 100%
+    width: 100%;
+    height: 130px;
+    position: absolute;
+    bottom: 0;
 }
 
 
@@ -83,5 +86,14 @@ footer {
 
 #navb .active {
     background-color: #F4F6FB;
-    border-bottom: 3px solid #F95752;     
+    border-bottom: 3px solid #F95752;
+}
+
+#page-wrapper {
+    height: 100%;
+    position: relative;
+}
+
+#page-content {
+    height: 100%;
 }

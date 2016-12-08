@@ -8,14 +8,13 @@
     <link rel="shortcut icon" href="@Url.Content("~/Content/Images/favicon.ico")" type="image/x-icon">
     <title>@ViewBag.Title</title>
     @Styles.Render("~/Content/css")
-    @Styles.Render("~/Content/home-page.css")
     @Styles.Render("~/Content/Site.css")
     @Scripts.Render("~/bundles/modernizr")
     @Styles.Render("~/Content/font-awesome/css/font-awesome.min.css")
     @RenderSection("styles", false)
 </head>
 <body>
-<div>
+<div id="page-wrapper">
     <header>
         <div class="page-container">
             <div class="navb">
@@ -41,9 +40,11 @@
         </div>
     </header>
 
-    @RenderBody()
+    <div id="page-content">
+        @RenderBody()
+    </div>
 
-    <footer class="panel-footer">
+    <footer>
         <div style="text-align: center;">
             <div class="logo-container">
                 <img src="@Url.Content("~/Content/Images/logo.png")"/>
