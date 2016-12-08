@@ -10,6 +10,7 @@
         WebAndMarketing3 = 5,
         English = 6,
         TeslaClassroom = 7,
-        NewtonClassroom = 8
+        NewtonClassroom = 8,
+        EmptyRoom = 9
     }
 }

@@ -85,7 +85,7 @@ namespace Booking.Models.Migrations
                     hours = random.Next(minimumHour, minimumHour + 3);
                     minutes = 30*random.Next(2);
 
-                    if (hours > (int) BookingHoursBoundsEnum.Upper)
+                    if (hours >= (int) BookingHoursBoundsEnum.Upper)
                     {
                         hours = (int) BookingHoursBoundsEnum.Lower;
                         j = 6;
@@ -125,6 +125,17 @@ namespace Booking.Models.Migrations
         {
             var audiences = new List<Audience>
             {
+                new Audience
+                {
+                    Id = AudiencesEnum.EmptyRoom,
+                    Name = "Empty",
+                    SeatsCount = 0,
+                    BoardsCount = 0,
+                    ProjectorsCount = 0,
+                    LaptopsCount = 0,
+                    PrintersCount = 0,
+                    IsBookingAvailable = false
+                },
                 new Audience
                 {
                     Id = AudiencesEnum.HrOffice,
