@@ -2,12 +2,55 @@
 @using Booking.Web.Localization
 @model Booking.Web.ViewModels.Event.DisplayEventViewModel
 
+@{
+    string routeImageName = "~/Content/Images/path/";
+    string classes = "";
+    
+    switch (Model.AudienceId)
+    {
+        case AudiencesEnum.EmptyRoom:
+            routeImageName += "path-empty.png";
+            break;
+        case AudiencesEnum.HrOffice:
+            routeImageName += "path-hr.png";
+            break;
+        case AudiencesEnum.EinsteinClassroom:
+            routeImageName += "path-einstein.png";
+            break;
+        case AudiencesEnum.English:
+            classes += "newton-tesla-english-top-fix";
+            routeImageName += "path-ienglish.png";
+            break;
+        case AudiencesEnum.TeslaClassroom:
+            routeImageName += "path-tesla.png";
+            classes += "newton-tesla-english-top-fix";
+            break;
+        case AudiencesEnum.NewtonClassroom:
+            routeImageName += "path-newton.png";
+            classes += "newton-tesla-english-top-fix";
+            break;
+        case AudiencesEnum.InfoCenter:
+            routeImageName += "path-info.png";
+            break;
+        case AudiencesEnum.WebAndMarketing1:
+            routeImageName += "path-web-1.png";
+            break;
+        case AudiencesEnum.WebAndMarketing2:
+            classes += "web-2-top-fix";
+            routeImageName += "path-web-2.png";
+            break;
+        case AudiencesEnum.WebAndMarketing3:
+            routeImageName += "path-web-3.png";
+            break;
+    }
+}
+
 <div class="page-container">
     <h2 style="text-align: center; margin-bottom: -60px; margin-top: 40px; z-index: 60">@Localization.Floor 10</h2>
     <div id="room-map-container">
         <img src="@Url.Content("~/Content/Images/walls.png")" style="position: relative; z-index: 50;"/>
 
-        <img id="route-img" src="@Url.Content("~/Content/Images/path/path-hr.png")"/>
+        <img id="route-img" class="@classes" src="@Url.Content(routeImageName)"/>
 
         <div class="room empty-room-pos @(Model.AudienceId == AudiencesEnum.EmptyRoom ? "room-active" : "room-not-available")">
             <div class="room-title">

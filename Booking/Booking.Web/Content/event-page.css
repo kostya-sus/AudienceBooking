@@ -1,5 +1,14 @@
 ﻿#route-img {
+    z-index:100;
     position: absolute;
     top: 210px;
     left: 22px;
+}
+
+.newton-tesla-english-top-fix {
+    top: 225px !important;
+}
+
+.web-2-top-fix {
+    top: 180px !important;
 }
