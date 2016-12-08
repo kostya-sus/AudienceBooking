@@ -8,10 +8,8 @@ function timestampIsBetween(time, left, right) {
     return timeMins > leftMins && timeMins < rightMins;
 }
 
-function toggleActiveAudiences(time) {
-    if (time === undefined || time === null) {
-        time = posToTime(lowerHourBound, upperHourBound, tdWidth, $("#slider-draggable").position().left);
-    }
+function toggleActiveAudiences() {
+    var time = posToTime(lowerHourBound, upperHourBound, tdWidth, $("#slider-draggable").position().left);
 
     var $div;
 
@@ -62,7 +60,7 @@ $(document)
                     var t = posToTime(lowerHourBound, upperHourBound, tdWidth, ui.position.left);
                     setDraggableSliderCaption(timeToStringHHMM(t));
                     checkSliderNowPosition();
-                    toggleActiveAudiences(t);
+                    toggleActiveAudiences();
                 },
                 stop: checkAndSetDraggableSliderPosition
             });

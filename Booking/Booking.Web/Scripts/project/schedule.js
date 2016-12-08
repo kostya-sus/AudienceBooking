@@ -145,7 +145,9 @@ function loadSchedule(date, loadedCallback) {
         .done(function(data) {
             refillSchedule(data.Items);
             events = data.Items;
-            loadedCallback();
+            if (typeof loadedCallback === "function") {
+                loadedCallback();
+            }
         });
 }
 
