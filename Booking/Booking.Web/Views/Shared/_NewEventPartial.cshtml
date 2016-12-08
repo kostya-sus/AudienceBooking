@@ -18,20 +18,23 @@
                         <td style="padding-left: 20px"><i onclick="NextMonth('month')" class="fa fa-caret-up" aria-hidden="true"></i></td>
                         <td style="padding-left: 26px"><i onclick="incrementHourValue('hourFrom')" class="fa fa-caret-up" aria-hidden="true"></i></td>
                         <td></td>
-                        <td style="padding-left: 6px"><i onclick="incrementMinuteValue('minuteFrom', 'hourFrom')" class="fa fa-caret-up" aria-hidden="true"></i></td>
+                        <td style="padding-left: 8px"><i onclick="incrementMinuteValue('minuteFrom', 'hourFrom')" class="fa fa-caret-up" aria-hidden="true"></i></td>
                         <td></td>
-                        <td style="padding-left: 6px"><i onclick="incrementHourValue('hourTo')" class="fa fa-caret-up" aria-hidden="true"></i></td>
+                        <td style="padding-left: 8px"><i onclick="incrementHourValue('hourTo')" class="fa fa-caret-up" aria-hidden="true"></i></td>
                         <td></td>
-                        <td style="padding-left: 4px"><i onclick="incrementMinuteValue('minuteTo', 'hourTo')" class="fa fa-caret-up" aria-hidden="true"></i></td>
+                        <td style="padding-left: 8px"><i onclick="incrementMinuteValue('minuteTo', 'hourTo')" class="fa fa-caret-up" aria-hidden="true"></i></td>
                     </tr>
                     <tr>
                         <td style="padding-left: 30px"><input disabled="disabled" id="day" min="1" max="31" type="number" /></td>
-                        <td style="padding-left: 12px"><input type="month" format="MM" id="month"/></td>
+                        <td style="padding-left: -1px">
+                            <input type="number" id="month"/>
+                            <input id="monthLabel" disabled="disabled" type="text"/>
+                        </td>
                         <td style="padding-left: 18px"><input disabled="disabled" id="hourFrom" min="0" max="23" type="number" /></td>
                         <td><span>:</span></td>
-                        <td style="padding-left: 2px"><input disabled="disabled" type="number" id="minuteFrom" onchange="if(parseInt(this.value,10)<10)this.value='0'+this.value;" /></td>
+                        <td><input disabled="disabled" type="number" id="minuteFrom" onchange="if(parseInt(this.value,10)<10)this.value='0'+this.value;" /></td>
                         <td><span>-</span></td>
-                        <td style="padding-left: 2px"><input disabled="disabled" id="hourTo" min="0" max="23" type="number" /></td>
+                        <td><input disabled="disabled" id="hourTo" min="0" max="23" type="number" /></td>
                         <td><span>:</span></td>
                         <td><input type="number" disabled="disabled" id="minuteTo"/></td>
                     </tr>
@@ -40,11 +43,11 @@
                         <td style="padding-left: 20px"><i onclick="PrevMonth('month')" class="fa fa-caret-down" aria-hidden="true"></i></td>
                         <td style="padding-left: 26px"><i onclick="decrementHourValue('hourFrom')" class="fa fa-caret-down" aria-hidden="true"></i></td>
                         <td></td>
-                        <td style="padding-left: 6px"><i onclick="decrementMinuteValue('minuteFrom', 'hourFrom')" class="fa fa-caret-down" aria-hidden="true"></i></td>
+                        <td style="padding-left: 8px"><i onclick="decrementMinuteValue('minuteFrom', 'hourFrom')" class="fa fa-caret-down" aria-hidden="true"></i></td>
                         <td></td>
-                        <td style="padding-left: 6px"><i onclick="decrementHourValue('hourTo')" class="fa fa-caret-down" aria-hidden="true"></i></td>
+                        <td style="padding-left: 8px"><i onclick="decrementHourValue('hourTo')" class="fa fa-caret-down" aria-hidden="true"></i></td>
                         <td></td>
-                        <td style="padding-left: 4px"><i onclick="decrementMinuteValue('minuteTo', 'hourTo')" class="fa fa-caret-down" aria-hidden="true"></i></td>
+                        <td style="padding-left: 8px"><i onclick="decrementMinuteValue('minuteTo', 'hourTo')" class="fa fa-caret-down" aria-hidden="true"></i></td>
                     </tr>
                 </table>
             </div>
@@ -95,11 +98,26 @@
                             <p>@Localization.OR</p>
                         </td>
                         <td style="padding-left: 20px">
-                            @Html.TextBoxFor(m => m.AuthorName, new { @class = "input-stile-org", placeholder = Localization.ShowOrganizer })
+                            @Html.TextBoxFor(m => m.AuthorName, new {@class = "input-stile-org", placeholder = Localization.ShowOrganizer})
                         </td>
                     </tr>
                 </table>
-                <input type="submit" class="btnCreate" value="@Localization.Create" />
+                <div>
+                    <div id="errorMessage">
+                        <table>
+                            <tr>
+                                <td><span style="font-size: 25px">&#9785;</span></td>
+                                <td style="padding-left: 10px">
+                                    <span>@Localization.ErrorMessageForNewEventPopup1</span>
+                                    <br/>
+                                    <span>@Localization.ErrorMessageForNewEventPopup2</span> 
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                    <input type="submit" class="btnCreate" value="@Localization.Create"/>
+                </div>
+                
             </div>
         </div>
     }

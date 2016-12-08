@@ -90,6 +90,7 @@ function NextMonth(id) {
     } else {
         value = 1;
     }
+    SetMonthName(value);
     document.getElementById(id.toString()).value = value;
 }
 
@@ -101,5 +102,45 @@ function PrevMonth(id) {
     } else {
         value = 12;
     }
+    SetMonthName(value);
     document.getElementById(id.toString()).value = value;
+}
+
+function SetMonthName(value) {
+    if (value === 1) {
+        document.getElementById('monthLabel').value = 'Января';
+    }
+    if (value === 2) {
+        document.getElementById('monthLabel').value = 'Февраля';
+    }
+    if (value === 3) {
+        document.getElementById('monthLabel').value = ' Марта';
+    }
+    if (value === 4) {
+        document.getElementById('monthLabel').value = 'Апреля';
+    }
+    if (value === 5) {
+        document.getElementById('monthLabel').value = '  Мая';
+    }
+    if (value === 6) {
+        document.getElementById('monthLabel').value = ' Июня';
+    }
+    if (value === 7) {
+        document.getElementById('monthLabel').value = ' Июля';
+    }
+    if (value === 8) {
+        document.getElementById('monthLabel').value = 'Августа';
+    }
+    if (value === 9) {
+        document.getElementById('monthLabel').value = 'Сентября';
+    }
+    if (value === 10) {
+        document.getElementById('monthLabel').value = 'Октября';
+    }
+    if (value === 11) {
+        document.getElementById('monthLabel').value = 'Ноября';
+    }
+    if (value === 12) {
+        document.getElementById('monthLabel').value = 'Декабря';
+    }
 }

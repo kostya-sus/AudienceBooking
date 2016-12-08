@@ -255,7 +255,8 @@ footer {
         background: #f95752;
         display: block;
         margin-top: 20px;
-        margin-left: 300px ;
+            float: right;
+    margin-right: 30px;
         min-width: 150px;
         height: 34px;
         border: 0 none;
@@ -307,10 +308,17 @@ footer {
         margin-left: 4px;
         width: 30px;
     }
-    #month {
+    #month {display: none;
         background: #FFF;
         border: 1px;
         width: 50px;
     }
-    ::-webkit-inner-spin-button { display: none; }
-::-webkit-calendar-picker-indicator { display: none; }
+    #monthLabel {
+        width: 64px;
+        border: 1px;
+        background: #FFF;
+    }
+    #errorMessage {
+            position: absolute;
+    padding-top: 15px;
+    }

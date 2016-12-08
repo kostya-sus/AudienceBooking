@@ -115,6 +115,24 @@ namespace Booking.Web.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Эта аудитория занята на выбранное.
+        /// </summary>
+        public static string ErrorMessageForNewEventPopup1 {
+            get {
+                return ResourceManager.GetString("ErrorMessageForNewEventPopup1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to время. Выберите, пожалуйста другое..
+        /// </summary>
+        public static string ErrorMessageForNewEventPopup2 {
+            get {
+                return ResourceManager.GetString("ErrorMessageForNewEventPopup2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Обратная связь.
         /// </summary>
         public static string Feedback {
@@ -171,10 +189,13 @@ namespace Booking.Web.Localization {
         /// <summary>
         ///   Looks up a localized string similar to Такой страницы не существует.
         /// </summary>
-        public static string NotFound404
-        {
-            get { return ResourceManager.GetString("NotFound404", resourceCulture); }
+        public static string NotFound404 {
+            get {
+                return ResourceManager.GetString("NotFound404", resourceCulture);
+            }
         }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Сейчас.
         /// </summary>
         public static string Now {
@@ -339,16 +360,9 @@ namespace Booking.Web.Localization {
         /// <summary>
         ///   Looks up a localized string similar to Что-то пошло не так.
         /// </summary>
-        public static string SomethingWentWrong
-        {
-            get { return ResourceManager.GetString("SomethingWentWrong", resourceCulture); }
-        }
-
-        ///   Looks up a localized string similar to Сегодня.
-        /// </summary>
-        public static string Today {
+        public static string SomethingWentWrong {
             get {
-                return ResourceManager.GetString("Today", resourceCulture);
+                return ResourceManager.GetString("SomethingWentWrong", resourceCulture);
             }
         }
         
@@ -358,6 +372,15 @@ namespace Booking.Web.Localization {
         public static string Title {
             get {
                 return ResourceManager.GetString("Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Сегодня.
+        /// </summary>
+        public static string Today {
+            get {
+                return ResourceManager.GetString("Today", resourceCulture);
             }
         }
         
