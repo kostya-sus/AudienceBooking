@@ -13,9 +13,3 @@ function onRoomProxyMouseLeave() {
     $("#" + targetDivId).removeClass("room-proxy-hover");
     $(".audience-info").remove();
 }
-
-$(document)
-    .ready(function() {
-        $(".room-proxy").mouseenter(onRoomProxyMouseEnter);
-        $(".room-proxy").mouseleave(onRoomProxyMouseLeave);
-    });

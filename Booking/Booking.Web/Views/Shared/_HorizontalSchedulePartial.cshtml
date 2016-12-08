@@ -36,7 +36,10 @@
                 @foreach (var pair in Model.AvailableAudiences)
                 {
                     <tr>
-                        <td id="audience-row-@pair.Key" data-row-index="@(i++)">@pair.Value</td>
+                        <td id="audience-row-@pair.Key" 
+                            class="audience-row" 
+                            data-audience-id="@pair.Key" 
+                            data-row-index="@(i++)">@pair.Value</td>
                     </tr>
                 }
             </table>
