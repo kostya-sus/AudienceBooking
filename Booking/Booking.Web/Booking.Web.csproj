@@ -237,6 +237,7 @@
     <Compile Include="ViewModels\Users\UsersViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\audience-info.css" />
     <Content Include="Content\bootstrap-datepicker.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
@@ -247,6 +248,11 @@
     <Content Include="Content\font-awesome\fonts\fontawesome-webfont.svg" />
     <Content Include="Content\form-inputs.css" />
     <Content Include="Content\home-page.css" />
+    <Content Include="Content\Images\audience-info-icons\icon-board.png" />
+    <Content Include="Content\Images\audience-info-icons\icon-laptop.png" />
+    <Content Include="Content\Images\audience-info-icons\icon-print.png" />
+    <Content Include="Content\Images\audience-info-icons\icon-proect.png" />
+    <Content Include="Content\Images\audience-info-icons\icon-table.png" />
     <Content Include="Content\Images\favicon.ico" />
     <Content Include="Content\Images\private-event-bg.png" />
     <Content Include="Content\Images\schedule\today-active-bottom.png" />
@@ -337,6 +343,7 @@
     </Content>
     <Content Include="Views\Error\Error.cshtml" />
     <Content Include="Views\Error\_ViewStart.cshtml" />
+    <Content Include="Views\Shared\_AudienceInfoPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
