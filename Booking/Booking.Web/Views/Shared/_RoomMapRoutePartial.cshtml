@@ -1,0 +1,72 @@
+﻿@using Booking.Enums
+@using Booking.Web.Localization
+@model Booking.Web.ViewModels.Event.DisplayEventViewModel
+
+<div class="page-container">
+    <h2 style="text-align: center; margin-bottom: -60px; margin-top: 40px; z-index: 60">@Localization.Floor 10</h2>
+    <div id="room-map-container">
+        <img src="@Url.Content("~/Content/Images/walls.png")" style="position: relative; z-index: 50;"/>
+
+        <img id="route-img" src="@Url.Content("~/Content/Images/path/path-hr.png")"/>
+
+        <div class="room empty-room-pos @(Model.AudienceId == AudiencesEnum.EmptyRoom ? "room-active" : "room-not-available")">
+            <div class="room-title">
+                <p>@Model.Audiences[AudiencesEnum.EmptyRoom].Name</p>
+            </div>
+        </div>
+
+        <div class="room hr-office-pos @(Model.AudienceId == AudiencesEnum.HrOffice ? "room-active" : "room-not-available")">
+            <div class="room-title">
+                <p>@Model.Audiences[AudiencesEnum.HrOffice].Name</p>
+            </div>
+        </div>
+
+        <div class="room einstein-classroom-pos @(Model.AudienceId == AudiencesEnum.EinsteinClassroom ? "room-active" : "room-not-available")">
+            <div class="room-title">
+                <p>@Model.Audiences[AudiencesEnum.EinsteinClassroom].Name</p>
+            </div>
+        </div>
+
+        <div class="room info-center-pos @(Model.AudienceId == AudiencesEnum.InfoCenter ? "room-active" : "room-not-available")">
+            <div class="room-title">
+                <p>@Model.Audiences[AudiencesEnum.InfoCenter].Name</p>
+            </div>
+        </div>
+
+        <div class="room web-and-marketing-1-pos @(Model.AudienceId == AudiencesEnum.WebAndMarketing1 ? "room-active" : "room-not-available")">
+            <div class="room-title">
+                <p>@Model.Audiences[AudiencesEnum.WebAndMarketing1].Name</p>
+            </div>
+        </div>
+
+        <div class="room web-and-marketing-2-pos @(Model.AudienceId == AudiencesEnum.WebAndMarketing2 ? "room-active" : "room-not-available")">
+            <div class="room-title">
+                <p>@Model.Audiences[AudiencesEnum.WebAndMarketing2].Name</p>
+            </div>
+        </div>
+
+        <div class="room web-and-marketing-3-pos @(Model.AudienceId == AudiencesEnum.WebAndMarketing3 ? "room-active" : "room-not-available")">
+            <div class="room-title">
+                <p>@Model.Audiences[AudiencesEnum.WebAndMarketing3].Name</p>
+            </div>
+        </div>
+
+        <div class="room english-room-pos @(Model.AudienceId == AudiencesEnum.English ? "room-active" : "room-not-available")">
+            <div class="room-title room-title-vertical">
+                <p>@Model.Audiences[AudiencesEnum.English].Name</p>
+            </div>
+        </div>
+
+        <div class="room tesla-classroom-pos @(Model.AudienceId == AudiencesEnum.TeslaClassroom ? "room-active" : "room-not-available")">
+            <div class="room-title">
+                <p>@Model.Audiences[AudiencesEnum.TeslaClassroom].Name</p>
+            </div>
+        </div>
+
+        <div class="room newton-classroom-pos @(Model.AudienceId == AudiencesEnum.NewtonClassroom ? "room-active" : "room-not-available")">
+            <div class="room-title">
+                <p>@Model.Audiences[AudiencesEnum.NewtonClassroom].Name</p>
+            </div>
+        </div>
+    </div>
+</div>

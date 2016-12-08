@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Security.Principal;
 using Booking.Models;
 
 namespace Booking.Services.Interfaces
@@ -9,12 +10,14 @@ namespace Booking.Services.Interfaces
 
         Event GetEvent(Guid id);
 
-        void CancelEvent(ApplicationUser editor, Guid eventId);
+        void CancelEvent(IPrincipal editor, Guid eventId);
 
-        void UpdateEvent(ApplicationUser editor, Event eventEntity);
+        void UpdateEvent(IPrincipal editor, Event eventEntity);
 
         void AddParticipant(string email, Guid eventId);
 
-        void RemoveParticipant(ApplicationUser editor, Guid participantId, Guid eventId);
+        void RemoveParticipant(IPrincipal editor, Guid participantId, Guid eventId);
+
+        bool CanEdit(IPrincipal user, Event eventEntity);
     }
 }

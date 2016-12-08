@@ -70,6 +70,7 @@
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <Compile Include="Services\AudienceService.cs" />
+    <Compile Include="Services\EmailNotificationService.cs" />
     <Compile Include="Services\EventService.cs" />
     <Compile Include="Services\ContactService.cs" />
     <Compile Include="Services\ScheduleService.cs" />

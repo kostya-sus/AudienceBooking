@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using System.Security.Principal;
 using Booking.Models;
 using Booking.Services.Interfaces;
 using Microsoft.AspNet.Identity;
@@ -37,6 +38,11 @@ namespace Booking.Services.Services
         public bool IsAdmin(ApplicationUser user)
         {
             return _userManager.IsInRole(user.Id, "Admin");
+        }
+
+        public bool IsAdmin(IPrincipal userPrincipal)
+        {
+            return userPrincipal.IsInRole("Admin");
         }
 
         public IEnumerable<string> GetAdminsEmails()

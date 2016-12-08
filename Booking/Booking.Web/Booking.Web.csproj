@@ -264,6 +264,16 @@
     <Content Include="Content\Images\line-details\line-details-web-1.png" />
     <Content Include="Content\Images\line-details\line-details-web-2.png" />
     <Content Include="Content\Images\line-details\line-details-web-3.png" />
+    <Content Include="Content\Images\path\path-einstein.png" />
+    <Content Include="Content\Images\path\path-empty.png" />
+    <Content Include="Content\Images\path\path-hr.png" />
+    <Content Include="Content\Images\path\path-ienglish.png" />
+    <Content Include="Content\Images\path\path-info.png" />
+    <Content Include="Content\Images\path\path-newton.png" />
+    <Content Include="Content\Images\path\path-tesla.png" />
+    <Content Include="Content\Images\path\path-web-1.png" />
+    <Content Include="Content\Images\path\path-web-2.png" />
+    <Content Include="Content\Images\path\path-web-3.png" />
     <Content Include="Content\Images\private-event-bg.png" />
     <Content Include="Content\Images\schedule\today-active-bottom.png" />
     <Content Include="Content\Images\schedule\today-active-top.png" />
@@ -356,11 +366,12 @@
     <Content Include="Views\Error\Error.cshtml" />
     <Content Include="Views\Error\_ViewStart.cshtml" />
     <Content Include="Views\Shared\_AudienceInfoPartial.cshtml" />
+    <Content Include="Views\Event\Index.cshtml" />
+    <Content Include="Views\Shared\_RoomMapRoutePartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Views\Audience\" />
-    <Folder Include="Views\Event\" />
     <Folder Include="Views\Profile\" />
     <Folder Include="Views\Users\" />
   </ItemGroup>

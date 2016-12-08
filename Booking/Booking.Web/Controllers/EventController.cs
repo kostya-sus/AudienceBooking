@@ -1,11 +1,30 @@
 ﻿using System;
+using System.Linq;
 using System.Web.Mvc;
+using Booking.Repositories;
+using Booking.Services.Interfaces;
+using Booking.Services.Services;
+using Booking.Web.Helpers;
+using Booking.Web.ViewModels.Audience;
 using Booking.Web.ViewModels.Event;
 
 namespace Booking.Web.Controllers
 {
+    [HandleException]
     public class EventController : Controller
     {
+        private readonly IEventService _eventService;
+        private readonly IAudienceService _audienceService;
+
+        public EventController()
+        {
+            var uof = new UnitOfWork();
+            _audienceService = new AudienceService(uof);
+            var usersService = new UsersService();
+            var emailNotificationService = new EmailNotificationService();
+            _eventService = new EventService(uof, usersService, emailNotificationService);
+        }
+
         [HttpGet]
         public ActionResult DisplayEventPopup(Guid eventId)
         {
@@ -15,7 +34,35 @@ namespace Booking.Web.Controllers
         [HttpGet]
         public ActionResult Index(Guid eventId)
         {
-            throw new NotImplementedException();
+            var eventEntity = _eventService.GetEvent(eventId);
+            var audiences = _audienceService.GetAllAudiences().ToList();
+
+            var audiencesVms = audiences.ToDictionary(
+                a => a.Id,
+                a => new AudienceMapItemVm
+                {
+                    Id = a.Id,
+                    IsAvailable = a.IsBookingAvailable,
+                    Name = a.Name
+                });
+
+            var vm = new DisplayEventViewModel
+            {
+                AudienceId = eventEntity.AudienceId,
+                Title = eventEntity.Title,
+                AdditionalInfo = eventEntity.AdditionalInfo,
+                Audiences = audiencesVms,
+                AuthorName = eventEntity.AuthorName,
+                CanEdit = _eventService.CanEdit(User, eventEntity),
+                Duration = eventEntity.Duration,
+                EventDateTime = eventEntity.EventDateTime,
+                Id = eventEntity.Id,
+                IsJoinAvailable = eventEntity.IsJoinAvailable,
+                ParticipantsCount = eventEntity.EventParticipants.Count,
+                ParticipantsEmails = eventEntity.EventParticipants.Select(x => x.ParticipantEmail)
+            };
+
+            return View(vm);
         }
 
         [HttpPost]

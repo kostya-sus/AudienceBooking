@@ -1,7 +1,10 @@
 ﻿using System;
+using System.Security.Principal;
 using Booking.Models;
 using Booking.Repositories.Interfaces;
 using Booking.Services.Interfaces;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace Booking.Services.Services
 {
@@ -30,11 +33,11 @@ namespace Booking.Services.Services
             return _unitOfWork.EventRepository.GetEventById(id);
         }
 
-        public void CancelEvent(ApplicationUser editor, Guid eventId)
+        public void CancelEvent(IPrincipal editor, Guid eventId)
         {
             var currentEvent = _unitOfWork.EventRepository.GetEventById(eventId);
 
-            if (_usersService.IsAdmin(editor) || editor.Id == currentEvent.AuthorId)
+            if (CanEdit(editor, currentEvent))
             {
                 _unitOfWork.EventRepository.DeleteEvent(currentEvent);
                 _emailNotificationService.EventCancelledAuthorNotification(currentEvent);
@@ -48,10 +51,10 @@ namespace Booking.Services.Services
             }
         }
 
-        public void UpdateEvent(ApplicationUser editor, Event eventEntity)
+        public void UpdateEvent(IPrincipal editor, Event eventEntity)
         {
             var oldEvent = _unitOfWork.EventRepository.GetEventById(eventEntity.Id);
-            if (_usersService.IsAdmin(editor) || editor.Id == oldEvent.AuthorId)
+            if (CanEdit(editor, oldEvent))
             {
                 _unitOfWork.EventRepository.UpdateEvent(eventEntity);
                 _emailNotificationService.EventEditedAuthorNotification(eventEntity, oldEvent);
@@ -88,11 +91,11 @@ namespace Booking.Services.Services
             }
         }
 
-        public void RemoveParticipant(ApplicationUser editor, Guid participantId, Guid eventId)
+        public void RemoveParticipant(IPrincipal editor, Guid participantId, Guid eventId)
         {
             var eventEntity = _unitOfWork.EventRepository.GetEventById(eventId);
 
-            if (_usersService.IsAdmin(editor) || editor.Id == eventEntity.AuthorId)
+            if (CanEdit(editor, eventEntity))
             {
                 var participant = _unitOfWork.EventParticipantRepository.GetEventParticipantById(participantId);
 
@@ -106,6 +109,15 @@ namespace Booking.Services.Services
             {
                 throw new InvalidOperationException(Resources.Resources.YouHaveNotRightsToRemoveParticipant);
             }
+        }
+
+        public bool CanEdit(IPrincipal userPrincipal, Event eventEntity)
+        {
+            if (!userPrincipal.Identity.IsAuthenticated) return false;
+
+            var userId = userPrincipal.Identity.GetUserId();
+
+            return (userId == eventEntity.AuthorId) || _usersService.IsAdmin(userPrincipal);
         }
     }
 }
