@@ -2,8 +2,53 @@
 
 <div class="audience-info-container">
     <img src="@Url.Content("~/Content/Images/audience-info-icons/icon-table.png")"/>
-    <img src="@Url.Content("~/Content/Images/audience-info-icons/icon-board.png")" />
-    <img src="@Url.Content("~/Content/Images/audience-info-icons/icon-laptop.png")" />
-    <img src="@Url.Content("~/Content/Images/audience-info-icons/icon-print.png")" />
-    <img src="@Url.Content("~/Content/Images/audience-info-icons/icon-proect.png")" />
+    <span>@Model.SeatsCount</span>
+
+    @if (Model.BoardsCount > 0)
+    {
+        <img src="@Url.Content("~/Content/Images/audience-info-icons/icon-board.png")"/>
+        if (Model.BoardsCount == 1)
+        {
+            <div class="space-filler"></div>
+        }
+        else
+        {
+            <span>@Model.BoardsCount</span>
+        }
+    }
+
+    @if (Model.LaptopsCount > 0)
+    {
+        <img src="@Url.Content("~/Content/Images/audience-info-icons/icon-laptop.png")"/>
+        if (Model.LaptopsCount == 1)
+        {
+            <div class="space-filler"></div>
+        }
+        else
+        {
+            <span>@Model.LaptopsCount</span>
+        }
+    }
+
+    @if (Model.PrintersCount > 0)
+    {
+        <img src="@Url.Content("~/Content/Images/audience-info-icons/icon-print.png")"/>
+        if (Model.PrintersCount == 1)
+        {
+            <div class="space-filler"></div>
+        }
+        else
+        {
+            <span>@Model.PrintersCount</span>
+        }
+    }
+
+    @if (Model.ProjectorsCount > 0)
+    {
+        <img src="@Url.Content("~/Content/Images/audience-info-icons/icon-proect.png")"/>
+        if (Model.ProjectorsCount > 1)
+        {
+            <span>@Model.ProjectorsCount</span>
+        }
+    }
 </div>
