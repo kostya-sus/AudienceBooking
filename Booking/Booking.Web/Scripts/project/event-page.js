@@ -15,6 +15,12 @@
                                     required: true,
                                     email: true
                                 }
+                            },
+                            submitHandler: function () {
+                                alert("success");
+                            },
+                            invalidHandler:function() {
+                                alert("error");
                             }
                         });
                 });

@@ -206,6 +206,11 @@
     padding: 3px 5px;
 }
 
+.schedule-event-item:hover {
+    text-decoration: none;
+    color: white;
+}
+
 .schedule-event-item-private {
     background-color: #F4F6FB;
     background-image: url(Images/private-event-bg.png);

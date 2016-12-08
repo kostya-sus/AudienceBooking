@@ -103,7 +103,7 @@ function refillSchedule(eventsList) {
     var $scheduleViewport = $("#schedule-viewport");
 
     eventsList.forEach(function(event) {
-        var $div = $("<div></div>");
+        var $scheduleItem = $("<a></a>");
         var date = parseMvcDate(event.EventDateTime);
 
         var startTime = timeToStringHHMM(date);
@@ -112,7 +112,10 @@ function refillSchedule(eventsList) {
         $time.addClass("event-item-time");
 
         if (!event.IsPublic) {
-            $div.addClass("schedule-event-item-private");
+            $scheduleItem.addClass("schedule-event-item-private");
+        } else {
+            var url = $("#redirect-to-event-url").val() + "?eventId=" + event.Id;
+            $scheduleItem.attr("href", url);
         }
 
         if (event.Duration > 40) {
@@ -120,22 +123,22 @@ function refillSchedule(eventsList) {
             $time.addClass("event-item-time-big");
             var $title = $("<div></div>").text(event.Title);
             $title.addClass("event-item-title");
-            $div.append($title);
+            $scheduleItem.append($title);
         } else {
             $time.text(startTime + " - " + endTime);
-            $div.addClass("event-item-small");
+            $scheduleItem.addClass("event-item-small");
         }
 
-        $div.append($time);
+        $scheduleItem.append($time);
 
-        $div.addClass("schedule-event-item");
-        $div.css("left", timeToPos(lowerHourBound, upperHourBound, tdWidth, date) + 1);
+        $scheduleItem.addClass("schedule-event-item");
+        $scheduleItem.css("left", timeToPos(lowerHourBound, upperHourBound, tdWidth, date) + 1);
         var ri = getRowIndex(event.AudienceId);
-        $div.css("top", thHeight + ri * tdHeight + 2);
-        $div.css("width", event.Duration * (tdWidth / 60.0) - 2);
-        $div.css("height", tdHeight - 2);
-        $.data($div, "event-id", event.Id);
-        $scheduleViewport.append($div);
+        $scheduleItem.css("top", thHeight + ri * tdHeight + 2);
+        $scheduleItem.css("width", event.Duration * (tdWidth / 60.0) - 2);
+        $scheduleItem.css("height", tdHeight - 2);
+        $.data($scheduleItem, "event-id", event.Id);
+        $scheduleViewport.append($scheduleItem);
     });
 }
 
