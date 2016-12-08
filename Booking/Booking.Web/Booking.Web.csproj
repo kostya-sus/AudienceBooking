@@ -296,6 +296,7 @@
     <Content Include="Content\Site.css" />
     <Content Include="Scripts\bootstrap-datepicker\js\bootstrap-datepicker.js" />
     <Content Include="Scripts\bootstrap-datepicker\locales\bootstrap-datepicker.ru.min.js" />
+    <Content Include="Scripts\event-page.js" />
     <Content Include="Scripts\project\home-scripts.js" />
     <Content Include="Scripts\project\room-map.js" />
     <Content Include="Scripts\bootstrap.js" />

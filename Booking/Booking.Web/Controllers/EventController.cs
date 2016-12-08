@@ -36,6 +36,7 @@ namespace Booking.Web.Controllers
         {
             var eventEntity = _eventService.GetEvent(eventId);
             var audiences = _audienceService.GetAllAudiences().ToList();
+            var authorName = eventEntity.IsAuthorShown ? eventEntity.Author.UserName : eventEntity.AuthorName;
 
             var audiencesVms = audiences.ToDictionary(
                 a => a.Id,
@@ -52,7 +53,7 @@ namespace Booking.Web.Controllers
                 Title = eventEntity.Title,
                 AdditionalInfo = eventEntity.AdditionalInfo,
                 Audiences = audiencesVms,
-                AuthorName = eventEntity.AuthorName,
+                AuthorName = authorName,
                 CanEdit = _eventService.CanEdit(User, eventEntity),
                 Duration = eventEntity.Duration,
                 EventDateTime = eventEntity.EventDateTime,

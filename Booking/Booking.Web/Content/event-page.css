@@ -12,3 +12,52 @@
 .web-2-top-fix {
     top: 180px !important;
 }
+
+.event-container {
+    background:white;
+    height:100%;
+    padding-top: 20px;
+    padding-bottom:50px;
+}
+
+.fa-user{
+    font-size:20px;
+}
+
+#author-name {
+    margin-left:5px;
+}
+
+#join-event-form{
+    display:inline-block;
+    padding-left:50px;
+}
+
+.email-input {
+    display:inline-block;
+    border: 2px solid #F4F6FB;
+    border-radius: 50px;
+    background: white;
+    margin: 0 auto;
+    outline: none;
+    height: 35px;
+    font-size: 13px;
+    padding: 15px;
+    width: 260px;
+}
+
+input[type="submit"] {
+    width:0;
+    visibility:hidden;
+}
+
+.fa-plus {
+    font-size: 18px;    
+    vertical-align: middle;
+    color:#9FA6B6;
+}
+
+.fa-plus:hover{
+    color:black;
+    cursor:pointer;
+}
