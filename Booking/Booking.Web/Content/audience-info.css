@@ -9,17 +9,27 @@
     border-style: solid;
     border-radius: 24px;
     display: inline-block;
-    left: 335px;
+    left: 33%;
     background-color: rgba(255,255,255,0.4);
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
     padding: 0 10px;
 }
 
 .audience-info-container img {
-    margin: 8px 4px 8px 10px;
+    margin: 8px 2px 8px 10px;
+}
+
+.audience-info-container span {
+    margin-right: 5px;
 }
 
 .space-filler {
     width: 10px;
     display: inline-block;
+}
+
+.line-details {
+    z-index: 80;
+    position: absolute;
+    bottom: 87px;
 }
