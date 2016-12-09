@@ -33,12 +33,12 @@
     padding-left:50px;
 }
 
-.email-input {
+#email {
     display:inline-block;
     border: 2px solid #F4F6FB;
     border-radius: 50px;
     background: white;
-    margin: 0 auto;
+    margin-left: 10px;
     outline: none;
     height: 35px;
     font-size: 13px;
@@ -52,6 +52,7 @@ input[type="submit"] {
 }
 
 .fa-plus {
+    visibility: hidden;
     font-size: 18px;    
     vertical-align: middle;
     color:#9FA6B6;
@@ -60,4 +61,18 @@ input[type="submit"] {
 .fa-plus:hover{
     color:black;
     cursor:pointer;
+}
+
+.join-event-container {
+    display: inline-block;
+}
+
+.validation-error {
+    display: block;
+    margin-left: 20px;
+    font-size: 11px;
+}
+
+.validation-error i {
+    color: #f95752;
 }

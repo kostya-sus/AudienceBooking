@@ -67,9 +67,11 @@ namespace Booking.Web.Controllers
         }
 
         [HttpPost]
-        public ActionResult Participate(string email)
+        [ValidateAntiForgeryToken]
+        public ActionResult Participate(JoinEventViewModel joinEventVm)
         {
-            throw new NotImplementedException();
+            _eventService.AddParticipant(joinEventVm.Email, joinEventVm.EventId);
+            return RedirectToAction("Index", new {eventId = joinEventVm.EventId});
         }
 
         [HttpGet]

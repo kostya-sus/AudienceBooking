@@ -4,24 +4,12 @@
             .click(function() {
                 $("input[type='submit']").click();
             });
+        var form = $("#join-event-form");
+        var validator = form.data("validator");
 
-        $(".email-input")
-            .on("change textInput input",
-                function() {
-                    $("#join-event-form")
-                        .validate({
-                            rules: {
-                                field: {
-                                    required: true,
-                                    email: true
-                                }
-                            },
-                            submitHandler: function () {
-                                alert("success");
-                            },
-                            invalidHandler:function() {
-                                alert("error");
-                            }
-                        });
-                });
+        validator.settings.showErrors = function() {
+            var visible = this.numberOfInvalids() === 0;
+            $(".fa-plus").css("visibility", visible ? "visible" : "hidden");
+            this.defaultShowErrors();
+        };
     });

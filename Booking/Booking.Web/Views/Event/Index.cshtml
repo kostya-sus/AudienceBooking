@@ -1,4 +1,5 @@
 ﻿@using Booking.Web.Localization
+@using Booking.Web.ViewModels.Event
 @model Booking.Web.ViewModels.Event.DisplayEventViewModel
 
 @{
@@ -19,8 +20,8 @@
     @Scripts.Render("//code.jquery.com/ui/1.12.1/jquery-ui.js")
     @Scripts.Render("~/Scripts/jquery.mapit.js")
     @Scripts.Render("~/Scripts/initializers.js")
+    @Scripts.Render("~/bundles/jqueryval")
     @Scripts.Render("~/Scripts/project/event-page.js")
-    @Scripts.Render("~/Scripts/jquery.validate.min.js")
 }
 
 <div class="event-container">
@@ -34,13 +35,7 @@
         @if (Model.IsJoinAvailable)
         {
             <span>@string.Format(Localization.EventPageParticipantsCount, Model.ParticipantsCount)</span>
-
-            <form id="join-event-form" action="@Url.Action("Participate", "Event")" method="post">
-                <span>@Localization.Join</span>
-                <input class="email-input" name="email" placeholder="@Localization.EnterEmailToJoin"/>
-                <i class="fa fa-plus" aria-hidden="true"></i>
-                <input type="submit"/>
-            </form>
+            @Html.Partial("_JoinEventPartial", new JoinEventViewModel {EventId = Model.Id})
         }
     </div>
 </div>
