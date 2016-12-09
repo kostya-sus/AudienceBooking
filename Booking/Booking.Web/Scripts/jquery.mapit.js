@@ -20,10 +20,9 @@
 
 	*/
 
+document.write('<scr' + 'ipt type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBNishPfXA954wyMzniSYEaBr7vMxqFPiY" ></scr' + 'ipt>');
 
-
-
-;(function($, window, undefined) {
+(function($, window, undefined) {
 	"use strict";
 	
 	$.fn.mapit = function(options) {
