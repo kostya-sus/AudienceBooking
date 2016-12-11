@@ -231,4 +231,7 @@
   <data name="EnterEmailToJoin" xml:space="preserve">
     <value>Укажите email, чтобы присоединится</value>
   </data>
+  <data name="RegisteredParticipants" xml:space="preserve">
+    <value>Зарегистрированные участники</value>
+  </data>
 </root>

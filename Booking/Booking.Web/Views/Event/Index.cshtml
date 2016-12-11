@@ -36,10 +36,33 @@
         {
             <span>@string.Format(Localization.EventPageParticipantsCount, Model.ParticipantsCount)</span>
             @Html.Partial("_JoinEventPartial", new JoinEventViewModel {EventId = Model.Id})
+            <br/>
+            if (Model.CanEdit)
+            {
+                <span>@Localization.RegisteredParticipants</span>
+                <ul>
+                    @foreach (var pair in Model.ParticipantsEmails)
+                    {
+                        <li class="participant-email-li col-md-4">
+                            <span>@pair.Value</span>
+                            <i class="fa fa-times" aria-hidden="true" data-form-id="#remove-participant-@pair.Key"></i>
+                            @using (Html.BeginForm("RemoveParticipant", "Event", new {participantId = pair.Key}, FormMethod.Post, new {@class = "remove-participant-form"}))
+                            {
+                                @Html.AntiForgeryToken()
+                                <input type="submit" value="submit" id="remove-participant-@pair.Key" class="remove-participant-submit"/>
+                            }
+                        </li>
+                    }
+                </ul>
+            }
         }
     </div>
 </div>
 
 @Html.Partial("_RoomMapRoutePartial", Model)
+
+<div class="buttons-container">
+
+</div>
 
 <div id="map_canvas"></div>

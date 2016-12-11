@@ -16,7 +16,7 @@ namespace Booking.Services.Interfaces
 
         void AddParticipant(string email, Guid eventId);
 
-        void RemoveParticipant(IPrincipal editor, Guid participantId, Guid eventId);
+        void RemoveParticipant(IPrincipal editor, Guid participantId);
 
         bool CanEdit(IPrincipal user, Event eventEntity);
     }

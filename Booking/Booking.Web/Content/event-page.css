@@ -1,40 +1,32 @@
 ﻿#route-img {
-    z-index:100;
+    z-index: 100;
     position: absolute;
     top: 210px;
     left: 22px;
 }
 
-.newton-tesla-english-top-fix {
-    top: 225px !important;
-}
+.newton-tesla-english-top-fix { top: 225px !important; }
 
-.web-2-top-fix {
-    top: 180px !important;
-}
+.web-2-top-fix { top: 180px !important; }
 
 .event-container {
-    background:white;
-    height:100%;
+    background: white;
+    height: 100%;
     padding-top: 20px;
-    padding-bottom:50px;
+    padding-bottom: 50px;
 }
 
-.fa-user{
-    font-size:20px;
-}
+.fa-user { font-size: 20px; }
 
-#author-name {
-    margin-left:5px;
-}
+#author-name { margin-left: 5px; }
 
-#join-event-form{
-    display:inline-block;
-    padding-left:50px;
+#join-event-form {
+    display: inline-block;
+    padding-left: 50px;
 }
 
 #email {
-    display:inline-block;
+    display: inline-block;
     border: 2px solid #F4F6FB;
     border-radius: 50px;
     background: white;
@@ -47,25 +39,32 @@
 }
 
 input[type="submit"] {
-    width:0;
-    visibility:hidden;
-}
-
-.fa-plus {
+    width: 0;
     visibility: hidden;
-    font-size: 18px;    
+}
+
+.fa-plus, .fa-times {
+    font-size: 18px;
     vertical-align: middle;
-    color:#9FA6B6;
+    color: #9FA6B6;
 }
 
-.fa-plus:hover{
-    color:black;
-    cursor:pointer;
+.fa-plus:hover, .fa-times:hover {
+    color: black;
+    cursor: pointer;
 }
 
-.join-event-container {
-    display: inline-block;
+.fa-plus.join-disabled:hover {
+    color: #9FA6B6 !important;
+    cursor: default !important;
 }
+
+.fa-times {
+    visibility: hidden;
+    font-size: 22px;
+}
+
+.join-event-container { display: inline-block; }
 
 .validation-error {
     display: block;
@@ -73,6 +72,23 @@ input[type="submit"] {
     font-size: 11px;
 }
 
-.validation-error i {
-    color: #f95752;
+.validation-error i { color: #f95752; }
+
+.participant-email-li {
+    font-size: 26px;
+    padding-left: 0;
+}
+
+.participant-email-li span { font-size: 14px; }
+
+.participant-email-li:hover { cursor: pointer; }
+
+.participant-email-li:hover .fa-times { visibility: visible; }
+
+.buttons-container { height: 150px; }
+
+.remove-participant-form, .remove-participant-submit {
+    display: inline;
+    height: 0;
+    visibility: hidden;
 }

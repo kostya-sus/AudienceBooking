@@ -27,7 +27,7 @@ namespace Booking.Web.ViewModels.Event
 
         public bool CanEdit { get; set; }
 
-        public IEnumerable<string> ParticipantsEmails { get; set; }
+        public IDictionary<Guid, string> ParticipantsEmails { get; set; }
 
         public IDictionary<AudiencesEnum, AudienceMapItemVm> Audiences { get; set; }
     }

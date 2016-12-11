@@ -277,6 +277,15 @@ namespace Booking.Web.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Зарегистрированные участники.
+        /// </summary>
+        public static string RegisteredParticipants {
+            get {
+                return ResourceManager.GetString("RegisteredParticipants", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Зарегистрироваться.
         /// </summary>
         public static string RegisterSubmit {

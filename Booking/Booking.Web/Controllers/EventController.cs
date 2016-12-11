@@ -47,6 +47,11 @@ namespace Booking.Web.Controllers
                     Name = a.Name
                 });
 
+            var participants = eventEntity.EventParticipants.ToDictionary(
+                a => a.Id,
+                a => a.ParticipantEmail
+                );
+
             var vm = new DisplayEventViewModel
             {
                 AudienceId = eventEntity.AudienceId,
@@ -60,7 +65,7 @@ namespace Booking.Web.Controllers
                 Id = eventEntity.Id,
                 IsJoinAvailable = eventEntity.IsJoinAvailable,
                 ParticipantsCount = eventEntity.EventParticipants.Count,
-                ParticipantsEmails = eventEntity.EventParticipants.Select(x => x.ParticipantEmail)
+                ParticipantsEmails = participants
             };
 
             return View(vm);
@@ -81,11 +86,13 @@ namespace Booking.Web.Controllers
             throw new NotImplementedException();
         }
 
-        [HttpDelete]
+        [HttpPost]
         [Authorize]
-        public ActionResult RemoveParticipant(string email)
+        [ValidateAntiForgeryToken]
+        public ActionResult RemoveParticipant(Guid participantId)
         {
-            throw new NotImplementedException();
+            _eventService.RemoveParticipant(User, participantId);
+            return Redirect(Request.UrlReferrer.ToString());
         }
 
         [HttpGet]

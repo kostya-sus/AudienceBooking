@@ -91,15 +91,15 @@ namespace Booking.Services.Services
             }
         }
 
-        public void RemoveParticipant(IPrincipal editor, Guid participantId, Guid eventId)
+        public void RemoveParticipant(IPrincipal editor, Guid participantId)
         {
-            var eventEntity = _unitOfWork.EventRepository.GetEventById(eventId);
+            var participant = _unitOfWork.EventParticipantRepository.GetEventParticipantById(participantId);
+            var eventEntity = _unitOfWork.EventRepository.GetEventById(participant.EventId);
 
             if (CanEdit(editor, eventEntity))
             {
-                var participant = _unitOfWork.EventParticipantRepository.GetEventParticipantById(participantId);
 
-                eventEntity.EventParticipants.Remove(participant);
+                _unitOfWork.EventParticipantRepository.DeleteEventParticipant(participant);
                 _unitOfWork.Save();
 
                 _emailNotificationService.RemovedFromParticipantsListNotification(participant.ParticipantEmail,
