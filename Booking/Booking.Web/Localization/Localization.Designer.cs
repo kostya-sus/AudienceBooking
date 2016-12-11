@@ -178,6 +178,15 @@ namespace Booking.Web.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to &lt;i class=&quot;fa fa-user&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;.
+        /// </summary>
+        public static string IconUser {
+            get {
+                return ResourceManager.GetString("IconUser", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Неверные данные.
         /// </summary>
         public static string InvalidLoginAttempt_Message {
@@ -250,11 +259,47 @@ namespace Booking.Web.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Новый пароль.
+        /// </summary>
+        public static string PasswordNew {
+            get {
+                return ResourceManager.GetString("PasswordNew", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Повторить новый пароль.
+        /// </summary>
+        public static string PasswordNewRepeat {
+            get {
+                return ResourceManager.GetString("PasswordNewRepeat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Старый пароль.
+        /// </summary>
+        public static string PasswordOld {
+            get {
+                return ResourceManager.GetString("PasswordOld", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Пароль.
         /// </summary>
         public static string PasswordPlaceholder {
             get {
                 return ResourceManager.GetString("PasswordPlaceholder", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &lt;i class=&quot;fa fa-check-circle&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt; Пароль успешно изменен.
+        /// </summary>
+        public static string PasswordSucsess {
+            get {
+                return ResourceManager.GetString("PasswordSucsess", resourceCulture);
             }
         }
         
@@ -327,6 +372,15 @@ namespace Booking.Web.Localization {
         public static string ResetPassword {
             get {
                 return ResourceManager.GetString("ResetPassword", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Сохранить.
+        /// </summary>
+        public static string Save {
+            get {
+                return ResourceManager.GetString("Save", resourceCulture);
             }
         }
         

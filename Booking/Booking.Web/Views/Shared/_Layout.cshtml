@@ -1,4 +1,5 @@
 ﻿@using Booking.Web.Localization;
+@using Microsoft.AspNet.Identity
 
 <!DOCTYPE html>
 <html>
@@ -26,8 +27,24 @@
                             </a>
                         </div>
                     </li>
+                    @if (User.IsInRole("Admin"))
+                    {
+                        <li class="@(ViewBag.ActiveLink == "Users" ? "active" : "")">
+                            @Html.ActionLink(@Localization.Feedback, "Index", "Users")
+                        </li>
+                    }
                     <li class="@(ViewBag.ActiveLink == "Login" ? "active" : "")">
-                        @Html.ActionLink(@Localization.Login, "Login", "Account")
+                        @if (User.Identity.IsAuthenticated)
+                        {
+                            <li>
+                                <a href="@Url.Action("Index", "Profile")">
+                                    <i class="fa fa-user" aria-hidden="true"></i> @User.Identity.Name</a>
+                            </li>
+                        }
+                        else
+                        {
+                            @Html.ActionLink(@Localization.Login, "Login", "Account")
+                        }
                     </li>
                     <li class="@(ViewBag.ActiveLink == "Contact" ? "active" : "")">
                         @Html.ActionLink(@Localization.Feedback, "Index", "Contact")

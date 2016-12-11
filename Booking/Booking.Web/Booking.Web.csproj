@@ -372,12 +372,12 @@
     <Content Include="Views\Event\Index.cshtml" />
     <Content Include="Views\Shared\_RoomMapRoutePartial.cshtml" />
     <Content Include="Views\Shared\_JoinEventPartial.cshtml" />
+    <Content Include="Views\Profile\Profile.cshtml" />
+    <Content Include="Views\Users\Users.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Views\Audience\" />
-    <Folder Include="Views\Profile\" />
-    <Folder Include="Views\Users\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

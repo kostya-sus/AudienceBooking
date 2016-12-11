@@ -231,4 +231,22 @@
   <data name="EnterEmailToJoin" xml:space="preserve">
     <value>Укажите email, чтобы присоединится</value>
   </data>
+  <data name="IconUser" xml:space="preserve">
+    <value>&lt;i class="fa fa-user" aria-hidden="true"&gt;&lt;/i&gt;</value>
+  </data>
+  <data name="PasswordSucsess" xml:space="preserve">
+    <value>&lt;i class="fa fa-check-circle" aria-hidden="true"&gt;&lt;/i&gt; Пароль успешно изменен</value>
+  </data>
+  <data name="PasswordNew" xml:space="preserve">
+    <value>Новый пароль</value>
+  </data>
+  <data name="PasswordNewRepeat" xml:space="preserve">
+    <value>Повторить новый пароль</value>
+  </data>
+  <data name="PasswordOld" xml:space="preserve">
+    <value>Старый пароль</value>
+  </data>
+  <data name="Save" xml:space="preserve">
+    <value>Сохранить</value>
+  </data>
 </root>

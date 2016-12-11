@@ -11,7 +11,7 @@ namespace Booking.Services.Services
 {
     public class ContactService 
     {
-        public static bool SendMessage(string name, string surname, string email, string text)
+        public static void SendMessage(string name, string surname, string email, string text)
         {
             MailAddress from = new MailAddress(email);
             MailAddress to = new MailAddress("audiencebookingtest@gmail.com");
@@ -43,8 +43,7 @@ namespace Booking.Services.Services
                 }
                     
             }
-
-            return true;
+           
         }
         
     }

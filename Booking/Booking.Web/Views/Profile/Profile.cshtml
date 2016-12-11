@@ -1,0 +1,75 @@
+﻿@using Booking.Web.Localization
+
+@{
+    ViewBag.Title = "Profile";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.ActiveLink = "Login";
+}
+
+<h2>Profile</h2>
+<div>
+    <div>
+        <div style="width: 100%; float: right">
+            <input type="submit" disabled="disabled" value=@Localization.Send class="login-submit"/>
+        </div>
+        <div>
+            <div>
+                <div style="width: 50%; display: inline-block">
+                    @Html.ValidationMessageFor(m => m.Password, "", new {@class = "validation-error"})
+                    @Html.TextBoxFor(m => m.Password, new {@class = "login-input", placeholder = Localization.PasswordPlaceholder})
+                </div>
+                <div style="width: 50%; display: inline-block">
+                    @Html.ValidationMessageFor(m => m.Password, "", new {@class = "validation-error"})
+                    @Html.TextBoxFor(m => m.Password, new {@class = "login-input", placeholder = Localization.PasswordPlaceholder})
+                </div>
+            </div>
+        </div>
+        <div>
+            <div>
+                <div style="width: 50%; display: inline-block">
+                    @Html.ValidationMessageFor(m => m.Password, "", new {@class = "validation-error"})
+                    @Html.TextBoxFor(m => m.Password, new {@class = "login-input", placeholder = Localization.PasswordPlaceholder})
+                </div>
+                <div style="width: 50%; display: inline-block">
+                    @Html.ValidationMessageFor(m => m.Password, "", new {@class = "validation-error"})
+                    @Html.TextBoxFor(m => m.Password, new {@class = "login-input", placeholder = Localization.PasswordPlaceholder})
+                </div>
+                <div style="width: 49%; display: inline-block">
+                    @Html.ValidationMessageFor(m => m.Password, "", new {@class = "validation-error"})
+                    @Html.TextBoxFor(m => m.Password, new {@class = "login-input", placeholder = Localization.PasswordPlaceholder})
+                </div>
+                <div style="width: 100%;">
+                    <input type="submit" disabled="disabled" value=@Localization.Send class="login-submit"/>
+                </div>
+               
+                
+                @using (Html.BeginForm("Index", "Profile", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @id = "Login", role = "form" }))
+                {
+                    <div>
+                        @Html.ValidationMessageFor(m => m.Password, "", new {@class = "validation-error"})
+                        @Html.TextBoxFor(m => m.PasswordOld, new {placeholder = @Localization.PasswordOld, @id = "oldPassword", type = "password"})
+                    </div>
+                    <div>
+                        @Html.ValidationMessageFor(m => m.Password, "", new { @class = "validation-error" })
+                        @Html.TextBoxFor(m => m.PasswordNew, new { placeholder = @Localization.PasswordNew, @id = "newPassword", type = "password" })
+                    </div>
+                    <div>
+                        @Html.ValidationMessageFor(m => m.Password, "", new { @class = "validation-error" })
+                        @Html.TextBoxFor(m => m.PasswordNewRepeat, new { placeholder = @Localization.PasswordNewRepeat, @id = "confirmNewPassword", type = "password" })
+                    </div>
+                    <input type="submit" disabled="disabled" value=@Localization.Send class="login-submit" />
+
+                    if (ViewData["PasswordSuccess"] != null)
+                    {
+                     <span>@Localization.PasswordSucsess</span>
+                    }
+
+                }
+
+                
+
+            </div>
+        </div>
+    </div>
+</div>
+

@@ -9,7 +9,7 @@ namespace Booking.Web.Controllers
         [HttpGet]
         public ActionResult Index(string userId)
         {
-            throw new NotImplementedException();
+            return View();
         }
 
         [HttpGet]
