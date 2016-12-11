@@ -17,9 +17,45 @@ $(document).ready(function () {
         var eventUrl = $("#get-new-event-popup-url").val();
         $("#new-event-popup").load(eventUrl,
             function () {
+                for (var i = 0;  i< 12; i++) {
+                    incrementHourValue('hourFrom');
+                    incrementHourValue('hourTo');
+                }
+                incrementDayValue('day');
+                incrementMinuteValue('minuteFrom');
+                incrementMinuteValue('minuteTo');
+                NextMonth('month');
+
+                $("#new-event-popup .fa-caret-down, #new-event-popup .fa-caret-up").click(checkIfAudienceIsFree);
             });
     });
 });
+
+function checkIfAudienceIsFree() {
+    var audienceId = document.getElementById("ChosenAudience").value;
+
+    var day = document.getElementById('day').value;
+    var month = document.getElementById('month').value - 1;
+    var hourFrom = document.getElementById('hourFrom').value;
+    var minuteFrom = document.getElementById('minuteFrom').value;
+    var hourTo = document.getElementById('hourTo').value;
+    var minuteTo = document.getElementById('minuteTo').value;
+
+    var dateNow = Date.now();
+
+    var dateEvent = new Date(dateNow.year, month, day, hourFrom, minuteFrom);
+    var endEventDate = new Date(dateNow.year, month, day, hourTo, minuteTo);
+    var duration = endEventDate - dateEvent;
+    duration = duration.getTime / 60000;
+
+    var url = $("#audience-is-free-url").val() + "?audienceId=" + audienceId +
+        "&dateTime=" + dateEvent.toLocaleDateString() + "&duration=" + duration;
+    
+    $.getJSON(url)
+        .done(function (isFree) {
+            toggleIsFreeMessage(isFree);
+        });
+}
 
 
 function incrementDayValue(id) {
@@ -143,4 +179,8 @@ function SetMonthName(value) {
     if (value === 12) {
         document.getElementById('monthLabel').value = 'Декабря';
     }
+}
+
+function toggleIsFreeMessage(isFree) {
+    $("#errorMessage").css("visibility", isFree);
 }

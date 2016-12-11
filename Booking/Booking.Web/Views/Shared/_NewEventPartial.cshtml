@@ -1,6 +1,9 @@
 ﻿@using Booking.Web.Localization
 @model Booking.Web.ViewModels.Event.CreateEditEventViewModel
-    @using (Html.BeginForm("Create", "Event", FormMethod.Post))
+    @using (Ajax.BeginForm("Create","Event", new AjaxOptions
+    {
+        InsertionMode = InsertionMode.Replace
+    }))
     {
         @Html.AntiForgeryToken()
 
@@ -25,18 +28,28 @@
                         <td style="padding-left: 8px"><i onclick="incrementMinuteValue('minuteTo', 'hourTo')" class="fa fa-caret-up" aria-hidden="true"></i></td>
                     </tr>
                     <tr>
-                        <td style="padding-left: 30px"><input disabled="disabled" id="day" min="1" max="31" type="number" /></td>
+                        <td style="padding-left: 30px">
+                            <input disabled="disabled" id="day" min="1" max="31" type="number" value="@Model.EventDay"/>
+                        </td>
                         <td style="padding-left: -1px">
-                            <input type="number" id="month"/>
+                            <input type="number" id="month" value="@Model.EventMonth"/>
                             <input id="monthLabel" disabled="disabled" type="text"/>
                         </td>
-                        <td style="padding-left: 18px"><input disabled="disabled" id="hourFrom" min="0" max="23" type="number" /></td>
+                        <td style="padding-left: 18px">
+                            <input disabled="disabled" id="hourFrom" type="number" value="@Model.StartHour"/>
+                        </td>
                         <td><span>:</span></td>
-                        <td><input disabled="disabled" type="number" id="minuteFrom" onchange="if(parseInt(this.value,10)<10)this.value='0'+this.value;" /></td>
+                        <td>
+                            <input disabled="disabled" type="number" id="minuteFrom" value="@Model.StartMinute"/>
+                        </td>
                         <td><span>-</span></td>
-                        <td><input disabled="disabled" id="hourTo" min="0" max="23" type="number" /></td>
+                        <td>
+                            <input disabled="disabled" id="hourTo" type="number" value="@Model.EndHour"/>
+                        </td>
                         <td><span>:</span></td>
-                        <td><input type="number" disabled="disabled" id="minuteTo"/></td>
+                        <td>
+                            <input type="number" disabled="disabled" id="minuteTo" value="@Model.EndMinute"/>
+                        </td>
                     </tr>
                     <tr>
                         <td style="padding-left: 34px"><i onclick="decrementDayValue('day')" class="fa fa-caret-down" aria-hidden="true"></i></td>
@@ -54,32 +67,35 @@
             <div class="line">
                 <span>@Localization.Where</span>
                 @Html.DropDownListFor(m => m.ChosenAudience, new SelectList(Model.AvailableAudiences,
-                               "Key", "Value"), new { @class = "select-style" })
+                    "Key", "Value"), new {@class = "select-style"})
 
             </div>
             <div class="line">
-                @Html.TextBoxFor(m => m.Title, new { @class = "input-style", placeholder = Localization.Title })
+                @Html.TextBoxFor(m => m.Title, new {@class = "input-style", placeholder = Localization.Title})
             </div>
             <div class="line">
-                @Html.TextAreaFor(m => m.AdditionalInfo, new { @class = "textarea", placeholder = Localization.AdditionalInformation })
+                @Html.TextAreaFor(m => m.AdditionalInfo, new {@class = "textarea", placeholder = Localization.AdditionalInformation})
             </div>
             <div class="line">
                 <table>
                     <tr>
                         <td id="td-style">
-                            @Html.CheckBoxFor(m => m.IsJoinAvailable)
+                            <input type="checkbox" class="whiteCheckbox" id="whiteCheckbox1" value="@Model.IsJoinAvailable"/>
+                            <label for="whiteCheckbox1"></label>
                         </td>
-                        <td style="padding-top:10px"><p>@Localization.RegistrationTo</p></td>
-                        <td style="padding-top:10px; padding-left: 70px;">
+                        <td style="padding-top: 10px">
+                            <p>@Localization.RegistrationTo</p></td>
+                        <td style="padding-top: 10px; padding-left: 70px;">
                             <p id="public" class="public">
                                 @Localization.Public
                             </p>
                         </td>
                         <td style="padding-top: 10px">
-                            @Html.CheckBoxFor(m => m.IsPublic, new { @id = "checkboxRed", onclick = "hasTickedBox()" })
+
+                            @Html.CheckBoxFor(m => m.IsPublic, new {@id = "checkboxRed", onclick = "hasTickedBox()"})
                             <label for="checkboxRed"></label>
                         </td>
-                        <td style="padding-top:10px">
+                        <td style="padding-top: 10px">
                             <p id="private" class="private">
                                 @Localization.Private
                             </p>
@@ -89,7 +105,8 @@
                 <table>
                     <tr>
                         <td id="td-style">
-                            @Html.CheckBoxFor(m => m.IsAuthorShown)
+                            <input type="checkbox" class="whiteCheckbox" id="whiteCheckbox2" name="registr" value="@Model.IsAuthorShown"/>
+                            <label for="whiteCheckbox2"></label>
                         </td>
                         <td style="padding-top: 10px">
                             <p>@Localization.ShowAuthor</p>
@@ -102,6 +119,7 @@
                         </td>
                     </tr>
                 </table>
+                <input type="hidden" id="audience-is-free-url" value="@Url.Action("IsFree", "Audience")"/>
                 <div>
                     <div id="errorMessage">
                         <table>
@@ -117,7 +135,7 @@
                     </div>
                     <input type="submit" class="btnCreate" value="@Localization.Create"/>
                 </div>
-                
+
             </div>
         </div>
     }

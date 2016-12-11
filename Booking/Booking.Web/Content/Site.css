@@ -176,11 +176,11 @@ footer {
     height: 25px;
     width: 25px;
 }
-       .whiteCheckbox1 {
+       .whiteCheckbox {
     	position:absolute; z-index:-1000; left:-1000px; overflow: hidden; clip: rect(0 0 0 0); height:1px; width:1px; margin:-1px; padding:0; border:0;
     }
     
-    .whiteCheckbox1 + label {
+    .whiteCheckbox + label {
     	padding-left:35px;
     	height:30px; 
     	display:inline-block;
@@ -192,7 +192,7 @@ footer {
     	cursor:pointer;
     }
     
-    .whiteCheckbox1:checked + label {
+    .whiteCheckbox:checked + label {
     	background-position: 0 -30px;
     }
     [for="whiteCheckbox1"] {
@@ -255,8 +255,8 @@ footer {
         background: #f95752;
         display: block;
         margin-top: 20px;
-            float: right;
-    margin-right: 30px;
+        float: right;
+        margin-right: 30px;
         min-width: 150px;
         height: 34px;
         border: 0 none;
@@ -320,5 +320,6 @@ footer {
     }
     #errorMessage {
             position: absolute;
-    padding-top: 15px;
+         padding-top: 15px;
+        visibility: hidden;
     }

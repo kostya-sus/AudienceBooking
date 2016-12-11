@@ -32,7 +32,7 @@ namespace Booking.Web.ViewModels.Event
 
         public bool IsPublic { get; set; }
 
-        public IDictionary<AudiencesEnum, string> AvailableAudiences { get; set; }
+        public IDictionary<int, string> AvailableAudiences { get; set; }
 
         public AudiencesEnum ChosenAudience { get; set; }
 

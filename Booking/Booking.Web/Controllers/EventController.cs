@@ -41,7 +41,7 @@ namespace Booking.Web.Controllers
         public ActionResult GetNewEventPopup()
         {
             var audiences = _audienceService.GetAllAudiences().ToList();
-            var availableAudiences = audiences.Where(a => a.IsBookingAvailable).ToDictionary(a => a.Id, a => a.Name);
+            var availableAudiences = audiences.Where(a => a.IsBookingAvailable).ToDictionary(a => (int)a.Id, a => a.Name);
 
             var viewModel = new CreateEditEventViewModel
             {
@@ -69,11 +69,14 @@ namespace Booking.Web.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create(CreateEditEventViewModel createEditEventViewModel)
         {
+            var audiences = _audienceService.GetAllAudiences().ToList();
+            var availableAudiences = audiences.Where(a => a.IsBookingAvailable).ToDictionary(a => (int)a.Id, a => a.Name);
+            createEditEventViewModel.AvailableAudiences = availableAudiences;
             if (!ModelState.IsValid)
             {
-                return View("_NewEventPartial", createEditEventViewModel);
+                return PartialView("_NewEventPartial", createEditEventViewModel);
             }
-            return View("_NewEventPartial", createEditEventViewModel);
+            return PartialView("_NewEventPartial", createEditEventViewModel);
         }
 
         [HttpDelete]

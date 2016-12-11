@@ -1,11 +1,23 @@
 ﻿using System;
 using System.Web.Mvc;
+using Booking.Enums;
+using Booking.Repositories;
+using Booking.Services.Interfaces;
+using Booking.Services.Services;
 using Booking.Web.ViewModels.Audience;
 
 namespace Booking.Web.Controllers
 {
     public class AudienceController : Controller
     {
+        private readonly IAudienceService _audienceService;
+
+        public AudienceController()
+        {
+            var uof = new UnitOfWork();
+            _audienceService = new AudienceService(uof);
+        }
+
         [HttpGet]
         public ActionResult Index(int audienceId)
         {
@@ -25,9 +37,10 @@ namespace Booking.Web.Controllers
         }
 
         [HttpGet]
-        public ActionResult IsFree(int audienceId, DateTime dateTime, int duration)
+        public ActionResult IsFree(AudiencesEnum audienceId, DateTime dateTime, int duration)
         {
-            throw new NotImplementedException();
+            var isFree = _audienceService.IsFree(audienceId, dateTime, duration);
+            return Content(isFree.ToString());
         }
 
         [HttpPost]
