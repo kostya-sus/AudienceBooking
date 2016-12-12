@@ -53,7 +53,7 @@
                     </td>
                     <td style="padding-left: 18px">
                         @Html.HiddenFor(m => m.StartHour)
-                        <input id="labelStartHour" , disabled="disabled" , type="number"/>
+                        <input id="labelStartHour" disabled="disabled" type="number"/>
                         @* @Html.EditorFor(m => m.StartHour, new {disabled = "disabled", @readonly = "readonly"})*@
                     </td>
                     <td>
@@ -119,8 +119,10 @@
             <table>
                 <tr>
                     <td id="td-style">
-                        <input type="checkbox" class="whiteCheckbox" id="whiteCheckbox1" value="@Model.IsJoinAvailable"/>
-                        <label for="whiteCheckbox1"></label>
+                        <div class="checkboxFive">
+                            <input type="checkbox" value="@Model.IsJoinAvailable" id="IsJoinAvailable" name="" />
+                            <label for="IsJoinAvailable"></label>
+                        </div>
                     </td>
                     <td style="padding-top: 10px">
                         <p>@Localization.RegistrationTo</p>
@@ -145,8 +147,12 @@
             <table>
                 <tr>
                     <td id="td-style">
-                        <input type="checkbox" class="whiteCheckbox" id="whiteCheckbox2" name="registr" value="@Model.IsAuthorShown"/>
-                        <label for="whiteCheckbox2"></label>
+                        <div class="checkboxFive">
+                            <input type="checkbox" value="@Model.IsAuthorShown" id="IsAuthorShow" name="" />
+                            <label for="IsAuthorShow"></label>
+                        </div>
+                        @*<input type="checkbox" class="whiteCheckbox" id="whiteCheckbox2" name="registr" value="@Model.IsAuthorShown"/>
+                        <label for="whiteCheckbox2"></label>*@
                     </td>
                     <td style="padding-top: 10px">
                         <p>@Localization.ShowAuthor</p>

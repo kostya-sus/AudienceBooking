@@ -10,7 +10,7 @@
 };
 
 var ajaxSuccess = function () {
-    alert('this is ajaxSuccess');
+    $('modalHiden').modal('hide');
 }
 $(document)
     .ready(function() {
@@ -25,7 +25,7 @@ $(document)
                                 incrementHourValue('EndHour');
                             }
                             incrementDayValue('EventDay', 'labelDay');
-                            incrementMinuteValue('StartMinute');
+                            incrementMinuteValue('StartMinute', 'StartHour');
                             incrementMinuteValue('EndMinute');
                             NextMonth('EventMonth');
 
@@ -139,7 +139,7 @@ function incrementMinuteValue(idMinute, idHour) {
 }
 
 function decrementMinuteValue(idMinute, idHour) {
-    var value = parseInt(document.getElementById(idMinute.toString()).value);
+    var value = parseInt(document.getElementById(idMinute).value);
     value = isNaN(value) ? 30 : value;
     if (value === 0) {
         value = 55;
