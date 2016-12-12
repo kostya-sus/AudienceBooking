@@ -11,6 +11,8 @@ namespace Booking.Web.ViewModels.Event
 
         public AudiencesEnum AudienceId { get; set; }
 
+        public string AudienceName { get; set; }
+
         public DateTime EventDateTime { get; set; }
 
         public int Duration { get; set; }

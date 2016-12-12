@@ -85,11 +85,6 @@ input[type="submit"] {
 
 .participant-email-li:hover .fa-times { visibility: visible; }
 
-.buttons-container {
-    height: 150px;
-    background-color: white;
-}
-
 .remove-participant-form, .remove-participant-submit {
     display: inline;
     height: 0;
@@ -166,4 +161,39 @@ p { margin-top: 20px; }
 #edit-buttons-container button:hover {
     background-color: #828a9d;
     color: white;
+}
+
+
+.buttons-container {
+    height: 200px;
+    background-color: white;
+    padding: 0 200px;
+}
+
+.link-btn-container {
+    align-self: center;
+    display: inline-block;
+    width: 200px;
+    margin-top: 50px;
+    text-align: center;
+    height: 120px;
+}
+
+.btn-squares {
+    width: 100px;
+    margin-left: 50px;
+    margin-right: 50px;
+}
+
+.square {
+    border-radius: 3px;
+    display: inline-block;
+    background: black;
+    margin: 2px;
+    height: 30px;
+    width: 30px;
+}
+
+.square-red {
+    background: #f95752;
 }

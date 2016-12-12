@@ -240,4 +240,10 @@
   <data name="Edit" xml:space="preserve">
     <value>Изменить</value>
   </data>
+  <data name="AllAudiencesSchedule" xml:space="preserve">
+    <value>Расписание всех аудиторий</value>
+  </data>
+  <data name="AudienceSchedule" xml:space="preserve">
+    <value>Расписание аудитории</value>
+  </data>
 </root>

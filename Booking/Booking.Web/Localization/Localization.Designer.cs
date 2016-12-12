@@ -70,6 +70,24 @@ namespace Booking.Web.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Расписание всех аудиторий.
+        /// </summary>
+        public static string AllAudiencesSchedule {
+            get {
+                return ResourceManager.GetString("AllAudiencesSchedule", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Расписание аудитории.
+        /// </summary>
+        public static string AudienceSchedule {
+            get {
+                return ResourceManager.GetString("AudienceSchedule", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Отменить.
         /// </summary>
         public static string Cancel {

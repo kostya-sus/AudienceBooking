@@ -52,9 +52,12 @@ namespace Booking.Web.Controllers
                 a => a.ParticipantEmail
             );
 
+            var audienceName = audiencesVms[eventEntity.AudienceId].Name;
+
             var vm = new DisplayEventViewModel
             {
                 AudienceId = eventEntity.AudienceId,
+                AudienceName = audienceName,
                 Title = eventEntity.Title,
                 AdditionalInfo = eventEntity.AdditionalInfo,
                 Audiences = audiencesVms,
