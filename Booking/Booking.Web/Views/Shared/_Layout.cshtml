@@ -27,12 +27,7 @@
                             </a>
                         </div>
                     </li>
-                    @if (User.IsInRole("Admin"))
-                    {
-                        <li class="@(ViewBag.ActiveLink == "Users" ? "active" : "")">
-                            @Html.ActionLink(@Localization.Feedback, "Index", "Users")
-                        </li>
-                    }
+                   
                     <li class="@(ViewBag.ActiveLink == "Login" ? "active" : "")">
                         @if (User.Identity.IsAuthenticated)
                         {
@@ -49,9 +44,17 @@
                     <li class="@(ViewBag.ActiveLink == "Contact" ? "active" : "")">
                         @Html.ActionLink(@Localization.Feedback, "Index", "Contact")
                     </li>
+                    @if (User.IsInRole("Admin"))
+                    {
+                        <li class="@(ViewBag.ActiveLink == "Users" ? "active" : "")">
+                            @Html.ActionLink(@Localization.Users, "Index", "Users")
+                        </li>
+                    }
                     <li class="@(ViewBag.ActiveLink == "Index" ? "active" : "")">
                         @Html.ActionLink(@Localization.Schedule, "Index", "Home")
                     </li>
+                  
+                   
                 </ul>
             </div>
         </div>

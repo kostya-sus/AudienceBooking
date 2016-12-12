@@ -9,7 +9,7 @@ namespace Booking.Web.Controllers
         [HttpGet]
         public ActionResult Index(string userId)
         {
-            return View();
+            return View(userId);
         }
 
         [HttpGet]
