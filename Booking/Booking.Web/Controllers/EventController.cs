@@ -50,7 +50,7 @@ namespace Booking.Web.Controllers
             var participants = eventEntity.EventParticipants.ToDictionary(
                 a => a.Id,
                 a => a.ParticipantEmail
-                );
+            );
 
             var vm = new DisplayEventViewModel
             {
@@ -93,6 +93,13 @@ namespace Booking.Web.Controllers
         {
             _eventService.RemoveParticipant(User, participantId);
             return Redirect(Request.UrlReferrer.ToString());
+        }
+
+        [HttpGet]
+        [Authorize]
+        public ActionResult Edit(Guid eventId)
+        {
+            throw new NotImplementedException();
         }
 
         [HttpGet]

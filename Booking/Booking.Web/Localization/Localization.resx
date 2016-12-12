@@ -234,4 +234,10 @@
   <data name="RegisteredParticipants" xml:space="preserve">
     <value>Зарегистрированные участники</value>
   </data>
+  <data name="Cancel" xml:space="preserve">
+    <value>Отменить</value>
+  </data>
+  <data name="Edit" xml:space="preserve">
+    <value>Изменить</value>
+  </data>
 </root>

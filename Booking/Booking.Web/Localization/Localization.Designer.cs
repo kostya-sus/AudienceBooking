@@ -70,6 +70,15 @@ namespace Booking.Web.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Отменить.
+        /// </summary>
+        public static string Cancel {
+            get {
+                return ResourceManager.GetString("Cancel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Повторить пароль.
         /// </summary>
         public static string ConfirmPasswordPlaceholder {
@@ -111,6 +120,15 @@ namespace Booking.Web.Localization {
         public static string ContactViewModel_UserSurname_ValidationMessage {
             get {
                 return ResourceManager.GetString("ContactViewModel_UserSurname_ValidationMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Изменить.
+        /// </summary>
+        public static string Edit {
+            get {
+                return ResourceManager.GetString("Edit", resourceCulture);
             }
         }
         
