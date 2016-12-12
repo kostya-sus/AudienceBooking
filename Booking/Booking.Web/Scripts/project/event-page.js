@@ -11,6 +11,18 @@
                 $(submitId).click();
             });
 
+        $("#redirect-audience-btn")
+            .click(function() {
+                var url = $("#redirect-to-audience-url").val();
+                window.location.replace(url);
+            });
+
+        $("#redirect-home-btn")
+            .click(function() {
+                var url = $("#redirect-to-home-url").val();
+                window.location.replace(url);
+            });
+
         var form = $("#join-event-form");
         var validator = form.data("validator");
 

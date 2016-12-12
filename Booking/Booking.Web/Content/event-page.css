@@ -22,7 +22,7 @@
 
 #join-event-form {
     display: inline-block;
-    padding-left: 30px;
+    padding-left: 20px;
 }
 
 #email {
@@ -91,15 +91,17 @@ input[type="submit"] {
     visibility: hidden;
 }
 
-#event-info { display: table-cell; }
+#event-info { display: table-cell;
+    vertical-align: top; }
 
 #event-calendar {
+    vertical-align: top;
     display: table-cell;
-    width: 260px;
+    width: 270px;
 }
 
 #event-date {
-    margin-top: 20px;
+    margin-top: 5px;
     background: #f95752;
     border-radius: 16px;
     height: 60px;
@@ -142,7 +144,7 @@ p { margin-top: 20px; }
     cursor: pointer;
 }
 
-#edit-buttons-container { padding: 0 16px; }
+#edit-buttons-container { text-align: center; }
 
 #edit-buttons-container button {
     border: 0;
@@ -171,12 +173,17 @@ p { margin-top: 20px; }
 }
 
 .link-btn-container {
+    vertical-align:top;
     align-self: center;
     display: inline-block;
     width: 200px;
-    margin-top: 50px;
+    margin: 50px 100px 0;
     text-align: center;
     height: 120px;
+}
+
+.link-btn-container:hover {
+    cursor: pointer;
 }
 
 .btn-squares {
@@ -196,4 +203,8 @@ p { margin-top: 20px; }
 
 .square-red {
     background: #f95752;
+}
+
+.link-buttons {
+    text-align: center;
 }

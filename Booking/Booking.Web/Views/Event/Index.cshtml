@@ -60,7 +60,7 @@
                 </div>
             }
         </div>
-        @if (Model.IsJoinAvailable && Model.CanEdit)
+        @if (Model.IsJoinAvailable && Model.CanEdit && Model.ParticipantsCount > 0)
         {
             <div class="participants-container">
                 <span>@Localization.RegisteredParticipants</span>
@@ -85,25 +85,30 @@
 
 @Html.Partial("_RoomMapRoutePartial", Model)
 
+<input type="hidden" id="redirect-to-home-url" value="@Url.Action("Index", "Home")"/>
+<input type="hidden" id="redirect-to-audience-url" value="@Url.Action("Index", "Audience", new {audienceId = Model.AudienceId})"/>
+
 <div class="buttons-container">
     <div class="page-container container">
-        <div class="link-btn-container" id="redirect-audience-id">
-            <div class="btn-squares">
-                <div class="square"></div>
-                <div class="square"></div>
-                <div class="square"></div>
-                <div class="square square-red"></div>
+        <div class="link-buttons">
+            <div class="link-btn-container" id="redirect-audience-btn">
+                <div class="btn-squares">
+                    <div class="square"></div>
+                    <div class="square"></div>
+                    <div class="square"></div>
+                    <div class="square square-red"></div>
+                </div>
+                <span>@Localization.AudienceSchedule @Model.AudienceName</span>
             </div>
-            <span>@Localization.AudienceSchedule @Model.AudienceName</span>
-        </div>
-        <div class="link-btn-container" id="redirect-home-btn">
-            <div class="btn-squares">
-                <div class="square square-red"></div>
-                <div class="square square-red"></div>
-                <div class="square square-red"></div>
-                <div class="square square-red"></div>
+            <div class="link-btn-container" id="redirect-home-btn">
+                <div class="btn-squares">
+                    <div class="square square-red"></div>
+                    <div class="square square-red"></div>
+                    <div class="square square-red"></div>
+                    <div class="square square-red"></div>
+                </div>
+                <span>@Localization.AllAudiencesSchedule</span>
             </div>
-            <span>@Localization.AllAudiencesSchedule</span>
         </div>
     </div>
 </div>
