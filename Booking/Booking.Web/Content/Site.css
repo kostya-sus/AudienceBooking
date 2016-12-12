@@ -278,37 +278,53 @@ footer {
         cursor: pointer;
     }
 
-    #day {
+    #EventDay {
+        display: none;
     width: 30px;
     border: 1px;
     margin-left: 4px;
         background: #FFF;
+        
     }
-    #hourFrom {
+    #labelDay {
         width: 30px;
     border: 1px;
     margin-left: 4px;
         background: #FFF;
     }
-    #hourTo {
+
+    #StartHour {
+        display: none;
+        width: 30px;
+    border: 1px;
+    margin-left: 4px;
+        background: #FFF;
+    }
+    #labelStartHour {
+        width: 30px;
+    border: 1px;
+    margin-left: 4px;
+        background: #FFF;
+    }
+    #EndHour {
         background: #FFF;
         border: 1px;
         margin-left: 4px;
         width: 30px;
     }
-    #minuteFrom {
+    #StartMinute {
         background: #FFF;
         border: 1px;
         margin-left: 4px;
         width: 30px;
     }
-    #minuteTo {
+    #EndMinute {
         background: #FFF;
         border: 1px;
         margin-left: 4px;
         width: 30px;
     }
-    #month {display: none;
+    #EventMonth {display: none;
         background: #FFF;
         border: 1px;
         width: 50px;

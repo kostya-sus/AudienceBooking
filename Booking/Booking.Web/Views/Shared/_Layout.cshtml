@@ -64,6 +64,7 @@
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @Scripts.Render("~/Scripts/project/new-event.js")
+    @Scripts.Render("~/Scripts/jquery.unobtrusive-ajax.min.js")
     @RenderSection("scripts", false)
 
 <input type="hidden" id="get-new-event-popup-url" value="@Url.Action("GetNewEventPopup", "Event")"/>

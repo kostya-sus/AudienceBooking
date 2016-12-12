@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using System.Net;
 using System.Web.Mvc;
 using Booking.Repositories;
 using Booking.Services.Interfaces;
@@ -67,16 +68,18 @@ namespace Booking.Web.Controllers
         [HttpPost]
         [Authorize]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(CreateEditEventViewModel createEditEventViewModel)
+        public ActionResult Create(CreateEditEventViewModel vm)
         {
-            var audiences = _audienceService.GetAllAudiences().ToList();
-            var availableAudiences = audiences.Where(a => a.IsBookingAvailable).ToDictionary(a => (int)a.Id, a => a.Name);
-            createEditEventViewModel.AvailableAudiences = availableAudiences;
-            if (!ModelState.IsValid)
-            {
-                return PartialView("_NewEventPartial", createEditEventViewModel);
-            }
-            return PartialView("_NewEventPartial", createEditEventViewModel);
+            //var dateEvent = new DateTime(DateTime.Now.Year, vm.EventMonth, vm.EventDay, vm.StartHour, vm.StartMinute, 0);
+            //var duration = (vm.EndHour - vm.StartHour)*60 + (vm.EndMinute - vm.StartMinute);
+            //var isFree = _audienceService.IsFree(vm.ChosenAudience, dateEvent, duration);
+
+            //if (duration < 20 || !isFree)
+            //{
+            //    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            //}
+            
+            return new HttpStatusCodeResult(HttpStatusCode.OK);
         }
 
         [HttpDelete]

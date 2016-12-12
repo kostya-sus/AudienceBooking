@@ -1,45 +1,62 @@
 ﻿function hasTickedBox() {
     var checkBox = document.getElementById('checkboxRed');
-    if(checkBox.checked)
-    {
+    if (checkBox.checked) {
         document.getElementById('private').style.color = "#f95752";
         document.getElementById('public').style.color = "#afb2bb";
-    }
-    else
-    {
+    } else {
         document.getElementById('public').style.color = "#f95752";
         document.getElementById('private').style.color = "#afb2bb";
     }
 };
 
-$(document).ready(function () {
-    $("#btn-new-event-popup").click(function () {
-        var eventUrl = $("#get-new-event-popup-url").val();
-        $("#new-event-popup").load(eventUrl,
-            function () {
-                for (var i = 0;  i< 12; i++) {
-                    incrementHourValue('hourFrom');
-                    incrementHourValue('hourTo');
-                }
-                incrementDayValue('day');
-                incrementMinuteValue('minuteFrom');
-                incrementMinuteValue('minuteTo');
-                NextMonth('month');
+var ajaxSuccess = function () {
+    alert('this is ajaxSuccess');
+}
+$(document)
+    .ready(function() {
+        $("#btn-new-event-popup")
+            .click(function() {
+                var eventUrl = $("#get-new-event-popup-url").val();
+                $("#new-event-popup")
+                    .load(eventUrl,
+                        function() {
+                            for (var i = 0; i < 12; i++) {
+                                incrementHourValue('StartHour');
+                                incrementHourValue('EndHour');
+                            }
+                            incrementDayValue('EventDay', 'labelDay');
+                            incrementMinuteValue('StartMinute');
+                            incrementMinuteValue('EndMinute');
+                            NextMonth('EventMonth');
 
-                $("#new-event-popup .fa-caret-down, #new-event-popup .fa-caret-up").click(checkIfAudienceIsFree);
+                            $('#myForm')
+                                .ajaxForm({
+                                    url: '', // or whatever
+                                    dataType: 'json',
+                                    success: function(response) {
+                                        alert("The server says: " + response);
+                                    }
+                                });
+
+                            $("#new-event-popup .fa-caret-down, #new-event-popup .fa-caret-up")
+                                .click(checkIfAudienceIsFree);
+                        });
+                $(".btnCreate")
+                    .click(function() {
+
+                    });
             });
     });
-});
 
 function checkIfAudienceIsFree() {
     var audienceId = document.getElementById("ChosenAudience").value;
 
-    var day = document.getElementById('day').value;
-    var month = document.getElementById('month').value - 1;
-    var hourFrom = document.getElementById('hourFrom').value;
-    var minuteFrom = document.getElementById('minuteFrom').value;
-    var hourTo = document.getElementById('hourTo').value;
-    var minuteTo = document.getElementById('minuteTo').value;
+    var day = document.getElementById('EventDay').value;
+    var month = document.getElementById('EventMonth').value - 1;
+    var hourFrom = document.getElementById('StartHour').value;
+    var minuteFrom = document.getElementById('StartMinute').value;
+    var hourTo = document.getElementById('EndHour').value;
+    var minuteTo = document.getElementById('EndMinute').value;
 
     var dateNow = Date.now();
 
@@ -48,41 +65,56 @@ function checkIfAudienceIsFree() {
     var duration = endEventDate - dateEvent;
     duration = duration.getTime / 60000;
 
-    var url = $("#audience-is-free-url").val() + "?audienceId=" + audienceId +
-        "&dateTime=" + dateEvent.toLocaleDateString() + "&duration=" + duration;
-    
+    var url = $("#audience-is-free-url").val() +
+        "?audienceId=" +
+        audienceId +
+        "&dateTime=" +
+        dateEvent.toLocaleDateString() +
+        "&duration=" +
+        duration;
+
     $.getJSON(url)
-        .done(function (isFree) {
+        .done(function(isFree) {
             toggleIsFreeMessage(isFree);
         });
 }
 
+function changeValue(id, value) {
+    $("#" + id).attr("value", value);
+}
 
-function incrementDayValue(id) {
+function incrementDayValue(id, labelId) {
     var value = parseInt(document.getElementById(id.toString()).value);
     value = isNaN(value) ? 1 : value;
     if (value !== 31) {
         value++;
     }
-    document.getElementById(id.toString()).value = value;
+    changeValue(id, value);
+    changeValue(labelId, value);
 }
 
-function decrementDayValue(id) {
+function decrementDayValue(id, labelId) {
     var value = parseInt(document.getElementById(id.toString()).value);
     value = isNaN(value) ? 1 : value;
     if (value !== 1) {
         value--;
     }
-    document.getElementById(id.toString()).value = value;
+    changeValue(id, value);
+    changeValue(labelId, value);
 }
 
-function incrementHourValue(id) {
+function incrementHourValue(id, minuteId) {
     var value = parseInt(document.getElementById(id.toString()).value);
     value = isNaN(value) ? 12 : value;
     if (value !== 19) {
         value++;
+        if (value === 19) {
+            value = 0;
+            changeValue(minuteId, value);
+            //document.getElementById(minuteId.toString()).value = 0;
+        }
     }
-    document.getElementById(id.toString()).value = value;
+    changeValue(id, value);
 }
 
 function decrementHourValue(id) {
@@ -91,7 +123,7 @@ function decrementHourValue(id) {
     if (value !== 12) {
         value--;
     }
-    document.getElementById(id.toString()).value = value;
+    changeValue(id, value);
 }
 
 function incrementMinuteValue(idMinute, idHour) {
@@ -99,11 +131,11 @@ function incrementMinuteValue(idMinute, idHour) {
     value = isNaN(value) ? 30 : value;
     if (value === 55) {
         value = 0;
-        incrementDayValue(idHour);
+        incrementHourValue(idHour);
     } else {
         value += 5;
     }
-    document.getElementById(idMinute.toString()).value = value;
+    changeValue(idMinute, value);
 }
 
 function decrementMinuteValue(idMinute, idHour) {
@@ -113,9 +145,9 @@ function decrementMinuteValue(idMinute, idHour) {
         value = 55;
         decrementHourValue(idHour);
     } else {
-        value-=5;
+        value -= 5;
     }
-    document.getElementById(idMinute.toString()).value = value;
+    changeValue(idMinute, value);
 }
 
 function NextMonth(id) {
@@ -127,7 +159,7 @@ function NextMonth(id) {
         value = 1;
     }
     SetMonthName(value);
-    document.getElementById(id.toString()).value = value;
+    changeValue(id, value);
 }
 
 function PrevMonth(id) {
@@ -139,7 +171,7 @@ function PrevMonth(id) {
         value = 12;
     }
     SetMonthName(value);
-    document.getElementById(id.toString()).value = value;
+    changeValue(id, value);
 }
 
 function SetMonthName(value) {

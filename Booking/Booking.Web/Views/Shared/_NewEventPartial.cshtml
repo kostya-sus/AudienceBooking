@@ -1,142 +1,183 @@
 ﻿@using Booking.Web.Localization
 @model Booking.Web.ViewModels.Event.CreateEditEventViewModel
-    @using (Ajax.BeginForm("Create","Event", new AjaxOptions
-    {
-        InsertionMode = InsertionMode.Replace
-    }))
-    {
-        @Html.AntiForgeryToken()
+@using (Ajax.BeginForm("Create", "Event", new AjaxOptions
+{
+    InsertionMode = InsertionMode.InsertAfter, HttpMethod = "Post", OnBegin = "ajaxSuccess"
+}))
+{
+    @Html.AntiForgeryToken()
 
-        <div id="main" class="main">
-            <div class="header">
-                <i id="calendar-icon" class="fa fa-calendar-o" aria-hidden="true"></i>
-                <span style="margin-left: 20px;">@Localization.ReserveAudience</span>
-                <i id="close-icon" class="fa fa-times" aria-hidden="true" data-dismiss="modal"></i>
-            </div>
-            <div class="line" style="display: flex">
-                <span style="padding-top: 21px">@Localization.When</span>
-                <table>
-                    <tr>
-                        <td style="padding-left: 35px"><i onclick="incrementDayValue('day')" class="fa fa-caret-up" aria-hidden="true"></i></td>
-                        <td style="padding-left: 20px"><i onclick="NextMonth('month')" class="fa fa-caret-up" aria-hidden="true"></i></td>
-                        <td style="padding-left: 26px"><i onclick="incrementHourValue('hourFrom')" class="fa fa-caret-up" aria-hidden="true"></i></td>
-                        <td></td>
-                        <td style="padding-left: 8px"><i onclick="incrementMinuteValue('minuteFrom', 'hourFrom')" class="fa fa-caret-up" aria-hidden="true"></i></td>
-                        <td></td>
-                        <td style="padding-left: 8px"><i onclick="incrementHourValue('hourTo')" class="fa fa-caret-up" aria-hidden="true"></i></td>
-                        <td></td>
-                        <td style="padding-left: 8px"><i onclick="incrementMinuteValue('minuteTo', 'hourTo')" class="fa fa-caret-up" aria-hidden="true"></i></td>
-                    </tr>
-                    <tr>
-                        <td style="padding-left: 30px">
-                            <input disabled="disabled" id="day" min="1" max="31" type="number" value="@Model.EventDay"/>
-                        </td>
-                        <td style="padding-left: -1px">
-                            <input type="number" id="month" value="@Model.EventMonth"/>
-                            <input id="monthLabel" disabled="disabled" type="text"/>
-                        </td>
-                        <td style="padding-left: 18px">
-                            <input disabled="disabled" id="hourFrom" type="number" value="@Model.StartHour"/>
-                        </td>
-                        <td><span>:</span></td>
-                        <td>
-                            <input disabled="disabled" type="number" id="minuteFrom" value="@Model.StartMinute"/>
-                        </td>
-                        <td><span>-</span></td>
-                        <td>
-                            <input disabled="disabled" id="hourTo" type="number" value="@Model.EndHour"/>
-                        </td>
-                        <td><span>:</span></td>
-                        <td>
-                            <input type="number" disabled="disabled" id="minuteTo" value="@Model.EndMinute"/>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td style="padding-left: 34px"><i onclick="decrementDayValue('day')" class="fa fa-caret-down" aria-hidden="true"></i></td>
-                        <td style="padding-left: 20px"><i onclick="PrevMonth('month')" class="fa fa-caret-down" aria-hidden="true"></i></td>
-                        <td style="padding-left: 26px"><i onclick="decrementHourValue('hourFrom')" class="fa fa-caret-down" aria-hidden="true"></i></td>
-                        <td></td>
-                        <td style="padding-left: 8px"><i onclick="decrementMinuteValue('minuteFrom', 'hourFrom')" class="fa fa-caret-down" aria-hidden="true"></i></td>
-                        <td></td>
-                        <td style="padding-left: 8px"><i onclick="decrementHourValue('hourTo')" class="fa fa-caret-down" aria-hidden="true"></i></td>
-                        <td></td>
-                        <td style="padding-left: 8px"><i onclick="decrementMinuteValue('minuteTo', 'hourTo')" class="fa fa-caret-down" aria-hidden="true"></i></td>
-                    </tr>
-                </table>
-            </div>
-            <div class="line">
-                <span>@Localization.Where</span>
-                @Html.DropDownListFor(m => m.ChosenAudience, new SelectList(Model.AvailableAudiences,
-                    "Key", "Value"), new {@class = "select-style"})
-
-            </div>
-            <div class="line">
-                @Html.TextBoxFor(m => m.Title, new {@class = "input-style", placeholder = Localization.Title})
-            </div>
-            <div class="line">
-                @Html.TextAreaFor(m => m.AdditionalInfo, new {@class = "textarea", placeholder = Localization.AdditionalInformation})
-            </div>
-            <div class="line">
-                <table>
-                    <tr>
-                        <td id="td-style">
-                            <input type="checkbox" class="whiteCheckbox" id="whiteCheckbox1" value="@Model.IsJoinAvailable"/>
-                            <label for="whiteCheckbox1"></label>
-                        </td>
-                        <td style="padding-top: 10px">
-                            <p>@Localization.RegistrationTo</p></td>
-                        <td style="padding-top: 10px; padding-left: 70px;">
-                            <p id="public" class="public">
-                                @Localization.Public
-                            </p>
-                        </td>
-                        <td style="padding-top: 10px">
-
-                            @Html.CheckBoxFor(m => m.IsPublic, new {@id = "checkboxRed", onclick = "hasTickedBox()"})
-                            <label for="checkboxRed"></label>
-                        </td>
-                        <td style="padding-top: 10px">
-                            <p id="private" class="private">
-                                @Localization.Private
-                            </p>
-                        </td>
-                    </tr>
-                </table>
-                <table>
-                    <tr>
-                        <td id="td-style">
-                            <input type="checkbox" class="whiteCheckbox" id="whiteCheckbox2" name="registr" value="@Model.IsAuthorShown"/>
-                            <label for="whiteCheckbox2"></label>
-                        </td>
-                        <td style="padding-top: 10px">
-                            <p>@Localization.ShowAuthor</p>
-                        </td>
-                        <td style="padding-top: 10px; padding-left: 10px">
-                            <p>@Localization.OR</p>
-                        </td>
-                        <td style="padding-left: 20px">
-                            @Html.TextBoxFor(m => m.AuthorName, new {@class = "input-stile-org", placeholder = Localization.ShowOrganizer})
-                        </td>
-                    </tr>
-                </table>
-                <input type="hidden" id="audience-is-free-url" value="@Url.Action("IsFree", "Audience")"/>
-                <div>
-                    <div id="errorMessage">
-                        <table>
-                            <tr>
-                                <td><span style="font-size: 25px">&#9785;</span></td>
-                                <td style="padding-left: 10px">
-                                    <span>@Localization.ErrorMessageForNewEventPopup1</span>
-                                    <br/>
-                                    <span>@Localization.ErrorMessageForNewEventPopup2</span> 
-                                </td>
-                            </tr>
-                        </table>
-                    </div>
-                    <input type="submit" class="btnCreate" value="@Localization.Create"/>
-                </div>
-
-            </div>
+    <div id="main" class="main">
+        <div class="header">
+            <i id="calendar-icon" class="fa fa-calendar-o" aria-hidden="true"></i>
+            <span style="margin-left: 20px;">@Localization.ReserveAudience</span>
+            <i id="close-icon" class="fa fa-times" aria-hidden="true" data-dismiss="modal"></i>
         </div>
-    }
-    
+        <div class="line" style="display: flex">
+            <span style="padding-top: 21px">@Localization.When</span>
+            <table>
+                <tr>
+                    <td style="padding-left: 35px">
+                        <i onclick="incrementDayValue('EventDay', 'labelDay')" class="fa fa-caret-up" aria-hidden="true"></i>
+                    </td>
+                    <td style="padding-left: 20px">
+                        <i onclick="NextMonth('EventMonth')" class="fa fa-caret-up" aria-hidden="true"></i>
+                    </td>
+                    <td style="padding-left: 26px">
+                        <i onclick="incrementHourValue('StartHour', 'StartMinute')" class="fa fa-caret-up" aria-hidden="true"></i>
+                    </td>
+                    <td></td>
+                    <td style="padding-left: 8px">
+                        <i onclick="incrementMinuteValue('StartMinute', 'StartHour')" class="fa fa-caret-up" aria-hidden="true"></i>
+                    </td>
+                    <td></td>
+                    <td style="padding-left: 8px">
+                        <i onclick="incrementHourValue('EndHour', 'EndMinute')" class="fa fa-caret-up" aria-hidden="true"></i>
+                    </td>
+                    <td></td>
+                    <td style="padding-left: 8px">
+                        <i onclick="incrementMinuteValue('EndMinute', 'EndHour')" class="fa fa-caret-up" aria-hidden="true"></i>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="padding-left: 30px">
+                        @* @Html.EditorFor(m => m.EventDay, new { htmlAttributes = new { @disabled = "disabled" } })*@
+                        @Html.HiddenFor(m => m.EventDay)
+                        @* <input id="EventDay" max="31" type="number" name="EventDay"  value="@Model.EventDay"/>*@
+                        <input id="labelDay" disabled="disabled" type="number"/>
+                    </td>
+                    <td style="padding-left: -1px">
+                        @Html.EditorFor(m => m.EventMonth, new {disabled = "disabled"})
+                        @*<input type="number" id="month" value="@Model.EventMonth"/>*@
+                        <input id="monthLabel" disabled="disabled" type="text"/>
+                    </td>
+                    <td style="padding-left: 18px">
+                        @Html.HiddenFor(m => m.StartHour)
+                        <input id="labelStartHour" , disabled="disabled" , type="number"/>
+                        @* @Html.EditorFor(m => m.StartHour, new {disabled = "disabled", @readonly = "readonly"})*@
+                    </td>
+                    <td>
+                        <span>:</span>
+                    </td>
+                    <td>
+                        @Html.DisplayFor(m => m.StartMinute, new {htmlAttributes = new {@disabled = "disabled"}})
+                        @*<input disabled="disabled" type="number" id="minuteFrom" value="@Model.StartMinute"/>*@
+                    </td>
+                    <td>
+                        <span>-</span>
+                    </td>
+                    <td>
+                        @Html.EditorFor(m => m.EndHour, new {htmlAttributes = new {@disabled = "disabled"}})
+                        @*<input disabled="disabled" id="hourTo" type="number" value="@Model.EndHour"/>*@
+                    </td>
+                    <td>
+                        <span>:</span>
+                    </td>
+                    <td>
+                        @Html.EditorFor(m => m.EndMinute, new {htmlAttributes = new {@disabled = "disabled"}})
+                        @*<input type="number" disabled="disabled" id="minuteTo" value="@Model.EndMinute"/>*@
+                    </td>
+                </tr>
+                <tr>
+                    <td style="padding-left: 34px">
+                        <i onclick="decrementDayValue('EventDay', 'labelDay')" class="fa fa-caret-down" aria-hidden="true"></i>
+                    </td>
+                    <td style="padding-left: 20px">
+                        <i onclick="PrevMonth('EventMonth')" class="fa fa-caret-down" aria-hidden="true"></i>
+                    </td>
+                    <td style="padding-left: 26px">
+                        <i onclick="decrementHourValue('StartHour')" class="fa fa-caret-down" aria-hidden="true"></i>
+                    </td>
+                    <td></td>
+                    <td style="padding-left: 8px">
+                        <i onclick="decrementMinuteValue('StartMinute', 'StartHour')" class="fa fa-caret-down" aria-hidden="true"></i>
+                    </td>
+                    <td></td>
+                    <td style="padding-left: 8px">
+                        <i onclick="decrementHourValue('EndHour')" class="fa fa-caret-down" aria-hidden="true"></i>
+                    </td>
+                    <td></td>
+                    <td style="padding-left: 8px">
+                        <i onclick="decrementMinuteValue('EndMinute', 'EndHour')" class="fa fa-caret-down" aria-hidden="true"></i>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <div class="line">
+            <span>@Localization.Where</span>
+            @Html.DropDownListFor(m => m.ChosenAudience, new SelectList(Model.AvailableAudiences,
+                "Key", "Value"), new {@class = "select-style"})
+
+        </div>
+        <div class="line">
+            @Html.TextBoxFor(m => m.Title, new {@class = "input-style", placeholder = Localization.Title})
+        </div>
+        <div class="line">
+            @Html.TextAreaFor(m => m.AdditionalInfo, new {@class = "textarea", placeholder = Localization.AdditionalInformation})
+        </div>
+        <div class="line">
+            <table>
+                <tr>
+                    <td id="td-style">
+                        <input type="checkbox" class="whiteCheckbox" id="whiteCheckbox1" value="@Model.IsJoinAvailable"/>
+                        <label for="whiteCheckbox1"></label>
+                    </td>
+                    <td style="padding-top: 10px">
+                        <p>@Localization.RegistrationTo</p>
+                    </td>
+                    <td style="padding-top: 10px; padding-left: 70px;">
+                        <p id="public" class="public">
+                            @Localization.Public
+                        </p>
+                    </td>
+                    <td style="padding-top: 10px">
+
+                        @Html.CheckBoxFor(m => m.IsPublic, new {@id = "checkboxRed", onclick = "hasTickedBox()"})
+                        <label for="checkboxRed"></label>
+                    </td>
+                    <td style="padding-top: 10px">
+                        <p id="private" class="private">
+                            @Localization.Private
+                        </p>
+                    </td>
+                </tr>
+            </table>
+            <table>
+                <tr>
+                    <td id="td-style">
+                        <input type="checkbox" class="whiteCheckbox" id="whiteCheckbox2" name="registr" value="@Model.IsAuthorShown"/>
+                        <label for="whiteCheckbox2"></label>
+                    </td>
+                    <td style="padding-top: 10px">
+                        <p>@Localization.ShowAuthor</p>
+                    </td>
+                    <td style="padding-top: 10px; padding-left: 10px">
+                        <p>@Localization.OR</p>
+                    </td>
+                    <td style="padding-left: 20px">
+                        @Html.TextBoxFor(m => m.AuthorName, new {@class = "input-stile-org", placeholder = Localization.ShowOrganizer})
+                    </td>
+                </tr>
+            </table>
+            <input type="hidden" id="audience-is-free-url" value="@Url.Action("IsFree", "Audience")"/>
+            <div>
+                <div id="errorMessage">
+                    <table>
+                        <tr>
+                            <td>
+                                <span style="font-size: 25px">&#9785;</span>
+                            </td>
+                            <td style="padding-left: 10px">
+                                <span>@Localization.ErrorMessageForNewEventPopup1</span>
+                                <br/>
+                                <span>@Localization.ErrorMessageForNewEventPopup2</span>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <input type="submit" class="btnCreate" value="@Localization.Create"/>
+            </div>
+
+        </div>
+    </div>
+}
