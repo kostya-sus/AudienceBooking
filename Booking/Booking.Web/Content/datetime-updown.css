@@ -1,0 +1,22 @@
+﻿.datetime-updown-control  {
+    display: inline-block;
+    vertical-align: middle;
+    padding: 0;
+    max-width: 15px;
+}
+
+.datetime-updown-control .fa, .datetime-updown-control span {
+    margin: 0 !important;
+}
+
+.datetime-updown-control  .fa {
+    text-align: center;
+    line-height: 6px;
+    display: block;
+    font-size: 12px;
+}
+
+.datetime-updown-outer {
+    margin: 0 3px;
+    display: inline-block;
+}

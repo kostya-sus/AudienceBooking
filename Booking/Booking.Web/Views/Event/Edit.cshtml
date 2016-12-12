@@ -9,6 +9,7 @@
     @Styles.Render("http://fonts.googleapis.com/css?family=Nunito:400,300,700")
     @Styles.Render("~/Content/schedule.css")
     @Styles.Render("~/Content/event-page.css")
+    @Styles.Render("~/Content/datetime-updown.css")
 }
 
 @section scripts
@@ -52,9 +53,50 @@
                         @Html.HiddenFor(m => m.EndDateTime)
                         <div id="event-date">
                             <i class="fa fa-calendar" aria-hidden="true"></i>
-                            <span>@Model.StartDateTime.ToString("dd.MM.yyyy")</span>
+                            <div class="datetime-updown-outer">
+                                <div class="datetime-updown-control date-updown-day">
+                                    <i class="fa fa-caret-up" aria-hidden="true"></i>
+                                    <span class="datetime-updown-label">18.</span>
+                                    <i class="fa fa-caret-down" aria-hidden="true"></i>
+                                </div>
+                                <div class="datetime-updown-control date-updown-month">
+                                    <i class="fa fa-caret-up" aria-hidden="true"></i>
+                                    <span class="datetime-updown-label">09.</span>
+                                    <i class="fa fa-caret-down" aria-hidden="true"></i>
+                                </div>
+                                <div class="datetime-updown-control date-updown-year">
+                                    <i class="fa fa-caret-up" aria-hidden="true"></i>
+                                    <span class="datetime-updown-label">16</span>
+                                    <i class="fa fa-caret-down" aria-hidden="true"></i>
+                                </div>
+                            </div>
                             <i class="fa fa-clock-o" aria-hidden="true"></i>
-                            <span>@Model.StartDateTime.ToString("HH:mm") - @Model.EndDateTime.ToString("HH:mm")</span>
+
+                            <div class="datetime-updown-outer">
+                                <div class="datetime-updown-control date-updown-start-hour">
+                                    <i class="fa fa-caret-up" aria-hidden="true"></i>
+                                    <span class="datetime-updown-label">18:</span>
+                                    <i class="fa fa-caret-down" aria-hidden="true"></i>
+                                </div>
+                                <div class="datetime-updown-control date-updown-start-minute">
+                                    <i class="fa fa-caret-up" aria-hidden="true"></i>
+                                    <span class="datetime-updown-label">00</span>
+                                    <i class="fa fa-caret-down" aria-hidden="true"></i>
+                                </div>
+                            </div>
+                            <span>-</span>
+                            <div class="datetime-updown-outer">
+                                <div class="datetime-updown-control date-updown-end-hour">
+                                    <i class="fa fa-caret-up" aria-hidden="true"></i>
+                                    <span class="datetime-updown-label">18:</span>
+                                    <i class="fa fa-caret-down" aria-hidden="true"></i>
+                                </div>
+                                <div class="datetime-updown-control date-updown-end-minute">
+                                    <i class="fa fa-caret-up" aria-hidden="true"></i>
+                                    <span class="datetime-updown-label">30</span>
+                                    <i class="fa fa-caret-down" aria-hidden="true"></i>
+                                </div>
+                            </div>
                         </div>
                         <div id="icons-container">
                             <i class="fa fa-calendar-plus-o" aria-hidden="true"></i>
@@ -94,6 +136,8 @@
             }
         </div>
     </div>
+
+    @Html.HiddenFor(m => m.ChosenAudienceId)
 }
 
 @*@Html.Partial("_RoomMapRoutePartial", Model)*@

@@ -128,8 +128,9 @@
     margin: 0 3px;
 }
 
-#event-date i {
+.fa-calendar, .fa-clock-o {
     font-size: 30px;
+    margin: 0 10px;
     opacity: 0.7;
 }
 
