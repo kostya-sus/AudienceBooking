@@ -242,6 +242,7 @@
     <Content Include="Content\bootstrap-datepicker.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\datetime-updown.css" />
     <Content Include="Content\error.css" />
     <Content Include="Content\datepicker.css" />
     <Content Include="Content\event-page.css" />
@@ -299,6 +300,7 @@
     <Content Include="Scripts\bootstrap-datepicker\js\bootstrap-datepicker.js" />
     <Content Include="Scripts\bootstrap-datepicker\locales\bootstrap-datepicker.ru.min.js" />
     <Content Include="Scripts\project\datetime-updown.js" />
+    <Content Include="Scripts\project\event-edit-page.js" />
     <Content Include="Scripts\project\event-page.js" />
     <Content Include="Scripts\project\home-scripts.js" />
     <Content Include="Scripts\project\room-map.js" />
