@@ -9,11 +9,15 @@
     margin: 0 !important;
 }
 
-.datetime-updown-control  .fa {
+.datetime-updown-control .fa {
     text-align: center;
     line-height: 6px;
     display: block;
     font-size: 12px;
+}
+
+.datetime-updown-control .fa:hover {
+    cursor: pointer;
 }
 
 .datetime-updown-outer {

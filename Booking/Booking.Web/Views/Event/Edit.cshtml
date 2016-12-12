@@ -18,7 +18,8 @@
     @Scripts.Render("~/Scripts/jquery.mapit.js")
     @Scripts.Render("~/Scripts/initializers.js")
     @Scripts.Render("~/bundles/jqueryval")
-    @Scripts.Render("~/Scripts/project/event-page.js")
+    @Scripts.Render("~/Scripts/project/datetime-updown.js")
+    @Scripts.Render("~/Scripts/project/event-edit-page.js")
 }
 
 @using (Html.BeginForm("Save", "Event"))
@@ -49,22 +50,22 @@
                 </div>
                 <div class="col-md-4">
                     <div id="event-calendar">
-                        @Html.HiddenFor(m => m.StartDateTime)
-                        @Html.HiddenFor(m => m.EndDateTime)
+                        @Html.HiddenFor(m => m.StartDateTime, new {id = "start-date"})
+                        @Html.HiddenFor(m => m.EndDateTime, new {id = "end-date"})
                         <div id="event-date">
                             <i class="fa fa-calendar" aria-hidden="true"></i>
                             <div class="datetime-updown-outer">
-                                <div class="datetime-updown-control date-updown-day">
+                                <div class="datetime-updown-control datetime-updown-day">
                                     <i class="fa fa-caret-up" aria-hidden="true"></i>
                                     <span class="datetime-updown-label">18.</span>
                                     <i class="fa fa-caret-down" aria-hidden="true"></i>
                                 </div>
-                                <div class="datetime-updown-control date-updown-month">
+                                <div class="datetime-updown-control datetime-updown-month">
                                     <i class="fa fa-caret-up" aria-hidden="true"></i>
                                     <span class="datetime-updown-label">09.</span>
                                     <i class="fa fa-caret-down" aria-hidden="true"></i>
                                 </div>
-                                <div class="datetime-updown-control date-updown-year">
+                                <div class="datetime-updown-control datetime-updown-year">
                                     <i class="fa fa-caret-up" aria-hidden="true"></i>
                                     <span class="datetime-updown-label">16</span>
                                     <i class="fa fa-caret-down" aria-hidden="true"></i>
@@ -73,12 +74,12 @@
                             <i class="fa fa-clock-o" aria-hidden="true"></i>
 
                             <div class="datetime-updown-outer">
-                                <div class="datetime-updown-control date-updown-start-hour">
+                                <div class="datetime-updown-control datetime-updown-start-hour">
                                     <i class="fa fa-caret-up" aria-hidden="true"></i>
                                     <span class="datetime-updown-label">18:</span>
                                     <i class="fa fa-caret-down" aria-hidden="true"></i>
                                 </div>
-                                <div class="datetime-updown-control date-updown-start-minute">
+                                <div class="datetime-updown-control datetime-updown-start-minute">
                                     <i class="fa fa-caret-up" aria-hidden="true"></i>
                                     <span class="datetime-updown-label">00</span>
                                     <i class="fa fa-caret-down" aria-hidden="true"></i>
@@ -86,12 +87,12 @@
                             </div>
                             <span>-</span>
                             <div class="datetime-updown-outer">
-                                <div class="datetime-updown-control date-updown-end-hour">
+                                <div class="datetime-updown-control datetime-updown-end-hour">
                                     <i class="fa fa-caret-up" aria-hidden="true"></i>
                                     <span class="datetime-updown-label">18:</span>
                                     <i class="fa fa-caret-down" aria-hidden="true"></i>
                                 </div>
-                                <div class="datetime-updown-control date-updown-end-minute">
+                                <div class="datetime-updown-control datetime-updown-end-minute">
                                     <i class="fa fa-caret-up" aria-hidden="true"></i>
                                     <span class="datetime-updown-label">30</span>
                                     <i class="fa fa-caret-down" aria-hidden="true"></i>
