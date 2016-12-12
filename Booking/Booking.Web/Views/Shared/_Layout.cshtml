@@ -28,19 +28,21 @@
                         </div>
                     </li>
                    
-                    <li class="@(ViewBag.ActiveLink == "Login" ? "active" : "")">
+                    
                         @if (User.Identity.IsAuthenticated)
                         {
-                            <li>
+                            <li class="@(ViewBag.ActiveLink == "Login" ? "active" : "")">
                                 <a href="@Url.Action("Index", "Profile")">
                                     <i class="fa fa-user" aria-hidden="true"></i> @User.Identity.Name</a>
                             </li>
                         }
                         else
                         {
-                            @Html.ActionLink(@Localization.Login, "Login", "Account")
+                            <li class="@(ViewBag.ActiveLink == "Login" ? "active" : "")">
+                                @Html.ActionLink(@Localization.Login, "Login", "Account")
+                            </li>
                         }
-                    </li>
+                           
                     <li class="@(ViewBag.ActiveLink == "Contact" ? "active" : "")">
                         @Html.ActionLink(@Localization.Feedback, "Index", "Contact")
                     </li>
