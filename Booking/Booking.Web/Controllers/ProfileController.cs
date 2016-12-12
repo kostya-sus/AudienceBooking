@@ -7,9 +7,9 @@ namespace Booking.Web.Controllers
     public class ProfileController : Controller
     {
         [HttpGet]
-        public ActionResult Index(string userId)
+        public ActionResult Index()
         {
-            return View(userId);
+            return View();
         }
 
         [HttpGet]
