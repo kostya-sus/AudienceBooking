@@ -20,7 +20,7 @@ namespace Booking.Models
         public Guid Id { get; set; }
 
         [Required]
-        [Column(TypeName = "smalldatetime")]
+        [Column(TypeName = "datetime2")]
         public DateTime EventDateTime { get; set; }
 
         [Required]

@@ -69,6 +69,10 @@
     <Compile Include="Migrations\201611301824105_Initial.Designer.cs">
       <DependentUpon>201611301824105_Initial.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201612121903322_ChangedEventDateTimeToDateTime2.cs" />
+    <Compile Include="Migrations\201612121903322_ChangedEventDateTimeToDateTime2.Designer.cs">
+      <DependentUpon>201612121903322_ChangedEventDateTimeToDateTime2.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -85,6 +89,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201611301824105_Initial.resx">
       <DependentUpon>201611301824105_Initial.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201612121903322_ChangedEventDateTimeToDateTime2.resx">
+      <DependentUpon>201612121903322_ChangedEventDateTimeToDateTime2.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

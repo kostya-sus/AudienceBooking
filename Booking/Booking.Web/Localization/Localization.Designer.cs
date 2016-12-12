@@ -97,6 +97,15 @@ namespace Booking.Web.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Отмена.
+        /// </summary>
+        public static string Cancellation {
+            get {
+                return ResourceManager.GetString("Cancellation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Повторить пароль.
         /// </summary>
         public static string ConfirmPasswordPlaceholder {
@@ -232,6 +241,15 @@ namespace Booking.Web.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Регистрация желающих.
+        /// </summary>
+        public static string JoinAvailable {
+            get {
+                return ResourceManager.GetString("JoinAvailable", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Вход.
         /// </summary>
         public static string Login {
@@ -282,6 +300,15 @@ namespace Booking.Web.Localization {
         public static string Now {
             get {
                 return ResourceManager.GetString("Now", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to или.
+        /// </summary>
+        public static string Or {
+            get {
+                return ResourceManager.GetString("Or", resourceCulture);
             }
         }
         
@@ -376,6 +403,15 @@ namespace Booking.Web.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Сохранить.
+        /// </summary>
+        public static string Save {
+            get {
+                return ResourceManager.GetString("Save", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Расписание.
         /// </summary>
         public static string Schedule {
@@ -390,6 +426,15 @@ namespace Booking.Web.Localization {
         public static string Send {
             get {
                 return ResourceManager.GetString("Send", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Показать автора.
+        /// </summary>
+        public static string ShowAuthor {
+            get {
+                return ResourceManager.GetString("ShowAuthor", resourceCulture);
             }
         }
         

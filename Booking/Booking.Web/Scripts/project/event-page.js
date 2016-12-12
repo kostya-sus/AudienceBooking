@@ -23,6 +23,12 @@
                 window.location.replace(url);
             });
 
+        $("#btn-edit-event")
+            .click(function () {
+                var url = $("#redirect-to-edit-event-url").val();
+                window.location.replace(url);
+            });
+
         var form = $("#join-event-form");
         var validator = form.data("validator");
 

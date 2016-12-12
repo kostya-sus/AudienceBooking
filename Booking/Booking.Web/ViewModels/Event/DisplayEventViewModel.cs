@@ -22,9 +22,7 @@ namespace Booking.Web.ViewModels.Event
         public string AdditionalInfo { get; set; }
 
         public string AuthorName { get; set; }
-
-        public int ParticipantsCount { get; set; }
-
+        
         public bool IsJoinAvailable { get; set; }
 
         public bool CanEdit { get; set; }

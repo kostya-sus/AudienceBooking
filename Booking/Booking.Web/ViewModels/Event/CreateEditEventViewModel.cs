@@ -8,17 +8,9 @@ namespace Booking.Web.ViewModels.Event
     {
         public Guid Id { get; set; }
 
-        public int EventDay { get; set; }
+        public DateTime StartDateTime { get; set; }
 
-        public int EventMonth { get; set; }
-
-        public int StartHour { get; set; }
-
-        public int StartMinute { get; set; }
-
-        public int EndHour { get; set; }
-
-        public int EndMinute { get; set; }
+        public DateTime EndDateTime { get; set; }
 
         public string Title { get; set; }
 
@@ -34,7 +26,7 @@ namespace Booking.Web.ViewModels.Event
 
         public IDictionary<AudiencesEnum, string> AvailableAudiences { get; set; }
 
-        public AudiencesEnum ChosenAudience { get; set; }
+        public AudiencesEnum ChosenAudienceId { get; set; }
 
         public int LowerHourBound { get; set; }
 

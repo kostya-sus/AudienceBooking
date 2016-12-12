@@ -246,4 +246,19 @@
   <data name="AudienceSchedule" xml:space="preserve">
     <value>Расписание аудитории</value>
   </data>
+  <data name="Cancellation" xml:space="preserve">
+    <value>Отмена</value>
+  </data>
+  <data name="Save" xml:space="preserve">
+    <value>Сохранить</value>
+  </data>
+  <data name="Or" xml:space="preserve">
+    <value>или</value>
+  </data>
+  <data name="JoinAvailable" xml:space="preserve">
+    <value>Регистрация желающих</value>
+  </data>
+  <data name="ShowAuthor" xml:space="preserve">
+    <value>Показать автора</value>
+  </data>
 </root>

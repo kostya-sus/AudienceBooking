@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Linq;
+using System.Net;
 using System.Web.Mvc;
+using Booking.Models;
 using Booking.Repositories;
 using Booking.Services.Interfaces;
 using Booking.Services.Services;
@@ -50,7 +52,7 @@ namespace Booking.Web.Controllers
             var participants = eventEntity.EventParticipants.ToDictionary(
                 a => a.Id,
                 a => a.ParticipantEmail
-            );
+                );
 
             var audienceName = audiencesVms[eventEntity.AudienceId].Name;
 
@@ -67,7 +69,6 @@ namespace Booking.Web.Controllers
                 EventDateTime = eventEntity.EventDateTime,
                 Id = eventEntity.Id,
                 IsJoinAvailable = eventEntity.IsJoinAvailable,
-                ParticipantsCount = eventEntity.EventParticipants.Count,
                 ParticipantsEmails = participants
             };
 
@@ -102,7 +103,39 @@ namespace Booking.Web.Controllers
         [Authorize]
         public ActionResult Edit(Guid eventId)
         {
-            throw new NotImplementedException();
+            var eventEntity = _eventService.GetEvent(eventId);
+            var audiences = _audienceService.GetAllAudiences().ToList();
+
+            var audiencesVms = audiences.ToDictionary(
+                a => a.Id,
+                a => new AudienceMapItemVm
+                {
+                    Id = a.Id,
+                    IsAvailable = a.IsBookingAvailable,
+                    Name = a.Name
+                });
+
+            var participants = eventEntity.EventParticipants.ToDictionary(
+                a => a.Id,
+                a => a.ParticipantEmail
+                );
+
+            var vm = new EventEditViewModel
+            {
+                ChosenAudienceId = eventEntity.AudienceId,
+                Title = eventEntity.Title,
+                AdditionalInfo = eventEntity.AdditionalInfo,
+                Audiences = audiencesVms,
+                AuthorName = eventEntity.AuthorName,
+                EndDateTime = eventEntity.EventDateTime.AddMinutes(eventEntity.Duration),
+                StartDateTime = eventEntity.EventDateTime,
+                Id = eventEntity.Id,
+                IsJoinAvailable = eventEntity.IsJoinAvailable,
+                IsAuthorShown = eventEntity.IsAuthorShown,
+                ParticipantsEmails = participants
+            };
+
+            return View(vm);
         }
 
         [HttpGet]
@@ -139,7 +172,20 @@ namespace Booking.Web.Controllers
         [Authorize]
         public ActionResult Save(CreateEditEventViewModel createEditEventViewModel)
         {
-            throw new NotImplementedException();
+            TimeSpan span = createEditEventViewModel.EndDateTime.Subtract(createEditEventViewModel.StartDateTime);
+
+            var eventEntity = _eventService.GetEvent(createEditEventViewModel.Id);
+            eventEntity.AdditionalInfo = createEditEventViewModel.AdditionalInfo;
+            eventEntity.AudienceId = createEditEventViewModel.ChosenAudienceId;
+            eventEntity.AuthorName = createEditEventViewModel.AuthorName;
+            eventEntity.IsAuthorShown = createEditEventViewModel.IsAuthorShown;
+            eventEntity.IsJoinAvailable = createEditEventViewModel.IsJoinAvailable;
+            eventEntity.EventDateTime = createEditEventViewModel.StartDateTime;
+            eventEntity.Duration = span.Minutes;
+            
+            _eventService.UpdateEvent(User, eventEntity);
+
+            return RedirectToAction("Index", new {eventId = eventEntity.Id});
         }
     }
 }

@@ -24,63 +24,76 @@
     @Scripts.Render("~/Scripts/project/event-page.js")
 }
 
+
+<input type="hidden" id="redirect-to-edit-event-url" value="@Url.Action("Edit", "Event", new {eventId = Model.Id})"/>
+
 <div class="event-container">
     <div class="page-container container">
-        <div id="event-info">
-            <div class="event-title">@Model.Title</div>
-            <br/>
-            <i class="fa fa-user" aria-hidden="true"></i>
-            <span id="author-name">@Model.AuthorName</span>
-            <br/>
-            <p>@Model.AdditionalInfo</p>
-            <br/>
-            @if (Model.IsJoinAvailable)
-            {
-                <span>@string.Format(Localization.EventPageParticipantsCount, Model.ParticipantsCount)</span>
-                @Html.Partial("_JoinEventPartial", new JoinEventViewModel {EventId = Model.Id})
-            }
-        </div>
-        <div id="event-calendar">
-            <div id="event-date">
-                <i class="fa fa-calendar" aria-hidden="true"></i>
-                <span>@Model.EventDateTime.ToString("dd.MM.yyyy")</span>
-                <i class="fa fa-clock-o" aria-hidden="true"></i>
-                <span>@Model.EventDateTime.ToString("HH:mm") - @Model.EventDateTime.AddMinutes(Model.Duration).ToString("HH:mm")</span>
-            </div>
-            <div id="icons-container">
-                <i class="fa fa-calendar-plus-o" aria-hidden="true"></i>
-                <i class="fa fa-envelope-o" aria-hidden="true"></i>
-                <i class="fa fa-print" aria-hidden="true"></i>
-            </div>
-            @if (Model.CanEdit)
-            {
-                <div id="edit-buttons-container">
-                    <button >@Localization.Edit</button>
-                    <button >@Localization.Cancel</button>
-                </div>
-            }
-        </div>
-        @if (Model.IsJoinAvailable && Model.CanEdit && Model.ParticipantsCount > 0)
-        {
-            <div class="participants-container">
-                <span>@Localization.RegisteredParticipants</span>
-                <ul>
-                    @foreach (var pair in Model.ParticipantsEmails)
+        <div class="row">
+            <div class="col-md-8">
+                <div id="event-info">
+                    <div class="event-title">@Model.Title</div>
+                    <br/>
+                    <i class="fa fa-user" aria-hidden="true"></i>
+                    <span id="author-name">@Model.AuthorName</span>
+                    <br/>
+                    <p>@Model.AdditionalInfo</p>
+                    <br/>
+                    @if (Model.IsJoinAvailable)
                     {
-                        <li class="participant-email-li col-md-4">
-                            <span>@pair.Value</span>
-                            <i class="fa fa-times" aria-hidden="true" data-form-id="#remove-participant-@pair.Key"></i>
-                            @using (Html.BeginForm("RemoveParticipant", "Event", new {participantId = pair.Key}, FormMethod.Post, new {@class = "remove-participant-form"}))
-                            {
-                                @Html.AntiForgeryToken()
-                                <input type="submit" value="submit" id="remove-participant-@pair.Key" class="remove-participant-submit"/>
-                            }
-                        </li>
+                        @Html.Partial("_JoinEventPartial", new JoinEventViewModel {EventId = Model.Id, ParticipantsCount = Model.ParticipantsEmails.Count})
                     }
-                </ul>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div id="event-calendar">
+                    <div id="event-date">
+                        <i class="fa fa-calendar" aria-hidden="true"></i>
+                        <span>@Model.EventDateTime.ToString("dd.MM.yyyy")</span>
+                        <i class="fa fa-clock-o" aria-hidden="true"></i>
+                        <span>@Model.EventDateTime.ToString("HH:mm") - @Model.EventDateTime.AddMinutes(Model.Duration).ToString("HH:mm")</span>
+                    </div>
+                    <div id="icons-container">
+                        <i class="fa fa-calendar-plus-o" aria-hidden="true"></i>
+                        <i class="fa fa-envelope-o" aria-hidden="true"></i>
+                        <i class="fa fa-print" aria-hidden="true"></i>
+                    </div>
+                    @if (Model.CanEdit)
+                    {
+                        <div id="edit-buttons-container">
+                            <button id="btn-edit-event">@Localization.Edit</button>
+                            <button>@Localization.Cancel</button>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+        @if (Model.IsJoinAvailable && Model.CanEdit && Model.ParticipantsEmails.Count > 0)
+        {
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="participants-container">
+                        <span>@Localization.RegisteredParticipants</span>
+                        <ul>
+                            @foreach (var pair in Model.ParticipantsEmails)
+                            {
+                                <li class="participant-email-li col-md-4">
+                                    <span>@pair.Value</span>
+                                    <i class="fa fa-times" aria-hidden="true" data-form-id="#remove-participant-@pair.Key"></i>
+                                    @using (Html.BeginForm("RemoveParticipant", "Event", new {participantId = pair.Key}, FormMethod.Post, new {@class = "remove-participant-form"}))
+                                    {
+                                        @Html.AntiForgeryToken()
+                                        <input type="submit" value="submit" id="remove-participant-@pair.Key" class="remove-participant-submit"/>
+                                    }
+                                </li>
+                            }
+                        </ul>
+                    </div>
+                </div>
             </div>
         }
     </div>
+
 </div>
 
 @Html.Partial("_RoomMapRoutePartial", Model)

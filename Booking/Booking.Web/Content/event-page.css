@@ -22,23 +22,37 @@
 
 #join-event-form {
     display: inline-block;
-    padding-left: 20px;
+    overflow: visible;
+    white-space: nowrap;
 }
 
-#email {
+#email, .text-input {
     display: inline-block;
     border: 2px solid #F4F6FB;
-    border-radius: 50px;
+    border-radius: 25px;
     background: white;
-    margin-left: 10px;
     outline: none;
     height: 35px;
     font-size: 13px;
     padding: 15px;
     width: 260px;
+    margin: 10px;
 }
 
-input[type="submit"] {
+.text-area {
+    border: 2px solid #F4F6FB;
+    border-radius: 15px;
+    outline: none;
+    font-size: 13px;
+    margin: 10px;
+    padding: 15px;
+    background: white;
+    height: auto;
+    width: 100%;
+    resize: none;
+}
+
+#join-event-submit, .remove-participant-submit {
     width: 0;
     visibility: hidden;
 }
@@ -81,8 +95,6 @@ input[type="submit"] {
 
 .participant-email-li span { font-size: 14px; }
 
-.participant-email-li:hover { cursor: pointer; }
-
 .participant-email-li:hover .fa-times { visibility: visible; }
 
 .remove-participant-form, .remove-participant-submit {
@@ -91,12 +103,14 @@ input[type="submit"] {
     visibility: hidden;
 }
 
-#event-info { display: table-cell;
-    vertical-align: top; }
+#event-info {
+    vertical-align: top;
+    width: 100%;
+}
 
 #event-calendar {
+    float: right;
     vertical-align: top;
-    display: table-cell;
     width: 270px;
 }
 
@@ -146,7 +160,7 @@ p { margin-top: 20px; }
 
 #edit-buttons-container { text-align: center; }
 
-#edit-buttons-container button {
+#edit-buttons-container button, #btn-save-event {
     border: 0;
     border-radius: 20px;
     background: #D7D9DE;
@@ -165,6 +179,13 @@ p { margin-top: 20px; }
     color: white;
 }
 
+#btn-save-event {
+    background: #f95752;
+    color: white;
+}
+
+#btn-save-event:hover { background: #E94944; }
+
 
 .buttons-container {
     height: 200px;
@@ -173,7 +194,7 @@ p { margin-top: 20px; }
 }
 
 .link-btn-container {
-    vertical-align:top;
+    vertical-align: top;
     align-self: center;
     display: inline-block;
     width: 200px;
@@ -182,9 +203,7 @@ p { margin-top: 20px; }
     height: 120px;
 }
 
-.link-btn-container:hover {
-    cursor: pointer;
-}
+.link-btn-container:hover { cursor: pointer; }
 
 .btn-squares {
     width: 100px;
@@ -201,10 +220,14 @@ p { margin-top: 20px; }
     width: 30px;
 }
 
-.square-red {
-    background: #f95752;
-}
+.square-red { background: #f95752; }
 
-.link-buttons {
-    text-align: center;
-}
+.link-buttons { text-align: center; }
+
+#btn-save-event { background: #f95752; }
+
+.col-md-8, .col-md-4 { padding: 0; }
+
+#event-info { overflow-x: visible; }
+
+#event-title-edit { width: 425px; }

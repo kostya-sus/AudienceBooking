@@ -5,7 +5,8 @@
 {
     @Html.AntiForgeryToken()
 
-    <span>@Localization.Join</span>
+    <span>@string.Format(Localization.EventPageParticipantsCount, Model.ParticipantsCount)</span>
+    <span style="margin-left: 15px;">@Localization.Join</span>
     <div class="join-event-container">
         @Html.HiddenFor(m => m.EventId)
         @Html.ValidationMessageFor(m => m.Email, "", new {@class = "validation-error"})

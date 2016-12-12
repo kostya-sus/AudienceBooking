@@ -12,5 +12,7 @@ namespace Booking.Web.ViewModels.Event
         public string Email { get; set; }
 
         public Guid EventId { get; set; }
+
+        public int ParticipantsCount { get; set; }
     }
 }

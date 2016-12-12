@@ -372,6 +372,7 @@
     <Content Include="Views\Event\Index.cshtml" />
     <Content Include="Views\Shared\_RoomMapRoutePartial.cshtml" />
     <Content Include="Views\Shared\_JoinEventPartial.cshtml" />
+    <Content Include="Views\Event\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
