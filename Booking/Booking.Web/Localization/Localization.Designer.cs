@@ -223,6 +223,15 @@ namespace Booking.Web.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Выйти.
+        /// </summary>
+        public static string Logout {
+            get {
+                return ResourceManager.GetString("Logout", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Напишите, если у вас есть идеи, предложения, замечания или вопросы..
         /// </summary>
         public static string MessageIdea {

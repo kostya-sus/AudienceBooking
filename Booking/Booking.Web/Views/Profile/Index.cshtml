@@ -1,52 +1,56 @@
-﻿@using Booking.Web.Localization
+﻿@using Booking.Web.Localization;
+@using Booking.Web.ViewModels.Manage;
 
 @{
     ViewBag.Title = "Profile";
     Layout = "~/Views/Shared/_Layout.cshtml";
-    ViewBag.ActiveLink = "Login";
+    ViewBag.ActiveLink = "Profile";
+}
+@section styles{
+    @Styles.Render("~/Content/home-page.css")
+    @Styles.Render("~/Content/Site.css")
+    @Styles.Render("~/Content/form-inputs.css")
+    @Styles.Render("~/Content/font-awesome/css/font-awesome.css")
+}
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/Scripts/project/contact-scripts.js")
 }
 
-<h2>Profile</h2>
+
+
   
-<div>
-    <div>
-        <div style="width: 100%; float: right">
-            <input type="submit" disabled="disabled" value=@Localization.Send class="login-submit" />
-        </div>
-        <div>
+<div class="page-container">
+    <div style="width: 100%;display: block">
+        @if ((User.IsInRole("Admin"))&&(User.Identity.Name!=)) { }
+        <input type="submit" disabled="disabled" value=@Localization.Logout class="login-submit" style="float: right"/>
+    </div>
+    <div style="width: 50%; height: 200px; background-color: red; display: inline-block">
+
+    </div>
+    <div style="width: 49%; height: 200px; background-color: yellowgreen; display: inline-block">
+        @using (Html.BeginForm("Index", "Profile", FormMethod.Post, new { @id = "Login", role = "form" }))
+        {
             <div>
-                <div style="width: 100%;">
-                    <input type="submit" disabled="disabled" value=@Localization.Send class="login-submit" />
-                </div>
-
-
-                @using (Html.BeginForm("Index", "Profile", FormMethod.Post, new { @id = "Login", role = "form" }))
-                {
-                    <div>
-                        @Html.ValidationMessageFor(m => m.Password, "", new { @class = "validation-error" })
-                        @Html.TextBoxFor(m => m.PasswordOld, new { placeholder = @Localization.PasswordOld, @id = "oldPassword", type = "password" })
-                    </div>
-                    <div>
-                        @Html.ValidationMessageFor(m => m.Password, "", new { @class = "validation-error" })
-                        @Html.TextBoxFor(m => m.PasswordNew, new { placeholder = @Localization.PasswordNew, @id = "newPassword", type = "password" })
-                    </div>
-                    <div>
-                        @Html.ValidationMessageFor(m => m.Password, "", new { @class = "validation-error" })
-                        @Html.TextBoxFor(m => m.PasswordNewRepeat, new { placeholder = @Localization.PasswordNewRepeat, @id = "confirmNewPassword", type = "password" })
-                    </div>
-                    <input type="submit" disabled="disabled" value=@Localization.Send class="login-submit" />
-
-                    if (ViewData["PasswordSuccess"] != null)
-                    {
-                        <span>@Localization.PasswordSucsess</span>
-                    }
-
-                }
-
-
-
+                @Html.ValidationMessageFor(m => m.OldPassword, "", new { @class = "validation-error" })
+                @Html.TextBoxFor(m => m.OldPassword, new { placeholder = @Localization.PasswordOld, @id = "oldPassword", type = "password" })
             </div>
-        </div>
+                    <div>
+                        @Html.ValidationMessageFor(m => m.NewPassword, "", new { @class = "validation-error" })
+                        @Html.TextBoxFor(m => m.NewPassword, new { placeholder = @Localization.PasswordNew, @id = "newPassword", type = "password" })
+                    </div>
+                    <div>
+                        @Html.ValidationMessageFor(m => m.ConfirmPassword, "", new { @class = "validation-error" })
+                        @Html.TextBoxFor(m => m.ConfirmPassword, new { placeholder = @Localization.PasswordNewRepeat, @id = "confirmNewPassword", type = "password" })
+                    </div>
+                    <input type="submit" disabled="disabled" value=@Localization.Send class="login-submit" />
+
+            if (ViewData["PasswordSuccess"] != null)
+            {
+                <span>@Localization.PasswordSucsess</span>
+            }
+
+        }
+
     </div>
 </div>
-

@@ -31,7 +31,7 @@
                     
                         @if (User.Identity.IsAuthenticated)
                         {
-                            <li class="@(ViewBag.ActiveLink == "Login" ? "active" : "")">
+                            <li class="@(ViewBag.ActiveLink == "Profile" ? "active" : "")">
                                 <a href="@Url.Action("Index", "Profile")">
                                     <i class="fa fa-user" aria-hidden="true"></i> @User.Identity.Name</a>
                             </li>
