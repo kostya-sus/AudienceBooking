@@ -9,6 +9,10 @@ function timestampIsBetween(time, left, right) {
 }
 
 function toggleActiveAudiences() {
+    if (events === undefined || events === null) {
+        return;
+    }
+
     var time = posToTime(lowerHourBound, upperHourBound, tdWidth, $("#slider-draggable").position().left);
 
     var $div;
