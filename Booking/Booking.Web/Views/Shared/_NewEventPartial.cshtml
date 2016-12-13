@@ -2,7 +2,7 @@
 @model Booking.Web.ViewModels.Event.CreateEditEventViewModel
 @using (Ajax.BeginForm("Create", "Event", new AjaxOptions
 {
-    InsertionMode = InsertionMode.InsertAfter, HttpMethod = "Post", OnBegin = "ajaxSuccess"
+    InsertionMode = InsertionMode.InsertAfter, HttpMethod = "Post", OnSuccess = "ajaxSuccess"
 }))
 {
     @Html.AntiForgeryToken()
@@ -24,58 +24,54 @@
                         <i onclick="NextMonth('EventMonth')" class="fa fa-caret-up" aria-hidden="true"></i>
                     </td>
                     <td style="padding-left: 26px">
-                        <i onclick="incrementHourValue('StartHour', 'StartMinute')" class="fa fa-caret-up" aria-hidden="true"></i>
+                        <i onclick="incrementHourValue('StartHour', 'StartMinute', 'labelStartHour','labelStartMinute')" class="fa fa-caret-up" aria-hidden="true"></i>
                     </td>
                     <td></td>
                     <td style="padding-left: 8px">
-                        <i onclick="incrementMinuteValue('StartMinute', 'StartHour')" class="fa fa-caret-up" aria-hidden="true"></i>
+                        <i onclick="incrementMinuteValue('StartMinute', 'StartHour', 'labelStartMinute','labelStartHour')" class="fa fa-caret-up" aria-hidden="true"></i>
                     </td>
                     <td></td>
                     <td style="padding-left: 8px">
-                        <i onclick="incrementHourValue('EndHour', 'EndMinute')" class="fa fa-caret-up" aria-hidden="true"></i>
+                        <i onclick="incrementHourValue('EndHour', 'EndMinute', 'labelEndHour','labelEndMinute')" class="fa fa-caret-up" aria-hidden="true"></i>
                     </td>
                     <td></td>
                     <td style="padding-left: 8px">
-                        <i onclick="incrementMinuteValue('EndMinute', 'EndHour')" class="fa fa-caret-up" aria-hidden="true"></i>
+                        <i onclick="incrementMinuteValue('EndMinute', 'EndHour', 'labelEndMinute','labelEndHour')" class="fa fa-caret-up" aria-hidden="true"></i>
                     </td>
                 </tr>
                 <tr>
                     <td style="padding-left: 30px">
-                        @* @Html.EditorFor(m => m.EventDay, new { htmlAttributes = new { @disabled = "disabled" } })*@
                         @Html.HiddenFor(m => m.EventDay)
-                        @* <input id="EventDay" max="31" type="number" name="EventDay"  value="@Model.EventDay"/>*@
                         <input id="labelDay" disabled="disabled" type="number"/>
                     </td>
                     <td style="padding-left: -1px">
                         @Html.EditorFor(m => m.EventMonth, new {disabled = "disabled"})
-                        @*<input type="number" id="month" value="@Model.EventMonth"/>*@
                         <input id="monthLabel" disabled="disabled" type="text"/>
                     </td>
                     <td style="padding-left: 18px">
                         @Html.HiddenFor(m => m.StartHour)
                         <input id="labelStartHour" disabled="disabled" type="number"/>
-                        @* @Html.EditorFor(m => m.StartHour, new {disabled = "disabled", @readonly = "readonly"})*@
                     </td>
                     <td>
                         <span>:</span>
                     </td>
                     <td>
-                        @Html.DisplayFor(m => m.StartMinute, new {htmlAttributes = new {@disabled = "disabled"}})
-                        @*<input disabled="disabled" type="number" id="minuteFrom" value="@Model.StartMinute"/>*@
+                        @Html.HiddenFor(m => m.StartMinute)
+                        <input id="labelStartMinute" disabled="disabled" type="number" />
                     </td>
                     <td>
                         <span>-</span>
                     </td>
                     <td>
-                        @Html.EditorFor(m => m.EndHour, new {htmlAttributes = new {@disabled = "disabled"}})
-                        @*<input disabled="disabled" id="hourTo" type="number" value="@Model.EndHour"/>*@
+                        @Html.HiddenFor(m => m.EndHour)
+                        <input id="labelEndHour" disabled="disabled" type="number" />
                     </td>
                     <td>
                         <span>:</span>
                     </td>
                     <td>
-                        @Html.EditorFor(m => m.EndMinute, new {htmlAttributes = new {@disabled = "disabled"}})
-                        @*<input type="number" disabled="disabled" id="minuteTo" value="@Model.EndMinute"/>*@
+                        @Html.HiddenFor(m => m.EndMinute)
+                        <input id="labelEndMinute" disabled="disabled" type="number" />
                     </td>
                 </tr>
                 <tr>
@@ -86,19 +82,19 @@
                         <i onclick="PrevMonth('EventMonth')" class="fa fa-caret-down" aria-hidden="true"></i>
                     </td>
                     <td style="padding-left: 26px">
-                        <i onclick="decrementHourValue('StartHour')" class="fa fa-caret-down" aria-hidden="true"></i>
+                        <i onclick="decrementHourValue('StartHour', 'labelStartHour')" class="fa fa-caret-down" aria-hidden="true"></i>
                     </td>
                     <td></td>
                     <td style="padding-left: 8px">
-                        <i onclick="decrementMinuteValue('StartMinute', 'StartHour')" class="fa fa-caret-down" aria-hidden="true"></i>
+                        <i onclick="decrementMinuteValue('StartMinute', 'StartHour', 'labelStartMinute', 'labelStartHour')" class="fa fa-caret-down" aria-hidden="true"></i>
                     </td>
                     <td></td>
                     <td style="padding-left: 8px">
-                        <i onclick="decrementHourValue('EndHour')" class="fa fa-caret-down" aria-hidden="true"></i>
+                        <i onclick="decrementHourValue('EndHour', 'labelEndHour')" class="fa fa-caret-down" aria-hidden="true"></i>
                     </td>
                     <td></td>
                     <td style="padding-left: 8px">
-                        <i onclick="decrementMinuteValue('EndMinute', 'EndHour')" class="fa fa-caret-down" aria-hidden="true"></i>
+                        <i onclick="decrementMinuteValue('EndMinute', 'EndHour', 'labelEndMinute', 'labelEndHour')" class="fa fa-caret-down" aria-hidden="true"></i>
                     </td>
                 </tr>
             </table>
@@ -110,6 +106,7 @@
 
         </div>
         <div class="line">
+            @Html.ValidationMessageFor(m => m.Title, "", new { @class = "validation-error" })
             @Html.TextBoxFor(m => m.Title, new {@class = "input-style", placeholder = Localization.Title})
         </div>
         <div class="line">
@@ -119,8 +116,8 @@
             <table>
                 <tr>
                     <td id="td-style">
-                        <div class="checkboxFive">
-                            <input type="checkbox" value="@Model.IsJoinAvailable" id="IsJoinAvailable" name="" />
+                        <div class="checkboxWhite">
+                            <input type="checkbox" value="@Model.IsJoinAvailable" id="IsJoinAvailable"/>
                             <label for="IsJoinAvailable"></label>
                         </div>
                     </td>
@@ -147,7 +144,7 @@
             <table>
                 <tr>
                     <td id="td-style">
-                        <div class="checkboxFive">
+                        <div class="checkboxWhite">
                             <input type="checkbox" value="@Model.IsAuthorShown" id="IsAuthorShow" name="" />
                             <label for="IsAuthorShow"></label>
                         </div>

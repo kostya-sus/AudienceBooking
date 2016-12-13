@@ -170,42 +170,11 @@ footer {
         padding-top: 10px;
     }
     
-    /*input[type="checkbox"] {
-    margin: 4px 0 0;
-    margin-top: 1px \9;
-    height: 25px;
-    width: 25px;
-}
-       .whiteCheckbox {
-    	position:absolute; z-index:-1000; left:-1000px; overflow: hidden; clip: rect(0 0 0 0); height:1px; width:1px; margin:-1px; padding:0; border:0;
-    }
-    
-    .whiteCheckbox + label {
-    	padding-left:35px;
-    	height:30px; 
-    	display:inline-block;
-    	line-height:30px;
-    	background-repeat:no-repeat;
-    	background-position: 0 0;
-    	font-size:30px;
-    	vertical-align:middle;
-    	cursor:pointer;
-    }
-    
-    .whiteCheckbox:checked + label {
-    	background-position: 0 -30px;
-    }
-    [for="whiteCheckbox1"] {
-    	background-image:url(http://csscheckbox.com/checkboxes/u/csscheckbox_f60067e68146be412873f96f1d2458cd.png);
-    }
-    [for="whiteCheckbox2"]{
-        background-image:url(http://csscheckbox.com/checkboxes/u/csscheckbox_f60067e68146be412873f96f1d2458cd.png);
-    }*/  
-    .checkboxFive {
+    .checkboxWhite {
 	width: 25px;
 	position: relative;
 }
-    .checkboxFive label {
+    .checkboxWhite label {
 	cursor: pointer;
 	position: absolute;
 	width: 25px;
@@ -216,7 +185,7 @@ footer {
         border-radius: 3px;
 	border:1px solid #ebeef7;
 }
-    .checkboxFive label:after {
+    .checkboxWhite label:after {
 	opacity: 0;
 	content: '';
 	position: absolute;
@@ -231,7 +200,7 @@ footer {
 
 	transform: rotate(-45deg);
 }
-    .checkboxFive input[type=checkbox]:checked + label:after {
+    .checkboxWhite input[type=checkbox]:checked + label:after {
 	opacity: 1;
 }
     
@@ -312,12 +281,7 @@ footer {
     }
 
     #EventDay {
-        display: none;
-    width: 30px;
-    border: 1px;
-    margin-left: 4px;
-        background: #FFF;
-        
+        display: none;       
     }
     #labelDay {
         width: 30px;
@@ -328,10 +292,6 @@ footer {
 
     #StartHour {
         display: none;
-        width: 30px;
-    border: 1px;
-    margin-left: 4px;
-        background: #FFF;
     }
     #labelStartHour {
         width: 30px;
@@ -340,27 +300,34 @@ footer {
         background: #FFF;
     }
     #EndHour {
-        background: #FFF;
+        display: none;
+    }
+    #labelEndHour {
+         background: #FFF;
         border: 1px;
         margin-left: 4px;
         width: 30px;
     }
     #StartMinute {
+        display: none;
+    }
+    #labelStartMinute {
         background: #FFF;
         border: 1px;
         margin-left: 4px;
         width: 30px;
     }
     #EndMinute {
+        display: none;
+    }
+    #labelEndMinute {
         background: #FFF;
         border: 1px;
         margin-left: 4px;
         width: 30px;
     }
-    #EventMonth {display: none;
-        background: #FFF;
-        border: 1px;
-        width: 50px;
+    #EventMonth {
+        display: none;
     }
     #monthLabel {
         width: 64px;

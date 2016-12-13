@@ -10,7 +10,7 @@
 };
 
 var ajaxSuccess = function () {
-    $('modalHiden').modal('hide');
+    $("#myModal").modal('hide');
 }
 $(document)
     .ready(function() {
@@ -21,28 +21,19 @@ $(document)
                     .load(eventUrl,
                         function() {
                             for (var i = 0; i < 12; i++) {
-                                incrementHourValue('StartHour');
-                                incrementHourValue('EndHour');
+                                incrementHourValue('StartHour', 'StartMinute','labelStartHour', 'labelStartMinute');
+                                incrementHourValue('EndHour', 'EndMinute', 'labelEndHour','labelEndMinute');
                             }
                             incrementDayValue('EventDay', 'labelDay');
-                            incrementMinuteValue('StartMinute', 'StartHour');
-                            incrementMinuteValue('EndMinute');
+                            incrementMinuteValue('StartMinute', 'StartHour', 'labelStartMinute','labelStartHour');
+                            incrementMinuteValue('EndMinute', 'EndHour', 'labelEndMinute', 'labelEndHour');
                             NextMonth('EventMonth');
-
-                            $('#myForm')
-                                .ajaxForm({
-                                    url: '', // or whatever
-                                    dataType: 'json',
-                                    success: function(response) {
-                                        alert("The server says: " + response);
-                                    }
-                                });
 
                             $("#new-event-popup .fa-caret-down, #new-event-popup .fa-caret-up")
                                 .click(checkIfAudienceIsFree);
                         });
                 $(".btnCreate")
-                    .click(function() {
+                    .click(function () {
 
                     });
             });
@@ -51,32 +42,41 @@ $(document)
 function checkIfAudienceIsFree() {
     var audienceId = document.getElementById("ChosenAudience").value;
 
-    var day = document.getElementById('EventDay').value;
-    var month = document.getElementById('EventMonth').value - 1;
-    var hourFrom = document.getElementById('StartHour').value;
-    var minuteFrom = document.getElementById('StartMinute').value;
-    var hourTo = document.getElementById('EndHour').value;
-    var minuteTo = document.getElementById('EndMinute').value;
+    var day = parseInt(document.getElementById('EventDay').value);
+    var month = parseInt(document.getElementById('EventMonth').value );
+    var hourFrom = parseInt(document.getElementById('StartHour').value);
+    var minuteFrom = parseInt(document.getElementById('StartMinute').value);
+    var hourTo = parseInt(document.getElementById('EndHour').value);
+    var minuteTo = parseInt(document.getElementById('EndMinute').value);
 
-    var dateNow = Date.now();
+    var dateNow = new Date();
+    var year = dateNow.getFullYear();
 
-    var dateEvent = new Date(dateNow.year, month, day, hourFrom, minuteFrom);
-    var endEventDate = new Date(dateNow.year, month, day, hourTo, minuteTo);
-    var duration = endEventDate - dateEvent;
-    duration = duration.getTime / 60000;
+    var time = month + "/" + day + "/" + year + " " + hourFrom + ':' + minuteFrom + ':' + 0;
+
+    var duration = (hourTo - hourFrom) * 60 + (minuteTo - minuteFrom);
 
     var url = $("#audience-is-free-url").val() +
         "?audienceId=" +
         audienceId +
         "&dateTime=" +
-        dateEvent.toLocaleDateString() +
+        time +
         "&duration=" +
         duration;
 
-    $.getJSON(url)
+    $.get(url)
         .done(function(isFree) {
             toggleIsFreeMessage(isFree);
         });
+}
+
+function toggleIsFreeMessage(isFree) {
+    if (isFree === 'False') {
+        $("#errorMessage").css("visibility", 'visible');
+    } else {
+        $("#errorMessage").css("visibility", 'hidden');
+    }
+    
 }
 
 function changeValue(id, value) {
@@ -103,7 +103,7 @@ function decrementDayValue(id, labelId) {
     changeValue(labelId, value);
 }
 
-function incrementHourValue(id, minuteId) {
+function incrementHourValue(id, minuteId, labelId, minuteLabelId) {
     var value = parseInt(document.getElementById(id.toString()).value);
     value = isNaN(value) ? 12 : value;
     if (value !== 19) {
@@ -111,43 +111,48 @@ function incrementHourValue(id, minuteId) {
         if (value === 19) {
             value = 0;
             changeValue(minuteId, value);
+            changeValue(minuteLabelId, value);
             //document.getElementById(minuteId.toString()).value = 0;
         }
     }
     changeValue(id, value);
+    changeValue(labelId, value);
 }
 
-function decrementHourValue(id) {
+function decrementHourValue(id, lableId) {
     var value = parseInt(document.getElementById(id.toString()).value);
     value = isNaN(value) ? 12 : value;
     if (value !== 12) {
         value--;
     }
     changeValue(id, value);
+    changeValue(lableId, value);
 }
 
-function incrementMinuteValue(idMinute, idHour) {
+function incrementMinuteValue(idMinute, idHour, lableMinuteId, lableHourId) {
     var value = parseInt(document.getElementById(idMinute.toString()).value);
     value = isNaN(value) ? 30 : value;
     if (value === 55) {
         value = 0;
-        incrementHourValue(idHour);
+        incrementHourValue(idHour, idMinute, lableHourId, lableMinuteId);
     } else {
         value += 5;
     }
     changeValue(idMinute, value);
+    changeValue(lableMinuteId, value);
 }
 
-function decrementMinuteValue(idMinute, idHour) {
+function decrementMinuteValue(idMinute, idHour, labelMinuteId, labelHourId) {
     var value = parseInt(document.getElementById(idMinute).value);
     value = isNaN(value) ? 30 : value;
     if (value === 0) {
         value = 55;
-        decrementHourValue(idHour);
+        decrementHourValue(idHour, labelHourId);
     } else {
         value -= 5;
     }
     changeValue(idMinute, value);
+    changeValue(labelMinuteId, value);
 }
 
 function NextMonth(id) {
@@ -213,6 +218,3 @@ function SetMonthName(value) {
     }
 }
 
-function toggleIsFreeMessage(isFree) {
-    $("#errorMessage").css("visibility", isFree);
-}

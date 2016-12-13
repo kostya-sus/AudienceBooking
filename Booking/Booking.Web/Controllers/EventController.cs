@@ -6,13 +6,14 @@ using Booking.Repositories;
 using Booking.Services.Interfaces;
 using Booking.Services.Services;
 using Booking.Web.ViewModels.Event;
+using Microsoft.Ajax.Utilities;
 
 namespace Booking.Web.Controllers
 {
     public class EventController : Controller
     {
         private readonly IAudienceService _audienceService;
-
+        private readonly IEventService _eventService;
         public EventController()
         {
             var uof = new UnitOfWork();
@@ -70,15 +71,18 @@ namespace Booking.Web.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create(CreateEditEventViewModel vm)
         {
-            //var dateEvent = new DateTime(DateTime.Now.Year, vm.EventMonth, vm.EventDay, vm.StartHour, vm.StartMinute, 0);
-            //var duration = (vm.EndHour - vm.StartHour)*60 + (vm.EndMinute - vm.StartMinute);
-            //var isFree = _audienceService.IsFree(vm.ChosenAudience, dateEvent, duration);
-
-            //if (duration < 20 || !isFree)
+            var dateEvent = new DateTime(DateTime.Now.Year, vm.EventMonth, vm.EventDay, vm.StartHour, vm.StartMinute, 0);
+            var duration = (vm.EndHour - vm.StartHour) * 60 + (vm.EndMinute - vm.StartMinute);
+            var isFree = _audienceService.IsFree(vm.ChosenAudience, dateEvent, duration);
+            if (duration < 20 || !isFree)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            //if (!vm.IsAuthorShown && vm.AuthorName.IsNullOrWhiteSpace())
             //{
             //    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             //}
-            
+
             return new HttpStatusCodeResult(HttpStatusCode.OK);
         }
 

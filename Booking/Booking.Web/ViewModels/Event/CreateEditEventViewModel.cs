@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using Booking.Enums;
 
 namespace Booking.Web.ViewModels.Event
@@ -19,7 +20,8 @@ namespace Booking.Web.ViewModels.Event
         public int EndHour { get; set; }
 
         public int EndMinute { get; set; }
-
+        [Required(ErrorMessageResourceType = typeof(Localization.Localization),
+            ErrorMessageResourceName = "ValidationMessage_Required")]
         public string Title { get; set; }
 
         public string AdditionalInfo { get; set; }
