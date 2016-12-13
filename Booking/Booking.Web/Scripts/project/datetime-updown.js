@@ -55,108 +55,123 @@
         $endMinuteView.text(minutes);
     }
 
+    function isNewDateValid(startDate, endDate) {
+        var now = new Date();
+        var diff = Math.abs(endDate - startDate);
+        var minutes = Math.floor(diff / 60000);
+        return now < startDate && minutes >= 20;
+    }
+
+    function backupDateAndTryToChange(callback) {
+        var prevStartDate = new Date(startDate.getTime());
+        var prevEndDate = new Date(endDate.getTime());
+        callback();
+        if (isNewDateValid(startDate, endDate)) {
+            setStartDate();
+            setEndDate();
+            updateView();
+        } else {
+            startDate = prevStartDate;
+            endDate = prevEndDate;
+        }
+    }
+
     updateView();
 
     $day.find(".fa-caret-up")
         .click(function() {
-            startDate.setDate(startDate.getDate() + 1);
-            endDate.setDate(endDate.getDate() + 1);
-            setStartDate();
-            setEndDate();
-            updateView();
+            backupDateAndTryToChange(function() {
+                startDate.setDate(startDate.getDate() + 1);
+                endDate.setDate(endDate.getDate() + 1);
+            });
         });
     $day.find(".fa-caret-down")
         .click(function() {
-            startDate.setDate(startDate.getDate() - 1);
-            endDate.setDate(endDate.getDate() - 1);
-            setStartDate();
-            setEndDate();
-            updateView();
+            backupDateAndTryToChange(function() {
+                startDate.setDate(startDate.getDate() - 1);
+                endDate.setDate(endDate.getDate() - 1);
+            });
         });
 
     $month.find(".fa-caret-up")
         .click(function() {
-            startDate.setMonth(startDate.getMonth() + 1);
-            endDate.setMonth(endDate.getMonth() + 1);
-            setStartDate();
-            setEndDate();
-            updateView();
+            backupDateAndTryToChange(function() {
+                startDate.setMonth(startDate.getMonth() + 1);
+                endDate.setMonth(endDate.getMonth() + 1);
+            });
         });
     $month.find(".fa-caret-down")
         .click(function() {
-            startDate.setMonth(startDate.getMonth() - 1);
-            endDate.setMonth(endDate.getMonth() - 1);
-            setStartDate();
-            setEndDate();
-            updateView();
+            backupDateAndTryToChange(function() {
+                startDate.setMonth(startDate.getMonth() - 1);
+                endDate.setMonth(endDate.getMonth() - 1);
+            });
         });
 
     $year.find(".fa-caret-up")
         .click(function() {
-            startDate.setYear(startDate.getYear() + 1);
-            endDate.setYear(endDate.getYear() + 1);
-            setStartDate();
-            setEndDate();
-            updateView();
+            backupDateAndTryToChange(function() {
+                startDate.setYear(startDate.getYear() + 1);
+                endDate.setYear(endDate.getYear() + 1);
+            });
         });
     $year.find(".fa-caret-down")
         .click(function() {
-            startDate.setYear(startDate.getYear() - 1);
-            endDate.setYear(endDate.getYear() - 1);
-            setStartDate();
-            setEndDate();
-            updateView();
+            backupDateAndTryToChange(function() {
+                startDate.setYear(startDate.getYear() - 1);
+                endDate.setYear(endDate.getYear() - 1);
+            });
         });
 
     $startHour.find(".fa-caret-up")
-        .click(function () {
-            startDate.setHours(startDate.getHours() + 1);
-            setStartDate();
-            updateView();
+        .click(function() {
+            backupDateAndTryToChange(function() {
+                startDate.setHours(startDate.getHours() + 1);
+            });
         });
     $startHour.find(".fa-caret-down")
-        .click(function () {
-            startDate.setHours(startDate.getHours() - 1);
-            setStartDate();
-            updateView();
+        .click(function() {
+            backupDateAndTryToChange(function() {
+                startDate.setHours(startDate.getHours() - 1);
+            });
         });
 
     $endHour.find(".fa-caret-up")
-        .click(function () {
-            endDate.setHours(endDate.getHours() + 1);
-            setEndDate();
-            updateView();
+        .click(function() {
+            backupDateAndTryToChange(function() {
+                endDate.setHours(endDate.getHours() + 1);
+            });
         });
     $endHour.find(".fa-caret-down")
-        .click(function () {
-            endDate.setHours(endDate.getHours() - 1);
-            setEndDate();
-            updateView();
+        .click(function() {
+            backupDateAndTryToChange(function() {
+                endDate.setHours(endDate.getHours() - 1);
+            });
         });
 
     $startMinute.find(".fa-caret-up")
-        .click(function () {
-            startDate.setMinutes(startDate.getMinutes() + 1);
-            setStartDate();
-            updateView();
+        .click(function() {
+            backupDateAndTryToChange(function() {
+                startDate.setMinutes(startDate.getMinutes() + 1);
+            });
         });
     $startMinute.find(".fa-caret-down")
-        .click(function () {
-            startDate.setMinutes(startDate.getMinutes() - 1);
-            setStartDate();
-            updateView();
+        .click(function() {
+            backupDateAndTryToChange(function() {
+                startDate.setMinutes(startDate.getMinutes() - 1);
+            });
         });
 
     $endMinute.find(".fa-caret-up")
-        .click(function () {
-            endDate.setMinutes(endDate.getMinutes() + 1);
-            setEndDate();
-            updateView();
+        .click(function() {
+            backupDateAndTryToChange(function() {
+                endDate.setMinutes(endDate.getMinutes() + 1);
+            });
         });
     $endMinute.find(".fa-caret-down")
-        .click(function () {
-            endDate.setMinutes(endDate.getMinutes() - 1);
-            setEndDate();
-            updateView();
+        .click(function() {
+            backupDateAndTryToChange(function() {
+                endDate.setMinutes(endDate.getMinutes() - 1);
+            });
         });
 }
