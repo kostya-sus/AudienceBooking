@@ -207,8 +207,7 @@
 }
 
 .schedule-event-item:hover {
-    text-decoration: none;
-    color: white;
+    cursor: pointer;
 }
 
 .schedule-event-item-private {

@@ -246,6 +246,7 @@
     <Content Include="Content\error.css" />
     <Content Include="Content\datepicker.css" />
     <Content Include="Content\event-page.css" />
+    <Content Include="Content\event-popups.css" />
     <Content Include="Content\font-awesome\css\font-awesome.css" />
     <Content Include="Content\font-awesome\css\font-awesome.min.css" />
     <Content Include="Content\font-awesome\fonts\fontawesome-webfont.svg" />
@@ -376,6 +377,7 @@
     <Content Include="Views\Shared\_RoomMapRoutePartial.cshtml" />
     <Content Include="Views\Shared\_JoinEventPartial.cshtml" />
     <Content Include="Views\Event\Edit.cshtml" />
+    <Content Include="Views\Shared\_DisplayEventPopup.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

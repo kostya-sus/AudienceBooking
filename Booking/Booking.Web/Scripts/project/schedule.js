@@ -103,7 +103,7 @@ function refillSchedule(eventsList) {
     var $scheduleViewport = $("#schedule-viewport");
 
     eventsList.forEach(function(event) {
-        var $scheduleItem = $("<a></a>");
+        var $scheduleItem = $("<div></div>");
         var date = parseMvcDate(event.EventDateTime);
 
         var startTime = timeToStringHHMM(date);
@@ -114,8 +114,7 @@ function refillSchedule(eventsList) {
         if (!event.IsPublic) {
             $scheduleItem.addClass("schedule-event-item-private");
         } else {
-            var url = $("#redirect-to-event-url").val() + "?eventId=" + event.Id;
-            $scheduleItem.attr("href", url);
+            $scheduleItem.attr("data-eventid", event.Id);
         }
 
         if (event.Duration > 40) {
@@ -140,6 +139,33 @@ function refillSchedule(eventsList) {
         $.data($scheduleItem, "event-id", event.Id);
         $scheduleViewport.append($scheduleItem);
     });
+
+    $(".schedule-event-item")
+        .click(function() {
+            var $item = $(this);
+            var id = $item.attr("data-eventid");
+            var url = $("#display-event-popup-url").val() + "?eventId=" + id;
+
+            var divId = "display-event-popup-container-" + id;
+
+            var $div = $("<div></div>");
+            $div.attr("id", divId);
+            $div.css("position", "absolute");
+            var position = $item.offset();
+            $div.css("left", position.left);
+            $div.css("top", position.top);
+
+            $("#page-content").append($div);
+            $div.draggable();
+
+            $div.load(url,
+                function() {
+                    $("#close-popup-" + id)
+                        .click(function() {
+                            $("#" + divId).remove();
+                        });
+                });
+        });
 }
 
 function loadSchedule(date, loadedCallback) {

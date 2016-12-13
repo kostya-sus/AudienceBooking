@@ -30,7 +30,43 @@ namespace Booking.Web.Controllers
         [HttpGet]
         public ActionResult DisplayEventPopup(Guid eventId)
         {
-            throw new NotImplementedException();
+            var eventEntity = _eventService.GetEvent(eventId);
+            var audiences = _audienceService.GetAllAudiences().ToList();
+            var authorName = eventEntity.IsAuthorShown ? eventEntity.Author.UserName : eventEntity.AuthorName;
+
+            var audiencesVms = audiences.ToDictionary(
+                a => a.Id,
+                a => new AudienceMapItemVm
+                {
+                    Id = a.Id,
+                    IsAvailable = a.IsBookingAvailable,
+                    Name = a.Name
+                });
+
+            var participants = eventEntity.EventParticipants.ToDictionary(
+                a => a.Id,
+                a => a.ParticipantEmail
+                );
+
+            var audienceName = audiencesVms[eventEntity.AudienceId].Name;
+
+            var vm = new DisplayEventViewModel
+            {
+                AudienceId = eventEntity.AudienceId,
+                AudienceName = audienceName,
+                Title = eventEntity.Title,
+                AdditionalInfo = eventEntity.AdditionalInfo,
+                Audiences = audiencesVms,
+                AuthorName = authorName,
+                CanEdit = _eventService.CanEdit(User, eventEntity),
+                Duration = eventEntity.Duration,
+                EventDateTime = eventEntity.EventDateTime,
+                Id = eventEntity.Id,
+                IsJoinAvailable = eventEntity.IsJoinAvailable,
+                ParticipantsEmails = participants
+            };
+
+            return PartialView("_DisplayEventPopup", vm);
         }
 
         [HttpGet]
