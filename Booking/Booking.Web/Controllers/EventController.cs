@@ -9,6 +9,7 @@ using Booking.Services.Services;
 using Booking.Web.Helpers;
 using Booking.Web.ViewModels.Audience;
 using Booking.Web.ViewModels.Event;
+using Microsoft.Ajax.Utilities;
 
 namespace Booking.Web.Controllers
 {
@@ -17,7 +18,6 @@ namespace Booking.Web.Controllers
     {
         private readonly IEventService _eventService;
         private readonly IAudienceService _audienceService;
-
         public EventController()
         {
             var uof = new UnitOfWork();
@@ -121,9 +121,20 @@ namespace Booking.Web.Controllers
 
         [HttpGet]
         [Authorize]
-        public ActionResult Create()
+        public ActionResult GetNewEventPopup()
         {
-            throw new NotImplementedException();
+            var audiences = _audienceService.GetAllAudiences().ToList();
+            var availableAudiences = audiences.Where(a => a.IsBookingAvailable).ToDictionary(a => (int)a.Id, a => a.Name);
+
+            var date = DateTime.Now;
+
+            var viewModel = new CreateEditEventViewModel
+            {
+                AvailableAudiences =  availableAudiences,
+                EndDateTime = date.AddMinutes(30),
+                StartDateTime = date
+            };
+            return PartialView("_NewEventPartial", viewModel);
         }
 
         [HttpPost]
@@ -184,9 +195,20 @@ namespace Booking.Web.Controllers
         [HttpPost]
         [Authorize]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(CreateEditEventViewModel createEditEventViewModel)
+        public ActionResult Create(CreateEditEventViewModel vm)
         {
-            throw new NotImplementedException();
+            // TODO vm changed, update this code
+            /*
+            var dateEvent = new DateTime(DateTime.Now.Year, vm.EventMonth, vm.EventDay, vm.StartHour, vm.StartMinute, 0);
+            var duration = (vm.EndHour - vm.StartHour) * 60 + (vm.EndMinute - vm.StartMinute);
+            var isFree = _audienceService.IsFree(vm.ChosenAudience, dateEvent, duration);
+            if (duration < 20 || !isFree)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            */
+
+            return new HttpStatusCodeResult(HttpStatusCode.OK);
         }
 
         [HttpDelete]

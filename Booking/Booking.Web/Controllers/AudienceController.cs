@@ -52,9 +52,10 @@ namespace Booking.Web.Controllers
         }
 
         [HttpGet]
-        public ActionResult IsFree(int audienceId, DateTime dateTime, int duration)
+        public ActionResult IsFree(AudiencesEnum audienceId, DateTime dateTime, int duration)
         {
-            throw new NotImplementedException();
+            var isFree = _audienceService.IsFree(audienceId, dateTime, duration);
+            return Content(isFree.ToString());
         }
 
         [HttpPost]

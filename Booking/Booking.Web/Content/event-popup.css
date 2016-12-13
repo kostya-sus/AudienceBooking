@@ -1,0 +1,162 @@
+﻿    .main {
+    height: 450px;
+    width: 500px;
+    border: 1px solid #9fa6b6
+}
+
+    .header {
+        background: #9fa6b6;
+        width: 100%;
+        height: 40px;
+        display:inline-block;
+        color: #FFF;
+        list-style-type: none;
+        padding-top: 5px;
+    }
+    
+    #btn-close{
+        position: relative;
+        top: 2px;
+        left: 280px;
+        <!--float: right;-->
+    }
+    .ul{
+        list-style-type: none;
+    }
+    .select-style{
+        padding: 0;
+        margin: 0;
+        border: 1px solid #ebeef7;
+        width: 160px;
+        border-radius: 50px;
+        overflow: hidden;
+        background-color: #fff;
+    
+        background: #fff
+    }
+    .input-style{
+        padding: 10px;
+        width: 90%;
+        border-radius: 50px;
+        border: 1px solid #ebeef7;
+    }
+    .input-stile-org{
+        padding: 10px;
+        width: 220px;
+        border-radius: 50px;
+        border: 1px solid #ebeef7;
+        margin-top: 5px;
+    }
+    .textarea{
+        width: 90%;
+        border-radius: 20px;
+        border: 1px solid #ebeef7;
+        height: 100px;
+        resize: none;
+    }
+    .line{
+        padding-left: 20px;
+        padding-top: 10px;
+    }
+    .line-inline{
+        display: inline-block;
+        padding-left:20px;
+        padding-top: 10px;
+    }
+    
+    input[type=checkbox] {
+    	position:absolute; z-index:-1000; left:-1000px; overflow: hidden; clip: rect(0 0 0 0); height:1px; width:1px; margin:-1px; padding:0; border:0;
+    }
+    
+    input[type=checkbox] + label {
+    	padding-left:35px;
+    	height:30px; 
+    	display:inline-block;
+    	line-height:30px;
+    	background-repeat:no-repeat;
+    	background-position: 0 0;
+    	font-size:30px;
+    	vertical-align:middle;
+    	cursor:pointer;
+    }
+    
+    input[type=checkbox]:checked + label {
+    	background-position: 0 -30px;
+    }
+    [for="whiteCheckbox1"] {
+    	background-image:url(http://csscheckbox.com/checkboxes/u/csscheckbox_f60067e68146be412873f96f1d2458cd.png);
+    }
+    [for="whiteCheckbox2"]{
+        background-image:url(http://csscheckbox.com/checkboxes/u/csscheckbox_f60067e68146be412873f96f1d2458cd.png);
+    }
+    
+    <!--[for="whiteCheckbox"]{
+      width: 20px;
+      height: 20px;
+      margin-top: 10px;
+      border-radius: 3px;
+      border: 1px solid #ebeef7;
+    }-->
+    
+    
+    #checkboxRed {display: none;}
+    [for="checkboxRed"] {
+      position: relative;
+      display: block;
+      width: 50px;
+      height: 10px;
+      padding: 15px;
+      border-radius: 50px;
+      line-height: 10px;
+      color: #f95752;
+      text-shadow: 1px 1px 0px rgba(255,255,255,.15);
+      background: #FFF);
+      box-shadow:
+           0 1px 0 #f95752,
+           inset 0 0 0 1px #f95752,
+           inset 0 1px 1px #f95752,
+           inset 0 -1px 1px #f95752;
+      cursor: pointer;
+    }
+    [for="checkboxRed"]:before {
+      position: absolute;
+      right: 15px;
+      color: #000;
+    }
+    [for="checkboxRed"]:after {
+      content: "";
+      position: absolute;
+      left: 0px; top: 0px;
+      display: block;
+      width: 30px;
+      height: 30px;
+      border-radius: 50px;
+      background: #f95752;
+      transition: .5s;
+    }
+    #checkboxRed:checked ~ [for="checkboxRed"]:after {
+      left: 20px;
+    }
+    
+    #td{
+        padding-right: 10px;
+    }
+    .private{
+        color: #afb2bb;
+    }
+    .public{
+        color: #f95752;
+    }
+    .btnCreate{
+        background: #f95752;
+        display: block;
+        margin-top: 20px;
+        margin-left: 280px ;
+        min-width: 150px;
+        height: 34px;
+        border: 0 none;
+        cursor: pointer;
+        border-radius: 50px;
+        font-size: 12px;
+        color: white;
+    }

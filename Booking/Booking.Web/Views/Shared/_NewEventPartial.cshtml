@@ -1,0 +1,152 @@
+﻿@using Booking.Web.Localization
+@model Booking.Web.ViewModels.Event.CreateEditEventViewModel
+@using (Ajax.BeginForm("Create", "Event", new AjaxOptions
+{
+    InsertionMode = InsertionMode.InsertAfter, HttpMethod = "Post", OnSuccess = "ajaxSuccess"
+}))
+{
+    @Html.AntiForgeryToken()
+
+    <div id="main" class="main">
+        <div class="header">
+            <i id="calendar-icon" class="fa fa-calendar-o" aria-hidden="true"></i>
+            <span style="margin-left: 20px;">@Localization.ReserveAudience</span>
+            <i id="close-icon" class="fa fa-times" aria-hidden="true" data-dismiss="modal"></i>
+        </div>
+        <div class="line" style="display: flex">
+            <span style="padding-top: 21px">@Localization.When</span>
+            @Html.HiddenFor(m => m.StartDateTime, new { id = "start-date" })
+            @Html.HiddenFor(m => m.EndDateTime, new { id = "end-date" })
+            <div id="event-date">
+                <i class="fa fa-calendar" aria-hidden="true"></i>
+                <div class="datetime-updown-outer">
+                    <div class="datetime-updown-control datetime-updown-day">
+                        <i class="fa fa-caret-up" aria-hidden="true"></i>
+                        <span class="datetime-updown-label">18.</span>
+                        <i class="fa fa-caret-down" aria-hidden="true"></i>
+                    </div>
+                    <div class="datetime-updown-control datetime-updown-month">
+                        <i class="fa fa-caret-up" aria-hidden="true"></i>
+                        <span class="datetime-updown-label">09.</span>
+                        <i class="fa fa-caret-down" aria-hidden="true"></i>
+                    </div>
+                    <div class="datetime-updown-control datetime-updown-year">
+                        <i class="fa fa-caret-up" aria-hidden="true"></i>
+                        <span class="datetime-updown-label">16</span>
+                        <i class="fa fa-caret-down" aria-hidden="true"></i>
+                    </div>
+                </div>
+                <i class="fa fa-clock-o" aria-hidden="true"></i>
+
+                <div class="datetime-updown-outer">
+                    <div class="datetime-updown-control datetime-updown-start-hour">
+                        <i class="fa fa-caret-up" aria-hidden="true"></i>
+                        <span class="datetime-updown-label">18:</span>
+                        <i class="fa fa-caret-down" aria-hidden="true"></i>
+                    </div>
+                    <div class="datetime-updown-control datetime-updown-start-minute">
+                        <i class="fa fa-caret-up" aria-hidden="true"></i>
+                        <span class="datetime-updown-label">00</span>
+                        <i class="fa fa-caret-down" aria-hidden="true"></i>
+                    </div>
+                </div>
+                <span>-</span>
+                <div class="datetime-updown-outer">
+                    <div class="datetime-updown-control datetime-updown-end-hour">
+                        <i class="fa fa-caret-up" aria-hidden="true"></i>
+                        <span class="datetime-updown-label">18:</span>
+                        <i class="fa fa-caret-down" aria-hidden="true"></i>
+                    </div>
+                    <div class="datetime-updown-control datetime-updown-end-minute">
+                        <i class="fa fa-caret-up" aria-hidden="true"></i>
+                        <span class="datetime-updown-label">30</span>
+                        <i class="fa fa-caret-down" aria-hidden="true"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="line">
+            <span>@Localization.Where</span>
+            @Html.DropDownListFor(m => m.ChosenAudienceId, new SelectList(Model.AvailableAudiences,
+                "Key", "Value"), new {@class = "select-style"})
+
+        </div>
+        <div class="line">
+            @Html.ValidationMessageFor(m => m.Title, "", new { @class = "validation-error" })
+            @Html.TextBoxFor(m => m.Title, new {@class = "input-style", placeholder = Localization.Title})
+        </div>
+        <div class="line">
+            @Html.TextAreaFor(m => m.AdditionalInfo, new {@class = "textarea", placeholder = Localization.AdditionalInformation})
+        </div>
+        <div class="line">
+            <table>
+                <tr>
+                    <td id="td-style">
+                        <div class="checkboxWhite">
+                            <input type="checkbox" value="@Model.IsJoinAvailable" id="IsJoinAvailable"/>
+                            <label for="IsJoinAvailable"></label>
+                        </div>
+                    </td>
+                    <td style="padding-top: 10px">
+                        <p>@Localization.RegistrationTo</p>
+                    </td>
+                    <td style="padding-top: 10px; padding-left: 70px;">
+                        <p id="public" class="public">
+                            @Localization.Public
+                        </p>
+                    </td>
+                    <td style="padding-top: 10px">
+
+                        @Html.CheckBoxFor(m => m.IsPublic, new {@id = "checkboxRed", onclick = "hasTickedBox()"})
+                        <label for="checkboxRed"></label>
+                    </td>
+                    <td style="padding-top: 10px">
+                        <p id="private" class="private">
+                            @Localization.Private
+                        </p>
+                    </td>
+                </tr>
+            </table>
+            <table>
+                <tr>
+                    <td id="td-style">
+                        <div class="checkboxWhite">
+                            <input type="checkbox" value="@Model.IsAuthorShown" id="IsAuthorShow" name="" />
+                            <label for="IsAuthorShow"></label>
+                        </div>
+                        @*<input type="checkbox" class="whiteCheckbox" id="whiteCheckbox2" name="registr" value="@Model.IsAuthorShown"/>
+                        <label for="whiteCheckbox2"></label>*@
+                    </td>
+                    <td style="padding-top: 10px">
+                        <p>@Localization.ShowAuthor</p>
+                    </td>
+                    <td style="padding-top: 10px; padding-left: 10px">
+                        <p>@Localization.Or</p>
+                    </td>
+                    <td style="padding-left: 20px">
+                        @Html.TextBoxFor(m => m.AuthorName, new {@class = "input-stile-org", placeholder = Localization.ShowOrganizer})
+                    </td>
+                </tr>
+            </table>
+            <input type="hidden" id="audience-is-free-url" value="@Url.Action("IsFree", "Audience")"/>
+            <div>
+                <div id="errorMessage">
+                    <table>
+                        <tr>
+                            <td>
+                                <span style="font-size: 25px">&#9785;</span>
+                            </td>
+                            <td style="padding-left: 10px">
+                                <span>@Localization.ErrorMessageForNewEventPopup1</span>
+                                <br/>
+                                <span>@Localization.ErrorMessageForNewEventPopup2</span>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <input type="submit" class="btnCreate" value="@Localization.Create"/>
+            </div>
+
+        </div>
+    </div>
+}

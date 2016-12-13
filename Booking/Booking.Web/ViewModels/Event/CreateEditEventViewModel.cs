@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using Booking.Enums;
 
 namespace Booking.Web.ViewModels.Event
@@ -9,9 +10,11 @@ namespace Booking.Web.ViewModels.Event
         public Guid Id { get; set; }
 
         public DateTime StartDateTime { get; set; }
-
+        
         public DateTime EndDateTime { get; set; }
 
+        [Required(ErrorMessageResourceType = typeof(Localization.Localization),
+            ErrorMessageResourceName = "ValidationMessage_Required")]
         public string Title { get; set; }
 
         public string AdditionalInfo { get; set; }
@@ -24,7 +27,7 @@ namespace Booking.Web.ViewModels.Event
 
         public bool IsPublic { get; set; }
 
-        public IDictionary<AudiencesEnum, string> AvailableAudiences { get; set; }
+        public IDictionary<int, string> AvailableAudiences { get; set; }
 
         public AudiencesEnum ChosenAudienceId { get; set; }
 
