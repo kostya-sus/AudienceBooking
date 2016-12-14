@@ -65,11 +65,12 @@
 @Scripts.Render("~/Scripts/project/datetime-updown.js")
 @Scripts.Render("~/Scripts/project/new-event.js")
 @Scripts.Render("~/Scripts/jquery.unobtrusive-ajax.min.js")
+@Scripts.Render("~/Scripts/project/display-event-popup.js")
 @RenderSection("scripts", false)
 
 <input type="hidden" id="get-new-event-popup-url" value="@Url.Action("GetNewEventPopup", "Event")"/>
 
-<div class="modal fade bd-example-modal-sm" id="myModal" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+<div class="modal fade bd-example-modal-sm" id="CreateEventModal" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-sm">
         <div id="new-event-popup"></div>
     </div>

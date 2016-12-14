@@ -223,24 +223,6 @@ namespace Booking.Web.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Эта аудитория занята на выбранное.
-        /// </summary>
-        public static string ErrorMessageForNewEventPopup1 {
-            get {
-                return ResourceManager.GetString("ErrorMessageForNewEventPopup1", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to время. Выберите, пожалуйста другое..
-        /// </summary>
-        public static string ErrorMessageForNewEventPopup2 {
-            get {
-                return ResourceManager.GetString("ErrorMessageForNewEventPopup2", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Планируют принять участие {0} человек..
         /// </summary>
         public static string EventPageParticipantsCount {
@@ -529,7 +511,7 @@ namespace Booking.Web.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Указать оргранизатора.
+        ///   Looks up a localized string similar to Указать организатора.
         /// </summary>
         public static string ShowOrganizer {
             get {

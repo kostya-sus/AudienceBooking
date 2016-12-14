@@ -280,7 +280,7 @@
     <value>Показать автора</value>
   </data>
   <data name="ShowOrganizer" xml:space="preserve">
-    <value>Указать оргранизатора</value>
+    <value>Указать организатора</value>
   </data>
   <data name="Title" xml:space="preserve">
     <value>Заголовок</value>
@@ -290,12 +290,6 @@
   </data>
   <data name="Where" xml:space="preserve">
     <value>Где</value>
-  </data>
-  <data name="ErrorMessageForNewEventPopup1" xml:space="preserve">
-    <value>Эта аудитория занята на выбранное</value>
-  </data>
-  <data name="ErrorMessageForNewEventPopup2" xml:space="preserve">
-    <value>время. Выберите, пожалуйста другое.</value>
   </data>
   <data name="ChooseAudience" xml:space="preserve">
     <value>Выберите аудиторию на 10 этаже</value>

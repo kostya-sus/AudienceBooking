@@ -52,7 +52,7 @@ namespace Booking.Services.Services
             }
         }
 
-        public bool IsFree(AudiencesEnum audienceId, DateTime dateTime, int duration)
+        public bool IsFree(AudiencesEnum audienceId, DateTime dateTime, int duration, Guid currentEventId = default(Guid))
         {
             var events = _unitOfWork.EventRepository.GetAllEvents().Where(x => x.AudienceId == audienceId);
             var endOfEvent = dateTime.AddMinutes(duration);
@@ -65,8 +65,13 @@ namespace Booking.Services.Services
                 {
                     foreach (var currentEvent in events)
                     {
+                        if(currentEvent.Id == currentEventId) { continue;}
                         var endOfCurrentEvent = currentEvent.EventDateTime.AddMinutes(currentEvent.Duration);
-                        if ((currentEvent.EventDateTime < endOfEvent) && endOfCurrentEvent <= endOfEvent)
+                        if (dateTime <= currentEvent.EventDateTime && currentEvent.EventDateTime < endOfEvent)
+                        {
+                            return false;
+                        }
+                        if (dateTime > currentEvent.EventDateTime && dateTime < endOfCurrentEvent)
                         {
                             return false;
                         }
