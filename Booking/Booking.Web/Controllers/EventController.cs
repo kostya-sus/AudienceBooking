@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Net;
 using System.Web.Mvc;
+using Booking.Enums;
 using Booking.Models;
 using Booking.Repositories;
 using Booking.Services.Interfaces;
@@ -169,7 +170,7 @@ namespace Booking.Web.Controllers
 
             var vm = new EventEditViewModel
             {
-                ChosenAudienceId = eventEntity.AudienceId,
+                ChosenAudienceId = (int)eventEntity.AudienceId,
                 Title = eventEntity.Title,
                 AdditionalInfo = eventEntity.AdditionalInfo,
                 Audiences = audiencesVms,
@@ -234,7 +235,7 @@ namespace Booking.Web.Controllers
 
             var eventEntity = _eventService.GetEvent(createEditEventViewModel.Id);
             eventEntity.AdditionalInfo = createEditEventViewModel.AdditionalInfo;
-            eventEntity.AudienceId = createEditEventViewModel.ChosenAudienceId;
+            eventEntity.AudienceId = (AudiencesEnum)createEditEventViewModel.ChosenAudienceId;
             eventEntity.AuthorName = createEditEventViewModel.AuthorName;
             eventEntity.IsAuthorShown = createEditEventViewModel.IsAuthorShown;
             eventEntity.IsJoinAvailable = createEditEventViewModel.IsJoinAvailable;

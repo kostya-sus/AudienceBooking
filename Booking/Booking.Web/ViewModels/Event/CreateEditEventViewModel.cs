@@ -29,7 +29,7 @@ namespace Booking.Web.ViewModels.Event
 
         public IDictionary<int, string> AvailableAudiences { get; set; }
 
-        public AudiencesEnum ChosenAudienceId { get; set; }
+        public int ChosenAudienceId { get; set; }
 
         public int LowerHourBound { get; set; }
 

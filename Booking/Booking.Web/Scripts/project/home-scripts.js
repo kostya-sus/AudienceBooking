@@ -126,8 +126,8 @@ $(document)
 
         checkSliderNowPosition();
 
-        $(".room-proxy").mouseenter(onRoomProxyMouseEnter);
-        $(".room-proxy").mouseleave(onRoomProxyMouseLeave);
+        $(".room-proxy").mouseenter(onRoomProxyMouseEnterShowInfo);
+        $(".room-proxy").mouseleave(onRoomProxyMouseLeaveHideInfo);
 
         setTimeout(toggleActiveAudiences, 300);
     });
