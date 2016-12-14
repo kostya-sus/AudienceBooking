@@ -37,5 +37,5 @@
 
         checkIsFree();
 
-        $("#start-date").change(checkIsFree);
+        $("#start-date, #end-date, #chosen-audience-id").change(checkIsFree);
     });
