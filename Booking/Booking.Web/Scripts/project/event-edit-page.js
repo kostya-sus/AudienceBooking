@@ -38,10 +38,17 @@
         checkIsFree();
 
         $("#start-date, #end-date, #chosen-audience-id").change(checkIsFree);
-        
+
         $("#redirect-home-btn")
-            .click(function () {
+            .click(function() {
                 var url = $("#redirect-to-home-url").val();
+                window.location.replace(url);
+            });
+
+        $("#btn-cancel")
+            .click(function() {
+                var eventId = $("#event-id").val();
+                var url = $("#display-event-url").val() + "?eventId=" + eventId;
                 window.location.replace(url);
             });
     });

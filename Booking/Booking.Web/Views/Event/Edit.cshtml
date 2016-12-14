@@ -28,6 +28,7 @@
 
 
 <input type="hidden" id="audience-is-free-url" value="@Url.Action("IsFree", "Audience")"/>
+<input type="hidden" id="display-event-url" value="@Url.Action("Index", "Event")"/>
 
 @foreach (var pair in Model.Audiences)
 {
@@ -43,7 +44,7 @@
             <div class="row">
                 <div class="col-md-8">
                     <div id="event-info">
-                        @Html.HiddenFor(m => m.Id)
+                        @Html.HiddenFor(m => m.Id, new {id = "event-id"})
 
                         @Html.ValidationMessageFor(m => m.Title, "", new {@class = "validation-error"})
                         @Html.TextBoxFor(m => m.Title, new {@class = "text-input", id = "event-title-edit"})
@@ -121,7 +122,7 @@
                             <i class="fa fa-print" aria-hidden="true"></i>
                         </div>
                         <div id="edit-buttons-container">
-                            <button>@Localization.Cancellation</button>
+                            <button id="btn-cancel" type="button">@Localization.Cancellation</button>
                             <input type="submit" id="btn-save-event" value="@Localization.Save">
                         </div>
                         <div class="audience-not-free-message">
