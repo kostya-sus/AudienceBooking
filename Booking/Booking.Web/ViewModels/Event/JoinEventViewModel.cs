@@ -14,5 +14,7 @@ namespace Booking.Web.ViewModels.Event
         public Guid EventId { get; set; }
 
         public int ParticipantsCount { get; set; }
+
+        public bool ParticipantsCountLabelHidden { get; set; }
     }
 }

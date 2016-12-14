@@ -1,17 +1,20 @@
 ﻿@using Booking.Web.Localization
 @model Booking.Web.ViewModels.Event.JoinEventViewModel
 
-@using (Html.BeginForm("Participate", "Event", FormMethod.Post, new {id = "join-event-form", role = "form"}))
+@using (Html.BeginForm("Participate", "Event", FormMethod.Post, new {@class = "join-event-form", role = "form"}))
 {
     @Html.AntiForgeryToken()
 
-    <span>@string.Format(Localization.EventPageParticipantsCount, Model.ParticipantsCount)</span>
-    <span style="margin-left: 15px;">@Localization.Join</span>
+    if (!Model.ParticipantsCountLabelHidden)
+     {
+         <span>@string.Format(Localization.EventPageParticipantsCount, Model.ParticipantsCount)</span>
+         <span style="margin-left: 15px;">@Localization.Join</span>
+     }
     <div class="join-event-container">
         @Html.HiddenFor(m => m.EventId)
         @Html.ValidationMessageFor(m => m.Email, "", new {@class = "validation-error"})
-        @Html.TextBoxFor(m => m.Email, new {id = "email", placeholder = Localization.EnterEmailToJoin})
+        @Html.TextBoxFor(m => m.Email, new {@class = "join-event-form-email", placeholder = Localization.EnterEmailToJoin})
     </div>
     <i class="fa fa-plus" aria-hidden="true"></i>
-    <input type="submit" value="submit" id="join-event-submit"/>
+    <input type="submit" value="submit" class="join-event-submit"/>
 }

@@ -1,19 +1,17 @@
-﻿@using System.Diagnostics.Eventing.Reader
-@using Booking.Web.Localization
+﻿@using Booking.Web.Localization
+@using Booking.Web.ViewModels.Event
 @model Booking.Web.ViewModels.Event.DisplayEventPopupViewModel
 
 <div id="event-display-popup-@Model.Id" class="event-display-popup">
     <input type="hidden" id="event-page-url" value="@Url.Action("Index", "Event", new {eventId = Model.Id})"/>
 
     <div class="head">
-        <div class="row-elements" id="date-of-event">
+        <div class="row-elements event-date">
             <span>@Model.EventDate</span>
-            @if (@Model.CanEdit)
+            @if (Model.CanEdit)
             {
-                <div class="hidden-buttons">
-                    <button class="btn-edit-event">@Localization.Edit</button>
-                    <button class="btn-cancel-event">@Localization.Cancel</button>
-                </div>
+                <button class="btn-edit-event">@Localization.Edit</button>
+                <button class="btn-cancel-event">@Localization.Cancel</button>
             }
 
             <button class="close-btn" id="close-popup-@Model.Id"></button>
@@ -42,26 +40,27 @@
             }
         </div>
     </div>
-    <h4 id="audience-name-show">@Model.AudienceName</h4>
+    <h4 class="audience-name-show">@Model.AudienceName</h4>
     <div class="add-info">@Model.AdditionalInfo</div>
-    <div class="row-elements">
-        <i class="fa fa-user" id="label-user-name" aria-hidden="true"></i>
-        <span id="author-name">@Model.AuthorName</span>
-        <div class="right-position">
-            <i class="fa fa-users" id="fa-users-icon" aria-hidden="true"></i>
-            <span id="participants-count">@Model.ParticipantsEmails.Count</span>
-        </div>
+    <div class="row-elements" style="margin-bottom: 10px;">
+        <i class="fa fa-user" aria-hidden="true"></i>
+        <span class="author-name">@Model.AuthorName</span>
+        <i class="fa fa-users" aria-hidden="true"></i>
+        <span class="participants-count">@Model.ParticipantsEmails.Count</span>
     </div>
-    <div class="row-elements" style="margin-top: 17px;">
-        <input class="add-participant-textbox" placeholder="@Localization.EnterEmailToJoin" type="text"/>
-        <i class="fa fa-plus" id="add-participant" aria-hidden="true"></i>
-    </div>
-    <div class="row-elements" id="icons">
-        <div class="icons-container" id="icons-container-popup">
-            <i class="fa fa-calendar-plus-o" aria-hidden="true"></i>
-            <i class="fa fa-envelope-o" id="icon-mail" aria-hidden="true"></i>
-            <i class="fa fa-print" aria-hidden="true"></i>
-            <i class="fa fa-link" style="margin-left: 10px;" aria-hidden="true"></i>
-        </div>
+    @if (Model.IsJoinAvailable)
+    {
+        @Html.Partial("_JoinEventPartial", new JoinEventViewModel
+        {
+            EventId = Model.Id,
+            ParticipantsCount = Model.ParticipantsEmails.Count,
+            ParticipantsCountLabelHidden = true
+        })
+    }
+    <div class="icons-container">
+        <i class="fa fa-calendar-plus-o" aria-hidden="true"></i>
+        <i class="fa fa-envelope-o" aria-hidden="true"></i>
+        <i class="fa fa-print" aria-hidden="true"></i>
+        <i class="fa fa-link" aria-hidden="true"></i>
     </div>
 </div>

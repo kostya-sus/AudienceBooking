@@ -20,13 +20,13 @@
 
 #author-name { margin-left: 5px; }
 
-#join-event-form {
+.join-event-form {
     display: inline-block;
     overflow: visible;
     white-space: nowrap;
 }
 
-#email, .text-input {
+.join-event-form-email, .text-input {
     display: inline-block;
     border: 2px solid #F4F6FB;
     border-radius: 25px;
@@ -52,7 +52,7 @@
     resize: none;
 }
 
-#join-event-submit, .remove-participant-submit {
+.join-event-submit, .remove-participant-submit {
     width: 0;
     visibility: hidden;
 }

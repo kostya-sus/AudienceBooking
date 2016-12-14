@@ -29,7 +29,7 @@
                 window.location.replace(url);
             });
 
-        var form = $("#join-event-form");
+        var form = $(".join-event-form").first();
         var validator = form.data("validator");
 
         validator.settings.showErrors = function() {

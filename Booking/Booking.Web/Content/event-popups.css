@@ -1,67 +1,75 @@
-﻿.event-display-popup {
+﻿.event-display-popup-container { z-index: 200; }
+
+.event-display-popup {
     border: #f65857 solid 1px;
     cursor: default;
-    min-width: 300px;
+    min-width: 280px;
     background: #FFF;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.6);
 }
 
-.event-display-popup-container {
-    z-index: 200;
-}
-.head {
+.event-display-popup .head {
     background: #f65857;
     height: 35px;
 }
-.close-btn {
+
+.event-display-popup .close-btn {
     position: absolute;
-    left: 90%;
+    top: 10px;
+    right: 10px;
 }
-.row-elements {
+
+.event-display-popup .row-elements {
     display: flex;
-    font-size:10px;
+    flex-direction: row;
+    font-size: 10px;
     height: 17px;
-    padding-top: 1px;
-    padding-left: 4px;
+    padding-top: 3px;
+    padding-left: 10px;
+    padding-bottom: 3px;
 }
-#author-name {
+
+
+.event-display-popup .fa-user {
+    align-self: flex-start;
+    font-size: 25px;
+    margin-left: 5px;
+}
+
+.event-display-popup .author-name {
+    align-self: flex-start;
     font-size: 12px;
     margin-top: 4px;
     margin-left: 7px;
 }
-#fa-users-icon {
+
+.event-display-popup .fa-users {
+    right: 70px;
+    position: absolute;
     font-size: 25px;
 }
-#participants-count {
+
+.event-display-popup .participants-count {
+    right: 50px;
+    position: absolute;
     font-size: 13px;
     margin-top: 3px;
 }
-.right-position {
-    position: absolute;
-    left: 75%;
-}
-#add-participant {
+
+.event-display-popup .fa-plus {
     font-size: 20px;
     margin-left: 8px;
     margin-top: 3px;
     color: #888c90
 }
-#add-participant:hover {
-    color: red;
+
+.event-display-popup .fa-plus:hover {
+    color: #828A9D;
     cursor: pointer;
 }
-#audience-name-show {
-    padding-left: 10px;
-}
-#minus {
-    color: black;
-    font-size: 20px;
-}
-#icons {
-    color: black;
-    font-size: 40px;
-    margin-top: 30px;
 
-}
+.audience-name-show { padding-left: 10px; }
+
 .add-participant-textbox {
     padding: 10px;
     width: 80%;
@@ -70,51 +78,79 @@
     margin-left: 5px;
     border: 1px solid #ebeef7;
 }
-#label-user-name {
-    font-size: 25px;
-    margin-left: 5px;
-}
-#date-of-event {
-    color: white;
-}
-.close-btn {
-        background: #fcc2c1;
+
+.event-display-popup .event-date { color: white; }
+
+.event-display-popup .close-btn {
+    background: #fcc2c1;
     border: 0;
     height: 4px;
     width: 15px;
 }
-#icon-calendar {
-    font-size: 25px;
-    margin-left: 5px;
-    color: black;
-    background: black;
-}
-#icons-container-popup {
-    color: #d7d9de;
-            top: 80%;
-    position: absolute;
-    font-size: 22px;
-        margin-left: 20%;
-}
-#icon-mail {
-    padding-left: 10px;
-    padding-right: 10px;
-}
-.btn-edit-event {
+
+.event-display-popup .btn-edit-event {
+    margin-left: auto;
+    margin-bottom: auto;
+    margin-top: 5px;
+    margin-right: 10px;
+    align-self: flex-end;
     border-radius: 20px;
     border: 1px solid #e65151;
     background: #e65151;
     color: #FFF;
 }
 
-.btn-cancel-event {
+.event-display-popup .btn-cancel-event {
+    margin-bottom: auto;
+    margin-left: 0;
+    margin-top: 5px;
+    margin-right: 35px;
+    align-self: flex-end;
     border: 1px solid #a05556;
     border-radius: 20px;
     background: #a05556;
     color: #FFF;
+    float: right;
 }
-.hidden-buttons {
-        margin-top: 5px;
-    position: absolute;
-    left: 90px;
+
+.event-display-popup .icons-container {
+    padding: 5px 80px 0;
+    font-size: 26px;
+    color: #D7D9DE;
 }
+
+.event-display-popup .icons-container i {
+    margin: 0 10px;
+    padding: 10px 0px;
+}
+
+.event-display-popup .icons-container i:hover {
+    color: #828A9D;
+    cursor: pointer;
+}
+
+.event-display-popup .join-event-form {
+    display: inline-block;
+    overflow: visible;
+    white-space: nowrap;
+}
+
+.event-display-popup .join-event-form-email {
+    display: inline-block;
+    border: 2px solid #F4F6FB;
+    border-radius: 25px;
+    background: white;
+    outline: none;
+    height: 35px;
+    font-size: 13px;
+    padding: 15px;
+    width: 280px;
+    margin: 10px;
+}
+
+.event-display-popup .join-event-submit {
+    width: 0;
+    visibility: hidden;
+}
+
+.event-display-popup .join-event-container { display: inline-block; }

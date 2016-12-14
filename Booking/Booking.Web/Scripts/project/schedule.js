@@ -148,6 +148,10 @@ function refillSchedule(eventsList) {
 
             var divId = "display-event-popup-container-" + id;
 
+            if ($("#" + divId).length) {
+                return;
+            }
+
             var $div = $("<div></div>");
             $div.attr("id", divId);
             $div.addClass("event-display-popup-container");
