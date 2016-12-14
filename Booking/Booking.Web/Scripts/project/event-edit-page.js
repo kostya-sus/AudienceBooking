@@ -10,20 +10,20 @@
 
         function checkIsFree() {
             var audienceId = parseInt($("#chosen-audience-id").val());
-            var startDateStr = $("#start-date").val();
-            var startDate = new Date(startDateStr);
-            var endDate = new Date($("#end-date").val());
-
-            var diff = Math.abs(endDate - startDate);
-            var duration = Math.floor(diff / 60000);
+            var startDate = $("#start-date").val();
+            var endDate = $("#end-date").val();
+            var eventId = $("#event-id").val();
 
             var url = $("#audience-is-free-url").val() +
                 "?audienceId=" +
                 audienceId +
-                "&dateTime=" +
-                startDateStr +
-                "&duration=" +
-                duration;
+                "&startEvent=" +
+                startDate +
+                "&endEvent=" +
+                endDate +
+                "&eventId=" +
+                eventId;
+
 
             $.get(url)
                 .done(function(isFree) {

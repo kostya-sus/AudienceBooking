@@ -52,12 +52,15 @@ namespace Booking.Services.Services
             }
         }
 
-        public bool IsFree(AudiencesEnum audienceId, DateTime dateTime, int duration, Guid currentEventId = default(Guid))
+        public bool IsFree(AudiencesEnum audienceId, DateTime dateTime, int duration, Guid? currentEventId)
         {
-            var events = _unitOfWork.EventRepository.GetAllEvents().Where(x => x.AudienceId == audienceId);
+            var events =
+                _unitOfWork.EventRepository.GetAllEvents()
+                    .Where(x => x.AudienceId == audienceId && x.Id != currentEventId.Value);
+
             var endOfEvent = dateTime.AddMinutes(duration);
 
-            if ((int) dateTime.DayOfWeek != 0 && (int) dateTime.DayOfWeek != 6) //check for weekend
+            if (dateTime.DayOfWeek != 0 && (int) dateTime.DayOfWeek != 6)
             {
                 if ((endOfEvent.Hour < (int) BookingHoursBoundsEnum.Upper ||
                      (endOfEvent.Hour == (int) BookingHoursBoundsEnum.Upper & endOfEvent.Minute == 0))
@@ -65,7 +68,6 @@ namespace Booking.Services.Services
                 {
                     foreach (var currentEvent in events)
                     {
-                        if(currentEvent.Id == currentEventId) { continue;}
                         var endOfCurrentEvent = currentEvent.EventDateTime.AddMinutes(currentEvent.Duration);
                         if (dateTime <= currentEvent.EventDateTime && currentEvent.EventDateTime < endOfEvent)
                         {

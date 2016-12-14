@@ -178,7 +178,7 @@ namespace Booking.Web.Controllers
         {
             var duration = (vm.EndDateTime.Hour - vm.StartDateTime.Hour)*60 +
                            (vm.EndDateTime.Minute - vm.StartDateTime.Minute);
-            var isFree = _audienceService.IsFree((AudiencesEnum) vm.ChosenAudienceId, vm.StartDateTime, duration);
+            var isFree = _audienceService.IsFree((AudiencesEnum) vm.ChosenAudienceId, vm.StartDateTime, duration, vm.Id);
             if (duration < 20 || !isFree)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -225,7 +225,7 @@ namespace Booking.Web.Controllers
 
             var eventEntity = _eventService.GetEvent(vm.Id);
 
-            if (!_audienceService.IsFree((AudiencesEnum) vm.ChosenAudienceId, vm.StartDateTime, duration))
+            if (!_audienceService.IsFree((AudiencesEnum) vm.ChosenAudienceId, vm.StartDateTime, duration, vm.Id))
             {
                 var audiences = _audienceService.GetAllAudiences();
                 vm.Audiences = audiences.ToVmDictionary();

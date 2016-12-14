@@ -9,7 +9,7 @@
     }
 };
 
-var onEventCreateSucceeded = function () {
+var onEventCreateSucceeded = function() {
     $("#CreateEventModal").modal('hide');
 }
 $(document)
@@ -40,8 +40,7 @@ function checkIfAudienceIsFree() {
         "&startEvent=" +
         eventStartDate +
         "&endEvent=" +
-        eventEndDate +
-        "&eventId=00000000-0000-0000-0000-000000000000";
+        eventEndDate;
 
     $.get(url)
         .done(function(isFree) {
@@ -56,8 +55,4 @@ function toggleIsFreeMessage(isFree) {
         $("#errorMessage").css("visibility", 'hidden');
     }
 
-}
-
-function changeValue(id, value) {
-    $("#" + id).attr("value", value);
 }
