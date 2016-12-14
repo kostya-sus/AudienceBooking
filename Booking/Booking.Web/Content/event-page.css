@@ -111,7 +111,7 @@
 #event-calendar {
     float: right;
     vertical-align: top;
-    width: 270px;
+    width: 280px;
 }
 
 .event-date-container {
@@ -119,12 +119,12 @@
     background: #f95752;
     border-radius: 16px;
     height: 60px;
-    padding: 15px 8px;
+    padding: 15px 10px;
 }
 
-.event-date-container span, 
-.event-date-container i, 
-.event-date-container .fa-calendar, 
+.event-date-container span,
+.event-date-container i,
+.event-date-container .fa-calendar,
 .event-date-container .fa-clock-o {
     color: white;
     vertical-align: middle;
@@ -175,6 +175,7 @@ p { margin-top: 20px; }
     font-size: 13px;
     padding: 0 20px;
     margin: 0 4px;
+    min-width: 120px;
 }
 
 #edit-buttons-container button:hover {
@@ -234,3 +235,24 @@ p { margin-top: 20px; }
 #event-info { overflow-x: visible; }
 
 #event-title-edit { width: 425px; }
+
+.audience-not-free-message {
+    width: 100%;
+    height: 40px;
+    margin-top: 6px;
+    visibility: hidden;
+}
+
+.audience-not-free-message i {
+    float: left;
+    font-size: 40px;
+    opacity: 0.8;
+    color: #4A5158;
+    margin-right: 8px;
+}
+
+.audience-not-free-message div {
+    vertical-align: top;
+    font-size: 13px;
+    display: inline;
+}

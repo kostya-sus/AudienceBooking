@@ -24,11 +24,11 @@
     var endDate = new Date($endDate.val());
 
     function setStartDate() {
-        $startDate.val(startDate.toISOString());
+        $startDate.val(startDate.toISOString()).trigger("change");
     }
 
     function setEndDate() {
-        $endDate.val(endDate.toISOString());
+        $endDate.val(endDate.toISOString()).trigger("change");
     }
 
     function updateView() {

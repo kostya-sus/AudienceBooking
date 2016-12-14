@@ -88,6 +88,15 @@ namespace Booking.Web.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Эта аудитория занята на выбранное время. Выберите, пожалуйста другое..
+        /// </summary>
+        public static string AudienceIsAlreadyBooked {
+            get {
+                return ResourceManager.GetString("AudienceIsAlreadyBooked", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Расписание аудитории.
         /// </summary>
         public static string AudienceSchedule {

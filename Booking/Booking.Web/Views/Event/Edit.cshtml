@@ -13,6 +13,7 @@
     @Styles.Render("http://fonts.googleapis.com/css?family=Nunito:400,300,700")
     @Styles.Render("~/Content/schedule.css")
     @Styles.Render("~/Content/event-page.css")
+    @Styles.Render("~/Content/form-inputs.css")
 }
 
 @section scripts
@@ -25,6 +26,9 @@
     @Scripts.Render("~/Scripts/project/room-map.js")
 }
 
+
+<input type="hidden" id="audience-is-free-url" value="@Url.Action("IsFree", "Audience")" />
+
 <div class="event-container">
     <div class="page-container container">
         @using (Html.BeginForm("Save", "Event"))
@@ -34,6 +38,8 @@
                 <div class="col-md-8">
                     <div id="event-info">
                         @Html.HiddenFor(m => m.Id)
+
+                        @Html.ValidationMessageFor(m => m.Title, "", new {@class = "validation-error"})
                         @Html.TextBoxFor(m => m.Title, new {@class = "text-input", id = "event-title-edit"})
                         <br/>
                         @Html.EditorFor(m => m.IsAuthorShown, new {@class = "text-input"})
@@ -111,6 +117,10 @@
                         <div id="edit-buttons-container">
                             <button>@Localization.Cancellation</button>
                             <input type="submit" id="btn-save-event" value="@Localization.Save">
+                        </div>
+                        <div class="audience-not-free-message">
+                            <i class="fa fa-frown-o" aria-hidden="true"></i>
+                            <div>@Localization.AudienceIsAlreadyBooked</div>
                         </div>
                     </div>
                 </div>

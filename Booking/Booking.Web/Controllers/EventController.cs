@@ -32,22 +32,12 @@ namespace Booking.Web.Controllers
         public ActionResult DisplayEventPopup(Guid eventId)
         {
             var eventEntity = _eventService.GetEvent(eventId);
-            var audiences = _audienceService.GetAllAudiences().ToList();
+            var audiences = _audienceService.GetAllAudiences();
             var authorName = eventEntity.IsAuthorShown ? eventEntity.Author.UserName : eventEntity.AuthorName;
 
-            var audiencesVms = audiences.ToDictionary(
-                a => a.Id,
-                a => new AudienceMapItemVm
-                {
-                    Id = a.Id,
-                    IsAvailable = a.IsBookingAvailable,
-                    Name = a.Name
-                });
+            var audiencesVms = audiences.ToVmDictionary();
 
-            var participants = eventEntity.EventParticipants.ToDictionary(
-                a => a.Id,
-                a => a.ParticipantEmail
-                );
+            var participants = eventEntity.EventParticipants.ToVmDictionary();
 
             var audienceName = audiencesVms[eventEntity.AudienceId].Name;
 
@@ -74,22 +64,12 @@ namespace Booking.Web.Controllers
         public ActionResult Index(Guid eventId)
         {
             var eventEntity = _eventService.GetEvent(eventId);
-            var audiences = _audienceService.GetAllAudiences().ToList();
+            var audiences = _audienceService.GetAllAudiences();
             var authorName = eventEntity.IsAuthorShown ? eventEntity.Author.UserName : eventEntity.AuthorName;
 
-            var audiencesVms = audiences.ToDictionary(
-                a => a.Id,
-                a => new AudienceMapItemVm
-                {
-                    Id = a.Id,
-                    IsAvailable = a.IsBookingAvailable,
-                    Name = a.Name
-                });
+            var audiencesVms = audiences.ToVmDictionary();
 
-            var participants = eventEntity.EventParticipants.ToDictionary(
-                a => a.Id,
-                a => a.ParticipantEmail
-                );
+            var participants = eventEntity.EventParticipants.ToVmDictionary();
 
             var audienceName = audiencesVms[eventEntity.AudienceId].Name;
 
@@ -152,21 +132,11 @@ namespace Booking.Web.Controllers
         public ActionResult Edit(Guid eventId)
         {
             var eventEntity = _eventService.GetEvent(eventId);
-            var audiences = _audienceService.GetAllAudiences().ToList();
+            var audiences = _audienceService.GetAllAudiences();
 
-            var audiencesVms = audiences.ToDictionary(
-                a => a.Id,
-                a => new AudienceMapItemVm
-                {
-                    Id = a.Id,
-                    IsAvailable = a.IsBookingAvailable,
-                    Name = a.Name
-                });
+            var audiencesVms = audiences.ToVmDictionary();
 
-            var participants = eventEntity.EventParticipants.ToDictionary(
-                a => a.Id,
-                a => a.ParticipantEmail
-                );
+            var participants = eventEntity.EventParticipants.ToVmDictionary();
 
             var vm = new EventEditViewModel
             {
@@ -229,18 +199,28 @@ namespace Booking.Web.Controllers
 
         [HttpPost]
         [Authorize]
-        public ActionResult Save(CreateEditEventViewModel createEditEventViewModel)
+        public ActionResult Save(EventEditViewModel vm)
         {
-            TimeSpan span = createEditEventViewModel.EndDateTime.Subtract(createEditEventViewModel.StartDateTime);
+            TimeSpan span = vm.EndDateTime.Subtract(vm.StartDateTime);
+            var duration = span.Minutes;
 
-            var eventEntity = _eventService.GetEvent(createEditEventViewModel.Id);
-            eventEntity.AdditionalInfo = createEditEventViewModel.AdditionalInfo;
-            eventEntity.AudienceId = (AudiencesEnum)createEditEventViewModel.ChosenAudienceId;
-            eventEntity.AuthorName = createEditEventViewModel.AuthorName;
-            eventEntity.IsAuthorShown = createEditEventViewModel.IsAuthorShown;
-            eventEntity.IsJoinAvailable = createEditEventViewModel.IsJoinAvailable;
-            eventEntity.EventDateTime = createEditEventViewModel.StartDateTime;
-            eventEntity.Duration = span.Minutes;
+            var eventEntity = _eventService.GetEvent(vm.Id);
+
+            if (!_audienceService.IsFree((AudiencesEnum)vm.ChosenAudienceId, vm.StartDateTime, duration))
+            {
+                var audiences = _audienceService.GetAllAudiences();
+                vm.Audiences = audiences.ToVmDictionary();
+                vm.ParticipantsEmails = eventEntity.EventParticipants.ToVmDictionary();
+                return View("Edit", vm);
+            }
+
+            eventEntity.AdditionalInfo = vm.AdditionalInfo;
+            eventEntity.AudienceId = (AudiencesEnum)vm.ChosenAudienceId;
+            eventEntity.AuthorName = vm.AuthorName;
+            eventEntity.IsAuthorShown = vm.IsAuthorShown;
+            eventEntity.IsJoinAvailable = vm.IsJoinAvailable;
+            eventEntity.EventDateTime = vm.StartDateTime;
+            eventEntity.Duration = duration;
             
             _eventService.UpdateEvent(User, eventEntity);
 

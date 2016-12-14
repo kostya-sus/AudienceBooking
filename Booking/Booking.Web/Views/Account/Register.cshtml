@@ -16,7 +16,7 @@
         }
     </div>
 
-    @Html.ValidationMessageFor(m => m.UserName, "", new {@class = "validation-error"})
+    @Html.ValidationMessageFor(m => m.UserName, null, new {@class = "validation-error"})
     @Html.TextBoxFor(m => m.UserName, new {@class = "login-input", placeholder = Localization.UserNamePlaceholder})
 
     @Html.ValidationMessageFor(m => m.Email, "", new {@class = "validation-error"})

@@ -28,7 +28,7 @@ function onRoomProxyClickToggleChosenAudience() {
     $(".room-available").removeClass("room-active");
     var $targetDiv = $("#" + $(this).data("room-target"));
     $targetDiv.addClass("room-active");
-    $("#chosen-audience-id").val($targetDiv.data("audience-id"));
+    $("#chosen-audience-id").val($targetDiv.data("audience-id")).trigger("change");
 }
 
 function setChosenAudience() {
