@@ -9,15 +9,14 @@
         <div class="row-elements" id="date-of-event">
             <span>@Model.EventDate</span>
             @if (@Model.CanEdit)
-            {<div class="hidden-buttons">
-                 <button class="btn-edit-event">@Localization.Edit</button>
-                 <button class="btn-cancel-event">@Localization.Cancel</button>
-             </div>
+            {
+                <div class="hidden-buttons">
+                    <button class="btn-edit-event">@Localization.Edit</button>
+                    <button class="btn-cancel-event">@Localization.Cancel</button>
+                </div>
             }
 
-            <div id="closePopup">
-                <button class="close-btn" id="close-popup-@Model.Id"></button>
-            </div>
+            <button class="close-btn" id="close-popup-@Model.Id"></button>
         </div>
         <div class="row-elements" style="color: white">
             <span>@Model.EventDateTime.Hour</span>

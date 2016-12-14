@@ -150,6 +150,7 @@ function refillSchedule(eventsList) {
 
             var $div = $("<div></div>");
             $div.attr("id", divId);
+            $div.addClass("event-display-popup-container");
             $div.css("position", "absolute");
             var position = $item.offset();
             $div.css("left", position.left);

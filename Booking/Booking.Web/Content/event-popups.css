@@ -1,14 +1,18 @@
 ﻿.event-display-popup {
     border: #f65857 solid 1px;
     cursor: default;
-    min-width: 260px;
+    min-width: 300px;
     background: #FFF;
+}
+
+.event-display-popup-container {
+    z-index: 200;
 }
 .head {
     background: #f65857;
     height: 35px;
 }
-#closePopup {
+.close-btn {
     position: absolute;
     left: 90%;
 }
