@@ -1,7 +1,9 @@
 ﻿using System;
+using System.Globalization;
 using System.Linq;
 using System.Net;
 using System.Web.Mvc;
+using Booking.Enums;
 using Booking.Models;
 using Booking.Repositories;
 using Booking.Services.Interfaces;
@@ -10,6 +12,7 @@ using Booking.Web.Helpers;
 using Booking.Web.ViewModels.Audience;
 using Booking.Web.ViewModels.Event;
 using Microsoft.Ajax.Utilities;
+using Microsoft.AspNet.Identity;
 
 namespace Booking.Web.Controllers
 {
@@ -50,7 +53,10 @@ namespace Booking.Web.Controllers
 
             var audienceName = audiencesVms[eventEntity.AudienceId].Name;
 
-            var vm = new DisplayEventViewModel
+            CultureInfo culture = CultureInfo.CreateSpecificCulture("ru-RU");
+            string eventDate = eventEntity.EventDateTime.ToString("ddd, d MMMM", culture);
+            
+            var vm = new DisplayEventPopupViewModel
             {
                 AudienceId = eventEntity.AudienceId,
                 AudienceName = audienceName,
@@ -59,11 +65,12 @@ namespace Booking.Web.Controllers
                 Audiences = audiencesVms,
                 AuthorName = authorName,
                 CanEdit = _eventService.CanEdit(User, eventEntity),
-                Duration = eventEntity.Duration,
                 EventDateTime = eventEntity.EventDateTime,
                 Id = eventEntity.Id,
                 IsJoinAvailable = eventEntity.IsJoinAvailable,
-                ParticipantsEmails = participants
+                ParticipantsEmails = participants,
+                Duration = eventEntity.Duration,
+                EventDate = eventDate
             };
 
             return PartialView("_DisplayEventPopup", vm);
@@ -197,17 +204,28 @@ namespace Booking.Web.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create(CreateEditEventViewModel vm)
         {
-            // TODO vm changed, update this code
-            /*
-            var dateEvent = new DateTime(DateTime.Now.Year, vm.EventMonth, vm.EventDay, vm.StartHour, vm.StartMinute, 0);
-            var duration = (vm.EndHour - vm.StartHour) * 60 + (vm.EndMinute - vm.StartMinute);
-            var isFree = _audienceService.IsFree(vm.ChosenAudience, dateEvent, duration);
+            var duration = (vm.EndDateTime.Hour - vm.StartDateTime.Hour)*60 +
+                           (vm.EndDateTime.Minute - vm.StartDateTime.Minute);
+            var isFree = _audienceService.IsFree(vm.ChosenAudienceId, vm.StartDateTime, duration);
             if (duration < 20 || !isFree)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            */
+            Event newEvent=new Event();
+            {
+                newEvent.Title = vm.Title;
+                newEvent.EventDateTime = vm.StartDateTime;
+                newEvent.AdditionalInfo = vm.AdditionalInfo;
+                newEvent.AudienceId = vm.ChosenAudienceId;
+                newEvent.Duration = duration;
+                newEvent.IsAuthorShown = vm.IsAuthorShown;
+                newEvent.IsJoinAvailable = vm.IsJoinAvailable;
+                newEvent.IsPublic = vm.IsPublic;
+                newEvent.AuthorName = vm.AuthorName;
+                newEvent.AuthorId = User.Identity.GetUserId();
+            }
 
+            _eventService.CreateEvent(newEvent);
             return new HttpStatusCodeResult(HttpStatusCode.OK);
         }
 

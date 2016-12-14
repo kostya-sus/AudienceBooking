@@ -9,8 +9,8 @@
     }
 };
 
-var ajaxSuccess = function() {
-    $("#myModal").modal('hide');
+var onEventCreateSucceeded = function () {
+    $("#CreateEventModal").modal('hide');
 }
 $(document)
     .ready(function() {
@@ -31,19 +31,17 @@ $(document)
 function checkIfAudienceIsFree() {
     var audienceId = document.getElementById("ChosenAudienceId").value;
 
-    var startDate = $("#start-date").val();
-    var endDate = $("#end-date").val();
-
-    var diff = Math.abs(endDate - startDate);
-    var duration = Math.floor(diff / 60000);
+    var eventStartDate = $("#start-date").val();
+    var eventEndDate = $("#end-date").val();
 
     var url = $("#audience-is-free-url").val() +
         "?audienceId=" +
         audienceId +
-        "&dateTime=" +
-        startDate +
-        "&duration=" +
-        duration;
+        "&startEvent=" +
+        eventStartDate +
+        "&endEvent=" +
+        eventEndDate +
+        "&eventId=00000000-0000-0000-0000-000000000000";
 
     $.get(url)
         .done(function(isFree) {

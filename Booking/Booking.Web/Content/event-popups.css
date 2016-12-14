@@ -1,4 +1,116 @@
 ﻿.event-display-popup {
-    border: red solid 1px;
+    border: #f65857 solid 1px;
     cursor: default;
+    min-width: 260px;
+    background: #FFF;
+}
+.head {
+    background: #f65857;
+    height: 35px;
+}
+#closePopup {
+    position: absolute;
+    left: 90%;
+}
+.row-elements {
+    display: flex;
+    font-size:10px;
+    height: 17px;
+    padding-top: 1px;
+    padding-left: 4px;
+}
+#author-name {
+    font-size: 12px;
+    margin-top: 4px;
+    margin-left: 7px;
+}
+#fa-users-icon {
+    font-size: 25px;
+}
+#participants-count {
+    font-size: 13px;
+    margin-top: 3px;
+}
+.right-position {
+    position: absolute;
+    left: 75%;
+}
+#add-participant {
+    font-size: 20px;
+    margin-left: 8px;
+    margin-top: 3px;
+    color: #888c90
+}
+#add-participant:hover {
+    color: red;
+    cursor: pointer;
+}
+#audience-name-show {
+    padding-left: 10px;
+}
+#minus {
+    color: black;
+    font-size: 20px;
+}
+#icons {
+    color: black;
+    font-size: 40px;
+    margin-top: 30px;
+
+}
+.add-participant-textbox {
+    padding: 10px;
+    width: 80%;
+    height: 30px;
+    border-radius: 50px;
+    margin-left: 5px;
+    border: 1px solid #ebeef7;
+}
+#label-user-name {
+    font-size: 25px;
+    margin-left: 5px;
+}
+#date-of-event {
+    color: white;
+}
+.close-btn {
+        background: #fcc2c1;
+    border: 0;
+    height: 4px;
+    width: 15px;
+}
+#icon-calendar {
+    font-size: 25px;
+    margin-left: 5px;
+    color: black;
+    background: black;
+}
+#icons-container-popup {
+    color: #d7d9de;
+            top: 80%;
+    position: absolute;
+    font-size: 22px;
+        margin-left: 20%;
+}
+#icon-mail {
+    padding-left: 10px;
+    padding-right: 10px;
+}
+.btn-edit-event {
+    border-radius: 20px;
+    border: 1px solid #e65151;
+    background: #e65151;
+    color: #FFF;
+}
+
+.btn-cancel-event {
+    border: 1px solid #a05556;
+    border-radius: 20px;
+    background: #a05556;
+    color: #FFF;
+}
+.hidden-buttons {
+        margin-top: 5px;
+    position: absolute;
+    left: 90px;
 }

@@ -143,18 +143,18 @@ p { margin-top: 20px; }
 
 .participants-container { margin-top: 20px; }
 
-#icons-container {
+.icons-container {
     padding: 25px 50px;
     font-size: 26px;
     color: #9FA6B6;
 }
 
-#icons-container i {
+.icons-container i {
     margin: 0 10px;
     padding: 10px 0px;
 }
 
-#icons-container i:hover {
+.icons-container i:hover {
     color: #828A9D;
     cursor: pointer;
 }

@@ -2,7 +2,7 @@
 @model Booking.Web.ViewModels.Event.CreateEditEventViewModel
 @using (Ajax.BeginForm("Create", "Event", new AjaxOptions
 {
-    InsertionMode = InsertionMode.InsertAfter, HttpMethod = "Post", OnSuccess = "ajaxSuccess"
+    InsertionMode = InsertionMode.InsertAfter, HttpMethod = "Post", OnSuccess = "onEventCreateSucceeded"
 }))
 {
     @Html.AntiForgeryToken()
@@ -14,12 +14,11 @@
             <i id="close-icon" class="fa fa-times" aria-hidden="true" data-dismiss="modal"></i>
         </div>
         <div class="line" style="display: flex">
-            <span style="padding-top: 21px">@Localization.When</span>
+            <span style="padding-top: 5px">@Localization.When</span>
             @Html.HiddenFor(m => m.StartDateTime, new { id = "start-date" })
             @Html.HiddenFor(m => m.EndDateTime, new { id = "end-date" })
             <div id="event-date">
-                <i class="fa fa-calendar" aria-hidden="true"></i>
-                <div class="datetime-updown-outer">
+                <div class="datetime-updown-outer" style="margin-left: 15px">
                     <div class="datetime-updown-control datetime-updown-day">
                         <i class="fa fa-caret-up" aria-hidden="true"></i>
                         <span class="datetime-updown-label">18.</span>
@@ -36,10 +35,9 @@
                         <i class="fa fa-caret-down" aria-hidden="true"></i>
                     </div>
                 </div>
-                <i class="fa fa-clock-o" aria-hidden="true"></i>
 
                 <div class="datetime-updown-outer">
-                    <div class="datetime-updown-control datetime-updown-start-hour">
+                    <div class="datetime-updown-control datetime-updown-start-hour" style="margin-left: 15px;">
                         <i class="fa fa-caret-up" aria-hidden="true"></i>
                         <span class="datetime-updown-label">18:</span>
                         <i class="fa fa-caret-down" aria-hidden="true"></i>
@@ -50,8 +48,8 @@
                         <i class="fa fa-caret-down" aria-hidden="true"></i>
                     </div>
                 </div>
-                <span>-</span>
-                <div class="datetime-updown-outer">
+                <span style="margin-top: 5px">-</span>
+                <div class="datetime-updown-outer" style="margin-left: 0px">
                     <div class="datetime-updown-control datetime-updown-end-hour">
                         <i class="fa fa-caret-up" aria-hidden="true"></i>
                         <span class="datetime-updown-label">18:</span>
@@ -114,8 +112,6 @@
                             <input type="checkbox" value="@Model.IsAuthorShown" id="IsAuthorShow" name="" />
                             <label for="IsAuthorShow"></label>
                         </div>
-                        @*<input type="checkbox" class="whiteCheckbox" id="whiteCheckbox2" name="registr" value="@Model.IsAuthorShown"/>
-                        <label for="whiteCheckbox2"></label>*@
                     </td>
                     <td style="padding-top: 10px">
                         <p>@Localization.ShowAuthor</p>
@@ -134,7 +130,7 @@
                     <table>
                         <tr>
                             <td>
-                                <span style="font-size: 25px">&#9785;</span>
+                                <i class="fa fa-frown-o" style="font-size: 35px" aria-hidden="true"></i>
                             </td>
                             <td style="padding-left: 10px">
                                 <span>@Localization.ErrorMessageForNewEventPopup1</span>

@@ -86,7 +86,7 @@ footer {
 
 #navb .active {
     background-color: #F4F6FB;
-<<<<<<< HEAD
+/*<<<<<<< HEAD*/
     border-bottom: 3px solid #F95752;
 }
 
@@ -99,9 +99,9 @@ footer {
     height: 100%;
     min-height: 100%;
 }
-=======
+/*=======
     border-bottom: 3px solid #F95752;     
-}
+}*/
 
 #btn-new-event-popup {
     font-size: 41px;
@@ -116,7 +116,7 @@ footer {
 
 
 .main {
-        height: 500px;
+        height: 465px;
         width: 500px;
         border: 1px solid #9fa6b6;
         background: #FFF;
@@ -355,5 +355,6 @@ footer {
             position: absolute;
          padding-top: 15px;
         visibility: hidden;
+        display: flex;
     }
->>>>>>> 445c1a11a80cf7450796765cddb3028b49afcf19
+/*>>>>>>> 445c1a11a80cf7450796765cddb3028b49afcf19*/
