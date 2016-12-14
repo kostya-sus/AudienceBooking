@@ -52,9 +52,9 @@
                         @Html.EditorFor(m => m.IsAuthorShown, new {@class = "text-input"})
                         @Html.LabelFor(m => m.IsAuthorShown, Localization.ShowAuthor)
                         <span>@Localization.Or</span>
-                        @Html.TextBoxFor(m => m.AuthorName, new {@class = "text-input"})
+                        @Html.TextBoxFor(m => m.AuthorName, new {@class = "text-input", placeholder = Localization.ShowOrganizer})
                         <br/>
-                        @Html.TextAreaFor(m => m.AdditionalInfo, new {@class = "text-area"})
+                        @Html.TextAreaFor(m => m.AdditionalInfo, new {@class = "text-area", placeholder = Localization.AdditionalInformation})
                         <br/>
                         @Html.EditorFor(m => m.IsJoinAvailable)
                         @Html.LabelFor(m => m.IsJoinAvailable, Localization.JoinAvailable)
