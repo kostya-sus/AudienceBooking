@@ -25,17 +25,18 @@ namespace Booking.Web.Controllers
                 string surname = contactViewModel.Surname;
                 string message = contactViewModel.Message;
                 string email = contactViewModel.Email;
+                //EmailNotificationService.SendFeedbackToAdmins(name, surname, email, message);
                 ContactService.SendMessage(name,surname,email,message);
                
-                ViewData["UserMessage"] = Localization.Localization.ContactViewModel_SucsessMessage;
+                TempData["UserMessage"] = Localization.Localization.ContactViewModel_SucsessMessage;
 
             }
             else
             {
-                ViewData["UserMessage"] = "";
+                TempData["UserMessage"] = null;
             }
 
-            return View();
+            return RedirectToAction("Index", "Contact");
         }
        
     }

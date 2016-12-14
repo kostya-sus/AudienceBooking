@@ -184,6 +184,7 @@
     <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\EventController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\ProfileController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
@@ -281,6 +282,7 @@
     <Content Include="Content\Images\schedule\today-active-top.png" />
     <Content Include="Content\Images\schedule\today-bottom.png" />
     <Content Include="Content\Images\schedule\today-top.png" />
+    <Content Include="Content\Profile-inputs.css" />
     <Content Include="Content\schedule.css" />
     <Content Include="Content\Images\contact-bg.png" />
     <Content Include="Content\Images\login-background.svg">
@@ -300,6 +302,7 @@
     <Content Include="Scripts\bootstrap-datepicker\locales\bootstrap-datepicker.ru.min.js" />
     <Content Include="Scripts\project\event-page.js" />
     <Content Include="Scripts\project\home-scripts.js" />
+    <Content Include="Scripts\project\profile-scripts.js" />
     <Content Include="Scripts\project\room-map.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />

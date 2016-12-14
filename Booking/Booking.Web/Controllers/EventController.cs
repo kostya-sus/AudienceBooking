@@ -1,7 +1,10 @@
 ﻿using System;
 using System.Linq;
 using System.Web.Mvc;
+using Booking.Models;
 using Booking.Repositories;
+using Booking.Repositories.Interfaces;
+using Booking.Repositories.Repositories;
 using Booking.Services.Interfaces;
 using Booking.Services.Services;
 using Booking.Web.Helpers;
@@ -15,7 +18,7 @@ namespace Booking.Web.Controllers
     {
         private readonly IEventService _eventService;
         private readonly IAudienceService _audienceService;
-
+       
         public EventController()
         {
             var uof = new UnitOfWork();
@@ -23,6 +26,7 @@ namespace Booking.Web.Controllers
             var usersService = new UsersService();
             var emailNotificationService = new EmailNotificationService();
             _eventService = new EventService(uof, usersService, emailNotificationService);
+           
         }
 
         [HttpGet]
@@ -124,5 +128,12 @@ namespace Booking.Web.Controllers
         {
             throw new NotImplementedException();
         }
+
+        public int GetEvenByAuthor(string userId)
+        {
+            return BookingDbContext.Create().Events.Count(x => x.AuthorId == userId);
+               // _eventRepository.GetAllEvents().Count(x => x.AuthorId == userId);
     }
+
+}
 }

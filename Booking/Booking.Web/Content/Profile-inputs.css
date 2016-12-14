@@ -1,8 +1,8 @@
-﻿.login-input {
-    border: 1px #cccccc;
+﻿.profile-input {
+    border: 1px #f5f6fb;
     border-radius: 50px;
-    background: #f5f6fb;
-    margin: 0 auto;
+    background: white;
+    margin: 0px auto;
     outline: none;
     height: 35px;
     color: #656d7f;
@@ -10,52 +10,48 @@
     padding: 15px;
     width: 100%;
 }
-.input-large {
-    border: 1px #cccccc;
-    border-radius: 25px;
-    background: #f5f6fb;
-    margin: 0 auto;
-    outline: none;
-    height: 200px;
-    color: #656d7f;
-    font-size: 13px;
-    padding: 15px;
-    width: 100%;
-    resize: none;
-}
 
-.login-input[type=password] {
+.profile-input[type=password] {
     letter-spacing: 5px;
     font-size: 20px;
 }
 
-.login-input[type=password]::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+.profile-input[type=password]::-webkit-input-placeholder { /* Chrome/Opera/Safari */
     letter-spacing: normal;
     font-size: 13px;
     /*color: #a6abb6;*/
 }
 
-.login-input[type=password]::-moz-placeholder { /* Firefox 19+ */
+.profile-input[type=password]::-moz-placeholder { /* Firefox 19+ */
     letter-spacing: normal;
     font-size: 13px;
 }
 
-.login-input[type=password]:-ms-input-placeholder { /* IE 10+ */
+.profile-input[type=password]:-ms-input-placeholder { /* IE 10+ */
     letter-spacing: normal;
     font-size: 13px;
 }
 
-.login-input[type=password]:-moz-placeholder { /* Firefox 18- */
+.profile-input[type=password]:-moz-placeholder { /* Firefox 18- */
     letter-spacing: normal;
     font-size: 13px;
 }
 
-.login-submit:disabled {
+
+.profile-submit {
     background: #c8cdd9;
-    color: #e9ebf0;
+    display: block;
+    margin: 10px auto;
+    min-width: 150px;
+    height: 30px;
+    border: 0 none;
+    cursor: pointer;
+    border-radius: 50px;
+    font-size: 12px;
+    color: #000000;
 }
 
-.login-submit {
+.profile-submit:hover {
     background: #f95752;
     display: block;
     margin: 10px auto;

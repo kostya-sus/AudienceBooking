@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using Booking.Web.ViewModels.Manage;
+using Booking.Web.ViewModels.Profile;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
@@ -238,10 +239,11 @@ namespace Booking.Web.Controllers
                 {
                     await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
                 }
-                return RedirectToAction("Index", new { Message = ManageMessageId.ChangePasswordSuccess });
+                TempData["PasswordSuccess"] = Localization.Localization.PasswordSucsess;
+                return RedirectToAction("Index", "Profile");
             }
-            AddErrors(result);
-            return View(model);
+            TempData["PasswordFaild"] = Localization.Localization.Error;
+            return RedirectToAction("Index", "Profile");
         }
 
         //

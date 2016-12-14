@@ -31,9 +31,9 @@
             </div>
             <div style="width: 49%; display: inline-block">
                 <div class="validation-summary-error">
-                    @if (ViewData["UserMessage"] != null)
+                    @if (TempData["UserMessage"] != null)
                     {
-                        <span>@ViewData["UserMessage"]</span>
+                        <span>@TempData["UserMessage"]</span>
                     }
                 </div>
                 <div>
@@ -54,7 +54,7 @@
                 @Html.TextAreaFor(m => m.Message, new {@class = "input-large", placeholder = ""})
 
                 <div style="width: 100%;">
-                    <input type="submit" disabled="disabled" value=@Localization.Save class="login-submit"/>
+                    <input type="submit" disabled="disabled" value=@Localization.Send class="login-submit"/>
                 </div>
 
             </div>

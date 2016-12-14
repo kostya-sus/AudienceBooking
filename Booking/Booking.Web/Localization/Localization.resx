@@ -255,4 +255,13 @@
   <data name="Logout" xml:space="preserve">
     <value>Выйти</value>
   </data>
+  <data name="NumberOfActiveEvent" xml:space="preserve">
+    <value>Количество активных событий </value>
+  </data>
+  <data name="PasswordChange" xml:space="preserve">
+    <value>Изменить пароль</value>
+  </data>
+  <data name="Change" xml:space="preserve">
+    <value>Изменить</value>
+  </data>
 </root>

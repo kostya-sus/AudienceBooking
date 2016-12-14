@@ -70,6 +70,15 @@ namespace Booking.Web.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Изменить.
+        /// </summary>
+        public static string Change {
+            get {
+                return ResourceManager.GetString("Change", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Повторить пароль.
         /// </summary>
         public static string ConfirmPasswordPlaceholder {
@@ -264,6 +273,24 @@ namespace Booking.Web.Localization {
         public static string Now {
             get {
                 return ResourceManager.GetString("Now", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Количество активных событий .
+        /// </summary>
+        public static string NumberOfActiveEvent {
+            get {
+                return ResourceManager.GetString("NumberOfActiveEvent", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Изменить пароль.
+        /// </summary>
+        public static string PasswordChange {
+            get {
+                return ResourceManager.GetString("PasswordChange", resourceCulture);
             }
         }
         

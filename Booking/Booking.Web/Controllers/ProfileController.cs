@@ -1,6 +1,13 @@
 ﻿using System;
+using System.Linq;
 using System.Web.Mvc;
+using Booking.Repositories;
+using Booking.Repositories.Interfaces;
+using Booking.Services.Interfaces;
+using Booking.Services.Services;
 using Booking.Web.ViewModels.Profile;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.Owin;
 
 namespace Booking.Web.Controllers
 {
@@ -22,7 +29,7 @@ namespace Booking.Web.Controllers
         [Authorize]
         public ActionResult Edit(string userId)
         {
-            throw new NotImplementedException();
+           throw new NotImplementedException();
         }
 
         [HttpPost]
@@ -38,5 +45,7 @@ namespace Booking.Web.Controllers
         {
             throw new NotImplementedException();
         }
+
+        
     }
 }

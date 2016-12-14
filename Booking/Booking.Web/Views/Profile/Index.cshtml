@@ -1,5 +1,10 @@
-﻿@using Booking.Web.Localization;
+﻿@using Booking.Models
+@using Booking.Repositories.Repositories
+@using Booking.Web.Localization;
 @using Booking.Web.ViewModels.Manage;
+@using Microsoft.AspNet.Identity
+@model ChangePasswordViewModel
+    
 
 @{
     ViewBag.Title = "Profile";
@@ -7,9 +12,8 @@
     ViewBag.ActiveLink = "Profile";
 }
 @section styles{
-    @Styles.Render("~/Content/home-page.css")
-    @Styles.Render("~/Content/Site.css")
-    @Styles.Render("~/Content/form-inputs.css")
+   @Styles.Render("~/Content/Site.css")
+    @Styles.Render("~/Content/Profile-inputs.css")
     @Styles.Render("~/Content/font-awesome/css/font-awesome.css")
 }
 @section Scripts {
@@ -18,39 +22,76 @@
 }
 
 
-
-  
-<div class="page-container">
-    <div style="width: 100%;display: block">
-        @if ((User.IsInRole("Admin"))&&(User.Identity.Name!=)) { }
-        <input type="submit" disabled="disabled" value=@Localization.Logout class="login-submit" style="float: right"/>
-    </div>
-    <div style="width: 50%; height: 200px; background-color: red; display: inline-block">
-
-    </div>
-    <div style="width: 49%; height: 200px; background-color: yellowgreen; display: inline-block">
-        @using (Html.BeginForm("Index", "Profile", FormMethod.Post, new { @id = "Login", role = "form" }))
-        {
-            <div>
-                @Html.ValidationMessageFor(m => m.OldPassword, "", new { @class = "validation-error" })
-                @Html.TextBoxFor(m => m.OldPassword, new { placeholder = @Localization.PasswordOld, @id = "oldPassword", type = "password" })
-            </div>
-                    <div>
-                        @Html.ValidationMessageFor(m => m.NewPassword, "", new { @class = "validation-error" })
-                        @Html.TextBoxFor(m => m.NewPassword, new { placeholder = @Localization.PasswordNew, @id = "newPassword", type = "password" })
-                    </div>
-                    <div>
-                        @Html.ValidationMessageFor(m => m.ConfirmPassword, "", new { @class = "validation-error" })
-                        @Html.TextBoxFor(m => m.ConfirmPassword, new { placeholder = @Localization.PasswordNewRepeat, @id = "confirmNewPassword", type = "password" })
-                    </div>
-                    <input type="submit" disabled="disabled" value=@Localization.Send class="login-submit" />
-
-            if (ViewData["PasswordSuccess"] != null)
+<div style="background-color: white">
+    <div class="page-container">
+        
+        <div style="width: 100%; ">
+            @using (Html.BeginForm("LogOff", "Account", FormMethod.Post))
             {
-                <span>@Localization.PasswordSucsess</span>
+                @Html.AntiForgeryToken()
+                <input type="submit" id="exit" value=@Localization.Logout class="profile-submit" style="float: right" />
             }
+        </div>
 
-        }
+        
 
+        <div style="width: 100%">
+            <div style="width: 50%; height: 200px; top: -200px; display: inline-block">
+                <div Style="width: 60%">
+                    <H3>
+                        @User.Identity.Name @if (@User.IsInRole("Admin"))
+                        {
+                            <sup style="background-color: #F95752; color: white; border-radius: 10px; margin: 2px; padding: 2px 5px">admin</sup>
+                        }
+                    </H3>
+                    <p>
+                        <b>Email:</b>@Html.Action("GetUserEmail", "Account", new {userId = @User.Identity.GetUserId()})
+                    </p>
+                    <p>
+                        <b>@Localization.NumberOfActiveEvent:</b>@Html.Action("GetEvenByAuthor","Event", new {userId = @User.Identity.GetUserId()})
+                    </p>
+
+                    @using (Html.BeginForm("Edit", "Profile", FormMethod.Post))
+                    {
+                        @Html.AntiForgeryToken()
+                        <input type="submit" id="change" value=@Localization.Change class="profile-submit" />
+                    }
+                </div>
+
+                
+
+            </div>
+            <div style="width: 48%;  display: inline-block; background-color: #EBEEF7; float: right;">
+                <div style="width: 60%; margin: 0px auto">
+                    @using (Html.BeginForm("ChangePassword", "Manage", FormMethod.Post))
+                    {
+                        @Html.AntiForgeryToken()
+                        <H3 style="text-align: center">@Localization.PasswordChange</H3>
+                        @Html.ValidationMessageFor(m => m.OldPassword, "", new { @class = "validation-error" })
+                        @Html.PasswordFor(m => m.OldPassword, new { @class = "profile-input", placeholder = @Localization.PasswordOld, @id = "oldPassword", })
+
+                        @Html.ValidationMessageFor(m => m.NewPassword, "", new { @class = "validation-error" })
+                        @Html.PasswordFor(m => m.NewPassword, new { @class = "profile-input", placeholder = @Localization.PasswordNew, @id = "newPassword", })
+
+                        @Html.ValidationMessageFor(m => m.ConfirmPassword, "", new { @class = "validation-error" })
+                        @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "profile-input", placeholder = @Localization.PasswordNewRepeat, @id = "confirmNewPassword", })
+
+                        <input type="submit" value=@Localization.Save class="profile-submit" />
+
+                        if (TempData["PasswordSuccess"] != null)
+                        {
+                            <span>@Localization.PasswordSucsess</span>
+                        }
+                        else
+                        {
+                               <span>@Localization.Error</span>
+                        }
+                    }
+                </div>
+            </div>
+
+        </div>
+       
     </div>
 </div>
+
