@@ -24,11 +24,11 @@
     var endDate = new Date($endDate.val());
 
     function setStartDate() {
-        $startDate.val(startDate.toISOString());
+        $startDate.val(startDate.toISOString()).trigger("change");
     }
 
     function setEndDate() {
-        $endDate.val(endDate.toISOString());
+        $endDate.val(endDate.toISOString()).trigger("change");
     }
 
     function updateView() {
@@ -57,7 +57,7 @@
 
     function isNewDateValid(startDate, endDate) {
         var now = new Date();
-        var diff = Math.abs(endDate - startDate);
+        var diff = endDate - startDate;
         var minutes = Math.floor(diff / 60000);
         return now < startDate && minutes >= 20;
     }
@@ -152,26 +152,26 @@
     $startMinute.find(".fa-caret-up")
         .click(function() {
             backupDateAndTryToChange(function() {
-                startDate.setMinutes(startDate.getMinutes() + 1);
+                startDate.setMinutes(startDate.getMinutes() + 10);
             });
         });
     $startMinute.find(".fa-caret-down")
         .click(function() {
             backupDateAndTryToChange(function() {
-                startDate.setMinutes(startDate.getMinutes() - 1);
+                startDate.setMinutes(startDate.getMinutes() - 10);
             });
         });
 
     $endMinute.find(".fa-caret-up")
         .click(function() {
             backupDateAndTryToChange(function() {
-                endDate.setMinutes(endDate.getMinutes() + 1);
+                endDate.setMinutes(endDate.getMinutes() + 10);
             });
         });
     $endMinute.find(".fa-caret-down")
         .click(function() {
             backupDateAndTryToChange(function() {
-                endDate.setMinutes(endDate.getMinutes() - 1);
+                endDate.setMinutes(endDate.getMinutes() - 10);
             });
         });
 }

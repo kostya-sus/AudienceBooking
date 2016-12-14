@@ -2,6 +2,10 @@
 @using Booking.Web.ViewModels.Event
 @model Booking.Web.ViewModels.Event.EventEditViewModel
 
+@{
+    ViewBag.Title = Model.Title;
+}
+
 @section styles{
     @Styles.Render("~/Content/room-styles.css")
     @Styles.Render("~/Content/home-page.css")
@@ -9,6 +13,7 @@
     @Styles.Render("http://fonts.googleapis.com/css?family=Nunito:400,300,700")
     @Styles.Render("~/Content/schedule.css")
     @Styles.Render("~/Content/event-page.css")
+    @Styles.Render("~/Content/form-inputs.css")
 }
 
 @section scripts
@@ -18,25 +23,38 @@
     @Scripts.Render("~/Scripts/initializers.js")
     @Scripts.Render("~/bundles/jqueryval")
     @Scripts.Render("~/Scripts/project/event-edit-page.js")
+    @Scripts.Render("~/Scripts/project/room-map.js")
 }
 
-@using (Html.BeginForm("Save", "Event"))
+
+<input type="hidden" id="audience-is-free-url" value="@Url.Action("IsFree", "Audience")"/>
+<input type="hidden" id="display-event-url" value="@Url.Action("Index", "Event")"/>
+
+@foreach (var pair in Model.Audiences)
 {
-    @Html.AntiForgeryToken()
-    <div class="event-container">
-        <div class="page-container container">
+    var id = (int) pair.Key;
+    <input type="hidden" id="audience-@id-name" value="@pair.Value.Name"/>
+}
+
+<div class="event-container">
+    <div class="page-container container">
+        @using (Html.BeginForm("Save", "Event"))
+        {
+            @Html.AntiForgeryToken()
             <div class="row">
                 <div class="col-md-8">
                     <div id="event-info">
-                        @Html.HiddenFor(m => m.Id)
+                        @Html.HiddenFor(m => m.Id, new {id = "event-id"})
+
+                        @Html.ValidationMessageFor(m => m.Title, "", new {@class = "validation-error"})
                         @Html.TextBoxFor(m => m.Title, new {@class = "text-input", id = "event-title-edit"})
                         <br/>
                         @Html.EditorFor(m => m.IsAuthorShown, new {@class = "text-input"})
                         @Html.LabelFor(m => m.IsAuthorShown, Localization.ShowAuthor)
                         <span>@Localization.Or</span>
-                        @Html.TextBoxFor(m => m.AuthorName, new {@class = "text-input"})
+                        @Html.TextBoxFor(m => m.AuthorName, new {@class = "text-input", placeholder = Localization.ShowOrganizer})
                         <br/>
-                        @Html.TextAreaFor(m => m.AdditionalInfo, new {@class = "text-area"})
+                        @Html.TextAreaFor(m => m.AdditionalInfo, new {@class = "text-area", placeholder = Localization.AdditionalInformation})
                         <br/>
                         @Html.EditorFor(m => m.IsJoinAvailable)
                         @Html.LabelFor(m => m.IsJoinAvailable, Localization.JoinAvailable)
@@ -50,7 +68,7 @@
                     <div id="event-calendar">
                         @Html.HiddenFor(m => m.StartDateTime, new {id = "start-date"})
                         @Html.HiddenFor(m => m.EndDateTime, new {id = "end-date"})
-                        <div id="event-date">
+                        <div id="event-date" class="event-date-container">
                             <i class="fa fa-calendar" aria-hidden="true"></i>
                             <div class="datetime-updown-outer">
                                 <div class="datetime-updown-control datetime-updown-day">
@@ -104,43 +122,47 @@
                             <i class="fa fa-print" aria-hidden="true"></i>
                         </div>
                         <div id="edit-buttons-container">
-                            <button>@Localization.Cancellation</button>
+                            <button id="btn-cancel" type="button">@Localization.Cancellation</button>
                             <input type="submit" id="btn-save-event" value="@Localization.Save">
+                        </div>
+                        <div class="audience-not-free-message">
+                            <i class="fa fa-frown-o" aria-hidden="true"></i>
+                            <div>@Localization.AudienceIsAlreadyBooked</div>
                         </div>
                     </div>
                 </div>
             </div>
-            @if (Model.IsJoinAvailable && Model.ParticipantsEmails.Count > 0)
-            {
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="participants-container">
-                            <span>@Localization.RegisteredParticipants</span>
-                            <ul>
-                                @foreach (var pair in Model.ParticipantsEmails)
-                                {
-                                    <li class="participant-email-li col-md-4">
-                                        <span>@pair.Value</span>
-                                        <i class="fa fa-times" aria-hidden="true" data-form-id="#remove-participant-@pair.Key"></i>
-                                        @using (Html.BeginForm("RemoveParticipant", "Event", new {participantId = pair.Key}, FormMethod.Post, new {@class = "remove-participant-form"}))
-                                        {
-                                            @Html.AntiForgeryToken()
-                                            <input type="submit" value="submit" id="remove-participant-@pair.Key" class="remove-participant-submit"/>
-                                        }
-                                    </li>
-                                }
-                            </ul>
-                        </div>
+            @Html.HiddenFor(m => m.ChosenAudienceId, new {id = "chosen-audience-id"})
+        }
+
+        @if (Model.IsJoinAvailable && Model.ParticipantsEmails.Count > 0)
+        {
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="participants-container">
+                        <span>@Localization.RegisteredParticipants</span>
+                        <ul>
+                            @foreach (var pair in Model.ParticipantsEmails)
+                            {
+                                <li class="participant-email-li col-md-4">
+                                    <span>@pair.Value</span>
+                                    <i class="fa fa-times" aria-hidden="true" data-form-id="#remove-participant-@pair.Key"></i>
+                                    @using (Html.BeginForm("RemoveParticipant", "Event", new {participantId = pair.Key}, FormMethod.Post, new {@class = "remove-participant-form"}))
+                                    {
+                                        @Html.AntiForgeryToken()
+                                        <input type="submit" value="submit" id="remove-participant-@pair.Key" class="remove-participant-submit"/>
+                                    }
+                                </li>
+                            }
+                        </ul>
                     </div>
                 </div>
-            }
-        </div>
+            </div>
+        }
     </div>
+</div>
 
-    @Html.HiddenFor(m => m.ChosenAudienceId)
-}
-
-@*@Html.Partial("_RoomMapRoutePartial", Model)*@
+@Html.Partial("_RoomMapChoicePartial", Model.Audiences)
 
 <input type="hidden" id="redirect-to-home-url" value="@Url.Action("Index", "Home")"/>
 <input type="hidden" id="redirect-to-audience-url" value="@Url.Action("Index", "Audience")"/>
@@ -155,7 +177,7 @@
                     <div class="square"></div>
                     <div class="square square-red"></div>
                 </div>
-                <span>@Localization.AudienceSchedule ---</span>
+                <span>@Localization.AudienceSchedule <span id="audience-name"></span></span>
             </div>
             <div class="link-btn-container" id="redirect-home-btn">
                 <div class="btn-squares">
