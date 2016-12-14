@@ -114,7 +114,7 @@
     width: 270px;
 }
 
-#event-date {
+.event-date-container {
     margin-top: 5px;
     background: #f95752;
     border-radius: 16px;
@@ -122,7 +122,10 @@
     padding: 15px 8px;
 }
 
-#event-date span, #event-date i {
+.event-date-container span, 
+.event-date-container i, 
+.event-date-container .fa-calendar, 
+.event-date-container .fa-clock-o {
     color: white;
     vertical-align: middle;
     margin: 0 3px;
@@ -130,7 +133,6 @@
 
 .fa-calendar, .fa-clock-o {
     font-size: 30px;
-    margin: 0 10px;
     opacity: 0.7;
 }
 
