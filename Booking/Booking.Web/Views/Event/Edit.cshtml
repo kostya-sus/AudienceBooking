@@ -27,7 +27,13 @@
 }
 
 
-<input type="hidden" id="audience-is-free-url" value="@Url.Action("IsFree", "Audience")" />
+<input type="hidden" id="audience-is-free-url" value="@Url.Action("IsFree", "Audience")"/>
+
+@foreach (var pair in Model.Audiences)
+{
+    var id = (int) pair.Key;
+    <input type="hidden" id="audience-@id-name" value="@pair.Value.Name"/>
+}
 
 <div class="event-container">
     <div class="page-container container">

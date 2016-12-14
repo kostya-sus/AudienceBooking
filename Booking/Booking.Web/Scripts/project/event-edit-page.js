@@ -38,4 +38,10 @@
         checkIsFree();
 
         $("#start-date, #end-date, #chosen-audience-id").change(checkIsFree);
+        
+        $("#redirect-home-btn")
+            .click(function () {
+                var url = $("#redirect-to-home-url").val();
+                window.location.replace(url);
+            });
     });
