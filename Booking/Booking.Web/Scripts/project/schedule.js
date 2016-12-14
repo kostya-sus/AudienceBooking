@@ -169,6 +169,11 @@ function refillSchedule(eventsList) {
                         .click(function() {
                             $("#" + divId).remove();
                         });
+                    $("#btn-event-page-" + id)
+                        .click(function () {
+                            var url = $("#redirect-to-event-url").val() + "?eventId=" + id;
+                            window.location.replace(url);
+                        });
                 });
         });
 }
