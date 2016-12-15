@@ -57,13 +57,13 @@
     visibility: hidden;
 }
 
-.fa-plus, .fa-times {
+.join-event-form .fa-plus, .join-event-form .fa-times {
     font-size: 18px;
     vertical-align: middle;
     color: #9FA6B6;
 }
 
-.fa-plus:hover, .fa-times:hover {
+.join-event-form .fa-plus:hover, .join-event-form .fa-times:hover {
     color: #828A9D;
     cursor: pointer;
 }
@@ -73,7 +73,7 @@
     cursor: default !important;
 }
 
-.fa-times {
+.join-event-form .fa-times {
     visibility: hidden;
     font-size: 22px;
 }

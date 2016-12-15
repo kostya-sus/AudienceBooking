@@ -16,11 +16,16 @@
     padding-top: 5px;
 }
 
-#new-event-popup #btn-close {
-    position: relative;
-    top: 2px;
-    left: 280px;
+#new-event-popup .fa-times {
     float: right;
+    margin-right: 10px;
+    font-size: 30px;
+    color: #cfd3db;
+    cursor: pointer;
+}
+
+#new-event-popup .fa-times:hover {
+    cursor: pointer;
 }
 
 #new-event-popup .ul { list-style-type: none; }
@@ -53,7 +58,7 @@
     height: 30px;
     border-radius: 50px;
     border: 1px solid #ebeef7;
-    margin-top: 5px;
+    float: right;
 }
 
 #new-event-popup .textarea {
@@ -65,59 +70,9 @@
     padding: 10px;
 }
 
-#new-event-popup #new-event-popup-is-public { display: none; }
-
-#new-event-popup [for="checkboxRed"] {
-    position: relative;
-    display: inline-block;
-    width: 50px;
-    height: 10px;
-    padding: 15px;
-    border-radius: 50px;
-    line-height: 10px;
-    color: #f95752;
-    text-shadow: 1px 1px 0px rgba(255, 255, 255, .15);
-    background: #FFF;
-    box-shadow:
-              0 1px 0 #f95752,
-              inset 0 0 0 1px #f95752,
-              inset 0 1px 1px #f95752,
-              inset 0 -1px 1px #f95752;
-    cursor: pointer;
-}
-
-#new-event-popup [for="checkboxRed"]:before {
-    position: absolute;
-    right: 15px;
-    color: #000;
-}
-
-#new-event-popup [for="checkboxRed"]:after {
-    content: "";
-    position: absolute;
-    left: 0px;
-    top: 0px;
-    display: block;
-    width: 30px;
-    height: 30px;
-    border-radius: 50px;
-    background: #f95752;
-    transition: .5s;
-}
-
-#new-event-popup #new-event-popup-is-public:checked ~ [for="checkboxRed"]:after { left: 20px; }
-
-#new-event-popup #calendar-icon {
+#new-event-popup .fa-calendar-o {
     margin-left: 20px;
     font-size: 30px !important;
-}
-
-#new-event-popup #close-icon {
-    font-size: 30px;
-    color: #cfd3db;
-    margin-left: 190px;
-    margin-top: 2px;
-    cursor: pointer;
 }
 
 #new-event-popup .audience-not-free-message {
@@ -142,7 +97,6 @@
     display: inline;
 }
 
-
 #new-event-popup .btnCreate {
     margin-top: 5px;
     background: #f95752;
@@ -159,4 +113,8 @@
 
 #new-event-popup-body {
     padding: 10px 20px;
+}
+
+#new-event-popup-body .red-toggle {
+    float: right;
 }
