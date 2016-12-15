@@ -258,6 +258,7 @@
     <Content Include="Content\Images\audience-info-icons\icon-print.png" />
     <Content Include="Content\Images\audience-info-icons\icon-proect.png" />
     <Content Include="Content\Images\audience-info-icons\icon-table.png" />
+    <Content Include="Content\Images\check_btn_sheet.png" />
     <Content Include="Content\Images\favicon.ico" />
     <Content Include="Content\Images\line-details\line-details-einstein.png" />
     <Content Include="Content\Images\line-details\line-details-empty.png" />

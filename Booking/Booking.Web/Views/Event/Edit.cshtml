@@ -49,15 +49,21 @@
                         @Html.ValidationMessageFor(m => m.Title, "", new {@class = "validation-error"})
                         @Html.TextBoxFor(m => m.Title, new {@class = "text-input", id = "event-title-edit"})
                         <br/>
-                        @Html.EditorFor(m => m.IsAuthorShown, new {@class = "text-input"})
-                        @Html.LabelFor(m => m.IsAuthorShown, Localization.ShowAuthor)
+
+                        <input type="checkbox" id="is-author-shown" name="IsAuthorShown"  value="true" @(Model.IsAuthorShown ? "checked" : "") />
+                        <label for="is-author-shown"><span></span>@Localization.ShowAuthor</label>
+                        <input name="IsAuthorShown" type="hidden" value="false" /> 
+
                         <span>@Localization.Or</span>
                         @Html.TextBoxFor(m => m.AuthorName, new {@class = "text-input", placeholder = Localization.ShowOrganizer})
                         <br/>
                         @Html.TextAreaFor(m => m.AdditionalInfo, new {@class = "text-area", placeholder = Localization.AdditionalInformation})
                         <br/>
-                        @Html.EditorFor(m => m.IsJoinAvailable)
-                        @Html.LabelFor(m => m.IsJoinAvailable, Localization.JoinAvailable)
+
+                        <input type="checkbox" id="is-join-available" name="IsJoinAvailable" value=true @(Model.IsJoinAvailable ? "checked" : "") />
+                        <label for="is-join-available"><span></span>@Localization.JoinAvailable</label>
+                        <input name="IsJoinAvailable" type="hidden" value="false" /> 
+
                         @if (Model.IsJoinAvailable)
                         {
                             <span>@string.Format(Localization.EventPageParticipantsCount, Model.ParticipantsEmails.Count)</span>

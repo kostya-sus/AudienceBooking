@@ -79,14 +79,10 @@
         <div class="line">
             <table>
                 <tr>
-                    <td id="td-style">
-                        <div class="checkboxWhite">
-                            @Html.CheckBoxFor(m => m.IsJoinAvailable, new { id = "IsJoinAvailable" })
-                            <label for="IsJoinAvailable"></label>
-                        </div>
-                    </td>
-                    <td style="padding-top: 10px">
-                        <p>@Localization.RegistrationTo</p>
+                    <td id="td-style" style="padding-top: 10px;">
+                        <input type="checkbox" id="new-event-popup-is-join-available" name="IsJoinAvailable" value=true @(Model.IsJoinAvailable ? "checked" : "") />
+                        <label for="new-event-popup-is-join-available"><span></span>@Localization.JoinAvailable</label>
+                        <input name="IsJoinAvailable" type="hidden" value="false" /> 
                     </td>
                     <td style="padding-top: 10px; padding-left: 70px;">
                         <p id="public" class="public">
@@ -106,14 +102,10 @@
             </table>
             <table>
                 <tr>
-                    <td id="td-style">
-                        <div class="checkboxWhite">
-                            @Html.CheckBoxFor(m=>m.IsAuthorShown, new {id = "IsAuthorShown"})
-                            <label for="IsAuthorShown"></label>
-                        </div>
-                    </td>
-                    <td style="padding-top: 10px">
-                        <p>@Localization.ShowAuthor</p>
+                    <td id="td-style" style="padding-top: 10px;">
+                        <input type="checkbox" id="new-event-popup-is-author-shown" name="IsAuthorShown" value="true" @(Model.IsAuthorShown ? "checked" : "") />
+                        <label for="new-event-popup-is-author-shown"><span></span>@Localization.ShowAuthor</label>
+                        <input name="IsAuthorShown" type="hidden" value="false" /> 
                     </td>
                     <td style="padding-top: 10px; padding-left: 10px">
                         <p>@Localization.Or</p>

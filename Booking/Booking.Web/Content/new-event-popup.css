@@ -75,44 +75,6 @@
     padding-top: 10px;
 }
 
-#new-event-popup .checkboxWhite {
-    width: 25px;
-    position: relative;
-}
-
-#new-event-popup .checkboxWhite input[type="checkbox"]{
-    visibility: hidden;
-}
-#new-event-popup .checkboxWhite label {
-    cursor: pointer;
-    position: absolute;
-    width: 25px;
-    height: 25px;
-    top: 0;
-    left: 0;
-    background: #fff;
-    border-radius: 3px;
-    border: 1px solid #ebeef7;
-}
-
-#new-event-popup .checkboxWhite label:after {
-    opacity: 0;
-    content: '';
-    position: absolute;
-    width: 20px;
-    height: 10px;
-    background: transparent;
-    top: 5px;
-    left: 2px;
-    border: 5px solid #c4c5c7;
-    border-top: none;
-    border-right: none;
-
-    transform: rotate(-45deg);
-}
-    #new-event-popup .checkboxWhite #IsAuthorShown:checked ~ [for="IsAuthorShown"]:after { opacity: 1;}
-    #new-event-popup .checkboxWhite #IsJoinAvailable:checked ~ [for="IsJoinAvailable"]:after { opacity: 1;}
-
 #new-event-popup #checkboxRed { display: none; }
 
 #new-event-popup [for="checkboxRed"] {
