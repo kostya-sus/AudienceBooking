@@ -40,7 +40,7 @@ namespace Booking.Models.Migrations
 
             var dates = GetDates();
 
-            var admin = CreateUser(context, "Admin", "admin@softheme.com");
+            var admin = CreateUser(context, "Admin", "admin@user.fake");
 
             var userStore = new UserStore<ApplicationUser>(context);
             var userManager = new UserManager<ApplicationUser>(userStore);
@@ -48,8 +48,9 @@ namespace Booking.Models.Migrations
 
             var users = new List<ApplicationUser>
             {
-                CreateUser(context, "John Doe", "john.doe@softheme.com"),
-                CreateUser(context, "John Smith", "john.smith@softheme.com")
+                CreateUser(context, "John Doe", "john.doe@user.fake"),
+                CreateUser(context, "John Smith", "john.smith@user.fake"),
+                CreateUser(context, "Joe Bloggs", "joe.bloggs@user.fake")
             };
 
             var classrooms = new List<Audience>
