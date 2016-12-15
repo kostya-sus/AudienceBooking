@@ -4,6 +4,7 @@ using System.Net;
 using System.Net.Mail;
 using System.Text;
 using Booking.Models;
+using Booking.Services.EmailModels;
 using Booking.Services.Interfaces;
 using RazorEngine.Templating;
 
@@ -11,12 +12,17 @@ namespace Booking.Services.Services
 {
     public class EmailNotificationService : IEmailNotificationService
     {
-        private static readonly string TemplateFolderPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "EmailTemplates");
+        private readonly MailAddress _emailFromAddress = new MailAddress("audiencebookingtest@gmail.com", "Audience");
+        private readonly string _templateFolderPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "EmailTemplates");
         public void AccountRegisteredNotification(ApplicationUser user)
         {
-            var emailTemplatePath = Path.Combine(TemplateFolderPath, "AccountRegisteredNotification.cshtml");
-           
-            var modelEmail = new {user.Email, Name = user.UserName};
+            var emailTemplatePath = Path.Combine(_templateFolderPath.Replace("Web", "Services"), "AccountRegisteredNotificationTemplate.cshtml");
+            
+            var modelEmail = new Booking.Services.EmailModels.AccountRegisteredNotificationModel
+            {
+                Name = user.UserName,
+                Email = user.Email
+            };
 
             var templateService = new TemplateService();
             var emailHtmlBody = templateService.Parse(File.ReadAllText(emailTemplatePath), modelEmail, null, null);
@@ -24,6 +30,7 @@ namespace Booking.Services.Services
             // Send the email
             var email = new MailMessage()
             {
+                From = _emailFromAddress,
                 Body = emailHtmlBody,
                 IsBodyHtml = true,
                 Subject = "Registered to softheme-booking.azurewebsites.net"
@@ -38,7 +45,7 @@ namespace Booking.Services.Services
                 Credentials = new NetworkCredential("audiencebookingtest@gmail.com", "Qwer123!"),
                 EnableSsl = true
             };
-
+            
             try
             {
                 smtp.Send(email);
