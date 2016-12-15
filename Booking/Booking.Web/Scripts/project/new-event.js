@@ -20,8 +20,7 @@ $(document)
                 $("#new-event-popup")
                     .load(eventUrl,
                         function() {
-                            $("#new-event-popup .fa-caret-down, #new-event-popup .fa-caret-up")
-                                .click(checkIfAudienceIsFree);
+                            $("#start-date, #end-date, #ChosenAudienceId").change(checkIfAudienceIsFree);
 
                             configureDatetimeUpdown("event-date", "start-date", "end-date");
                         });
