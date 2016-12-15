@@ -28,16 +28,9 @@ namespace Booking.Web.Controllers
         [HttpGet]
         public ActionResult Index()
         {
-            var audiences = _audienceService.GetAllAudiences().ToList();
+            var audiences = _audienceService.GetAllAudiences();
 
-            var audiencesVms = audiences.ToDictionary(
-                a => a.Id,
-                a => new AudienceMapItemVm
-                {
-                    Id = a.Id,
-                    IsAvailable = a.IsBookingAvailable,
-                    Name = a.Name
-                });
+            var audiencesVms = audiences.ToVmDictionary();
 
             var availableAudiences = audiences.Where(a => a.IsBookingAvailable)
                 .ToDictionary(a => (int) a.Id, a => a.Name);
@@ -56,6 +49,25 @@ namespace Booking.Web.Controllers
             };
 
             return View(viewModel);
+        }
+
+        [HttpGet]
+        public ActionResult GetPartialScheduleLayout(int timezoneOffset)
+        {
+            var audiences = _audienceService.GetAllAudiences();
+            var availableAudiences = audiences.Where(a => a.IsBookingAvailable)
+                .ToDictionary(a => (int) a.Id, a => a.Name);
+
+            int hoursOffset = timezoneOffset/60;
+
+            var scheduleTable = new ScheduleTableViewModel
+            {
+                AvailableAudiences = availableAudiences,
+                LowerHourBound = (int) BookingHoursBoundsEnum.Lower + hoursOffset,
+                UpperHourBound = (int) BookingHoursBoundsEnum.Upper + hoursOffset
+            };
+
+            return PartialView("_HorizontalSchedulePartial", scheduleTable);
         }
 
         [HttpGet]

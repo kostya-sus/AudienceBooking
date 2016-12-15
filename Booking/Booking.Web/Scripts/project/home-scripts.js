@@ -43,91 +43,100 @@ function toggleActiveAudiences() {
 
 $(document)
     .ready(function() {
-        lowerHourBound = parseInt($("#LowerHourBound").val());
-        upperHourBound = parseInt($("#UpperHourBound").val());
-        tdWidth = parseInt($("#schedule-contents-table td").css("width"));
-        tdHeight = parseInt($("#schedule-contents-table td").css("height"));
-        thHeight = parseInt($("#schedule-contents-table th").css("height"));
+        function initHomePage() {
+            lowerHourBound = parseInt($("#LowerHourBound").val());
+            upperHourBound = parseInt($("#UpperHourBound").val());
+            tdWidth = parseInt($("#schedule-contents-table td").css("width"));
+            tdHeight = parseInt($("#schedule-contents-table td").css("height"));
+            thHeight = parseInt($("#schedule-contents-table th").css("height"));
 
-        var rows = $(".audience-row");
-        for (var i = 0; i < rows.length; ++i) {
-            availableAudiencesIds.push($(rows[i]).data("audience-id"));
-        }
+            var rows = $(".audience-row");
+            for (var i = 0; i < rows.length; ++i) {
+                availableAudiencesIds.push($(rows[i]).data("audience-id"));
+            }
 
-        availableAudiencesDivs = $(".room-available");
+            availableAudiencesDivs = $(".room-available");
 
-        $("#slider-draggable")
-            .draggable({
-                axis: "x",
-                containment: "parent",
-                drag: function(event, ui) {
-                    var t = posToTime(lowerHourBound, upperHourBound, tdWidth, ui.position.left);
-                    setDraggableSliderCaption(timeToStringHHMM(t));
-                    checkSliderNowPosition();
-                    toggleActiveAudiences();
-                },
-                stop: checkAndSetDraggableSliderPosition
-            });
-
-        var time = new Date();
-        var pos = timeToPos(lowerHourBound, upperHourBound, tdWidth, time);
-
-        if (pos > (upperHourBound - lowerHourBound) * tdWidth) {
-            pos = (upperHourBound - lowerHourBound) * tdWidth;
-        } else if (pos < 0) {
-            pos = 0;
-        }
-
-        moveSlider($("#slider-now"), pos);
-        moveSlider($("#slider-draggable"), pos);
-        $("#schedule-viewport-outer").scrollLeft(pos);
-
-        setDraggableSliderCaption(timeToStringHHMM(time));
-
-        setInterval(function() {
-                moveSliderNow(lowerHourBound, upperHourBound, tdWidth);
-            },
-            60000);
-
-
-        $("#schedule-mode-table-only").click(toggleTableOnlyMode);
-        $("#schedule-mode-with-calendar").click(toggleWithCalendarMode);
-
-        $("#decrement-date-button").click(decrementDate);
-        $("#increment-date-button").click(incrementDate);
-
-        var $datepicker = $("#datepicker");
-
-        $datepicker.datepicker({ language: "ru" });
-
-        $datepicker.datepicker("setDaysOfWeekDisabled", "06");
-
-        $datepicker.on("changeDate",
-            function() {
-                dateChangedEvent($datepicker.datepicker("getDate"),
-                    function() {
+            $("#slider-draggable")
+                .draggable({
+                    axis: "x",
+                    containment: "parent",
+                    drag: function(event, ui) {
+                        var t = posToTime(lowerHourBound, upperHourBound, tdWidth, ui.position.left);
+                        setDraggableSliderCaption(timeToStringHHMM(t));
+                        checkSliderNowPosition();
                         toggleActiveAudiences();
-                    });
-            });
+                    },
+                    stop: checkAndSetDraggableSliderPosition
+                });
 
-        setDateToday();
+            var time = new Date();
+            var pos = timeToPos(lowerHourBound, upperHourBound, tdWidth, time);
 
-        moveSliderNow(lowerHourBound, upperHourBound, tdWidth);
+            if (pos > (upperHourBound - lowerHourBound) * tdWidth) {
+                pos = (upperHourBound - lowerHourBound) * tdWidth;
+            } else if (pos < 0) {
+                pos = 0;
+            }
 
-        toggleWithCalendarMode();
+            moveSlider($("#slider-now"), pos);
+            moveSlider($("#slider-draggable"), pos);
+            $("#schedule-viewport-outer").scrollLeft(pos);
 
-        $(".btn-goto-today").click(function() { setDateToday(toggleActiveAudiences); });
+            setDraggableSliderCaption(timeToStringHHMM(time));
 
-        $(".btn-goto-now")
-            .click(function() {
-                bindDraggableSliderToNow();
-                toggleActiveAudiences();
-            });
+            setInterval(function() {
+                    moveSliderNow(lowerHourBound, upperHourBound, tdWidth);
+                },
+                60000);
 
-        checkSliderNowPosition();
 
-        $(".room-proxy").mouseenter(onRoomProxyMouseEnterShowInfo);
-        $(".room-proxy").mouseleave(onRoomProxyMouseLeaveHideInfo);
+            $("#schedule-mode-table-only").click(toggleTableOnlyMode);
+            $("#schedule-mode-with-calendar").click(toggleWithCalendarMode);
 
-        setTimeout(toggleActiveAudiences, 300);
+            $("#decrement-date-button").click(decrementDate);
+            $("#increment-date-button").click(incrementDate);
+
+            var $datepicker = $("#datepicker");
+
+            $datepicker.datepicker({ language: "ru" });
+
+            $datepicker.datepicker("setDaysOfWeekDisabled", "06");
+
+            $datepicker.on("changeDate",
+                function() {
+                    dateChangedEvent($datepicker.datepicker("getDate"),
+                        function() {
+                            toggleActiveAudiences();
+                        });
+                });
+
+            setDateToday();
+
+            moveSliderNow(lowerHourBound, upperHourBound, tdWidth);
+
+            toggleWithCalendarMode();
+
+            $(".btn-goto-today").click(function() { setDateToday(toggleActiveAudiences); });
+
+            $(".btn-goto-now")
+                .click(function() {
+                    bindDraggableSliderToNow();
+                    toggleActiveAudiences();
+                });
+
+            checkSliderNowPosition();
+
+            $(".room-proxy").mouseenter(onRoomProxyMouseEnterShowInfo);
+            $(".room-proxy").mouseleave(onRoomProxyMouseLeaveHideInfo);
+
+            setTimeout(toggleActiveAudiences, 300);
+        }
+
+        var now = new Date();
+        var offset = now.getTimezoneOffset();
+
+        var url = $("#get-schedule-layout-url").val() + "?timezoneOffset=" + offset;
+
+        $("#schedule-container .container").load(url, initHomePage);
     });
