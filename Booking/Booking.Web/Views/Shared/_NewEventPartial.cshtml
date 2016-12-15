@@ -7,7 +7,7 @@
 {
     @Html.AntiForgeryToken()
 
-    <div id="main" class="main">
+    <div id="main" class="new-event-popup">
         <div class="header">
             <i id="calendar-icon" class="fa fa-calendar-o" aria-hidden="true"></i>
             <span style="margin-left: 20px;">@Localization.ReserveAudience</span>
@@ -15,8 +15,8 @@
         </div>
         <div class="line" style="display: flex">
             <span style="padding-top: 5px">@Localization.When</span>
-            @Html.HiddenFor(m => m.StartDateTime, new { id = "start-date" })
-            @Html.HiddenFor(m => m.EndDateTime, new { id = "end-date" })
+            @Html.HiddenFor(m => m.StartDateTime, new {id = "start-date"})
+            @Html.HiddenFor(m => m.EndDateTime, new {id = "end-date"})
             <div id="event-date">
                 <div class="datetime-updown-outer" style="margin-left: 15px">
                     <div class="datetime-updown-control datetime-updown-day">
@@ -70,7 +70,7 @@
 
         </div>
         <div class="line">
-            @Html.ValidationMessageFor(m => m.Title, "", new { @class = "validation-error" })
+            @Html.ValidationMessageFor(m => m.Title, "", new {@class = "validation-error"})
             @Html.TextBoxFor(m => m.Title, new {@class = "input-style", placeholder = Localization.Title})
         </div>
         <div class="line">
@@ -109,7 +109,7 @@
                 <tr>
                     <td id="td-style">
                         <div class="checkboxWhite">
-                            <input type="checkbox" value="@Model.IsAuthorShown" id="IsAuthorShow" name="" />
+                            <input type="checkbox" value="@Model.IsAuthorShown" id="IsAuthorShow" name=""/>
                             <label for="IsAuthorShow"></label>
                         </div>
                     </td>
@@ -120,29 +120,18 @@
                         <p>@Localization.Or</p>
                     </td>
                     <td style="padding-left: 20px">
-                        @Html.TextBoxFor(m => m.AuthorName, new {@class = "input-stile-org", placeholder = Localization.ShowOrganizer})
+                        @Html.TextBoxFor(m => m.AuthorName, new {@class = "input-style-org", placeholder = Localization.ShowOrganizer})
                     </td>
                 </tr>
             </table>
             <input type="hidden" id="audience-is-free-url" value="@Url.Action("IsFree", "Audience")"/>
-            <div>
-                <div id="errorMessage">
-                    <table>
-                        <tr>
-                            <td>
-                                <i class="fa fa-frown-o" style="font-size: 35px" aria-hidden="true"></i>
-                            </td>
-                            <td style="padding-left: 10px">
-                                <span>@Localization.ErrorMessageForNewEventPopup1</span>
-                                <br/>
-                                <span>@Localization.ErrorMessageForNewEventPopup2</span>
-                            </td>
-                        </tr>
-                    </table>
-                </div>
-                <input type="submit" class="btnCreate" value="@Localization.Create"/>
+        </div>
+        <div class="bottom-container">
+            <div class="audience-not-free-message">
+                <i class="fa fa-frown-o" aria-hidden="true"></i>
+                <div>@Localization.AudienceIsAlreadyBooked</div>
             </div>
-
+            <input type="submit" class="btnCreate" value="@Localization.Create" />
         </div>
     </div>
 }

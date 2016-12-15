@@ -284,6 +284,7 @@
     <Content Include="Content\Images\schedule\today-active-top.png" />
     <Content Include="Content\Images\schedule\today-bottom.png" />
     <Content Include="Content\Images\schedule\today-top.png" />
+    <Content Include="Content\new-event-popup.css" />
     <Content Include="Content\schedule.css" />
     <Content Include="Content\Images\contact-bg.png" />
     <Content Include="Content\Images\login-background.svg">

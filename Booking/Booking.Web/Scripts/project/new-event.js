@@ -50,9 +50,9 @@ function checkIfAudienceIsFree() {
 
 function toggleIsFreeMessage(isFree) {
     if (isFree === 'False') {
-        $("#errorMessage").css("visibility", 'visible');
+        $(".audience-not-free-message").css("visibility", 'visible');
     } else {
-        $("#errorMessage").css("visibility", 'hidden');
+        $(".audience-not-free-message").css("visibility", 'hidden');
     }
 
 }
