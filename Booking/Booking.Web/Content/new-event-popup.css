@@ -80,6 +80,9 @@
     position: relative;
 }
 
+#new-event-popup .checkboxWhite input[type="checkbox"]{
+    visibility: hidden;
+}
 #new-event-popup .checkboxWhite label {
     cursor: pointer;
     position: absolute;
@@ -107,8 +110,8 @@
 
     transform: rotate(-45deg);
 }
-
-#new-event-popup .checkboxWhite input[type=checkbox]:checked + label:after { opacity: 1; }
+    #new-event-popup .checkboxWhite #IsAuthorShown:checked ~ [for="IsAuthorShown"]:after { opacity: 1;}
+    #new-event-popup .checkboxWhite #IsJoinAvailable:checked ~ [for="IsJoinAvailable"]:after { opacity: 1;}
 
 #new-event-popup #checkboxRed { display: none; }
 

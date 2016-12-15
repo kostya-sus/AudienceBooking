@@ -81,7 +81,8 @@
                 <tr>
                     <td id="td-style">
                         <div class="checkboxWhite">
-                            <input type="checkbox" value="@Model.IsJoinAvailable" id="IsJoinAvailable"/>
+                            @Html.CheckBoxFor(m => m.IsJoinAvailable, new { id = "IsJoinAvailable" })
+                            @*<input type="checkbox" value="@Model.IsJoinAvailable" id="IsJoinAvailable"/>*@
                             <label for="IsJoinAvailable"></label>
                         </div>
                     </td>
@@ -94,7 +95,7 @@
                         </p>
                     </td>
                     <td style="padding-top: 10px">
-                        @Html.CheckBoxFor(m => m.IsPublic, new {@id = "checkboxRed", onclick = "hasTickedBox()"})
+                        @Html.CheckBoxFor(m => m.IsPrivate, new {id = "checkboxRed", onclick = "hasTickedBox()"})
                         <label for="checkboxRed"></label>
                     </td>
                     <td style="padding-top: 10px">
@@ -108,8 +109,9 @@
                 <tr>
                     <td id="td-style">
                         <div class="checkboxWhite">
-                            <input type="checkbox" value="@Model.IsAuthorShown" id="IsAuthorShow" name=""/>
-                            <label for="IsAuthorShow"></label>
+                            @Html.CheckBoxFor(m=>m.IsAuthorShown, new {id = "IsAuthorShown"})
+                            @*<input type="checkbox" value="@Model.IsAuthorShown" name="@Model.IsAuthorShown" id="IsAuthorShow"/>*@
+                            <label for="IsAuthorShown"></label>
                         </div>
                     </td>
                     <td style="padding-top: 10px">
