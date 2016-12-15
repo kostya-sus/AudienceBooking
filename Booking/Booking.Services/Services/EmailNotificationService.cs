@@ -14,30 +14,9 @@ namespace Booking.Services.Services
     {
         private readonly MailAddress _emailFromAddress = new MailAddress("audiencebookingtest@gmail.com", "Audience");
         private readonly string _templateFolderPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "EmailTemplates");
-        public void AccountRegisteredNotification(ApplicationUser user)
+
+        private void SendMail(MailMessage email)
         {
-            var emailTemplatePath = Path.Combine(_templateFolderPath.Replace("Web", "Services"), "AccountRegisteredNotificationTemplate.cshtml");
-            
-            var modelEmail = new Booking.Services.EmailModels.AccountRegisteredNotificationModel
-            {
-                Name = user.UserName,
-                Email = user.Email
-            };
-
-            var templateService = new TemplateService();
-            var emailHtmlBody = templateService.Parse(File.ReadAllText(emailTemplatePath), modelEmail, null, null);
-
-            // Send the email
-            var email = new MailMessage()
-            {
-                From = _emailFromAddress,
-                Body = emailHtmlBody,
-                IsBodyHtml = true,
-                Subject = "Registered to softheme-booking.azurewebsites.net"
-            };
-
-            email.To.Add(new MailAddress(modelEmail.Email, modelEmail.Name));
-
             SmtpClient smtp = new SmtpClient("smtp.gmail.com", 587)
             {
                 Host = "smtp.gmail.com",
@@ -45,7 +24,6 @@ namespace Booking.Services.Services
                 Credentials = new NetworkCredential("audiencebookingtest@gmail.com", "Qwer123!"),
                 EnableSsl = true
             };
-            
             try
             {
                 smtp.Send(email);
@@ -61,8 +39,57 @@ namespace Booking.Services.Services
             }
         }
 
+        private MailMessage GenerateEmail(string emailHtmlBody, string subject)
+        {
+            return new MailMessage
+            {
+                From = _emailFromAddress,
+                Body = emailHtmlBody,
+                IsBodyHtml = true,
+                Subject = subject
+            };
+        }
+        public void AccountRegisteredNotification(ApplicationUser user)
+        {
+            var emailTemplatePath = Path.Combine(_templateFolderPath.Replace("Web", "Services"), "AccountRegisteredNotificationTemplate.cshtml");
+            
+            var modelEmail = new Booking.Services.EmailModels.AccountRegisteredRemovedNotificationModel
+            {
+                Name = user.UserName,
+                Email = user.Email
+            };
+
+            var templateService = new TemplateService();
+            var emailHtmlBody = templateService.Parse(File.ReadAllText(emailTemplatePath), modelEmail, null, null);
+
+            var subject = "Registered to softheme-booking.azurewebsites.net";
+            var email = GenerateEmail(emailHtmlBody, subject);
+
+            email.To.Add(new MailAddress(modelEmail.Email, modelEmail.Name));    
+            
+            SendMail(email);
+        }
+
+
         public void AccountRemovedNotification(ApplicationUser user)
         {
+            var emailTemplatePath = Path.Combine(_templateFolderPath.Replace("Web", "Services"), "AccountRemovedNotificationTemplate.cshtml");
+
+            var modelEmail = new Booking.Services.EmailModels.AccountRegisteredRemovedNotificationModel
+            {
+                Name = user.UserName,
+                Email = user.Email
+            };
+
+            var templateService = new TemplateService();
+            var emailHtmlBody = templateService.Parse(File.ReadAllText(emailTemplatePath), modelEmail, null, null);
+
+            var subject = "Account remove from softheme-booking.azurewebsites.net";
+            var email = GenerateEmail(emailHtmlBody, subject);
+
+            email.To.Add(new MailAddress(modelEmail.Email, modelEmail.Name));
+
+            SendMail(email);
         }
 
         public void EventCancelledNotification(Event eventEntity)

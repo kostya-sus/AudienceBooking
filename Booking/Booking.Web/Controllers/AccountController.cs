@@ -20,7 +20,7 @@ namespace Booking.Web.Controllers
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
-        private IEmailNotificationService _emailNotificationService;
+        private readonly IEmailNotificationService _emailNotificationService;
         public AccountController()
         {
             _emailNotificationService = new EmailNotificationService();
