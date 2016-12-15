@@ -1,9 +1,24 @@
 ﻿@using Booking.Web.Localization
 @using Microsoft.AspNet.Identity
-@model Booking.Web.ViewModels.Profile.EditProfileViewModel
 
-@Html.ValidationMessageFor(m => m.Name, "", new { @class = "validation-error" })
-@Html.TextAreaFor(m => m.Name, new { @class = "profile-input", placeholder = @User.Identity.Name, @id = "name", })
+@model Booking.Web.ViewModels.Profile.ProfileViewModel
 
-@Html.ValidationMessageFor(m => m.Email, "", new { @class = "validation-error" })
-@Html.TextAreaFor(m => m.Email, new { @class = "profile-input", placeholder = @Context., @id = "email", })
+
+    
+    @using (Html.BeginForm("Edit", "Profile", FormMethod.Post))
+    {
+        @Html.AntiForgeryToken()
+        @Html.ValidationMessageFor(m => m.UserInfo.Name, "", new {@class = "validation-error"})
+        @Html.TextBoxFor(m => m.UserInfo.Name, new {@class = "profile-input-edit",  @id = "name",})
+
+        @Html.ValidationMessageFor(m => m.UserInfo.Email, "", new {@class = "validation-error"})
+        @Html.TextBoxFor(m => m.UserInfo.Email, new {@class = "profile-input-edit",   @id = "email",})
+        if (@User.IsInRole("Admin"))
+        {
+            <div>
+                switch
+            </div>
+        }
+        
+        <input type="submit" id="save" value=@Localization.Save class="profile-submit"/>
+    }

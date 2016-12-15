@@ -10,6 +10,19 @@
     padding: 15px;
     width: 100%;
 }
+.profile-input-edit {
+    border: 8px #656d7f;
+    border-radius: 50px;
+    background: black;
+    margin: 0px auto;
+    outline: none;
+    height: 35px;
+    color: #656d7f;
+    font-size: 13px;
+    padding: 15px;
+    width: 50%;
+}
+
 
 .profile-input[type=password] {
     letter-spacing: 5px;

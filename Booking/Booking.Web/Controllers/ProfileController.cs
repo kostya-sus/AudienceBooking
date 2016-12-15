@@ -5,6 +5,7 @@ using Booking.Repositories;
 using Booking.Repositories.Interfaces;
 using Booking.Services.Interfaces;
 using Booking.Services.Services;
+using Booking.Web.ViewModels.Manage;
 using Booking.Web.ViewModels.Profile;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
@@ -13,10 +14,20 @@ namespace Booking.Web.Controllers
 {
     public class ProfileController : Controller
     {
+        
         [HttpGet]
         public ActionResult Index(string userId)
         {
-            return View(userId);
+            var vm = new ProfileViewModel()
+            {
+                UserInfo = new UserInfoViewModel { },
+                ChangePasswordForm = new ChangePasswordViewModel { },
+                Id = userId,
+                IsAdmin = false,
+                IsOwner = false
+               
+            };
+            return View(vm);
         }
 
         [HttpGet]
@@ -29,7 +40,15 @@ namespace Booking.Web.Controllers
         [Authorize]
         public ActionResult Edit(string userId)
         {
-           throw new NotImplementedException();
+            var vm = new EditProfileViewModel
+            {
+                Email = null,
+                IsEditorAdmin = false,
+                IsProfileAdmin = false,
+                Name = null
+            };
+
+            return PartialView("_EditProfilePartial", vm);
         }
 
         [HttpPost]
