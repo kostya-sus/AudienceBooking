@@ -33,12 +33,12 @@
 <input type="hidden" id="get-audience-info-url" value="@Url.Action("GetAudienceInfo", "Audience")"/>
 <input type="hidden" id="redirect-to-event-url" value="@Url.Action("Index", "Event")"/>
 <input type="hidden" id="display-event-popup-url" value="@Url.Action("DisplayEventPopup", "Event")"/>
-<input type="hidden" id="get-schedule-layout-url" value="@Url.Action("GetPartialScheduleLayout", "Home" )" />
 
 @Html.Partial("_RoomMapPartial", Model.Audiences)
 
 <div id="schedule-container" style="background: white">
     <div class="page-container container">
+        @Html.Partial("_HorizontalSchedulePartial", Model.ScheduleTable)
     </div>
 </div>
 <div id="map_canvas"></div>
