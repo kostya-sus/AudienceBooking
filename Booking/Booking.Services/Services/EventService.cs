@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Security.Principal;
 using Booking.Models;
+using Booking.Repositories;
 using Booking.Repositories.Interfaces;
 using Booking.Services.Interfaces;
 using Microsoft.AspNet.Identity;
@@ -14,12 +15,11 @@ namespace Booking.Services.Services
         private readonly IUsersService _usersService;
         private readonly IEmailNotificationService _emailNotificationService;
 
-        public EventService(IUnitOfWork unitOfWork, IUsersService usersService,
-            IEmailNotificationService emailNotificationService)
+        public EventService()
         {
-            _unitOfWork = unitOfWork;
-            _usersService = usersService;
-            _emailNotificationService = emailNotificationService;
+            _unitOfWork = new UnitOfWork();
+            _usersService = new UsersService();
+            _emailNotificationService = new EmailNotificationService();
         }
 
         public void CreateEvent(Event eventEntity)
