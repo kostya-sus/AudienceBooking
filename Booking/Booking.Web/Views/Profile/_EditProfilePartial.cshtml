@@ -1,1 +1,9 @@
-﻿
+﻿@using Booking.Web.Localization
+@using Microsoft.AspNet.Identity
+@model Booking.Web.ViewModels.Profile.EditProfileViewModel
+
+@Html.ValidationMessageFor(m => m.Name, "", new { @class = "validation-error" })
+@Html.TextAreaFor(m => m.Name, new { @class = "profile-input", placeholder = @User.Identity.Name, @id = "name", })
+
+@Html.ValidationMessageFor(m => m.Email, "", new { @class = "validation-error" })
+@Html.TextAreaFor(m => m.Email, new { @class = "profile-input", placeholder = @Context., @id = "email", })
