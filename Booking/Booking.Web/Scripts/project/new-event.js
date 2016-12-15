@@ -23,6 +23,8 @@ $(document)
                             $("#start-date, #end-date, #ChosenAudienceId").change(checkIfAudienceIsFree);
 
                             configureDatetimeUpdown("event-date", "start-date", "end-date");
+
+                            checkIfAudienceIsFree();
                         });
             });
     });
