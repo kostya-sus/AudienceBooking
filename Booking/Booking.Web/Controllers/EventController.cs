@@ -189,10 +189,6 @@ namespace Booking.Web.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            if (!vm.IsAuthorShown && vm.AuthorName.IsNullOrWhiteSpace())
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
 
             Event newEvent = new Event();
             {
