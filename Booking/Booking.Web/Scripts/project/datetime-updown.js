@@ -19,7 +19,9 @@
     var $endHourView = $endHour.find("span").first();
     var $endMinuteView = $endMinute.find("span").first();
 
-
+    var lowerHoursBound = $("#booking-hours-bounds-lower").val();
+    var upperHoursBound = $("#booking-hours-bounds-upper").val();
+    
     var startDate = new Date($startDate.val());
     var endDate = new Date($endDate.val());
 
@@ -55,7 +57,14 @@
         $endMinuteView.text(minutes);
     }
 
-    function isNewDateValid(startDate, endDate) {
+    function isDateValid(startDate, endDate) {
+        if (startDate.getHours() < lowerHoursBound) {
+            return false;
+        }
+        if (endDate.getHours() > upperHoursBound) {
+            return false;
+        }
+
         var now = new Date();
         var diff = endDate - startDate;
         var minutes = Math.floor(diff / 60000);
@@ -66,7 +75,7 @@
         var prevStartDate = new Date(startDate.getTime());
         var prevEndDate = new Date(endDate.getTime());
         callback();
-        if (isNewDateValid(startDate, endDate)) {
+        if (isDateValid(startDate, endDate)) {
             setStartDate();
             setEndDate();
             updateView();
@@ -75,6 +84,24 @@
             endDate = prevEndDate;
         }
     }
+
+    if (!isDateValid(startDate, endDate)) {
+        var now = new Date();
+        startDate.setDate(now.getDate() + 1);
+        startDate.setHours(lowerHoursBound);
+        startDate.setMinutes(0);
+
+        endDate = new Date(startDate.getTime());
+        endDate.setMinutes(endDate.getMinutes() + 30);
+    }
+    
+    startDate.setSeconds(0);
+    startDate.setMilliseconds(0);
+    endDate.setSeconds(0);
+    endDate.setMilliseconds(0);
+    
+    setStartDate();
+    setEndDate();
 
     updateView();
 

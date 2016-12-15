@@ -1,4 +1,5 @@
-﻿@using Booking.Web.Localization;
+﻿@using Booking.Enums
+@using Booking.Web.Localization;
 
 <!DOCTYPE html>
 <html>
@@ -49,6 +50,9 @@
     </header>
 
     <div id="page-content">
+        <input type="hidden" id="booking-hours-bounds-lower" value="@((int)BookingHoursBoundsEnum.Lower)"/>
+        <input type="hidden" id="booking-hours-bounds-upper" value="@((int)BookingHoursBoundsEnum.Upper)"/>
+
         @RenderBody()
     </div>
 
