@@ -158,7 +158,7 @@ function refillSchedule(eventsList) {
             $div.css("position", "absolute");
             var position = $item.offset();
             $div.css("left", position.left);
-            $div.css("top", position.top);
+            $div.css("top", position.top - 35);
 
             $("#page-content").append($div);
             $div.draggable();
