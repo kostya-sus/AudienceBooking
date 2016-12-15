@@ -58,7 +58,9 @@ namespace Booking.Web.Controllers
             var availableAudiences = audiences.Where(a => a.IsBookingAvailable)
                 .ToDictionary(a => (int) a.Id, a => a.Name);
 
-            int hoursOffset = timezoneOffset/60;
+            var ts = DateTime.UtcNow - DateTime.Now;
+
+            int hoursOffset = timezoneOffset/60 - ts.Hours;
 
             var scheduleTable = new ScheduleTableViewModel
             {
