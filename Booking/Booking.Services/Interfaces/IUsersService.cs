@@ -17,5 +17,7 @@ namespace Booking.Services.Interfaces
         bool IsAdmin(IPrincipal userPrincipal);
 
         IEnumerable<string> GetAdminsEmails();
+
+        int GetEvenByAuthor(string userId);
     }
 }

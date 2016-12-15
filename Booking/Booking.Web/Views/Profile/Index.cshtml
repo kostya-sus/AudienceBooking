@@ -1,9 +1,10 @@
 ﻿@using Booking.Models
 @using Booking.Repositories.Repositories
+@using Booking.Services.Services
 @using Booking.Web.Localization;
 @using Booking.Web.ViewModels.Manage;
 @using Microsoft.AspNet.Identity
-@model ChangePasswordViewModel
+@model Booking.Web.ViewModels.Profile.ProfileViewModel
     
 
 @{
@@ -45,10 +46,10 @@
                         }
                     </H3>
                     <p>
-                        <b>Email:</b>@Html.Action("GetUserEmail", "Account", new {userId = @User.Identity.GetUserId()})
+                        <b>Email:</b>@Html.Action("GetUserEmail", "Account", new {userId = Model.IsAdmin})
                     </p>
                     <p>
-                        <b>@Localization.NumberOfActiveEvent:</b>@Html.Action("GetEvenByAuthor","Event", new {userId = @User.Identity.GetUserId()})
+                        <b>@Localization.NumberOfActiveEvent:</b>@Html.Action(new UsersService().GetEvenByAuthor(@User.Identity.GetUserId()).ToString())
                     </p>
 
                     @using (Html.BeginForm("Edit", "Profile", FormMethod.Post))
@@ -63,30 +64,7 @@
             </div>
             <div style="width: 48%;  display: inline-block; background-color: #EBEEF7; float: right;">
                 <div style="width: 60%; margin: 0px auto">
-                    @using (Html.BeginForm("ChangePassword", "Manage", FormMethod.Post))
-                    {
-                        @Html.AntiForgeryToken()
-                        <H3 style="text-align: center">@Localization.PasswordChange</H3>
-                        @Html.ValidationMessageFor(m => m.OldPassword, "", new { @class = "validation-error" })
-                        @Html.PasswordFor(m => m.OldPassword, new { @class = "profile-input", placeholder = @Localization.PasswordOld, @id = "oldPassword", })
-
-                        @Html.ValidationMessageFor(m => m.NewPassword, "", new { @class = "validation-error" })
-                        @Html.PasswordFor(m => m.NewPassword, new { @class = "profile-input", placeholder = @Localization.PasswordNew, @id = "newPassword", })
-
-                        @Html.ValidationMessageFor(m => m.ConfirmPassword, "", new { @class = "validation-error" })
-                        @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "profile-input", placeholder = @Localization.PasswordNewRepeat, @id = "confirmNewPassword", })
-
-                        <input type="submit" value=@Localization.Save class="profile-submit" />
-
-                        if (TempData["PasswordSuccess"] != null)
-                        {
-                            <span>@Localization.PasswordSucsess</span>
-                        }
-                        else
-                        {
-                               <span>@Localization.Error</span>
-                        }
-                    }
+                    @Html.Partial("_ResetPasswordPartial", Model.ChangePasswordForm)
                 </div>
             </div>
 

@@ -219,7 +219,7 @@
   <data name="Send" xml:space="preserve">
     <value>Отправить</value>
   </data>
-  <data name="ContactViewModel_SucsessMessage" xml:space="preserve">
+  <data name="ContactViewModel_SuccessMessage" xml:space="preserve">
     <value>Спасибо. Ваше сообщение отправлено администратору.</value>
   </data>
   <data name="EventPageParticipantsCount" xml:space="preserve">
@@ -234,8 +234,8 @@
   <data name="IconUser" xml:space="preserve">
     <value>&lt;i class="fa fa-user" aria-hidden="true"&gt;&lt;/i&gt;</value>
   </data>
-  <data name="PasswordSucsess" xml:space="preserve">
-    <value>&lt;i class="fa fa-check-circle" aria-hidden="true"&gt;&lt;/i&gt; Пароль успешно изменен</value>
+  <data name="PasswordSuccess" xml:space="preserve">
+    <value>Пароль успешно изменен</value>
   </data>
   <data name="PasswordNew" xml:space="preserve">
     <value>Новый пароль</value>
@@ -263,5 +263,17 @@
   </data>
   <data name="Change" xml:space="preserve">
     <value>Изменить</value>
+  </data>
+  <data name="PasswordError" xml:space="preserve">
+    <value>Вы ввели неправельный пароль</value>
+  </data>
+  <data name="UserList" xml:space="preserve">
+    <value>Список пользователей</value>
+  </data>
+  <data name="All" xml:space="preserve">
+    <value>Всего:</value>
+  </data>
+  <data name="Search" xml:space="preserve">
+    <value>Поиск</value>
   </data>
 </root>

@@ -49,5 +49,10 @@ namespace Booking.Services.Services
         {
             return _context.Users.Where(u => _userManager.IsInRole(u.Id, "Admin")).Select(u => u.Email);
         }
+
+        public int GetEvenByAuthor(string userId)
+        {
+            return BookingDbContext.Create().Events.Count(x => x.AuthorId == userId);
+        }
     }
 }

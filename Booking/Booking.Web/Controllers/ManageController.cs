@@ -225,13 +225,13 @@ namespace Booking.Web.Controllers
         // POST: /Manage/ChangePassword
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> ChangePassword(ChangePasswordViewModel model)
+        public async Task<ActionResult> ChangePassword(ProfileViewModel model)
         {
             if (!ModelState.IsValid)
             {
                 return View(model);
             }
-            var result = await UserManager.ChangePasswordAsync(User.Identity.GetUserId(), model.OldPassword, model.NewPassword);
+            var result = await UserManager.ChangePasswordAsync(User.Identity.GetUserId(), model.ChangePasswordForm.OldPassword, model.ChangePasswordForm.NewPassword);
             if (result.Succeeded)
             {
                 var user = await UserManager.FindByIdAsync(User.Identity.GetUserId());
@@ -239,11 +239,11 @@ namespace Booking.Web.Controllers
                 {
                     await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
                 }
-                TempData["PasswordSuccess"] = Localization.Localization.PasswordSucsess;
+                ViewData["PasswordSuccess"] = Localization.Localization.PasswordSuccess;
                 return RedirectToAction("Index", "Profile");
             }
-            TempData["PasswordFaild"] = Localization.Localization.Error;
-            return RedirectToAction("Index", "Profile");
+            ViewData["PasswordFaild"] = Localization.Localization.Error;
+            return View();
         }
 
         //

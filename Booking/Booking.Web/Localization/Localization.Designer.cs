@@ -61,6 +61,15 @@ namespace Booking.Web.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Всего:.
+        /// </summary>
+        public static string All {
+            get {
+                return ResourceManager.GetString("All", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Все права защищены.
         /// </summary>
         public static string All_rights_reserved {
@@ -99,9 +108,9 @@ namespace Booking.Web.Localization {
         /// <summary>
         ///   Looks up a localized string similar to Спасибо. Ваше сообщение отправлено администратору..
         /// </summary>
-        public static string ContactViewModel_SucsessMessage {
+        public static string ContactViewModel_SuccessMessage {
             get {
-                return ResourceManager.GetString("ContactViewModel_SucsessMessage", resourceCulture);
+                return ResourceManager.GetString("ContactViewModel_SuccessMessage", resourceCulture);
             }
         }
         
@@ -295,6 +304,15 @@ namespace Booking.Web.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Вы ввели неправельный пароль.
+        /// </summary>
+        public static string PasswordError {
+            get {
+                return ResourceManager.GetString("PasswordError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Новый пароль.
         /// </summary>
         public static string PasswordNew {
@@ -331,11 +349,11 @@ namespace Booking.Web.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to &lt;i class=&quot;fa fa-check-circle&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt; Пароль успешно изменен.
+        ///   Looks up a localized string similar to Пароль успешно изменен.
         /// </summary>
-        public static string PasswordSucsess {
+        public static string PasswordSuccess {
             get {
-                return ResourceManager.GetString("PasswordSucsess", resourceCulture);
+                return ResourceManager.GetString("PasswordSuccess", resourceCulture);
             }
         }
         
@@ -430,6 +448,15 @@ namespace Booking.Web.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Поиск.
+        /// </summary>
+        public static string Search {
+            get {
+                return ResourceManager.GetString("Search", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Отправить.
         /// </summary>
         public static string Send {
@@ -462,6 +489,15 @@ namespace Booking.Web.Localization {
         public static string Today {
             get {
                 return ResourceManager.GetString("Today", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Список пользователей.
+        /// </summary>
+        public static string UserList {
+            get {
+                return ResourceManager.GetString("UserList", resourceCulture);
             }
         }
         

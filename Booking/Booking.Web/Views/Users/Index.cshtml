@@ -1,11 +1,62 @@
-﻿
+﻿@using Booking.Web.Localization
+@using PagedList.Mvc
+
 @{
     ViewBag.ActiveLink = "Users";
     ViewBag.Title = "Users";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Users</h2>
+@section styles{
+    @Styles.Render("~/Content/home-page.css")
+    @Styles.Render("~/Content/Site.css")
+    @Styles.Render("~/Content/form-inputs.css")
+    @Styles.Render("~/Content/font-awesome/css/font-awesome.css")
+}
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/Scripts/project/contact-scripts.js")
+}
 
 
+
+
+<div class="page-container container">
+    <h2 style="padding-top: 20px">@Localization.UserList</h2>
+    <h4>@Localization.All</h4>
+    <div id="users">
+        <table cellspacing="5" cellpadding="10">
+
+            @foreach (var user in Model)
+
+            {
+
+                <tr>
+
+                    <td>
+
+                        <p> @user.UserName </p>
+
+                    </td>
+
+                    <td>
+
+                        <p>@user.Email</p>
+
+                    </td>
+
+                    <td>
+
+                        <p> @user</p>
+
+                    </td>
+
+                </tr>
+
+            }
+        </table>
+
+      //  @Html.PagedListPager(Model, page => Url.Action("Index", new { page }))
+
+    </div>
 

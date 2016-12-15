@@ -129,11 +129,7 @@ namespace Booking.Web.Controllers
             throw new NotImplementedException();
         }
 
-        public int GetEvenByAuthor(string userId)
-        {
-            return BookingDbContext.Create().Events.Count(x => x.AuthorId == userId);
-               // _eventRepository.GetAllEvents().Count(x => x.AuthorId == userId);
-    }
+       
 
 }
 }
