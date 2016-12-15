@@ -1,1 +1,27 @@
-﻿
+﻿@using Booking.Web.Localization
+@using Microsoft.AspNet.Identity
+@model Booking.Web.ViewModels.Profile.UserInfoViewModel
+
+
+
+<div Style="width: 60%">
+    <H3 style="padding: 20px 0px">
+        @User.Identity.Name @if (@User.IsInRole("Admin"))
+        {
+            <sup style="background-color: #F95752; color: white; border-radius: 10px; margin: 2px; padding: 2px 5px">admin</sup>
+        }
+    </H3>
+    <p>
+        <b>Email:</b>@Html.Action("GetUserEmail", "Account", new { userId = @User.Identity.GetUserId() })
+    </p>
+    <p>
+        <b>@Localization.NumberOfActiveEvent:</b>
+    </p>
+
+    @using (Html.BeginForm("Edit", "Profile", FormMethod.Post))
+    {
+        @Html.AntiForgeryToken()
+        <input type="submit" id="change" value=@Localization.Change class="profile-submit" />
+    }
+</div>
+

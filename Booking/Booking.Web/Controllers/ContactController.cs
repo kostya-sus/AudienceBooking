@@ -28,15 +28,15 @@ namespace Booking.Web.Controllers
                 //EmailNotificationService.SendFeedbackToAdmins(name, surname, email, message);
                 ContactService.SendMessage(name,surname,email,message);
 
-                ViewData["FeedbackSentMessage"] = Localization.Localization.ContactViewModel_SuccessMessage;
+                TempData["FeedbackSentMessage"] = Localization.Localization.ContactViewModel_SuccessMessage;
 
             }
             else
             {
-                ViewData["FeedbackSentMessage"] = null;
+                TempData["FeedbackSentMessage"] = null;
             }
 
-            return View();
+            return RedirectToAction("Index","Contact");
         }
        
     }

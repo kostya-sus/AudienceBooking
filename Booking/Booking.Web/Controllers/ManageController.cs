@@ -227,7 +227,7 @@ namespace Booking.Web.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> ChangePassword(ProfileViewModel model)
         {
-            if (!ModelState.IsValid)
+           if (!ModelState.IsValid)
             {
                 return View(model);
             }
@@ -240,10 +240,12 @@ namespace Booking.Web.Controllers
                     await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
                 }
                 ViewData["PasswordSuccess"] = Localization.Localization.PasswordSuccess;
-                return RedirectToAction("Index", "Profile");
+                
+                return RedirectToAction("Index","Profile");
             }
             ViewData["PasswordFaild"] = Localization.Localization.Error;
-            return View();
+
+            return RedirectToAction("Index", "Profile");
         }
 
         //

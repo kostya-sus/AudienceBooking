@@ -31,9 +31,9 @@
             </div>
             <div style="width: 49%; display: inline-block">
                 <div class="validation-summary-error">
-                    @if (ViewData["FeedbackSentMessage"] != null)
+                    @if (TempData["FeedbackSentMessage"] != null)
                     {
-                        <span>@ViewData["FeedbackSentMessage"]</span>
+                        <span>@TempData["FeedbackSentMessage"]</span>
                     }
                 </div>
                 <div>

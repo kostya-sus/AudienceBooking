@@ -26,7 +26,7 @@
 <div style="background-color: white">
     <div class="page-container">
         
-        <div style="width: 100%; ">
+        <div style="width: 100%; height: 30px">
             @using (Html.BeginForm("LogOff", "Account", FormMethod.Post))
             {
                 @Html.AntiForgeryToken()
@@ -34,42 +34,17 @@
             }
         </div>
 
-        
 
         <div style="width: 100%">
-            <div style="width: 50%; height: 200px; top: -200px; display: inline-block">
-                <div Style="width: 60%">
-                    <H3>
-                        @User.Identity.Name @if (@User.IsInRole("Admin"))
-                        {
-                            <sup style="background-color: #F95752; color: white; border-radius: 10px; margin: 2px; padding: 2px 5px">admin</sup>
-                        }
-                    </H3>
-                    <p>
-                        <b>Email:</b>@Html.Action("GetUserEmail", "Account", new {userId = Model.IsAdmin})
-                    </p>
-                    <p>
-                        <b>@Localization.NumberOfActiveEvent:</b>@Html.Action(new UsersService().GetEvenByAuthor(@User.Identity.GetUserId()).ToString())
-                    </p>
-
-                    @using (Html.BeginForm("Edit", "Profile", FormMethod.Post))
-                    {
-                        @Html.AntiForgeryToken()
-                        <input type="submit" id="change" value=@Localization.Change class="profile-submit" />
-                    }
-                </div>
-
-                
-
+            <div style="width: 50%; height: 200px; top: -200px; display: inline-block; vertical-align: top; float:left">
+                @Html.Partial("_UserInfoPartial")
             </div>
-            <div style="width: 48%;  display: inline-block; background-color: #EBEEF7; float: right;">
+            <div style="width: 49%;  display: inline-block; background-color: #EBEEF7; float: right;vertical-align: top">
                 <div style="width: 60%; margin: 0px auto">
-                    @Html.Partial("_ResetPasswordPartial", Model.ChangePasswordForm)
+                    @Html.Partial("_ResetPasswordPartial")
                 </div>
             </div>
-
         </div>
-       
     </div>
 </div>
 
