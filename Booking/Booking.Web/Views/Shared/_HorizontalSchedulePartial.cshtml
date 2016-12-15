@@ -1,8 +1,6 @@
 ﻿@using Booking.Web.Localization
 @model Booking.Web.ViewModels.ScheduleTableViewModel
 
-@Html.HiddenFor(m => m.LowerHourBound)
-@Html.HiddenFor(m => m.UpperHourBound)
 <input type="hidden" id="get-day-schedule-url" value="@Url.Action("GetDaySchedule", "Home")"/>
 
 <div id="main-schedule-container">

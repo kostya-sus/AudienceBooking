@@ -19,8 +19,8 @@
     var $endHourView = $endHour.find("span").first();
     var $endMinuteView = $endMinute.find("span").first();
 
-    var lowerHoursBound = $("#booking-hours-bounds-lower").val();
-    var upperHoursBound = $("#booking-hours-bounds-upper").val();
+    var lowerHoursBound = parseInt($("#booking-hours-bounds-lower").val());
+    var upperHoursBound = parseInt($("#booking-hours-bounds-upper").val());
     
     var startDate = new Date($startDate.val());
     var endDate = new Date($endDate.val());

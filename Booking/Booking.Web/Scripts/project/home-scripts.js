@@ -43,8 +43,8 @@ function toggleActiveAudiences() {
 
 $(document)
     .ready(function() {
-        lowerHourBound = parseInt($("#LowerHourBound").val());
-        upperHourBound = parseInt($("#UpperHourBound").val());
+        lowerHourBound = parseInt($("#booking-hours-bounds-lower").val());
+        upperHourBound = parseInt($("#booking-hours-bounds-upper").val());
         tdWidth = parseInt($("#schedule-contents-table td").css("width"));
         tdHeight = parseInt($("#schedule-contents-table td").css("height"));
         thHeight = parseInt($("#schedule-contents-table th").css("height"));
