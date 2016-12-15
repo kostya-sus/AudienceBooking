@@ -1,11 +1,11 @@
-﻿.new-event-popup {
+﻿#new-event-popup {
     height: 450px;
     width: 500px;
     border: 1px solid #9fa6b6;
     background: #FFF;
 }
 
-.new-event-popup .header {
+#new-event-popup .header {
     background: #9fa6b6;
     width: 100%;
     height: 50px;
@@ -15,16 +15,16 @@
     padding-top: 5px;
 }
 
-.new-event-popup #btn-close {
+#new-event-popup #btn-close {
     position: relative;
     top: 2px;
     left: 280px;
     float: right;
 }
 
-.new-event-popup .ul { list-style-type: none; }
+#new-event-popup .ul { list-style-type: none; }
 
-.new-event-popup .select-style {
+#new-event-popup .select-style {
     padding: 0;
     margin-left: 20px;
     border: 1px solid #ebeef7;
@@ -38,7 +38,7 @@
     background: #fff
 }
 
-.new-event-popup .input-style {
+#new-event-popup .input-style {
     padding: 10px;
     width: 95%;
     height: 30px;
@@ -46,7 +46,7 @@
     border: 1px solid #ebeef7;
 }
 
-.new-event-popup .input-style-org {
+#new-event-popup .input-style-org {
     padding: 10px;
     width: 250px;
     height: 30px;
@@ -55,7 +55,7 @@
     margin-top: 5px;
 }
 
-.new-event-popup .textarea {
+#new-event-popup .textarea {
     width: 95%;
     border-radius: 20px;
     border: 1px solid #ebeef7;
@@ -64,23 +64,23 @@
     padding: 10px;
 }
 
-.new-event-popup .line {
+#new-event-popup .line {
     padding-left: 20px;
     padding-top: 10px;
 }
 
-.new-event-popup .line-inline {
+#new-event-popup .line-inline {
     display: inline-block;
     padding-left: 20px;
     padding-top: 10px;
 }
 
-.new-event-popup .checkboxWhite {
+#new-event-popup .checkboxWhite {
     width: 25px;
     position: relative;
 }
 
-.new-event-popup .checkboxWhite label {
+#new-event-popup .checkboxWhite label {
     cursor: pointer;
     position: absolute;
     width: 25px;
@@ -92,7 +92,7 @@
     border: 1px solid #ebeef7;
 }
 
-.new-event-popup .checkboxWhite label:after {
+#new-event-popup .checkboxWhite label:after {
     opacity: 0;
     content: '';
     position: absolute;
@@ -108,11 +108,11 @@
     transform: rotate(-45deg);
 }
 
-.new-event-popup .checkboxWhite input[type=checkbox]:checked + label:after { opacity: 1; }
+#new-event-popup .checkboxWhite input[type=checkbox]:checked + label:after { opacity: 1; }
 
-.new-event-popup #checkboxRed { display: none; }
+#new-event-popup #checkboxRed { display: none; }
 
-.new-event-popup [for="checkboxRed"] {
+#new-event-popup [for="checkboxRed"] {
     position: relative;
     display: block;
     width: 50px;
@@ -131,13 +131,13 @@
     cursor: pointer;
 }
 
-.new-event-popup [for="checkboxRed"]:before {
+#new-event-popup [for="checkboxRed"]:before {
     position: absolute;
     right: 15px;
     color: #000;
 }
 
-.new-event-popup [for="checkboxRed"]:after {
+#new-event-popup [for="checkboxRed"]:after {
     content: "";
     position: absolute;
     left: 0px;
@@ -150,20 +150,20 @@
     transition: .5s;
 }
 
-.new-event-popup #checkboxRed:checked ~ [for="checkboxRed"]:after { left: 20px; }
+#new-event-popup #checkboxRed:checked ~ [for="checkboxRed"]:after { left: 20px; }
 
-.new-event-popup #td-style { padding-right: 10px; }
+#new-event-popup #td-style { padding-right: 10px; }
 
-.new-event-popup .private { color: #afb2bb; }
+#new-event-popup .private { color: #afb2bb; }
 
-.new-event-popup .public { color: #f95752; }
+#new-event-popup .public { color: #f95752; }
 
-.new-event-popup #calendar-icon {
+#new-event-popup #calendar-icon {
     margin-left: 20px;
     font-size: 30px !important;
 }
 
-.new-event-popup #close-icon {
+#new-event-popup #close-icon {
     font-size: 30px;
     color: #cfd3db;
     margin-left: 190px;
@@ -171,7 +171,7 @@
     cursor: pointer;
 }
 
-.new-event-popup .audience-not-free-message {
+#new-event-popup .audience-not-free-message {
     display: inline-block;
     width: 60%;
     height: 40px;
@@ -179,7 +179,7 @@
     visibility: hidden;
 }
 
-.new-event-popup .audience-not-free-message i {
+#new-event-popup .audience-not-free-message i {
     float: left;
     font-size: 40px;
     opacity: 0.8;
@@ -187,14 +187,14 @@
     margin-right: 8px;
 }
 
-.new-event-popup .audience-not-free-message div {
+#new-event-popup .audience-not-free-message div {
     vertical-align: top;
     font-size: 13px;
     display: inline;
 }
 
 
-.new-event-popup .btnCreate {
+#new-event-popup .btnCreate {
     margin-top: 5px;
     background: #f95752;
     display: inline-block;
@@ -208,8 +208,7 @@
     color: white;
 }
 
-.new-event-popup .bottom-container {
+#new-event-popup .bottom-container {
     height: 40px;
     margin: 10px 20px;
-}body {
 }

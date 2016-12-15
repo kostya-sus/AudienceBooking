@@ -154,3 +154,7 @@
 }
 
 .event-display-popup .join-event-container { display: inline-block; }
+
+.event-display-popup .add-info {
+    margin-left: 15px;
+}

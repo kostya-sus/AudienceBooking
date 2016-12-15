@@ -34,8 +34,11 @@
                 <div id="event-info">
                     <div class="event-title">@Model.Title</div>
                     <br/>
-                    <i class="fa fa-user" aria-hidden="true"></i>
-                    <span id="author-name">@Model.AuthorName</span>
+                    @if (!string.IsNullOrEmpty(Model.AuthorName))
+                    {
+                        <i class="fa fa-user" aria-hidden="true"></i>
+                        <span id="author-name">@Model.AuthorName</span>
+                    }
                     <br/>
                     <p>@Model.AdditionalInfo</p>
                     <br/>

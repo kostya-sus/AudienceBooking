@@ -43,10 +43,16 @@
     <h4 class="audience-name-show">@Model.AudienceName</h4>
     <div class="add-info">@Model.AdditionalInfo</div>
     <div class="row-elements" style="margin-bottom: 10px;">
-        <i class="fa fa-user" aria-hidden="true"></i>
-        <span class="author-name">@Model.AuthorName</span>
-        <i class="fa fa-users" aria-hidden="true"></i>
-        <span class="participants-count">@Model.ParticipantsEmails.Count</span>
+        @if (!string.IsNullOrEmpty(Model.AuthorName))
+        {
+            <i class="fa fa-user" aria-hidden="true"></i>
+            <span class="author-name">@Model.AuthorName</span>
+        }
+        @if (Model.IsJoinAvailable)
+        {
+            <i class="fa fa-users" aria-hidden="true"></i>
+            <span class="participants-count">@Model.ParticipantsEmails.Count</span>
+        }
     </div>
     @if (Model.IsJoinAvailable)
     {
