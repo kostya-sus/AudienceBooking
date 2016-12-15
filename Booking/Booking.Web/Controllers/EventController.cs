@@ -115,7 +115,7 @@ namespace Booking.Web.Controllers
             var availableAudiences = audiences.Where(a => a.IsBookingAvailable)
                 .ToDictionary(a => (int) a.Id, a => a.Name);
 
-            var date = DateTime.Now;
+            var date = DateTime.Now.AddHours(2);
 
             var viewModel = new CreateEditEventViewModel
             {
