@@ -185,7 +185,9 @@ namespace Booking.Web.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            if (!ModelState.IsValid)
+            if (!vm.IsPrivate &&
+                ((vm.IsAuthorShown == false && string.IsNullOrWhiteSpace(vm.AuthorName)) ||
+                 string.IsNullOrWhiteSpace(vm.Title)))
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
@@ -195,7 +197,7 @@ namespace Booking.Web.Controllers
                 newEvent.Title = vm.Title;
                 newEvent.EventDateTime = vm.StartDateTime;
                 newEvent.AdditionalInfo = vm.AdditionalInfo;
-                newEvent.AudienceId = (AudiencesEnum)vm.ChosenAudienceId;
+                newEvent.AudienceId = (AudiencesEnum) vm.ChosenAudienceId;
                 newEvent.Duration = duration;
                 newEvent.IsAuthorShown = vm.IsAuthorShown;
                 newEvent.IsJoinAvailable = vm.IsJoinAvailable;
@@ -228,7 +230,7 @@ namespace Booking.Web.Controllers
         public ActionResult Save(EventEditViewModel vm)
         {
             TimeSpan span = vm.EndDateTime.Subtract(vm.StartDateTime);
-            var duration = (int)span.TotalMinutes;
+            var duration = (int) span.TotalMinutes;
 
             var eventEntity = _eventService.GetEvent(vm.Id);
 
