@@ -223,7 +223,7 @@ namespace Booking.Web.Controllers
         public ActionResult Save(EventEditViewModel vm)
         {
             TimeSpan span = vm.EndDateTime.Subtract(vm.StartDateTime);
-            var duration = span.Minutes;
+            var duration = (int)span.TotalMinutes;
 
             var eventEntity = _eventService.GetEvent(vm.Id);
 
@@ -235,6 +235,7 @@ namespace Booking.Web.Controllers
                 return View("Edit", vm);
             }
 
+            eventEntity.Title = vm.Title;
             eventEntity.AdditionalInfo = vm.AdditionalInfo;
             eventEntity.AudienceId = (AudiencesEnum) vm.ChosenAudienceId;
             eventEntity.AuthorName = vm.AuthorName;
