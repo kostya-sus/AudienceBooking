@@ -1,13 +1,11 @@
-﻿.datetime-updown-control  {
+﻿.datetime-updown-control {
     display: inline-block;
     vertical-align: middle;
     padding: 0;
     max-width: 15px;
 }
 
-.datetime-updown-control .fa, .datetime-updown-control span {
-    margin: 0 !important;
-}
+.datetime-updown-control .fa, .datetime-updown-control span { margin: 0 !important; }
 
 .datetime-updown-control .fa {
     text-align: center;
@@ -16,11 +14,17 @@
     font-size: 12px;
 }
 
-.datetime-updown-control .fa:hover {
-    cursor: pointer;
-}
+.datetime-updown-control .fa:hover { cursor: pointer; }
 
 .datetime-updown-outer {
     margin: 0 3px;
     display: inline-block;
 }
+
+.datetime-updown-month-name {
+    text-align: center;
+    width: 60px;
+    max-width: 60px;
+}
+
+.datetime-updown-control-hidden { visibility: hidden; }

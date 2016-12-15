@@ -19,9 +19,21 @@
     var $endHourView = $endHour.find("span").first();
     var $endMinuteView = $endMinute.find("span").first();
 
+    var monthDisplayedValues;
+    var displayMonthName = $month.hasClass("datetime-updown-month-name");
+    if (displayMonthName) {
+        monthDisplayedValues = [
+            "Января", "Февраля", "Марта", "Апреля",
+            "Мая", "Июня", "Июля", "Августа", "Сентября",
+            "Октября", "Ноября", "Декабря"
+        ];
+    } else {
+        monthDisplayedValues = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
+    }
+
     var lowerHoursBound = parseInt($("#booking-hours-bounds-lower").val());
     var upperHoursBound = parseInt($("#booking-hours-bounds-upper").val());
-    
+
     var startDate = new Date($startDate.val());
     var endDate = new Date($endDate.val());
 
@@ -35,10 +47,10 @@
 
     function updateView() {
         var day = startDate.getDate();
-        day = (day >= 10 ? day : "0" + day) + ".";
+        day = (day >= 10 ? day : "0" + day) + (displayMonthName ? "" : ".");
         $dayView.text(day);
-        var month = startDate.getMonth() + 1;
-        month = (month >= 10 ? month : "0" + month) + ".";
+        var month = startDate.getMonth();
+        month = monthDisplayedValues[month];
         $monthView.text(month);
         $yearView.text(startDate.getFullYear().toString().substr(2, 2));
 
@@ -94,12 +106,12 @@
         endDate = new Date(startDate.getTime());
         endDate.setMinutes(endDate.getMinutes() + 30);
     }
-    
+
     startDate.setSeconds(0);
     startDate.setMilliseconds(0);
     endDate.setSeconds(0);
     endDate.setMilliseconds(0);
-    
+
     setStartDate();
     setEndDate();
 
