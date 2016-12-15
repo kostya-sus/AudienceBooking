@@ -40,8 +40,8 @@
     border-radius: 50px;
     overflow: hidden;
     background-color: #fff;
-    
-    background: #fff
+    background: #fff;
+    padding-right: 10px;
 }
 
 #new-event-popup .input-style {
@@ -117,4 +117,8 @@
 
 #new-event-popup-body .red-toggle {
     float: right;
+}
+
+#new-event-popup-event-date .fa {
+    font-size: 15px;
 }
