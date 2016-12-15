@@ -54,7 +54,9 @@ namespace Booking.Web.Controllers
         [HttpGet]
         public ActionResult IsFree(AudiencesEnum audienceId, DateTime startEvent, DateTime endEvent, Guid? eventId)
         {
-            int duration = (endEvent.Hour - startEvent.Hour)*60 + (endEvent.Minute - startEvent.Minute);
+            TimeSpan span = endEvent.Subtract(startEvent);
+            var duration = (int)span.TotalMinutes;
+
             var isFree = _audienceService.IsFree(audienceId, startEvent, duration, eventId);
             return Content(isFree.ToString());
         }

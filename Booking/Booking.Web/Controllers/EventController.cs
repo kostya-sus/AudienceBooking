@@ -178,8 +178,9 @@ namespace Booking.Web.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create(CreateEditEventViewModel vm)
         {
-            var duration = (vm.EndDateTime.Hour - vm.StartDateTime.Hour)*60 +
-                           (vm.EndDateTime.Minute - vm.StartDateTime.Minute);
+            TimeSpan span = vm.EndDateTime.Subtract(vm.StartDateTime);
+            var duration = (int)span.TotalMinutes;
+
             var isFree = _audienceService.IsFree((AudiencesEnum) vm.ChosenAudienceId, vm.StartDateTime, duration, vm.Id);
             if (duration < 20 || !isFree)
             {

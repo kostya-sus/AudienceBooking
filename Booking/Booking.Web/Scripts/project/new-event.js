@@ -9,11 +9,9 @@ $(document)
                 $("#new-event-popup")
                     .load(eventUrl,
                         function() {
-                            $("#start-date, #end-date, #ChosenAudienceId").change(checkIfAudienceIsFree);
+                            $("#new-event-popup-end-date, #ChosenAudienceId").change(checkIfAudienceIsFree);
 
-                            configureDatetimeUpdown("new-event-popup-event-date ",
-                                "new-event-popup-start-date",
-                                "new-event-popup-end-date");
+                            configureDatetimeUpdown("new-event-popup-event-date","new-event-popup-start-date","new-event-popup-end-date");
 
                             checkIfAudienceIsFree();
 
@@ -33,8 +31,8 @@ $(document)
 function checkIfAudienceIsFree() {
     var audienceId = document.getElementById("ChosenAudienceId").value;
 
-    var eventStartDate = $("#start-date").val();
-    var eventEndDate = $("#end-date").val();
+    var eventStartDate = $("#new-event-popup-start-date").val();
+    var eventEndDate = $("#new-event-popup-end-date").val();
 
     var url = $("#audience-is-free-url").val() +
         "?audienceId=" +
