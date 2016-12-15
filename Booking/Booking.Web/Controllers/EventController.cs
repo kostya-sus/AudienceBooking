@@ -185,7 +185,7 @@ namespace Booking.Web.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            if (!vm.IsPrivate &&
+            if (vm.IsPublic &&
                 ((vm.IsAuthorShown == false && string.IsNullOrWhiteSpace(vm.AuthorName)) ||
                  string.IsNullOrWhiteSpace(vm.Title)))
             {
@@ -201,7 +201,7 @@ namespace Booking.Web.Controllers
                 newEvent.Duration = duration;
                 newEvent.IsAuthorShown = vm.IsAuthorShown;
                 newEvent.IsJoinAvailable = vm.IsJoinAvailable;
-                newEvent.IsPublic = !vm.IsPrivate;
+                newEvent.IsPublic = vm.IsPublic;
                 newEvent.AuthorName = vm.AuthorName;
                 newEvent.AuthorId = User.Identity.GetUserId();
             }

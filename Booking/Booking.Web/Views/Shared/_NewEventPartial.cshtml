@@ -13,111 +13,107 @@
             <span style="margin-left: 20px;">@Localization.ReserveAudience</span>
             <i id="close-icon" class="fa fa-times" aria-hidden="true" data-dismiss="modal"></i>
         </div>
-        <div class="line" style="display: flex">
-            <span style="padding-top: 5px">@Localization.When</span>
-            @Html.TextBoxFor(m => m.StartDateTime, "{0:MM/dd/yyyy HH:mm:ss}", htmlAttributes: new {@type = "hidden", id="start-date"}) 
-            @Html.TextBoxFor(m => m.EndDateTime, "{0:MM/dd/yyyy HH:mm:ss}", htmlAttributes: new {@type = "hidden", id="end-date"})
-            <div id="event-date">
-                <div class="datetime-updown-outer" style="margin-left: 15px">
-                    <div class="datetime-updown-control datetime-updown-day">
-                        <i class="fa fa-caret-up" aria-hidden="true"></i>
-                        <span class="datetime-updown-label">18.</span>
-                        <i class="fa fa-caret-down" aria-hidden="true"></i>
+        <div id="new-event-popup-body">
+            <div class="form-group">
+                <span>@Localization.When</span>
+                @Html.TextBoxFor(m => m.StartDateTime, "{0:MM/dd/yyyy HH:mm:ss}", htmlAttributes: new {@type = "hidden", id = "new-event-popup-start-date"})
+                @Html.TextBoxFor(m => m.EndDateTime, "{0:MM/dd/yyyy HH:mm:ss}", htmlAttributes: new {@type = "hidden", id = "new-event-popup-end-date"})
+                <div id="new-event-popup-event-date">
+                    <div class="datetime-updown-outer" style="margin-left: 15px">
+                        <div class="datetime-updown-control datetime-updown-day">
+                            <i class="fa fa-caret-up" aria-hidden="true"></i>
+                            <span class="datetime-updown-label">18.</span>
+                            <i class="fa fa-caret-down" aria-hidden="true"></i>
+                        </div>
+                        <div class="datetime-updown-control datetime-updown-month datetime-updown-month-name">
+                            <i class="fa fa-caret-up" aria-hidden="true"></i>
+                            <span class="datetime-updown-label">09.</span>
+                            <i class="fa fa-caret-down" aria-hidden="true"></i>
+                        </div>
+                        <div class="datetime-updown-control datetime-updown-year datetime-updown-control-hidden">
+                            <i class="fa fa-caret-up" aria-hidden="true"></i>
+                            <span class="datetime-updown-label">16</span>
+                            <i class="fa fa-caret-down" aria-hidden="true"></i>
+                        </div>
                     </div>
-                    <div class="datetime-updown-control datetime-updown-month datetime-updown-month-name">
-                        <i class="fa fa-caret-up" aria-hidden="true"></i>
-                        <span class="datetime-updown-label">09.</span>
-                        <i class="fa fa-caret-down" aria-hidden="true"></i>
-                    </div>
-                    <div class="datetime-updown-control datetime-updown-year datetime-updown-control-hidden">
-                        <i class="fa fa-caret-up" aria-hidden="true"></i>
-                        <span class="datetime-updown-label">16</span>
-                        <i class="fa fa-caret-down" aria-hidden="true"></i>
-                    </div>
-                </div>
 
-                <div class="datetime-updown-outer">
-                    <div class="datetime-updown-control datetime-updown-start-hour">
-                        <i class="fa fa-caret-up" aria-hidden="true"></i>
-                        <span class="datetime-updown-label">18:</span>
-                        <i class="fa fa-caret-down" aria-hidden="true"></i>
+                    <div class="datetime-updown-outer">
+                        <div class="datetime-updown-control datetime-updown-start-hour">
+                            <i class="fa fa-caret-up" aria-hidden="true"></i>
+                            <span class="datetime-updown-label">18:</span>
+                            <i class="fa fa-caret-down" aria-hidden="true"></i>
+                        </div>
+                        <div class="datetime-updown-control datetime-updown-start-minute">
+                            <i class="fa fa-caret-up" aria-hidden="true"></i>
+                            <span class="datetime-updown-label">00</span>
+                            <i class="fa fa-caret-down" aria-hidden="true"></i>
+                        </div>
                     </div>
-                    <div class="datetime-updown-control datetime-updown-start-minute">
-                        <i class="fa fa-caret-up" aria-hidden="true"></i>
-                        <span class="datetime-updown-label">00</span>
-                        <i class="fa fa-caret-down" aria-hidden="true"></i>
-                    </div>
-                </div>
-                <span style="margin-top: 5px">-</span>
-                <div class="datetime-updown-outer" style="margin-left: 0px">
-                    <div class="datetime-updown-control datetime-updown-end-hour">
-                        <i class="fa fa-caret-up" aria-hidden="true"></i>
-                        <span class="datetime-updown-label">18:</span>
-                        <i class="fa fa-caret-down" aria-hidden="true"></i>
-                    </div>
-                    <div class="datetime-updown-control datetime-updown-end-minute">
-                        <i class="fa fa-caret-up" aria-hidden="true"></i>
-                        <span class="datetime-updown-label">30</span>
-                        <i class="fa fa-caret-down" aria-hidden="true"></i>
+                    <span style="margin-top: 5px">-</span>
+                    <div class="datetime-updown-outer" style="margin-left: 0px">
+                        <div class="datetime-updown-control datetime-updown-end-hour">
+                            <i class="fa fa-caret-up" aria-hidden="true"></i>
+                            <span class="datetime-updown-label">18:</span>
+                            <i class="fa fa-caret-down" aria-hidden="true"></i>
+                        </div>
+                        <div class="datetime-updown-control datetime-updown-end-minute">
+                            <i class="fa fa-caret-up" aria-hidden="true"></i>
+                            <span class="datetime-updown-label">30</span>
+                            <i class="fa fa-caret-down" aria-hidden="true"></i>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="line">
-            <span>@Localization.Where</span>
-            @Html.DropDownListFor(m => m.ChosenAudienceId, new SelectList(Model.AvailableAudiences,
-                "Key", "Value"), new {@class = "select-style"})
 
-        </div>
-        <div class="line">
-            @Html.ValidationMessageFor(m => m.Title, "", new {@class = "validation-error"})
-            @Html.TextBoxFor(m => m.Title, new {@class = "input-style", placeholder = Localization.Title})
-        </div>
-        <div class="line">
-            @Html.TextAreaFor(m => m.AdditionalInfo, new {@class = "textarea", placeholder = Localization.AdditionalInformation})
-        </div>
-        <div class="line">
-            <table>
-                <tr>
-                    <td id="td-style" style="padding-top: 10px;">
-                        <input type="checkbox" id="new-event-popup-is-join-available" name="IsJoinAvailable" value=true @(Model.IsJoinAvailable ? "checked" : "") />
-                        <label for="new-event-popup-is-join-available"><span></span>@Localization.JoinAvailable</label>
-                        <input name="IsJoinAvailable" type="hidden" value="false" /> 
-                    </td>
-                    <td style="padding-top: 10px; padding-left: 70px;">
-                        <p id="public" class="public">
-                            @Localization.Public
-                        </p>
-                    </td>
-                    <td style="padding-top: 10px">
-                        @Html.CheckBoxFor(m => m.IsPrivate, new {id = "checkboxRed", onclick = "hasTickedBox()"})
-                        <label for="checkboxRed"></label>
-                    </td>
-                    <td style="padding-top: 10px">
-                        <p id="private" class="private">
-                            @Localization.Private
-                        </p>
-                    </td>
-                </tr>
-            </table>
-            <table>
-                <tr>
-                    <td id="td-style" style="padding-top: 10px;">
-                        <input type="checkbox" id="new-event-popup-is-author-shown" name="IsAuthorShown" value="true" @(Model.IsAuthorShown ? "checked" : "") />
-                        <label for="new-event-popup-is-author-shown"><span></span>@Localization.ShowAuthor</label>
-                        <input name="IsAuthorShown" type="hidden" value="false" /> 
-                    </td>
-                    <td style="padding-top: 10px; padding-left: 10px">
-                        <p>@Localization.Or</p>
-                    </td>
-                    <td style="padding-left: 20px">
-                        @Html.TextBoxFor(m => m.AuthorName, new {@class = "input-style-org", placeholder = Localization.ShowOrganizer})
-                    </td>
-                </tr>
-            </table>
+            <div class="form-group">
+                <span>@Localization.Where</span>
+                @Html.DropDownListFor(m => m.ChosenAudienceId, new SelectList(Model.AvailableAudiences,
+                    "Key", "Value"), new {@class = "select-style"})
+            </div>
+
+            <div class="form-group">
+                @Html.ValidationMessageFor(m => m.Title, "", new {@class = "validation-error"})
+                @Html.TextBoxFor(m => m.Title, new {@class = "input-style", placeholder = Localization.Title})
+            </div>
+
+            <div class="form-group">
+                @Html.TextAreaFor(m => m.AdditionalInfo, new {@class = "textarea", placeholder = Localization.AdditionalInformation})
+            </div>
+
+
+            <div class="form-group">
+                <input type="checkbox" id="new-event-popup-is-join-available" name="IsJoinAvailable" value=true @(Model.IsJoinAvailable ? "checked" : "")/>
+                <label for="new-event-popup-is-join-available">
+                    <span></span>@Localization.JoinAvailable
+                </label>
+                <input name="IsJoinAvailable" type="hidden" value="false"/>
+
+                <div class="red-toggle">
+                    <span class="red-toggle-checked">@Localization.Public</span>
+
+                    <input type="checkbox" class="red-toggle-input" id="new-event-popup-is-public" name="IsPublic" value=true @(Model.IsPublic ? "checked" : "") />
+                    <label for="new-event-popup-is-public">
+                        <span class="red-toggle-container"><span class="red-toggle-circle"></span></span>
+                    </label>
+                    <input name="IsPublic" type="hidden" value="false" />
+
+                    <span class="red-toggle-not-checked">@Localization.Private</span>
+                </div>
+            </div>
+
+
+            <div class="form-group">
+                <input type="checkbox" id="new-event-popup-is-author-shown" name="IsAuthorShown" value="true" @(Model.IsAuthorShown ? "checked" : "")/>
+                <label for="new-event-popup-is-author-shown">
+                    <span></span>@Localization.ShowAuthor
+                </label>
+
+                <input name="IsAuthorShown" type="hidden" value="false"/>
+                <span>@Localization.Or</span>
+
+                @Html.TextBoxFor(m => m.AuthorName, new {@class = "input-style-org", placeholder = Localization.ShowOrganizer})
+            </div>
             <input type="hidden" id="audience-is-free-url" value="@Url.Action("IsFree", "Audience")"/>
-        </div>
-        <div class="bottom-container">
             <div class="audience-not-free-message">
                 <i class="fa fa-frown-o" aria-hidden="true"></i>
                 <div>@Localization.AudienceIsAlreadyBooked</div>

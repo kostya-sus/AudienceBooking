@@ -281,6 +281,8 @@
     <Content Include="Content\Images\path\path-web-2.png" />
     <Content Include="Content\Images\path\path-web-3.png" />
     <Content Include="Content\Images\private-event-bg.png" />
+    <Content Include="Content\Images\red-toggle-circle.png" />
+    <Content Include="Content\Images\red-toggle-container.png" />
     <Content Include="Content\Images\schedule\today-active-bottom.png" />
     <Content Include="Content\Images\schedule\today-active-top.png" />
     <Content Include="Content\Images\schedule\today-bottom.png" />

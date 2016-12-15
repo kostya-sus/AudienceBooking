@@ -1,15 +1,4 @@
-﻿function hasTickedBox() {
-    var checkBox = document.getElementById('checkboxRed');
-    if (checkBox.checked) {
-        document.getElementById('private').style.color = "#f95752";
-        document.getElementById('public').style.color = "#afb2bb";
-    } else {
-        document.getElementById('public').style.color = "#f95752";
-        document.getElementById('private').style.color = "#afb2bb";
-    }
-};
-
-var onEventCreateSucceeded = function() {
+﻿var onEventCreateSucceeded = function() {
     $("#CreateEventModal").modal('hide');
 }
 $(document)
@@ -22,9 +11,21 @@ $(document)
                         function() {
                             $("#start-date, #end-date, #ChosenAudienceId").change(checkIfAudienceIsFree);
 
-                            configureDatetimeUpdown("event-date", "start-date", "end-date");
+                            configureDatetimeUpdown("new-event-popup-event-date ",
+                                "new-event-popup-start-date",
+                                "new-event-popup-end-date");
 
                             checkIfAudienceIsFree();
+
+                            $(".red-toggle .red-toggle-input")
+                                .change(function() {
+                                    var $checked = $(".red-toggle .red-toggle-checked");
+                                    var $notChecked = $(".red-toggle .red-toggle-not-checked");
+                                    $checked.removeClass("red-toggle-checked");
+                                    $checked.addClass("red-toggle-not-checked");
+                                    $notChecked.addClass("red-toggle-checked");
+                                    $notChecked.removeClass("red-toggle-not-checked");
+                                });
                         });
             });
     });
