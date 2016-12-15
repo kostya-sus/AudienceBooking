@@ -31,8 +31,8 @@ $(document)
 function checkIfAudienceIsFree() {
     var audienceId = document.getElementById("ChosenAudienceId").value;
 
-    var eventStartDate = $("#start-date").val();
-    var eventEndDate = $("#end-date").val();
+    var eventStartDate = new Date($("#start-date").val()).toISOString();
+    var eventEndDate = new Date($("#end-date").val()).toISOString();
 
     var url = $("#audience-is-free-url").val() +
         "?audienceId=" +

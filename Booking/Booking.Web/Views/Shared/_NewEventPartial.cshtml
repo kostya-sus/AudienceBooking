@@ -15,8 +15,8 @@
         </div>
         <div class="line" style="display: flex">
             <span style="padding-top: 5px">@Localization.When</span>
-            @Html.HiddenFor(m => m.StartDateTime, new {id = "start-date"})
-            @Html.HiddenFor(m => m.EndDateTime, new {id = "end-date"})
+            @Html.TextBoxFor(m => m.StartDateTime, "{0:MM/dd/yyyy HH:mm:ss}", htmlAttributes: new {@type = "hidden", id="start-date"}) 
+            @Html.TextBoxFor(m => m.EndDateTime, "{0:MM/dd/yyyy HH:mm:ss}", htmlAttributes: new {@type = "hidden", id="end-date"})
             <div id="event-date">
                 <div class="datetime-updown-outer" style="margin-left: 15px">
                     <div class="datetime-updown-control datetime-updown-day">
@@ -130,7 +130,7 @@
                 <i class="fa fa-frown-o" aria-hidden="true"></i>
                 <div>@Localization.AudienceIsAlreadyBooked</div>
             </div>
-            <input type="submit" class="btnCreate" value="@Localization.Create" />
+            <input type="submit" class="btnCreate" value="@Localization.Create"/>
         </div>
     </div>
 }
