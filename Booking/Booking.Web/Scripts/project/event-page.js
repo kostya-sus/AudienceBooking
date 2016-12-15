@@ -2,7 +2,7 @@
     .ready(function() {
         $(".fa-plus")
             .click(function() {
-                $("#join-event-submit").click();
+                $(".join-event-submit").click();
             });
 
         $(".fa-times")
