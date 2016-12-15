@@ -119,6 +119,25 @@ namespace Booking.Services.Services
 
         public void EventCancelledAuthorNotification(Event eventEntity)
         {
+            var emailTemplatePath = Path.Combine(_templateFolderPath.Replace("Web", "Services"), "EventCancelledAuthorNotificationTemplate.cshtml");
+            var user = eventEntity.Author;
+            var modelEmail = new Booking.Services.EmailModels.EventCancelledAuthorModel
+            {
+                Name = user.UserName,
+                Email = user.Email,
+                EventDateTime = eventEntity.EventDateTime.ToLongDateString(),
+                EventTitle = eventEntity.Title
+            };
+
+            var templateService = new TemplateService();
+            var emailHtmlBody = templateService.Parse(File.ReadAllText(emailTemplatePath), modelEmail, null, null);
+
+            var subject = "Cancel event notification";
+            var email = GenerateEmail(emailHtmlBody, subject);
+
+            email.To.Add(new MailAddress(modelEmail.Email, modelEmail.Name));
+
+            SendMail(email);
         }
 
         public void RemovedFromParticipantsListNotification(string email, Event eventEntity)
