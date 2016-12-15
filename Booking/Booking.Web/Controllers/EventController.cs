@@ -116,6 +116,8 @@ namespace Booking.Web.Controllers
                 .ToDictionary(a => (int) a.Id, a => a.Name);
 
             var date = DateTime.Now.AddHours(2);
+            var newMinute = (date.Minute/10)*10;
+            date = date.AddMinutes(newMinute - date.Minute);
 
             var viewModel = new CreateEditEventViewModel
             {
