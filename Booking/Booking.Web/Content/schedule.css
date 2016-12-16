@@ -215,6 +215,7 @@
     background-image: url(Images/private-event-bg.png);
     background-repeat: no-repeat;
     background-position: center;
+    cursor: default !important;
 }
 
 .schedule-event-item .event-item-title {

@@ -142,6 +142,10 @@ function refillSchedule(eventsList) {
 
     $(".schedule-event-item")
         .click(function() {
+            if ($(this).hasClass("schedule-event-item-private")) {
+                return;
+            }
+
             var $item = $(this);
             var id = $item.attr("data-eventid");
             var url = $("#display-event-popup-url").val() + "?eventId=" + id;
@@ -170,14 +174,14 @@ function refillSchedule(eventsList) {
                             $("#" + divId).remove();
                         });
                     $("#btn-event-page-" + id)
-                        .click(function () {
+                        .click(function() {
                             var url = $("#redirect-to-event-url").val() + "?eventId=" + id;
                             window.location.replace(url);
                         });
 
                     var formId = "join-event-form-" + id;
                     $("#" + formId + " .fa-plus")
-                        .click(function () {
+                        .click(function() {
                             $("#" + formId + " .join-event-submit").click();
                         });
                     /*
