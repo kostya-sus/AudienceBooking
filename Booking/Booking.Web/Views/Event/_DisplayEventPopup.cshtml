@@ -12,7 +12,15 @@
         </div>
         @if (Model.CanEdit)
         {
-            <button class="btn-edit-event">@Localization.Edit</button>
+            using (Ajax.BeginForm("EditPopup", "Event", new {eventId = Model.Id}, new AjaxOptions
+            {
+                InsertionMode = InsertionMode.Replace,
+                HttpMethod = "Get",
+                UpdateTargetId = string.Format("event-display-popup-{0}", Model.Id)
+            }))
+            {
+                <input type="submit" class="btn-edit-event" value="@Localization.Edit"/>
+            }
             <button class="btn-cancel-event">@Localization.Cancel</button>
         }
 

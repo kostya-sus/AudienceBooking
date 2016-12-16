@@ -387,11 +387,12 @@
     <Content Include="Views\Shared\_RoomMapRoutePartial.cshtml" />
     <Content Include="Views\Shared\_JoinEventPartial.cshtml" />
     <Content Include="Views\Event\Edit.cshtml" />
-    <Content Include="Views\Shared\_DisplayEventPopup.cshtml" />
+    <Content Include="Views\Event\_DisplayEventPopup.cshtml" />
     <Content Include="Views\Error\_ViewStart.cshtml" />
-    <Content Include="Views\Shared\_NewEventPartial.cshtml" />
+    <Content Include="Views\Event\_NewEventPartial.cshtml" />
     <Content Include="Views\Shared\_RoomMapChoicePartial.cshtml" />
     <Content Include="Views\Event\_CancelEventPartial.cshtml" />
+    <Content Include="Views\Event\_EditEventPopupPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -119,5 +119,11 @@ namespace Booking.Services.Services
 
             return (userId == eventEntity.AuthorId) || _usersService.IsAdmin(userPrincipal);
         }
+
+        public bool CanEdit(IPrincipal user, Guid eventId)
+        {
+            var eventEntity = _unitOfWork.EventRepository.GetEventById(eventId);
+            return CanEdit(user, eventEntity);
+        }
     }
 }

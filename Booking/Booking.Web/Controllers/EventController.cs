@@ -230,7 +230,23 @@ namespace Booking.Web.Controllers
         [Authorize]
         public ActionResult EditPopup(Guid eventId)
         {
-            throw new NotImplementedException();
+            var audiences = _audienceService.GetAllAudiences().ToList();
+            var availableAudiences = audiences.Where(a => a.IsBookingAvailable)
+                .ToDictionary(a => (int)a.Id, a => a.Name);
+
+            var date = DateTime.Now.AddHours(2);
+            var newMinute = (date.Minute / 10) * 10;
+            date = date.AddMinutes(newMinute - date.Minute);
+
+            var viewModel = new CreateEditEventViewModel
+            {
+                AvailableAudiences = availableAudiences,
+                EndDateTime = date.AddMinutes(30),
+                StartDateTime = date,
+                IsPublic = true
+            };
+
+            return PartialView("_EditEventPopupPartial", viewModel);
         }
 
         [HttpPost]
