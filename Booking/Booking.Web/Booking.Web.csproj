@@ -391,6 +391,7 @@
     <Content Include="Views\Error\_ViewStart.cshtml" />
     <Content Include="Views\Shared\_NewEventPartial.cshtml" />
     <Content Include="Views\Shared\_RoomMapChoicePartial.cshtml" />
+    <Content Include="Views\Event\_CancelEventPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

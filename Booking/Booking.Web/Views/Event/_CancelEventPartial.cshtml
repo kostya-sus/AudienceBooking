@@ -1,0 +1,6 @@
+﻿@model Guid
+
+@using (Html.BeginForm("Cancel", "Event"))
+{
+    @Html.AntiForgeryToken()
+}

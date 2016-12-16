@@ -210,12 +210,20 @@ namespace Booking.Web.Controllers
             return new HttpStatusCodeResult(HttpStatusCode.OK);
         }
 
-        [HttpDelete]
+        [HttpPost]
         [Authorize]
         [ValidateAntiForgeryToken]
         public ActionResult Cancel(Guid eventId)
         {
-            throw new NotImplementedException();
+            _eventService.CancelEvent(User, eventId);
+            return RedirectToAction("Index", "Home");
+        }
+
+        [HttpGet]
+        [Authorize]
+        public ActionResult GetCancellationForm(Guid eventId)
+        {
+            return PartialView("_CancelEventPartial", eventId);
         }
 
         [HttpGet]
