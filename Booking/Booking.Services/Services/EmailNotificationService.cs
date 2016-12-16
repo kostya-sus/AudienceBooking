@@ -210,10 +210,53 @@ namespace Booking.Services.Services
 
         public void EventEditedAuthorNotification(Event newEvent, Event oldEvent)
         {
+            var emailTemplatePath = Path.Combine(_templateFolderPath.Replace("Web", "Services"), "EventEditedAuthorNotificationTemplate.cshtml");
+            var user = oldEvent.Author;
+            var modelEmail = new Booking.Services.EmailModels.EventEditedAuthorNotificationModel
+            {
+                Name = user.UserName,
+                Email = user.Email,
+                OldDate = oldEvent.EventDateTime.ToLongDateString(),
+                NewDate = newEvent.Title
+            };
+
+            var templateService = new TemplateService();
+            var emailHtmlBody = templateService.Parse(File.ReadAllText(emailTemplatePath), modelEmail, null, null);
+
+            var subject = "Edit event notification";
+            var email = GenerateEmail(emailHtmlBody, subject);
+
+            email.To.Add(new MailAddress(modelEmail.Email, modelEmail.Name));
+
+            SendMail(email);
         }
 
         public void SendFeedbackToAdmins(string name, string surname, string email, string message)
         {
+            var service = new UsersService();
+            var adminsEmails = service.GetAdminsEmails();
+
+            var emailTemplatePath = Path.Combine(_templateFolderPath.Replace("Web", "Services"), "SendFeedbackToAdminsNotificationTemplate.cshtml");
+            var templateService = new TemplateService();
+
+            var subject = "Feedback from user";
+            var modelEmail = new Booking.Services.EmailModels.SendFeedbackToAdminsModel
+            {
+                Message = message,
+                Name = name + " " + surname,
+                UserEmail = email
+            };
+
+            foreach (var adminEmail in adminsEmails)
+            {
+                modelEmail.Email = adminEmail;
+                var emailHtmlBody = templateService.Parse(File.ReadAllText(emailTemplatePath), modelEmail, null, null);
+                var mail = GenerateEmail(emailHtmlBody, subject);
+
+                mail.To.Add(new MailAddress(modelEmail.Email));
+
+                SendMail(mail);
+            }
         }
     }
 }
