@@ -10,13 +10,16 @@ using Booking.Repositories.Repositories;
 
 namespace Booking.Repositories
 {
-    public class UnitOfWork:IUnitOfWork
+    public class UnitOfWork : IUnitOfWork
     {
         private readonly BookingDbContext _context = new BookingDbContext();
+        private bool _disposed;
 
-        private AudienceRepository _audienceRepository;
-        private EventRepository _eventRepository;
-        private EventParticipantRepository _eventParticipantRepository;
+        private IAudienceRepository _audienceRepository;
+        private IEventRepository _eventRepository;
+        private IEventParticipantRepository _eventParticipantRepository;
+        private IAudienceMapRepository _audienceMapRepository;
+
         public IAudienceRepository AudienceRepository
         {
             get { return _audienceRepository ?? (_audienceRepository = new AudienceRepository(_context)); }
@@ -29,15 +32,22 @@ namespace Booking.Repositories
 
         public IEventParticipantRepository EventParticipantRepository
         {
-            get { return _eventParticipantRepository ?? (_eventParticipantRepository = new EventParticipantRepository(_context)); }
+            get
+            {
+                return _eventParticipantRepository ??
+                       (_eventParticipantRepository = new EventParticipantRepository(_context));
+            }
+        }
+
+        public IAudienceMapRepository AudienceMapRepository
+        {
+            get { return _audienceMapRepository ?? (_audienceMapRepository = new AudienceMapRepository(_context)); }
         }
 
         public void Save()
         {
             _context.SaveChanges();
         }
-
-        private bool _disposed;
 
         protected virtual void Dispose(bool disposing)
         {

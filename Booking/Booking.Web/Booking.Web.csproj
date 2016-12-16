@@ -187,6 +187,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\AdminPanelController.cs" />
     <Compile Include="Controllers\AudienceController.cs" />
     <Compile Include="Controllers\ContactController.cs" />
     <Compile Include="Controllers\ErrorController.cs" />
@@ -210,6 +211,7 @@
     <Compile Include="ViewModels\Account\ResetPasswordViewModel.cs" />
     <Compile Include="ViewModels\Account\SendCodeViewModel.cs" />
     <Compile Include="ViewModels\Account\VerifyCodeViewModel.cs" />
+    <Compile Include="ViewModels\AdminPanel\IndexViewModel.cs" />
     <Compile Include="ViewModels\Audience\AudienceInfoViewModel.cs" />
     <Compile Include="ViewModels\Audience\AudienceMapItemVm.cs" />
     <Compile Include="ViewModels\Audience\AudienceScheduleItemViewModel.cs" />
@@ -406,6 +408,8 @@
     <Content Include="Views\Event\_CancelEventPartial.cshtml" />
     <Content Include="Views\Event\_EditEventPopupPartial.cshtml" />
     <Content Include="Views\ImageUpload\Index.cshtml" />
+    <Content Include="Views\AdminPanel\Index.cshtml" />
+    <Content Include="Views\AdminPanel\_ViewStart.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

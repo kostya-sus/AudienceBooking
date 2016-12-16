@@ -10,6 +10,8 @@ namespace Booking.Repositories.Interfaces
 
         IEventParticipantRepository EventParticipantRepository { get; }
 
+        IAudienceMapRepository AudienceMapRepository { get; }
+
         void Save();
     }
 }
