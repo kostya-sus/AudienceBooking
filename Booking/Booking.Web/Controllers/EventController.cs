@@ -9,7 +9,6 @@ using Booking.Models;
 using Booking.Repositories;
 using Booking.Services.Interfaces;
 using Booking.Services.Services;
-using Booking.Web.Configuration;
 using Booking.Web.Helpers;
 using Booking.Web.ViewModels.Audience;
 using Booking.Web.ViewModels.Event;
