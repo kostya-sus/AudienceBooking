@@ -24,10 +24,10 @@ input[type="checkbox"]:checked + label span { background: url(Images/check_btn_s
     width: 46px;
     height: 26px;
     background: url(Images/red-toggle-container.png) left top no-repeat;
+    padding-top: 1px;
 }
 
 .red-toggle input[type="checkbox"].red-toggle-input + label .red-toggle-circle {
-    padding-top: 2px;
     width: 46px;
     height: 26px;
     background: url(Images/red-toggle-circle.png) left top 2px no-repeat;

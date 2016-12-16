@@ -72,6 +72,9 @@
     function isDateValid(startDate, endDate) {
         var startHours = startDate.getHours();
         var endHours = endDate.getHours();
+        if (endDate.getMinutes()) {
+            endHours ++;
+        }
         if (startHours < lowerHoursBound || startHours > upperHoursBound) {
             return false;
         }
