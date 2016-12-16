@@ -33,13 +33,13 @@ input[type="checkbox"]:checked + label span { background: url(Images/check_btn_s
     background: url(Images/red-toggle-circle.png) left top 2px no-repeat;
     animation-duration: 0.5s;
     animation-name: red-toggle-slide-back;
-    margin-left: 0;
+    margin-left: 22px;
 }
 
 .red-toggle input[type="checkbox"].red-toggle-input:checked + label .red-toggle-circle {
     animation-duration: 0.5s;
     animation-name: red-toggle-slide;
-    margin-left: 22px;
+    margin-left: 0;
 }
 
 .red-toggle .red-toggle-checked {
@@ -50,13 +50,13 @@ input[type="checkbox"]:checked + label span { background: url(Images/check_btn_s
     color: #afb2bb;
 }
 
-@keyframes red-toggle-slide {
+@keyframes red-toggle-slide-back {
     from { margin-left: 0; }
 
     to { margin-left: 22px; }
 }
 
-@keyframes red-toggle-slide-back {
+@keyframes red-toggle-slide {
     from { margin-left: 22px; }
 
     to { margin-left: 0; }

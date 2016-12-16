@@ -123,7 +123,8 @@ namespace Booking.Web.Controllers
             {
                 AvailableAudiences = availableAudiences,
                 EndDateTime = date.AddMinutes(30),
-                StartDateTime = date
+                StartDateTime = date,
+                IsPublic = true
             };
             return PartialView("_NewEventPartial", viewModel);
         }
@@ -179,16 +180,14 @@ namespace Booking.Web.Controllers
         public ActionResult Create(CreateEditEventViewModel vm)
         {
             TimeSpan span = vm.EndDateTime.Subtract(vm.StartDateTime);
-            var duration = (int)span.TotalMinutes;
+            var duration = (int) span.TotalMinutes;
 
             var isFree = _audienceService.IsFree((AudiencesEnum) vm.ChosenAudienceId, vm.StartDateTime, duration, vm.Id);
             if (duration < 20 || !isFree)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            if (vm.IsPublic &&
-                ((vm.IsAuthorShown == false && string.IsNullOrWhiteSpace(vm.AuthorName)) ||
-                 string.IsNullOrWhiteSpace(vm.Title)))
+            if (vm.IsPublic && string.IsNullOrWhiteSpace(vm.Title))
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
