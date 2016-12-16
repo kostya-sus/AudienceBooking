@@ -225,13 +225,13 @@ namespace Booking.Web.Controllers
 
         public async Task<ActionResult> Delete(string userId)
         {
-           ApplicationUser user = await UserManager.FindByIdAsync(userId);
+          var user = await UserManager.FindByIdAsync(userId);
             if (user != null)
             {
                 var result = await UserManager.DeleteAsync(user);
                 if (result.Succeeded)
                 {
-                    return RedirectToAction("Index", "Home");
+                    return RedirectToAction("Index", "Users");
                 }
             }
             return RedirectToAction("Index", "Home");
@@ -239,15 +239,15 @@ namespace Booking.Web.Controllers
 
 
         [HttpPost]
-        public async Task<ActionResult> EditUser(UserInfoViewModel model)
+        public ActionResult EditUser(UserInfoViewModel model)
         {
             
-            ApplicationUser user = await UserManager.FindByIdAsync(model.Id);
+            ApplicationUser user =UserManager.FindById(model.Id);
             if (user != null)
             {
                 user.UserName = model.Name;
                 user.Email = model.Email;
-                IdentityResult result = await UserManager.UpdateAsync(user);
+                IdentityResult result = UserManager.Update(user);
                 if (result.Succeeded)
                 {
                     return RedirectToAction("Index", "Home");

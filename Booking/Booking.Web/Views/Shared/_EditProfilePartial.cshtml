@@ -1,30 +1,32 @@
 ﻿@using Booking.Web.Localization
 @using Microsoft.AspNet.Identity
 
-@model Booking.Web.ViewModels.Profile.EditProfileViewModel
+@model Booking.Web.ViewModels.Profile.UserInfoViewModel
 
 
     
-   @using (Ajax.BeginForm("EditUser", "manage", new { editProfileViewModel = Model }, new AjaxOptions
+   @using (Ajax.BeginForm("EditUser", "Manage", new { editProfileViewModel = Model }, new AjaxOptions
    {
        InsertionMode = InsertionMode.ReplaceWith,
        HttpMethod = "Post",
        UpdateTargetId = "user-info-partial"
    }))
    {
+    <div style="width: 50%">
         @Html.AntiForgeryToken()
-        @Html.ValidationMessageFor(m => m.Name, "", new {@class = "validation-error"})
-        @Html.TextBoxFor(m => m.Name, new {@class = "profile-input-edit",  @id = "name",})
+        @Html.ValidationMessageFor(m => m.Name, "", new { @class = "validation-error" })
+        @Html.TextBoxFor(m => m.Name, new { @class = "profile-input-edit", @id = "name", })
 
-        @Html.ValidationMessageFor(m => m.Email, "", new {@class = "validation-error"})
-        @Html.TextBoxFor(m => m.Email, new {@class = "profile-input-edit",   @id = "email",})
-        if (Model.IsEditorAdmin)
+        @Html.ValidationMessageFor(m => m.Email, "", new { @class = "validation-error" })
+        @Html.TextBoxFor(m => m.Email, new { @class = "profile-input-edit", @id = "email", })
+        @if (Model.IsEditorAdmin)
         {
-            
-            <div>
-                <input id="admin" type="checkbox" value="Admin" />
-            </div>
+
+        <div>
+            <input id="admin" type="checkbox" value="Admin" />
+        </div>
         }
-        
-        <input type="submit" id="save" value=@Localization.Save class="profile-submit"/>
-    }
+
+        <input type="submit" id="save" value=@Localization.Save class="profile-submit" />
+    </div>
+   }

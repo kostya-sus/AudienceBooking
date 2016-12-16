@@ -391,7 +391,6 @@
     <Content Include="Views\Shared\_UserInfoPartial.cshtml" />
     <Content Include="Views\Shared\_ResetPasswordPartial.cshtml" />
     <Content Include="Views\Shared\_EditProfilePartial.cshtml" />
-    <Content Include="Views\Profile\_ResetPasswordResponsePartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

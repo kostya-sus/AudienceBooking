@@ -32,7 +32,9 @@ namespace Booking.Web.Controllers
                     IsProfileAdmin = new UsersService().IsAdmin(user),
                     Name = user.UserName,
                     Email = user.Email,
-                    ActiveEventsCount = new UsersService().GetEvenByAuthor(userId)
+                    ActiveEventsCount = new UsersService().GetEvenByAuthor(userId),
+                    Id = userId
+                    
                 },
                 Id = userId,
                 IsOwner = (User.Identity.GetUserId() == userId)
@@ -50,19 +52,9 @@ namespace Booking.Web.Controllers
 
         [HttpPost]
         [Authorize]
-        public ActionResult Edit(string userId)
+        public ActionResult Edit(UserInfoViewModel userInfoModeld)
         {
-            var user = new UsersService().GetUserById(userId);
-            var vm = new EditProfileViewModel
-            {
-                
-                Email = new UsersService().GetUserEmail(userId),
-                IsEditorAdmin = (User.Identity.GetUserId() == userId)&&(new UsersService().IsAdmin(User)),
-                IsProfileAdmin = new UsersService().IsAdmin(user),
-                Name = user.UserName
-            };
-
-            return PartialView("_EditProfilePartial", vm);
+            return PartialView("_EditProfilePartial", userInfoModeld);
         }
         
        
