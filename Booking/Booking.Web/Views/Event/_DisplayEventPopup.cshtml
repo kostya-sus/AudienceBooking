@@ -38,7 +38,7 @@
             @if (Model.IsJoinAvailable)
             {
                 <i class="fa fa-users" aria-hidden="true"></i>
-                <span class="participants-count">@Model.ParticipantsEmails.Count</span>
+                <span class="participants-count">@Model.ParticipantsCount</span>
             }
         </div>
         @if (Model.IsJoinAvailable)
@@ -46,7 +46,7 @@
             @Html.Partial("_JoinEventPartial", new JoinEventViewModel
             {
                 EventId = Model.Id,
-                ParticipantsCount = Model.ParticipantsEmails.Count,
+                ParticipantsCount = Model.ParticipantsCount,
                 ParticipantsCountLabelHidden = true
             })
         }

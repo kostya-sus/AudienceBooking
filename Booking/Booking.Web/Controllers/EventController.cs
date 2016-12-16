@@ -3,6 +3,7 @@ using System.Globalization;
 using System.Linq;
 using System.Net;
 using System.Web.Mvc;
+using AutoMapper;
 using Booking.Enums;
 using Booking.Models;
 using Booking.Repositories;
@@ -35,34 +36,9 @@ namespace Booking.Web.Controllers
         public ActionResult DisplayEventPopup(Guid eventId)
         {
             var eventEntity = _eventService.GetEvent(eventId);
-            var audiences = _audienceService.GetAllAudiences();
-            var authorName = eventEntity.IsAuthorShown ? eventEntity.Author.UserName : eventEntity.AuthorName;
-
-            var audiencesVms = audiences.ToVmDictionary();
-
-            var participants = eventEntity.EventParticipants.ToVmDictionary();
-
-            var audienceName = audiencesVms[eventEntity.AudienceId].Name;
-
-            CultureInfo culture = CultureInfo.CreateSpecificCulture("ru-RU");
-            string eventDate = eventEntity.EventDateTime.ToString("ddd, d MMMM", culture);
-
-            var vm = new DisplayEventPopupViewModel
-            {
-                AudienceId = eventEntity.AudienceId,
-                AudienceName = audienceName,
-                Title = eventEntity.Title,
-                AdditionalInfo = eventEntity.AdditionalInfo,
-                Audiences = audiencesVms,
-                AuthorName = authorName,
-                CanEdit = _eventService.CanEdit(User, eventEntity),
-                EventDateTime = eventEntity.EventDateTime,
-                Id = eventEntity.Id,
-                IsJoinAvailable = eventEntity.IsJoinAvailable,
-                ParticipantsEmails = participants,
-                Duration = eventEntity.Duration,
-                EventDate = eventDate
-            };
+            
+            var vm = Mapper.Map<Event, DisplayEventPopupViewModel>(eventEntity);
+            vm.CanEdit = _eventService.CanEdit(User, eventEntity);
 
             return PartialView("_DisplayEventPopup", vm);
         }
