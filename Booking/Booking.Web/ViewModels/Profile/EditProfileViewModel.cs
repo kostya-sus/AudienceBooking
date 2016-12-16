@@ -15,9 +15,11 @@ namespace Booking.Web.ViewModels.Profile
         [EmailAddress(ErrorMessageResourceType = typeof(Localization.Localization),
            ErrorMessageResourceName = "RegisterViewModel_Email_ValidationMessage")]
         public string Email { get; set; }
+        public string Id { get; set; }
 
         public bool IsProfileAdmin { get; set; }
 
         public bool IsEditorAdmin { get; set; }
+
     }
 }

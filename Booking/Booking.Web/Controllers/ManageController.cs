@@ -225,16 +225,43 @@ namespace Booking.Web.Controllers
 
         public async Task<ActionResult> Delete(string userId)
         {
-            ApplicationUser user = await UserManager.FindByIdAsync(userId);
+           ApplicationUser user = await UserManager.FindByIdAsync(userId);
             if (user != null)
             {
-                IdentityResult result = await UserManager.DeleteAsync(user);
+                var result = await UserManager.DeleteAsync(user);
                 if (result.Succeeded)
                 {
                     return RedirectToAction("Index", "Home");
                 }
             }
             return RedirectToAction("Index", "Home");
+        }
+
+
+        [HttpPost]
+        public async Task<ActionResult> EditUser(EditProfileViewModel model)
+        {
+            ApplicationUser user = await UserManager.FindByIdAsync(model.Id);
+            if (user != null)
+            {
+                user.UserName = model.Name;
+                user.Email = model.Email;
+                IdentityResult result = await UserManager.UpdateAsync(user);
+                if (result.Succeeded)
+                {
+                    return RedirectToAction("Index", "Home");
+                }
+                else
+                {
+                    ModelState.AddModelError("", "Что-то пошло не так");
+                }
+            }
+            else
+            {
+                ModelState.AddModelError("", "Пользователь не найден");
+            }
+
+            return PartialView("_UserInfoPartial");
         }
         //
         // POST: /Manage/ChangePassword
@@ -256,11 +283,11 @@ namespace Booking.Web.Controllers
                 }
                 ViewData["PasswordSuccess"] = Localization.Localization.PasswordSuccess;
                 
-                return PartialView("_ResetPassword");
+                return PartialView("_ResetPasswordPartial");
             }
             ViewData["PasswordFaild"] = Localization.Localization.Error;
 
-            return PartialView("_ResetPassword");
+            return PartialView("_ResetPasswordPartial");
         }
 
         //

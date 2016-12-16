@@ -32,12 +32,13 @@ namespace Booking.Web.Controllers
                     IsAdmin = new UsersService().IsAdmin(user),
                     Name = user.UserName,
                     Email = user.Email,
-                    ActiveEventsCount =new UsersService().GetEvenByAuthor(userId)
+                    ActiveEventsCount = new UsersService().GetEvenByAuthor(userId)
                 },
                 Id = userId,
-                IsOwner = (User.Identity.GetUserId()==userId)
-               
+                IsOwner = (User.Identity.GetUserId() == userId)
+
             };
+          
             return View(vm);
         }
 
@@ -47,7 +48,7 @@ namespace Booking.Web.Controllers
             throw new NotImplementedException();
         }
 
-        [HttpGet]
+        [HttpPost]
         [Authorize]
         public ActionResult Edit(string userId)
         {
@@ -63,23 +64,7 @@ namespace Booking.Web.Controllers
 
             return PartialView("_EditProfilePartial", vm);
         }
-
-        [HttpPost]
-        [Authorize]
-        public ActionResult Save(EditProfileViewModel editProfileViewModel)
-        {
-            var vm = new EditProfileViewModel
-            {
-
-                Email = editProfileViewModel.Email,
-                IsEditorAdmin = editProfileViewModel.IsEditorAdmin,
-                IsProfileAdmin = editProfileViewModel.IsProfileAdmin,
-                Name = editProfileViewModel.Name
-            };
-
-            return PartialView("_EditProfilePartial", vm);
-        }
-
+        
        
         [Authorize(Roles = "Admin")]
         public async Task<ActionResult> Delete(string userId)

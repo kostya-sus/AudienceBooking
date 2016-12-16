@@ -5,8 +5,13 @@
 
 
     
-    @using (Html.BeginForm("Edit", "Profile", FormMethod.Post))
-    {
+   @using (Ajax.BeginForm("EditUser", "manage", new { editProfileViewModel = Model }, new AjaxOptions
+   {
+       InsertionMode = InsertionMode.ReplaceWith,
+       HttpMethod = "Post",
+       UpdateTargetId = "user-info-partial"
+   }))
+   {
         @Html.AntiForgeryToken()
         @Html.ValidationMessageFor(m => m.Name, "", new {@class = "validation-error"})
         @Html.TextBoxFor(m => m.Name, new {@class = "profile-input-edit",  @id = "name",})
@@ -15,8 +20,9 @@
         @Html.TextBoxFor(m => m.Email, new {@class = "profile-input-edit",   @id = "email",})
         if (Model.IsEditorAdmin)
         {
+            
             <div>
-                switch
+                <input id="admin" type="checkbox" value="Admin" />
             </div>
         }
         

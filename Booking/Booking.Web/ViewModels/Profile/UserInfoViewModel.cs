@@ -16,6 +16,8 @@ namespace Booking.Web.ViewModels.Profile
           ErrorMessageResourceName = "RegisterViewModel_Email_ValidationMessage")]
         public string Email { get; set; }
 
+        public string Id { get; set; }
+
         public int ActiveEventsCount { get; set; }
 
         public bool IsAdmin { get; set; }
