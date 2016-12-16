@@ -1,15 +1,9 @@
 ﻿using System;
-using System.Diagnostics;
 using System.IO;
 using System.Net.Mail;
 using Booking.Models;
-using Booking.Repositories;
-using Booking.Repositories.Interfaces;
-using System.IO;
 using System.Net;
-using System.Net.Mail;
 using System.Text;
-using Booking.Models;
 using Booking.Services.EmailModels;
 using Booking.Services.Interfaces;
 using RazorEngine.Templating;
@@ -20,7 +14,12 @@ namespace Booking.Services.Services
     {
         private readonly MailAddress _emailFromAddress = new MailAddress("audiencebookingtest@gmail.com", "Audience");
         private readonly string _templateFolderPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "EmailTemplates");
+        private readonly TemplateService _templateService;
 
+        public EmailNotificationService()
+        {
+            _templateService = new TemplateService();
+        }
         private void SendMail(MailMessage email)
         {
             SmtpClient smtp = new SmtpClient("smtp.gmail.com", 587)
@@ -41,7 +40,6 @@ namespace Booking.Services.Services
                 {
                     var error = smtpEx.StatusCode;
                 }
-
             }
         }
 
@@ -65,8 +63,7 @@ namespace Booking.Services.Services
                 Email = user.Email
             };
 
-            var templateService = new TemplateService();
-            var emailHtmlBody = templateService.Parse(File.ReadAllText(emailTemplatePath), modelEmail, null, null);
+            var emailHtmlBody = _templateService.Parse(File.ReadAllText(emailTemplatePath), modelEmail, null, null);
 
             var subject = "Registered to softheme-booking.azurewebsites.net";
             var email = GenerateEmail(emailHtmlBody, subject);
@@ -87,8 +84,7 @@ namespace Booking.Services.Services
                 Email = user.Email
             };
 
-            var templateService = new TemplateService();
-            var emailHtmlBody = templateService.Parse(File.ReadAllText(emailTemplatePath), modelEmail, null, null);
+            var emailHtmlBody = _templateService.Parse(File.ReadAllText(emailTemplatePath), modelEmail, null, null);
 
             var subject = "Account remove from softheme-booking.azurewebsites.net";
             var email = GenerateEmail(emailHtmlBody, subject);
@@ -101,9 +97,7 @@ namespace Booking.Services.Services
         public void EventCancelledNotification(Event eventEntity)
         {
             var participants = eventEntity.EventParticipants;
-
             var emailTemplatePath = Path.Combine(_templateFolderPath.Replace("Web", "Services"), "EventCancelledNotificationTemplate.cshtml");
-            var templateService = new TemplateService();
             
             var subject = "Event cancelled notification";
             var modelEmail = new Booking.Services.EmailModels.EventCancellModel
@@ -115,7 +109,7 @@ namespace Booking.Services.Services
             foreach (var participant in participants)
             {
                 modelEmail.Email = participant.ParticipantEmail;
-                var emailHtmlBody = templateService.Parse(File.ReadAllText(emailTemplatePath), modelEmail, null, null);
+                var emailHtmlBody = _templateService.Parse(File.ReadAllText(emailTemplatePath), modelEmail, null, null);
                 var email = GenerateEmail(emailHtmlBody, subject);
 
                 email.To.Add(new MailAddress(modelEmail.Email));
@@ -137,8 +131,7 @@ namespace Booking.Services.Services
                 EventTitle = eventEntity.Title
             };
 
-            var templateService = new TemplateService();
-            var emailHtmlBody = templateService.Parse(File.ReadAllText(emailTemplatePath), modelEmail, null, null);
+            var emailHtmlBody = _templateService.Parse(File.ReadAllText(emailTemplatePath), modelEmail, null, null);
 
             var subject = "Cancel event notification";
             var email = GenerateEmail(emailHtmlBody, subject);
@@ -158,8 +151,7 @@ namespace Booking.Services.Services
                 EventDate = eventEntity.EventDateTime.ToLongDateString()
             };
 
-            var templateService = new TemplateService();
-            var emailHtmlBody = templateService.Parse(File.ReadAllText(emailTemplatePath), modelEmail, null, null);
+            var emailHtmlBody = _templateService.Parse(File.ReadAllText(emailTemplatePath), modelEmail, null, null);
 
             var subject = "Remove from participants list notification";
             var mailMessage = GenerateEmail(emailHtmlBody, subject);
@@ -179,8 +171,7 @@ namespace Booking.Services.Services
                 EventDate = eventEntity.EventDateTime.ToLongDateString()
             };
 
-            var templateService = new TemplateService();
-            var emailHtmlBody = templateService.Parse(File.ReadAllText(emailTemplatePath), modelEmail, null, null);
+            var emailHtmlBody = _templateService.Parse(File.ReadAllText(emailTemplatePath), modelEmail, null, null);
 
             var subject = "Joined to participants list notification";
             var mailMessage = GenerateEmail(emailHtmlBody, subject);
@@ -194,7 +185,6 @@ namespace Booking.Services.Services
         {
             var participants = oldEvent.EventParticipants;
             var emailTemplatePath = Path.Combine(_templateFolderPath.Replace("Web", "Services"), "EventEditedNotificationTemplate.cshtml");
-            var templateService = new TemplateService();
 
             var subject = "Event edit notification";
             var modelEmail = new Booking.Services.EmailModels.EventEditedModel
@@ -207,7 +197,7 @@ namespace Booking.Services.Services
             foreach (var participant in participants)
             {
                 modelEmail.Email = participant.ParticipantEmail;
-                var emailHtmlBody = templateService.Parse(File.ReadAllText(emailTemplatePath), modelEmail, null, null);
+                var emailHtmlBody = _templateService.Parse(File.ReadAllText(emailTemplatePath), modelEmail, null, null);
                 var email = GenerateEmail(emailHtmlBody, subject);
 
                 email.To.Add(new MailAddress(modelEmail.Email));
@@ -228,8 +218,7 @@ namespace Booking.Services.Services
                 NewDate = newEvent.Title
             };
 
-            var templateService = new TemplateService();
-            var emailHtmlBody = templateService.Parse(File.ReadAllText(emailTemplatePath), modelEmail, null, null);
+            var emailHtmlBody = _templateService.Parse(File.ReadAllText(emailTemplatePath), modelEmail, null, null);
 
             var subject = "Edit event notification";
             var email = GenerateEmail(emailHtmlBody, subject);
@@ -245,7 +234,6 @@ namespace Booking.Services.Services
             var adminsEmails = service.GetAdminsEmails();
 
             var emailTemplatePath = Path.Combine(_templateFolderPath.Replace("Web", "Services"), "SendFeedbackToAdminsNotificationTemplate.cshtml");
-            var templateService = new TemplateService();
 
             var subject = "Feedback from user";
             var modelEmail = new Booking.Services.EmailModels.SendFeedbackToAdminsModel
@@ -258,7 +246,7 @@ namespace Booking.Services.Services
             foreach (var adminEmail in adminsEmails)
             {
                 modelEmail.Email = adminEmail;
-                var emailHtmlBody = templateService.Parse(File.ReadAllText(emailTemplatePath), modelEmail, null, null);
+                var emailHtmlBody = _templateService.Parse(File.ReadAllText(emailTemplatePath), modelEmail, null, null);
                 var mail = GenerateEmail(emailHtmlBody, subject);
 
                 mail.To.Add(new MailAddress(modelEmail.Email));
