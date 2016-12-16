@@ -5,7 +5,7 @@ VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Booking.Models", "Booking.Models\Booking.Models.csproj", "{55DF4FDE-EA7C-47DB-B8E3-FEFC58EA1B47}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Booking.Repositories", "Booking.Repositories\Booking.Repositories.csproj", "{FD3CD658-F5A9-4DB5-9F06-3A7A8CB4C47D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Booking.DataAccess", "Booking.Repositories\Booking.DataAccess.csproj", "{FD3CD658-F5A9-4DB5-9F06-3A7A8CB4C47D}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Booking.Services", "Booking.Services\Booking.Services.csproj", "{8C8D1B88-47A6-4825-81F7-A3AA86CC3589}"
 EndProject

@@ -1,8 +1,11 @@
 ﻿using System;
+using System.IO;
 using System.Linq;
+using System.Net;
 using System.Web.Mvc;
 using Booking.Enums;
 using Booking.Repositories;
+using Booking.Repositories.Repositories;
 using Booking.Services.Interfaces;
 using Booking.Services.Services;
 using Booking.Web.Helpers;
@@ -57,7 +60,7 @@ namespace Booking.Web.Controllers
 
             return View(viewModel);
         }
-        
+
         [HttpGet]
         public ActionResult GetDaySchedule(DateTime date)
         {

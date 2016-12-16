@@ -93,9 +93,9 @@
       <Project>{55DF4FDE-EA7C-47DB-B8E3-FEFC58EA1B47}</Project>
       <Name>Booking.Models</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Booking.Repositories\Booking.Repositories.csproj">
+    <ProjectReference Include="..\Booking.Repositories\Booking.DataAccess.csproj">
       <Project>{fd3cd658-f5a9-4db5-9f06-3a7a8cb4c47d}</Project>
-      <Name>Booking.Repositories</Name>
+      <Name>Booking.DataAccess</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
