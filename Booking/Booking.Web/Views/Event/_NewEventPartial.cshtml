@@ -67,7 +67,7 @@
 
             <div class="form-group">
                 <span>@Localization.Where</span>
-                @Html.DropDownListFor(m => m.ChosenAudienceId, new SelectList(Model.AvailableAudiences,
+                @Html.DropDownListFor(m => m.AudienceId, new SelectList(Model.AvailableAudiences,
                     "Key", "Value"), new {@class = "select-style"})
             </div>
 

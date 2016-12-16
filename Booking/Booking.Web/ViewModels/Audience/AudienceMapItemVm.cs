@@ -1,10 +1,11 @@
-﻿using Booking.Enums;
+﻿using System;
+using Booking.Enums;
 
 namespace Booking.Web.ViewModels.Audience
 {
     public class AudienceMapItemVm
     {
-        public AudiencesEnum Id { get; set; }
+        public Guid Id { get; set; }
 
         public string Name { get; set; }
 

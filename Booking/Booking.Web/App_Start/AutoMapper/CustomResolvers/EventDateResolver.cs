@@ -1,6 +1,7 @@
 ﻿using System.Globalization;
 using AutoMapper;
 using Booking.Models;
+using Booking.Models.EfModels;
 using Booking.Web.ViewModels.Event;
 
 namespace Booking.Web.AutoMapper.CustomResolvers
@@ -11,7 +12,7 @@ namespace Booking.Web.AutoMapper.CustomResolvers
             ResolutionContext context)
         {
             CultureInfo culture = CultureInfo.CreateSpecificCulture("ru-RU");
-            return source.EventDateTime.ToString("ddd, d MMMM", culture);
+            return source.StartTime.ToString("ddd, d MMMM", culture);
         }
     }
 }

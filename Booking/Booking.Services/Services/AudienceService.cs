@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Booking.Enums;
 using Booking.Models;
+using Booking.Models.EfModels;
 using Booking.Repositories.Interfaces;
 using Booking.Services.Interfaces;
 
@@ -19,7 +20,7 @@ namespace Booking.Services.Services
             _unitOfWork = unitOfWork;
         }
 
-        public Audience GetAudience(AudiencesEnum audienceId)
+        public Audience GetAudience(Guid audienceId)
         {
             return _unitOfWork.AudienceRepository.GetAudienceById(audienceId);
         }
@@ -30,7 +31,7 @@ namespace Booking.Services.Services
             _unitOfWork.Save();
         }
 
-        public void CloseAudience(AudiencesEnum audienceId)
+        public void CloseAudience(Guid audienceId)
         {
             var currentAudience = _unitOfWork.AudienceRepository.GetAudienceById(audienceId);
             if (currentAudience != null)
@@ -41,7 +42,7 @@ namespace Booking.Services.Services
             }
         }
 
-        public void OpenAudience(AudiencesEnum audienceId)
+        public void OpenAudience(Guid audienceId)
         {
             var currentAudience = _unitOfWork.AudienceRepository.GetAudienceById(audienceId);
             if (currentAudience != null)
@@ -52,7 +53,7 @@ namespace Booking.Services.Services
             }
         }
 
-        public bool IsFree(AudiencesEnum audienceId, DateTime dateTime, int duration, Guid? currentEventId)
+        public bool IsFree(Guid audienceId, DateTime dateTime, int duration, Guid? currentEventId)
         {
             var events =
                 _unitOfWork.EventRepository.GetAllEvents()
@@ -68,12 +69,12 @@ namespace Booking.Services.Services
                 {
                     foreach (var currentEvent in events)
                     {
-                        var endOfCurrentEvent = currentEvent.EventDateTime.AddMinutes(currentEvent.Duration);
-                        if (dateTime <= currentEvent.EventDateTime && currentEvent.EventDateTime < endOfEvent)
+                        var endOfCurrentEvent = currentEvent.StartTime.AddMinutes(currentEvent.Duration);
+                        if (dateTime <= currentEvent.StartTime && currentEvent.StartTime < endOfEvent)
                         {
                             return false;
                         }
-                        if (dateTime > currentEvent.EventDateTime && dateTime < endOfCurrentEvent)
+                        if (dateTime > currentEvent.StartTime && dateTime < endOfCurrentEvent)
                         {
                             return false;
                         }

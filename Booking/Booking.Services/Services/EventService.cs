@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Security.Principal;
 using Booking.Models;
+using Booking.Models.EfModels;
 using Booking.Repositories.Interfaces;
 using Booking.Services.Interfaces;
 using Microsoft.AspNet.Identity;

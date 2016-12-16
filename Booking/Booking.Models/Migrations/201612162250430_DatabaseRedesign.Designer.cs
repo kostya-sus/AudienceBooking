@@ -7,13 +7,13 @@ namespace Booking.Models.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
-    public sealed partial class ChangedEventDateTimeToDateTime2 : IMigrationMetadata
+    public sealed partial class DatabaseRedesign : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(ChangedEventDateTimeToDateTime2));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(DatabaseRedesign));
         
         string IMigrationMetadata.Id
         {
-            get { return "201612121903322_ChangedEventDateTimeToDateTime2"; }
+            get { return "201612162250430_DatabaseRedesign"; }
         }
         
         string IMigrationMetadata.Source

@@ -43,7 +43,7 @@ namespace Booking.Web.Controllers
                 });
 
             var availableAudiences = audiences.Where(a => a.IsBookingAvailable)
-                .ToDictionary(a => (int) a.Id, a => a.Name);
+                .ToDictionary(a => a.Id, a => a.Name);
 
             var viewModel = new HomeViewModel
             {
@@ -71,7 +71,7 @@ namespace Booking.Web.Controllers
                     Id = x.Id,
                     AudienceId = x.AudienceId,
                     Duration = x.Duration,
-                    EventDateTime = x.EventDateTime,
+                    EventDateTime = x.StartTime,
                     IsPublic = x.IsPublic,
                     Title = x.Title,
                     AuthorId = x.AuthorId

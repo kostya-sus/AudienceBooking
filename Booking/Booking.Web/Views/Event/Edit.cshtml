@@ -138,7 +138,7 @@
                     </div>
                 </div>
             </div>
-            @Html.HiddenFor(m => m.ChosenAudienceId, new {id = "chosen-audience-id"})
+            @Html.HiddenFor(m => m.AudienceId, new {id = "chosen-audience-id"})
         }
 
         @if (Model.IsJoinAvailable && Model.ParticipantsEmails.Count > 0)

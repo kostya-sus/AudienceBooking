@@ -1,12 +1,10 @@
-using Booking.Enums;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Booking.Models
+namespace Booking.Models.EfModels
 {
-    using System;
-    using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-    using System.ComponentModel.DataAnnotations.Schema;
-
     [Table("Event")]
     public class Event
     {
@@ -21,12 +19,11 @@ namespace Booking.Models
 
         [Required]
         [Column(TypeName = "datetime2")]
-        public DateTime EventDateTime { get; set; }
+        public DateTime StartTime { get; set; }
 
         [Required]
         public int Duration { get; set; }
-
-        [Required(AllowEmptyStrings = true)]
+        
         [StringLength(50)]
         public string Title { get; set; }
         
@@ -40,8 +37,9 @@ namespace Booking.Models
         [Required]
         public bool IsJoinAvailable { get; set; }
         
+        [Required]
         [ForeignKey("Audience")]
-        public AudiencesEnum AudienceId { get; set; }
+        public Guid AudienceId { get; set; }
 
         [Required]
         public bool IsAuthorShown { get; set; }

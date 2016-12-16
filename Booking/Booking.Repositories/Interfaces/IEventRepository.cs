@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using Booking.Models;
+using Booking.Models.EfModels;
 
 namespace Booking.Repositories.Interfaces
 {

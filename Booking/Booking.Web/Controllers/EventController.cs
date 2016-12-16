@@ -6,6 +6,7 @@ using System.Web.Mvc;
 using AutoMapper;
 using Booking.Enums;
 using Booking.Models;
+using Booking.Models.EfModels;
 using Booking.Repositories;
 using Booking.Services.Interfaces;
 using Booking.Services.Services;
@@ -66,7 +67,7 @@ namespace Booking.Web.Controllers
                 AuthorName = authorName,
                 CanEdit = _eventService.CanEdit(User, eventEntity),
                 Duration = eventEntity.Duration,
-                EventDateTime = eventEntity.EventDateTime,
+                EventDateTime = eventEntity.StartTime,
                 Id = eventEntity.Id,
                 IsJoinAvailable = eventEntity.IsJoinAvailable,
                 ParticipantsEmails = participants
@@ -89,7 +90,7 @@ namespace Booking.Web.Controllers
         {
             var audiences = _audienceService.GetAllAudiences().ToList();
             var availableAudiences = audiences.Where(a => a.IsBookingAvailable)
-                .ToDictionary(a => (int) a.Id, a => a.Name);
+                .ToDictionary(a => a.Id, a => a.Name);
 
             var date = DateTime.Now.AddHours(2);
             var newMinute = (date.Minute/10)*10;
@@ -127,13 +128,13 @@ namespace Booking.Web.Controllers
 
             var vm = new EventEditViewModel
             {
-                ChosenAudienceId = (int) eventEntity.AudienceId,
+                AudienceId = eventEntity.AudienceId,
                 Title = eventEntity.Title,
                 AdditionalInfo = eventEntity.AdditionalInfo,
                 Audiences = audiencesVms,
                 AuthorName = eventEntity.AuthorName,
-                EndDateTime = eventEntity.EventDateTime.AddMinutes(eventEntity.Duration),
-                StartDateTime = eventEntity.EventDateTime,
+                EndDateTime = eventEntity.StartTime.AddMinutes(eventEntity.Duration),
+                StartDateTime = eventEntity.StartTime,
                 Id = eventEntity.Id,
                 IsJoinAvailable = eventEntity.IsJoinAvailable,
                 IsAuthorShown = eventEntity.IsAuthorShown,
@@ -158,7 +159,7 @@ namespace Booking.Web.Controllers
             TimeSpan span = vm.EndDateTime.Subtract(vm.StartDateTime);
             var duration = (int) span.TotalMinutes;
 
-            var isFree = _audienceService.IsFree((AudiencesEnum) vm.ChosenAudienceId, vm.StartDateTime, duration, vm.Id);
+            var isFree = _audienceService.IsFree(vm.AudienceId, vm.StartDateTime, duration, vm.Id);
             if (duration < 20 || !isFree)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -170,10 +171,10 @@ namespace Booking.Web.Controllers
 
             Event newEvent = new Event();
             {
-                newEvent.Title = vm.Title ?? " ";
-                newEvent.EventDateTime = vm.StartDateTime;
+                newEvent.Title = vm.Title;
+                newEvent.StartTime = vm.StartDateTime;
                 newEvent.AdditionalInfo = vm.AdditionalInfo;
-                newEvent.AudienceId = (AudiencesEnum) vm.ChosenAudienceId;
+                newEvent.AudienceId = vm.AudienceId;
                 newEvent.Duration = duration;
                 newEvent.IsAuthorShown = vm.IsAuthorShown;
                 newEvent.IsJoinAvailable = vm.IsJoinAvailable;
@@ -208,7 +209,7 @@ namespace Booking.Web.Controllers
         {
             var audiences = _audienceService.GetAllAudiences().ToList();
             var availableAudiences = audiences.Where(a => a.IsBookingAvailable)
-                .ToDictionary(a => (int)a.Id, a => a.Name);
+                .ToDictionary(a => a.Id, a => a.Name);
 
             var date = DateTime.Now.AddHours(2);
             var newMinute = (date.Minute / 10) * 10;
@@ -234,7 +235,7 @@ namespace Booking.Web.Controllers
 
             var eventEntity = _eventService.GetEvent(vm.Id);
 
-            if (!_audienceService.IsFree((AudiencesEnum) vm.ChosenAudienceId, vm.StartDateTime, duration, vm.Id))
+            if (!_audienceService.IsFree(vm.AudienceId, vm.StartDateTime, duration, vm.Id))
             {
                 var audiences = _audienceService.GetAllAudiences();
                 vm.Audiences = audiences.ToVmDictionary();
@@ -244,11 +245,11 @@ namespace Booking.Web.Controllers
 
             eventEntity.Title = vm.Title;
             eventEntity.AdditionalInfo = vm.AdditionalInfo;
-            eventEntity.AudienceId = (AudiencesEnum) vm.ChosenAudienceId;
+            eventEntity.AudienceId = vm.AudienceId;
             eventEntity.AuthorName = vm.AuthorName;
             eventEntity.IsAuthorShown = vm.IsAuthorShown;
             eventEntity.IsJoinAvailable = vm.IsJoinAvailable;
-            eventEntity.EventDateTime = vm.StartDateTime;
+            eventEntity.StartTime = vm.StartDateTime;
             eventEntity.Duration = duration;
 
             _eventService.UpdateEvent(User, eventEntity);

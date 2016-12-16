@@ -3,15 +3,25 @@ namespace Booking.Models.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class Initial : DbMigration
+    public partial class DatabaseRedesign : DbMigration
     {
         public override void Up()
         {
             CreateTable(
+                "dbo.AudienceMap",
+                c => new
+                    {
+                        Id = c.Guid(nullable: false, identity: true),
+                        Name = c.String(nullable: false),
+                        ImageName = c.String(nullable: false),
+                    })
+                .PrimaryKey(t => t.Id);
+            
+            CreateTable(
                 "dbo.Audience",
                 c => new
                     {
-                        Id = c.Int(nullable: false),
+                        Id = c.Guid(nullable: false, identity: true),
                         Name = c.String(nullable: false),
                         SeatsCount = c.Int(nullable: false),
                         BoardsCount = c.Int(nullable: false),
@@ -19,21 +29,30 @@ namespace Booking.Models.Migrations
                         PrintersCount = c.Int(nullable: false),
                         ProjectorsCount = c.Int(nullable: false),
                         IsBookingAvailable = c.Boolean(nullable: false),
+                        Left = c.Int(nullable: false),
+                        Top = c.Int(nullable: false),
+                        Width = c.Int(nullable: false),
+                        Height = c.Int(nullable: false),
+                        RouteImageName = c.String(),
+                        LineDetailsImageName = c.String(),
+                        AudienceMapId = c.Guid(nullable: false),
                     })
-                .PrimaryKey(t => t.Id);
+                .PrimaryKey(t => t.Id)
+                .ForeignKey("dbo.AudienceMap", t => t.AudienceMapId, cascadeDelete: true)
+                .Index(t => t.AudienceMapId);
             
             CreateTable(
                 "dbo.Event",
                 c => new
                     {
                         Id = c.Guid(nullable: false, identity: true),
-                        EventDateTime = c.DateTime(nullable: false, storeType: "smalldatetime"),
+                        StartTime = c.DateTime(nullable: false, precision: 7, storeType: "datetime2"),
                         Duration = c.Int(nullable: false),
-                        Title = c.String(nullable: false, maxLength: 50),
-                        AuthorId = c.String(nullable:false, maxLength: 128),
+                        Title = c.String(maxLength: 50),
+                        AuthorId = c.String(maxLength: 128),
                         IsPublic = c.Boolean(nullable: false),
                         IsJoinAvailable = c.Boolean(nullable: false),
-                        AudienceId = c.Int(nullable: false),
+                        AudienceId = c.Guid(nullable: false),
                         IsAuthorShown = c.Boolean(nullable: false),
                         AuthorName = c.String(maxLength: 30),
                         AdditionalInfo = c.String(maxLength: 600),
@@ -115,6 +134,20 @@ namespace Booking.Models.Migrations
                 .Index(t => t.EventId);
             
             CreateTable(
+                "dbo.BookingRangeHistory",
+                c => new
+                    {
+                        Id = c.Guid(nullable: false, identity: true),
+                        StartHour = c.Int(nullable: false),
+                        StartMinute = c.Int(nullable: false),
+                        EndHour = c.Int(nullable: false),
+                        EndMinute = c.Int(nullable: false),
+                        DaysOfWeekAllowed = c.Int(nullable: false),
+                        AppliedDate = c.DateTime(nullable: false, precision: 7, storeType: "datetime2"),
+                    })
+                .PrimaryKey(t => t.Id);
+            
+            CreateTable(
                 "dbo.AspNetRoles",
                 c => new
                     {
@@ -135,6 +168,7 @@ namespace Booking.Models.Migrations
             DropForeignKey("dbo.AspNetUserLogins", "UserId", "dbo.AspNetUsers");
             DropForeignKey("dbo.AspNetUserClaims", "UserId", "dbo.AspNetUsers");
             DropForeignKey("dbo.Event", "AudienceId", "dbo.Audience");
+            DropForeignKey("dbo.Audience", "AudienceMapId", "dbo.AudienceMap");
             DropIndex("dbo.AspNetRoles", "RoleNameIndex");
             DropIndex("dbo.EventParticipant", new[] { "EventId" });
             DropIndex("dbo.AspNetUserRoles", new[] { "RoleId" });
@@ -144,7 +178,9 @@ namespace Booking.Models.Migrations
             DropIndex("dbo.AspNetUsers", "UserNameIndex");
             DropIndex("dbo.Event", new[] { "AudienceId" });
             DropIndex("dbo.Event", new[] { "AuthorId" });
+            DropIndex("dbo.Audience", new[] { "AudienceMapId" });
             DropTable("dbo.AspNetRoles");
+            DropTable("dbo.BookingRangeHistory");
             DropTable("dbo.EventParticipant");
             DropTable("dbo.AspNetUserRoles");
             DropTable("dbo.AspNetUserLogins");
@@ -152,6 +188,7 @@ namespace Booking.Models.Migrations
             DropTable("dbo.AspNetUsers");
             DropTable("dbo.Event");
             DropTable("dbo.Audience");
+            DropTable("dbo.AudienceMap");
         }
     }
 }

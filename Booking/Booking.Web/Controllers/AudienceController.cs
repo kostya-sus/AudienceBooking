@@ -27,9 +27,9 @@ namespace Booking.Web.Controllers
         }
 
         [HttpGet]
-        public ActionResult GetAudienceInfo(int audienceId)
+        public ActionResult GetAudienceInfo(Guid audienceId)
         {
-            var audience = _audienceService.GetAudience((AudiencesEnum) audienceId);
+            var audience = _audienceService.GetAudience(audienceId);
             var vm = new AudienceInfoViewModel
             {
                 BoardsCount = audience.BoardsCount,
@@ -52,7 +52,7 @@ namespace Booking.Web.Controllers
         }
 
         [HttpGet]
-        public ActionResult IsFree(AudiencesEnum audienceId, DateTime startEvent, DateTime endEvent, Guid? eventId)
+        public ActionResult IsFree(Guid audienceId, DateTime startEvent, DateTime endEvent, Guid? eventId)
         {
             TimeSpan span = endEvent.Subtract(startEvent);
             var duration = (int)span.TotalMinutes;

@@ -13,7 +13,7 @@ namespace Booking.Web.ViewModels.Home
 
         public int Duration { get; set; }
 
-        public AudiencesEnum AudienceId { get; set; }
+        public Guid AudienceId { get; set; }
 
         public bool IsPublic { get; set; }
 

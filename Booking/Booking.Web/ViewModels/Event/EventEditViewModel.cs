@@ -9,6 +9,6 @@ namespace Booking.Web.ViewModels.Event
     {
         public IDictionary<Guid, string> ParticipantsEmails { get; set; }
 
-        public IDictionary<AudiencesEnum, AudienceMapItemVm> Audiences { get; set; }
+        public IDictionary<Guid, AudienceMapItemVm> Audiences { get; set; }
     }
 }

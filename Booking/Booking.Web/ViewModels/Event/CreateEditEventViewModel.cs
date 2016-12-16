@@ -27,9 +27,9 @@ namespace Booking.Web.ViewModels.Event
 
         public bool IsPublic { get; set; }
 
-        public IDictionary<int, string> AvailableAudiences { get; set; }
+        public IDictionary<Guid, string> AvailableAudiences { get; set; }
 
-        public int ChosenAudienceId { get; set; }
+        public Guid AudienceId { get; set; }
 
         public int LowerHourBound { get; set; }
 

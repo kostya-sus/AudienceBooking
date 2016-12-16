@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Booking.Enums;
 using Booking.Web.ViewModels.Audience;
 
@@ -6,7 +7,7 @@ namespace Booking.Web.ViewModels
 {
     public class ScheduleTableViewModel
     {
-        public IDictionary<int, string> AvailableAudiences { get; set; }
+        public IDictionary<Guid, string> AvailableAudiences { get; set; }
 
         public int LowerHourBound { get; set; }
 

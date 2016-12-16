@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Booking.Models;
+using Booking.Models.EfModels;
 using Booking.Web.ViewModels.Event;
 
 namespace Booking.Web.AutoMapper.CustomResolvers
