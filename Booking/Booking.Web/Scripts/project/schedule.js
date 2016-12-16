@@ -174,6 +174,26 @@ function refillSchedule(eventsList) {
                             var url = $("#redirect-to-event-url").val() + "?eventId=" + id;
                             window.location.replace(url);
                         });
+
+                    var formId = "join-event-form-" + id;
+                    $("#" + formId + " .fa-plus")
+                        .click(function () {
+                            $("#" + formId + " .join-event-submit").click();
+                        });
+                    /*
+                    var form = $("#" + formId);
+                    var validator = form.data("validator");
+
+                    validator.settings.showErrors = function () {
+                        var disabled = this.numberOfInvalids() !== 0;
+                        if (disabled) {
+                            $("#" + formId + " .fa-plus").addClass("join-disabled");
+                        } else {
+                            $("#" + formId + " .fa-plus").removeClass("join-disabled");
+                        }
+
+                        this.defaultShowErrors();
+                    };*/
                 });
         });
 }

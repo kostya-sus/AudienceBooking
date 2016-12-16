@@ -51,8 +51,8 @@
     </header>
 
     <div id="page-content">
-        <input type="hidden" id="booking-hours-bounds-lower" value="@((int)BookingHoursBoundsEnum.Lower)"/>
-        <input type="hidden" id="booking-hours-bounds-upper" value="@((int)BookingHoursBoundsEnum.Upper)"/>
+        <input type="hidden" id="booking-hours-bounds-lower" value="@((int) BookingHoursBoundsEnum.Lower)"/>
+        <input type="hidden" id="booking-hours-bounds-upper" value="@((int) BookingHoursBoundsEnum.Upper)"/>
 
         @RenderBody()
     </div>
@@ -67,11 +67,13 @@
 </div>
 
 @Scripts.Render("~/bundles/jquery")
+@Scripts.Render("~/bundles/jqueryval")
 @Scripts.Render("~/bundles/bootstrap")
 @Scripts.Render("~/Scripts/project/datetime-updown.js")
 @Scripts.Render("~/Scripts/project/new-event.js")
 @Scripts.Render("~/Scripts/jquery.unobtrusive-ajax.min.js")
 @Scripts.Render("~/Scripts/project/display-event-popup.js")
+@Scripts.Render("//code.jquery.com/ui/1.12.1/jquery-ui.js")
 @RenderSection("scripts", false)
 
 <input type="hidden" id="get-new-event-popup-url" value="@Url.Action("GetNewEventPopup", "Event")"/>
