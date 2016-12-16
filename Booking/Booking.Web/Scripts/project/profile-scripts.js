@@ -1,10 +1,6 @@
-﻿$(document)
-    .ready(function() {
-        var form = $("form");
-        var validator = form.data("validator");
-
-        validator.settings.showErrors = function() {
-            $('input[type="submit"]').prop('disabled', (this.numberOfInvalids() !== 0));
-            this.defaultShowErrors();
-        };
+﻿    $(document).ready(function () {
+        var el = $('#delete')[0];
+        $("#change").click(function (e) {
+            el.style.display = (el.style.display == 'none') ? 'block' : 'none'
+        });
     });

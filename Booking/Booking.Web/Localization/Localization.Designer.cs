@@ -133,6 +133,15 @@ namespace Booking.Web.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Удалить.
+        /// </summary>
+        public static string Delete {
+            get {
+                return ResourceManager.GetString("Delete", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Адрес электронной почты.
         /// </summary>
         public static string EmailAddressPlaceholder {
@@ -286,7 +295,7 @@ namespace Booking.Web.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Количество активных событий .
+        ///   Looks up a localized string similar to Количество активных событий.
         /// </summary>
         public static string NumberOfActiveEvent {
             get {

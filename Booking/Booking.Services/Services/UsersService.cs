@@ -39,7 +39,7 @@ namespace Booking.Services.Services
         {
             return _userManager.IsInRole(user.Id, "Admin");
         }
-
+        
         public bool IsAdmin(IPrincipal userPrincipal)
         {
             return userPrincipal.IsInRole("Admin");
@@ -53,6 +53,11 @@ namespace Booking.Services.Services
         public int GetEvenByAuthor(string userId)
         {
             return BookingDbContext.Create().Events.Count(x => x.AuthorId == userId);
+        }
+
+        public string GetUserEmail(string userid)
+        {
+            return _userManager.FindById(userid).Email;
         }
     }
 }

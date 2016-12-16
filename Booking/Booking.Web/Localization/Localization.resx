@@ -256,7 +256,7 @@
     <value>Выйти</value>
   </data>
   <data name="NumberOfActiveEvent" xml:space="preserve">
-    <value>Количество активных событий </value>
+    <value>Количество активных событий</value>
   </data>
   <data name="PasswordChange" xml:space="preserve">
     <value>Изменить пароль</value>
@@ -275,5 +275,8 @@
   </data>
   <data name="Search" xml:space="preserve">
     <value>Поиск</value>
+  </data>
+  <data name="Delete" xml:space="preserve">
+    <value>Удалить</value>
   </data>
 </root>

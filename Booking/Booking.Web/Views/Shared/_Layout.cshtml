@@ -32,7 +32,7 @@
                         @if (User.Identity.IsAuthenticated)
                         {
                             <li class="@(ViewBag.ActiveLink == "Profile" ? "active" : "")">
-                                <a href="@Url.Action("Index", "Profile")">
+                                <a href="@Url.Action("Index", "Profile",new { userId = User.Identity.GetUserId()})">
                                     <i class="fa fa-user" aria-hidden="true"></i> @User.Identity.Name</a>
                             </li>
                         }

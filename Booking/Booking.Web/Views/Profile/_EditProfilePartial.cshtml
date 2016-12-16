@@ -1,19 +1,19 @@
 ﻿@using Booking.Web.Localization
 @using Microsoft.AspNet.Identity
 
-@model Booking.Web.ViewModels.Profile.ProfileViewModel
+@model Booking.Web.ViewModels.Profile.EditProfileViewModel
 
 
     
     @using (Html.BeginForm("Edit", "Profile", FormMethod.Post))
     {
         @Html.AntiForgeryToken()
-        @Html.ValidationMessageFor(m => m.UserInfo.Name, "", new {@class = "validation-error"})
-        @Html.TextBoxFor(m => m.UserInfo.Name, new {@class = "profile-input-edit",  @id = "name",})
+        @Html.ValidationMessageFor(m => m.Name, "", new {@class = "validation-error"})
+        @Html.TextBoxFor(m => m.Name, new {@class = "profile-input-edit",  @id = "name",})
 
-        @Html.ValidationMessageFor(m => m.UserInfo.Email, "", new {@class = "validation-error"})
-        @Html.TextBoxFor(m => m.UserInfo.Email, new {@class = "profile-input-edit",   @id = "email",})
-        if (@User.IsInRole("Admin"))
+        @Html.ValidationMessageFor(m => m.Email, "", new {@class = "validation-error"})
+        @Html.TextBoxFor(m => m.Email, new {@class = "profile-input-edit",   @id = "email",})
+        if (Model.IsEditorAdmin)
         {
             <div>
                 switch

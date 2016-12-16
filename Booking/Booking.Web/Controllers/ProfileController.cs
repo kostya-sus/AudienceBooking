@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Linq;
+using System.Runtime.Remoting.Contexts;
 using System.Web.Mvc;
+using Booking.Models;
 using Booking.Repositories;
 using Booking.Repositories.Interfaces;
 using Booking.Services.Interfaces;
@@ -9,22 +11,31 @@ using Booking.Web.ViewModels.Manage;
 using Booking.Web.ViewModels.Profile;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
+using System.Web;
+using System.Threading.Tasks;
 
 namespace Booking.Web.Controllers
 {
     public class ProfileController : Controller
     {
         
+      
+
         [HttpGet]
         public ActionResult Index(string userId)
         {
+            var user = new UsersService().GetUserById(userId);
             var vm = new ProfileViewModel()
             {
-                UserInfo = new UserInfoViewModel { },
-                ChangePasswordForm = new ChangePasswordViewModel { },
+                UserInfo = new UserInfoViewModel
+                {
+                    IsAdmin = new UsersService().IsAdmin(user),
+                    Name = user.UserName,
+                    Email = user.Email,
+                    ActiveEventsCount =new UsersService().GetEvenByAuthor(userId)
+                },
                 Id = userId,
-                IsAdmin = false,
-                IsOwner = false
+                IsOwner = (User.Identity.GetUserId()==userId)
                
             };
             return View(vm);
@@ -40,12 +51,14 @@ namespace Booking.Web.Controllers
         [Authorize]
         public ActionResult Edit(string userId)
         {
+            var user = new UsersService().GetUserById(userId);
             var vm = new EditProfileViewModel
             {
-                Email = null,
-                IsEditorAdmin = false,
-                IsProfileAdmin = false,
-                Name = null
+                
+                Email = new UsersService().GetUserEmail(userId),
+                IsEditorAdmin = (User.Identity.GetUserId() == userId)&&(new UsersService().IsAdmin(User)),
+                IsProfileAdmin = new UsersService().IsAdmin(user),
+                Name = user.UserName
             };
 
             return PartialView("_EditProfilePartial", vm);
@@ -55,14 +68,39 @@ namespace Booking.Web.Controllers
         [Authorize]
         public ActionResult Save(EditProfileViewModel editProfileViewModel)
         {
-            throw new NotImplementedException();
+            var vm = new EditProfileViewModel
+            {
+
+                Email = editProfileViewModel.Email,
+                IsEditorAdmin = editProfileViewModel.IsEditorAdmin,
+                IsProfileAdmin = editProfileViewModel.IsProfileAdmin,
+                Name = editProfileViewModel.Name
+            };
+
+            return PartialView("_EditProfilePartial", vm);
         }
 
-        [HttpDelete]
+       
         [Authorize(Roles = "Admin")]
-        public ActionResult Delete(string userId)
+        public async Task<ActionResult> Delete(string userId)
         {
             throw new NotImplementedException();
+            //  ApplicationUser user = await UserManager.FindByIdAsync(userId);
+            //  if (user != null)
+            //  {
+            //      IdentityResult result = await UserManager.DeleteAsync(user);
+            //      if (result.Succeeded)
+            //      {
+            //          return RedirectToAction("Index", "Home");
+            //      }
+            //  }
+            //  return RedirectToAction("Index", "Home");
+
+            //  var db = new BookingDbContext();
+            //  var user = db.Users.Find(userId);
+            //  db.Users.Remove(user);
+            //  db.SaveChanges();
+            //  return RedirectToAction("Index","Home");
         }
 
         

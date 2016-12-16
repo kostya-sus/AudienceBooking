@@ -8,6 +8,7 @@ using Booking.Web.ViewModels.Profile;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
+using Booking.Models;
 
 namespace Booking.Web.Controllers
 {
@@ -221,6 +222,20 @@ namespace Booking.Web.Controllers
             return View();
         }
 
+
+        public async Task<ActionResult> Delete(string userId)
+        {
+            ApplicationUser user = await UserManager.FindByIdAsync(userId);
+            if (user != null)
+            {
+                IdentityResult result = await UserManager.DeleteAsync(user);
+                if (result.Succeeded)
+                {
+                    return RedirectToAction("Index", "Home");
+                }
+            }
+            return RedirectToAction("Index", "Home");
+        }
         //
         // POST: /Manage/ChangePassword
         [HttpPost]
@@ -241,11 +256,11 @@ namespace Booking.Web.Controllers
                 }
                 ViewData["PasswordSuccess"] = Localization.Localization.PasswordSuccess;
                 
-                return RedirectToAction("Index","Profile");
+                return PartialView("_ResetPassword");
             }
             ViewData["PasswordFaild"] = Localization.Localization.Error;
 
-            return RedirectToAction("Index", "Profile");
+            return PartialView("_ResetPassword");
         }
 
         //

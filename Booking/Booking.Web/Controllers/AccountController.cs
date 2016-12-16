@@ -22,11 +22,7 @@ namespace Booking.Web.Controllers
         public AccountController()
         {
         }
-
-        public string GetUserEmail(string userid)
-        {
-            return UserManager.FindById(userid).Email;
-        }
+       
 
         public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager)
         {

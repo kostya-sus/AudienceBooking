@@ -11,16 +11,16 @@
     width: 100%;
 }
 .profile-input-edit {
-    border: 8px #656d7f;
+    border: 1px solid #f5f6fb;
     border-radius: 50px;
-    background: black;
+    background: white;
     margin: 0px auto;
     outline: none;
     height: 35px;
     color: #656d7f;
     font-size: 13px;
     padding: 15px;
-    width: 50%;
+    width: 60%;
 }
 
 
