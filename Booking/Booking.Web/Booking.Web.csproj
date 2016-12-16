@@ -178,14 +178,15 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\AutoMapperConfig.cs" />
-    <Compile Include="App_Start\AutoMapper\AutoMapperProfiles\EventProfile.cs" />
-    <Compile Include="App_Start\AutoMapper\CustomResolvers\EventAuthorNameResolver.cs" />
-    <Compile Include="App_Start\AutoMapper\CustomResolvers\EventDateResolver.cs" />
+    <Compile Include="Configuration\AutoMapper\AutoMapperProfiles\EventProfile.cs" />
+    <Compile Include="Configuration\AutoMapper\CustomResolvers\EventAuthorNameResolver.cs" />
+    <Compile Include="Configuration\AutoMapper\CustomResolvers\EventDateResolver.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\IdentityConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="Configuration\BookingRangeSettings.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AudienceController.cs" />
     <Compile Include="Controllers\ContactController.cs" />

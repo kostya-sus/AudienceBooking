@@ -23,6 +23,7 @@ namespace Booking.Web
             Exception exception = Server.GetLastError();
             Response.Clear();
             Response.Redirect(HandleExceptionAttribute.GetRedirectUrl(exception));
+            throw exception;
         }
     }
 }
