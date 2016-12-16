@@ -1,1 +1,29 @@
-﻿
+﻿@model Booking.Web.ViewModels.AdminPanel.AdminPanelViewModel
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>title</title>
+</head>
+<body>
+<div>
+    <ul>
+        @foreach (var pair in Model.AudienceMaps)
+        {
+            <li>
+                <a href="#">@pair.Value</a>
+
+                @using (Html.BeginForm("DeleteAudienceMap", "AdminPanel", new {id=pair.Key}, FormMethod.Post))
+                {
+                    @Html.AntiForgeryToken()
+                    <button type="submit">Delete</button>
+                }
+            </li>
+        }
+    </ul>
+
+    <a href="@Url.Action("CreateAudienceMapPage", "AdminPanel")">Create new audience map</a>
+</div>
+</body>
+</html>

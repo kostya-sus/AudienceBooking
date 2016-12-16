@@ -65,6 +65,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Interfaces\IAudienceMapService.cs" />
     <Compile Include="Interfaces\IAudienceService.cs" />
     <Compile Include="Interfaces\IEmailNotificationService.cs" />
     <Compile Include="Interfaces\IEventService.cs" />
@@ -76,6 +77,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Include="Services\AudienceMapService.cs" />
     <Compile Include="Services\AudienceService.cs" />
     <Compile Include="Services\EmailNotificationService.cs" />
     <Compile Include="Services\EventService.cs" />

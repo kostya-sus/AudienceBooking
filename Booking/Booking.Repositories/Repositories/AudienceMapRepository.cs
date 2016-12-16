@@ -30,9 +30,19 @@ namespace Booking.Repositories.Repositories
             return _context.AudienceMaps.Find(id);
         }
 
+        public void CreateAudienceMap(AudienceMap audienceMap)
+        {
+            _context.AudienceMaps.Add(audienceMap);
+        }
+
         public void UpdateAudience(AudienceMap audienceMap)
         {
             _context.Entry(audienceMap).State = EntityState.Modified;
+        }
+
+        public void DeleteAudienceMap(AudienceMap audienceMap)
+        {
+            _context.AudienceMaps.Remove(audienceMap);
         }
 
         public void Save()

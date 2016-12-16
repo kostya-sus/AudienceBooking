@@ -13,7 +13,11 @@ namespace Booking.Repositories.Interfaces
 
         AudienceMap GetAudienceById(Guid id);
 
+        void CreateAudienceMap(AudienceMap audienceMap);
+
         void UpdateAudience(AudienceMap audienceMap);
+
+        void DeleteAudienceMap(AudienceMap audienceMap);
 
         void Save();
     }
