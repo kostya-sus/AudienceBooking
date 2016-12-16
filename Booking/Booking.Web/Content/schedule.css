@@ -206,17 +206,16 @@
     padding: 3px 5px;
 }
 
-.schedule-event-item:hover {
-    cursor: pointer;
-}
+.schedule-event-item:hover { cursor: pointer; }
 
 .schedule-event-item-private {
     background-color: #F4F6FB;
     background-image: url(Images/private-event-bg.png);
     background-repeat: no-repeat;
     background-position: center;
-    cursor: default !important;
 }
+
+.not-clickable-schedule-item { cursor: default !important; }
 
 .schedule-event-item .event-item-title {
     position: absolute;

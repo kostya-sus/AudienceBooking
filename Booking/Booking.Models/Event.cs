@@ -26,7 +26,7 @@ namespace Booking.Models
         [Required]
         public int Duration { get; set; }
 
-        [Required]
+        [Required(AllowEmptyStrings = true)]
         [StringLength(50)]
         public string Title { get; set; }
         

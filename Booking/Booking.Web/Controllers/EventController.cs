@@ -194,7 +194,7 @@ namespace Booking.Web.Controllers
 
             Event newEvent = new Event();
             {
-                newEvent.Title = vm.Title;
+                newEvent.Title = vm.Title ?? " ";
                 newEvent.EventDateTime = vm.StartDateTime;
                 newEvent.AdditionalInfo = vm.AdditionalInfo;
                 newEvent.AudienceId = (AudiencesEnum) vm.ChosenAudienceId;

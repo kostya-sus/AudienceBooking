@@ -111,10 +111,12 @@ function refillSchedule(eventsList) {
         var $time = $("<span></span>");
         $time.addClass("event-item-time");
 
+        $scheduleItem.attr("data-authorid", event.AuthorId);
+
+        $scheduleItem.attr("data-eventid", event.Id);
+
         if (!event.IsPublic) {
             $scheduleItem.addClass("schedule-event-item-private");
-        } else {
-            $scheduleItem.attr("data-eventid", event.Id);
         }
 
         if (event.Duration > 40) {
@@ -142,63 +144,71 @@ function refillSchedule(eventsList) {
 
     $(".schedule-event-item")
         .click(function() {
-            if ($(this).hasClass("schedule-event-item-private")) {
-                return;
-            }
-
             var $item = $(this);
-            var id = $item.attr("data-eventid");
-            var url = $("#display-event-popup-url").val() + "?eventId=" + id;
+            var isAdmin = $("#is-user-admin").val();
+            var loggedInUserId = $("#user-id").val();
+            var authorId = $item.attr("data-authorid");
+            var isPrivate = $item.hasClass("schedule-event-item-private");
+            if (isPrivate && !isAdmin && loggedInUserId !== authorId) {
+                $item.addClass("not-clickable-schedule-item");
+            } else {
+                var id = $item.attr("data-eventid");
+                var url = $("#display-event-popup-url").val() + "?eventId=" + id;
 
-            var divId = "display-event-popup-container-" + id;
+                var divId = "display-event-popup-container-" + id;
 
-            if ($("#" + divId).length) {
-                return;
+                if ($("#" + divId).length) {
+                    return;
+                }
+
+                var $div = $("<div></div>");
+                $div.attr("id", divId);
+                $div.addClass("event-display-popup-container");
+                if (isPrivate) {
+                    $div.addClass("popup-private");
+                }
+
+                $div.css("position", "absolute");
+                var position = $item.offset();
+                $div.css("left", position.left);
+                $div.css("top", position.top - 35);
+
+                $("#page-content").append($div);
+                $div.draggable();
+
+                $div.load(url,
+                    function() {
+                        $("#close-popup-" + id)
+                            .click(function() {
+                                $("#" + divId).remove();
+                            });
+                        $("#btn-event-page-" + id)
+                            .click(function() {
+                                var url = $("#redirect-to-event-url").val() + "?eventId=" + id;
+                                window.location.replace(url);
+                            });
+
+                        var formId = "join-event-form-" + id;
+                        $("#" + formId + " .fa-plus")
+                            .click(function() {
+                                $("#" + formId + " .join-event-submit").click();
+                            });
+                        /*
+                        var form = $("#" + formId);
+                        var validator = form.data("validator");
+            
+                        validator.settings.showErrors = function () {
+                            var disabled = this.numberOfInvalids() !== 0;
+                            if (disabled) {
+                                $("#" + formId + " .fa-plus").addClass("join-disabled");
+                            } else {
+                                $("#" + formId + " .fa-plus").removeClass("join-disabled");
+                            }
+            
+                            this.defaultShowErrors();
+                        };*/
+                    });
             }
-
-            var $div = $("<div></div>");
-            $div.attr("id", divId);
-            $div.addClass("event-display-popup-container");
-            $div.css("position", "absolute");
-            var position = $item.offset();
-            $div.css("left", position.left);
-            $div.css("top", position.top - 35);
-
-            $("#page-content").append($div);
-            $div.draggable();
-
-            $div.load(url,
-                function() {
-                    $("#close-popup-" + id)
-                        .click(function() {
-                            $("#" + divId).remove();
-                        });
-                    $("#btn-event-page-" + id)
-                        .click(function() {
-                            var url = $("#redirect-to-event-url").val() + "?eventId=" + id;
-                            window.location.replace(url);
-                        });
-
-                    var formId = "join-event-form-" + id;
-                    $("#" + formId + " .fa-plus")
-                        .click(function() {
-                            $("#" + formId + " .join-event-submit").click();
-                        });
-                    /*
-                    var form = $("#" + formId);
-                    var validator = form.data("validator");
-
-                    validator.settings.showErrors = function () {
-                        var disabled = this.numberOfInvalids() !== 0;
-                        if (disabled) {
-                            $("#" + formId + " .fa-plus").addClass("join-disabled");
-                        } else {
-                            $("#" + formId + " .fa-plus").removeClass("join-disabled");
-                        }
-
-                        this.defaultShowErrors();
-                    };*/
-                });
         });
 }
 

@@ -16,5 +16,7 @@ namespace Booking.Web.ViewModels.Home
         public AudiencesEnum AudienceId { get; set; }
 
         public bool IsPublic { get; set; }
+
+        public string AuthorId { get; set; }
     }
 }

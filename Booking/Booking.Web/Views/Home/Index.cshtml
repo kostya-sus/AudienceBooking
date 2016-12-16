@@ -1,4 +1,5 @@
 ﻿@using Booking.Web.Localization
+@using Microsoft.AspNet.Identity
 @model Booking.Web.ViewModels.Home.HomeViewModel
 
 @{
@@ -32,6 +33,9 @@
 <input type="hidden" id="get-audience-info-url" value="@Url.Action("GetAudienceInfo", "Audience")"/>
 <input type="hidden" id="redirect-to-event-url" value="@Url.Action("Index", "Event")"/>
 <input type="hidden" id="display-event-popup-url" value="@Url.Action("DisplayEventPopup", "Event")"/>
+
+<input type="hidden" id="is-user-admin" value="@Model.IsAdmin"/>
+<input type="hidden" id="user-id" value="@User.Identity.GetUserId()"/>
 
 @Html.Partial("_RoomMapPartial", Model.Audiences)
 

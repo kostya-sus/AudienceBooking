@@ -70,7 +70,8 @@ namespace Booking.Web.Controllers
                     Duration = x.Duration,
                     EventDateTime = x.EventDateTime,
                     IsPublic = x.IsPublic,
-                    Title = x.Title
+                    Title = x.Title,
+                    AuthorId = x.AuthorId
                 })
             };
 

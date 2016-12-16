@@ -69,10 +69,10 @@
         $endMinuteView.text(minutes);
     }
 
-    function isDateValid(startDate, endDate) {
-        var startHours = startDate.getHours();
-        var endHours = endDate.getHours();
-        if (endDate.getMinutes()) {
+    function isDateValid(eventStart, eventEnd) {
+        var startHours = eventStart.getHours();
+        var endHours = eventEnd.getHours();
+        if (eventEnd.getMinutes()) {
             endHours ++;
         }
         if (startHours < lowerHoursBound || startHours > upperHoursBound) {
@@ -82,10 +82,10 @@
             return false;
         }
 
-        var now = new Date();
-        var diff = endDate - startDate;
+        var dateNow = new Date();
+        var diff = eventEnd - eventStart;
         var minutes = Math.floor(diff / 60000);
-        return now < startDate && minutes >= 20;
+        return dateNow < eventStart && minutes >= 20;
     }
 
     function backupDateAndTryToChange(callback) {
