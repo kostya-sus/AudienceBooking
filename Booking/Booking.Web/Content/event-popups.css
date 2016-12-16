@@ -3,35 +3,35 @@
 .event-display-popup {
     border: #f65857 solid 1px;
     cursor: default;
-    min-width: 280px;
+    width: 320px;
     background: #FFF;
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.6);
 }
 
-.event-display-popup .head {
+.event-display-popup .display-popup-header {
     background: #f65857;
     height: 35px;
+}
+
+.event-display-popup .event-date {
+    display: inline-block;
+    padding: 2px 10px;
+    font-size: 11px;
+    color: white;
+    opacity: 0.9;
 }
 
 .event-display-popup .close-btn {
     position: absolute;
     top: 10px;
     right: 10px;
+    background: #fcc2c1;
+    border: 0;
+    height: 4px;
+    width: 15px;
 }
-
-.event-display-popup .row-elements {
-    display: flex;
-    flex-direction: row;
-    font-size: 10px;
-    height: 17px;
-    padding-top: 3px;
-    padding-left: 10px;
-    padding-bottom: 3px;
-}
-
 
 .event-display-popup .fa-user {
-    align-self: flex-start;
     font-size: 25px;
     margin-left: 5px;
 }
@@ -68,8 +68,6 @@
     cursor: pointer;
 }
 
-.audience-name-show { padding-left: 10px; }
-
 .add-participant-textbox {
     padding: 10px;
     width: 80%;
@@ -79,42 +77,31 @@
     border: 1px solid #ebeef7;
 }
 
-.event-display-popup .event-date { color: white; }
-
-.event-display-popup .close-btn {
-    background: #fcc2c1;
+.event-display-popup .btn-edit-event,
+.event-display-popup .btn-cancel-event {
+    border-radius: 20px;
     border: 0;
-    height: 4px;
-    width: 15px;
+    background: #e65151;
+    color: white;
+    font-size: 11px;
+    height: 16px;
+    padding: 1px 6px;
+    position: absolute;
+    top: 8px;
 }
 
 .event-display-popup .btn-edit-event {
-    margin-left: auto;
-    margin-bottom: auto;
-    margin-top: 5px;
-    margin-right: 10px;
-    align-self: flex-end;
-    border-radius: 20px;
-    border: 1px solid #e65151;
     background: #e65151;
-    color: #FFF;
+    right: 120px;
 }
 
 .event-display-popup .btn-cancel-event {
-    margin-bottom: auto;
-    margin-left: 0;
-    margin-top: 5px;
-    margin-right: 35px;
-    align-self: flex-end;
-    border: 1px solid #a05556;
-    border-radius: 20px;
     background: #a05556;
-    color: #FFF;
-    float: right;
+    right: 45px;
 }
 
 .event-display-popup .icons-container {
-    padding: 5px 80px 0;
+    padding: 5px 47px 0;
     font-size: 26px;
     color: #D7D9DE;
 }
@@ -135,6 +122,17 @@
     white-space: nowrap;
 }
 
+.event-display-popup .join-event-form .fa-plus {
+    font-size: 18px;
+    vertical-align: middle;
+    color: #9FA6B6;
+}
+
+.event-display-popup .join-event-form .fa-plus:hover {
+    color: #828A9D;
+    cursor: pointer;
+}
+
 .event-display-popup .join-event-form-email {
     display: inline-block;
     border: 2px solid #F4F6FB;
@@ -144,8 +142,9 @@
     height: 35px;
     font-size: 13px;
     padding: 15px;
-    width: 280px;
-    margin: 10px;
+    width: 260px;
+    margin: 0;
+    text-align: center;
 }
 
 .event-display-popup .join-event-submit {
@@ -155,6 +154,4 @@
 
 .event-display-popup .join-event-container { display: inline-block; }
 
-.event-display-popup .add-info {
-    margin-left: 15px;
-}
+.event-display-popup .display-popup-body { padding: 0 10px; }
