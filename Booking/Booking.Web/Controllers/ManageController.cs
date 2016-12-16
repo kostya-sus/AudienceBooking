@@ -239,8 +239,9 @@ namespace Booking.Web.Controllers
 
 
         [HttpPost]
-        public async Task<ActionResult> EditUser(EditProfileViewModel model)
+        public async Task<ActionResult> EditUser(UserInfoViewModel model)
         {
+            
             ApplicationUser user = await UserManager.FindByIdAsync(model.Id);
             if (user != null)
             {
@@ -261,33 +262,33 @@ namespace Booking.Web.Controllers
                 ModelState.AddModelError("", "Пользователь не найден");
             }
 
-            return PartialView("_UserInfoPartial");
+            return PartialView("_UserInfoPartial",model);
         }
         //
         // POST: /Manage/ChangePassword
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> ChangePassword(ProfileViewModel model)
+        public ActionResult ChangePassword(ProfileViewModel model)
         {
            if (!ModelState.IsValid)
             {
                 return View(model);
             }
-            var result = await UserManager.ChangePasswordAsync(User.Identity.GetUserId(), model.ChangePasswordForm.OldPassword, model.ChangePasswordForm.NewPassword);
+            var result =  UserManager.ChangePassword(User.Identity.GetUserId(), model.ChangePasswordForm.OldPassword, model.ChangePasswordForm.NewPassword);
             if (result.Succeeded)
             {
-                var user = await UserManager.FindByIdAsync(User.Identity.GetUserId());
+                var user =  UserManager.FindById(User.Identity.GetUserId());
                 if (user != null)
                 {
-                    await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
+                    SignInManager.SignIn(user, isPersistent: false, rememberBrowser: false);
                 }
                 ViewData["PasswordSuccess"] = Localization.Localization.PasswordSuccess;
                 
-                return PartialView("_ResetPasswordPartial");
+                return PartialView("_ResetPasswordPartial",model);
             }
             ViewData["PasswordFaild"] = Localization.Localization.Error;
 
-            return PartialView("_ResetPasswordPartial");
+            return PartialView("_ResetPasswordPartial",model);
         }
 
         //

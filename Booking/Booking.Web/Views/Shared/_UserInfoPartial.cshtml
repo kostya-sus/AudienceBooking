@@ -1,8 +1,7 @@
 ﻿@using Booking.Web.Localization
 @using Booking.Web.ViewModels.Profile
 @using Microsoft.AspNet.Identity
-@model Booking.Web.ViewModels.Profile.ProfileViewModel
-
+@model Booking.Web.ViewModels.Profile.UserInfoViewModel
 
 
     @using (Ajax.BeginForm("Edit", "Profile", new {userId = Model.Id}, new AjaxOptions
@@ -14,16 +13,16 @@
     {
         <H3 style="padding: 20px 0px">
 
-            @Model.UserInfo.Name @if (Model.UserInfo.IsAdmin)
+            @Model.Name @if (Model.IsProfileAdmin)
                                  {
                                      <sup style="background-color: #F95752; font-size: small; color: white; border-radius: 10px; margin: 2px; padding: 2px 5px">admin</sup>
                                  }
         </H3>
         <p>
-            <b>Email:</b> @Model.UserInfo.Email
+            <b>Email:</b> @Model.Email
         </p>
         <p>
-            <b>@Localization.NumberOfActiveEvent:</b> @Model.UserInfo.ActiveEventsCount
+            <b>@Localization.NumberOfActiveEvent:</b> @Model.ActiveEventsCount
         </p>
 
 

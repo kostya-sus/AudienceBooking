@@ -10,13 +10,14 @@ using Booking.Repositories.Repositories;
 
 namespace Booking.Repositories
 {
-    public class UnitOfWork:IUnitOfWork
+    public class UnitOfWork : IUnitOfWork
     {
         private readonly BookingDbContext _context = new BookingDbContext();
 
         private AudienceRepository _audienceRepository;
         private EventRepository _eventRepository;
         private EventParticipantRepository _eventParticipantRepository;
+
         public IAudienceRepository AudienceRepository
         {
             get { return _audienceRepository ?? (_audienceRepository = new AudienceRepository(_context)); }
@@ -29,7 +30,11 @@ namespace Booking.Repositories
 
         public IEventParticipantRepository EventParticipantRepository
         {
-            get { return _eventParticipantRepository ?? (_eventParticipantRepository = new EventParticipantRepository(_context)); }
+            get
+            {
+                return _eventParticipantRepository ??
+                       (_eventParticipantRepository = new EventParticipantRepository(_context));
+            }
         }
 
         public void Save()

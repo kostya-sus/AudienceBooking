@@ -20,6 +20,8 @@ namespace Booking.Web.ViewModels.Profile
 
         public int ActiveEventsCount { get; set; }
 
-        public bool IsAdmin { get; set; }
+        public bool IsProfileAdmin { get; set; }
+
+        public bool IsEditorAdmin { get; set; }
     }
 }

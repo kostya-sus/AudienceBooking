@@ -29,7 +29,7 @@ namespace Booking.Web.Controllers
             {
                 UserInfo = new UserInfoViewModel
                 {
-                    IsAdmin = new UsersService().IsAdmin(user),
+                    IsProfileAdmin = new UsersService().IsAdmin(user),
                     Name = user.UserName,
                     Email = user.Email,
                     ActiveEventsCount = new UsersService().GetEvenByAuthor(userId)
