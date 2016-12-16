@@ -5,6 +5,12 @@ using System.Net.Mail;
 using Booking.Models;
 using Booking.Repositories;
 using Booking.Repositories.Interfaces;
+using System.IO;
+using System.Net;
+using System.Net.Mail;
+using System.Text;
+using Booking.Models;
+using Booking.Services.EmailModels;
 using Booking.Services.Interfaces;
 using RazorEngine.Templating;
 
@@ -12,78 +18,253 @@ namespace Booking.Services.Services
 {
     public class EmailNotificationService : IEmailNotificationService
     {
-        private readonly IUnitOfWork _unitOfWork;
-        private readonly IEventService _eventService;
-        private readonly TemplateService _templateService;
-        private static readonly string TemplateFolderPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "EmailTemplates");
+        private readonly MailAddress _emailFromAddress = new MailAddress("audiencebookingtest@gmail.com", "Audience");
+        private readonly string _templateFolderPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "EmailTemplates");
 
-        public EmailNotificationService()
+        private void SendMail(MailMessage email)
         {
-            _unitOfWork = new UnitOfWork();
-            _eventService = new EventService();
-            _templateService = new TemplateService();
+            SmtpClient smtp = new SmtpClient("smtp.gmail.com", 587)
+            {
+                Host = "smtp.gmail.com",
+                Port = 587,
+                Credentials = new NetworkCredential("audiencebookingtest@gmail.com", "Qwer123!"),
+                EnableSsl = true
+            };
+            try
+            {
+                smtp.Send(email);
+            }
+            catch (Exception ex)
+            {
+                var smtpEx = ex as SmtpException;
+                if (smtpEx != null)
+                {
+                    var error = smtpEx.StatusCode;
+                }
+
+            }
+        }
+
+        private MailMessage GenerateEmail(string emailHtmlBody, string subject)
+        {
+            return new MailMessage
+            {
+                From = _emailFromAddress,
+                Body = emailHtmlBody,
+                IsBodyHtml = true,
+                Subject = subject
+            };
         }
         public void AccountRegisteredNotification(ApplicationUser user)
         {
+            var emailTemplatePath = Path.Combine(_templateFolderPath.Replace("Web", "Services"), "AccountRegisteredNotificationTemplate.cshtml");
+            
+            var modelEmail = new Booking.Services.EmailModels.AccountRegisteredRemovedNotificationModel
+            {
+                Name = user.UserName,
+                Email = user.Email
+            };
+
+            var templateService = new TemplateService();
+            var emailHtmlBody = templateService.Parse(File.ReadAllText(emailTemplatePath), modelEmail, null, null);
+
+            var subject = "Registered to softheme-booking.azurewebsites.net";
+            var email = GenerateEmail(emailHtmlBody, subject);
+
+            email.To.Add(new MailAddress(modelEmail.Email, modelEmail.Name));    
+            
+            SendMail(email);
         }
+
 
         public void AccountRemovedNotification(ApplicationUser user)
         {
+            var emailTemplatePath = Path.Combine(_templateFolderPath.Replace("Web", "Services"), "AccountRemovedNotificationTemplate.cshtml");
+
+            var modelEmail = new Booking.Services.EmailModels.AccountRegisteredRemovedNotificationModel
+            {
+                Name = user.UserName,
+                Email = user.Email
+            };
+
+            var templateService = new TemplateService();
+            var emailHtmlBody = templateService.Parse(File.ReadAllText(emailTemplatePath), modelEmail, null, null);
+
+            var subject = "Account remove from softheme-booking.azurewebsites.net";
+            var email = GenerateEmail(emailHtmlBody, subject);
+
+            email.To.Add(new MailAddress(modelEmail.Email, modelEmail.Name));
+
+            SendMail(email);
         }
 
         public void EventCancelledNotification(Event eventEntity)
         {
             var participants = eventEntity.EventParticipants;
-            var cancelEmailTemplatePath = Path.Combine(TemplateFolderPath, "CancelEventNotification.cshtml");
-            var emailModel = new
-                {
-                    Title = eventEntity.Title,
-                    DateOfEvent = eventEntity.EventDateTime,
-                    AuthorOfEvent = eventEntity.AuthorName
-                };
+
+            var emailTemplatePath = Path.Combine(_templateFolderPath.Replace("Web", "Services"), "EventCancelledNotificationTemplate.cshtml");
+            var templateService = new TemplateService();
+            
+            var subject = "Event cancelled notification";
+            var modelEmail = new Booking.Services.EmailModels.EventCancellModel
+            {
+                EventTitle = eventEntity.Title,
+                EventDateTime = eventEntity.EventDateTime.ToLongDateString()
+            };
 
             foreach (var participant in participants)
             {
-                var emailAddress = participant.ParticipantEmail;
-                var emailHtmlBody = _templateService.Parse(File.ReadAllText(cancelEmailTemplatePath), emailModel, null, null);
+                modelEmail.Email = participant.ParticipantEmail;
+                var emailHtmlBody = templateService.Parse(File.ReadAllText(emailTemplatePath), modelEmail, null, null);
+                var email = GenerateEmail(emailHtmlBody, subject);
 
-                // Send the email
-                var email = new MailMessage()
-                {
-                    Body = emailHtmlBody,
-                    IsBodyHtml = true,
-                    Subject = "Cancel Event"
-                };
+                email.To.Add(new MailAddress(modelEmail.Email));
 
-                email.To.Add(new MailAddress(emailAddress));
-                
-                var smtpClient = new SmtpClient();
-                smtpClient.Send(email);
-            }
+                SendMail(email);
+            }      
+
         }
 
         public void EventCancelledAuthorNotification(Event eventEntity)
         {
+            var emailTemplatePath = Path.Combine(_templateFolderPath.Replace("Web", "Services"), "EventCancelledAuthorNotificationTemplate.cshtml");
+            var user = eventEntity.Author;
+            var modelEmail = new Booking.Services.EmailModels.EventCancelledAuthorModel
+            {
+                Name = user.UserName,
+                Email = user.Email,
+                EventDateTime = eventEntity.EventDateTime.ToLongDateString(),
+                EventTitle = eventEntity.Title
+            };
+
+            var templateService = new TemplateService();
+            var emailHtmlBody = templateService.Parse(File.ReadAllText(emailTemplatePath), modelEmail, null, null);
+
+            var subject = "Cancel event notification";
+            var email = GenerateEmail(emailHtmlBody, subject);
+
+            email.To.Add(new MailAddress(modelEmail.Email, modelEmail.Name));
+
+            SendMail(email);
         }
 
         public void RemovedFromParticipantsListNotification(string email, Event eventEntity)
         {
+            var emailTemplatePath = Path.Combine(_templateFolderPath.Replace("Web", "Services"), "RemovedFromParticipantsListNotificationTemplate.cshtml");
+            var modelEmail = new Booking.Services.EmailModels.RemovedJoinedFromParticipantsListModel
+            {
+                Email = email,
+                EventTitle = eventEntity.Title,
+                EventDate = eventEntity.EventDateTime.ToLongDateString()
+            };
+
+            var templateService = new TemplateService();
+            var emailHtmlBody = templateService.Parse(File.ReadAllText(emailTemplatePath), modelEmail, null, null);
+
+            var subject = "Remove from participants list notification";
+            var mailMessage = GenerateEmail(emailHtmlBody, subject);
+
+            mailMessage.To.Add(new MailAddress(modelEmail.Email));
+
+            SendMail(mailMessage);
         }
 
         public void EventJoinedNotification(string email, Event eventEntity)
         {
+            var emailTemplatePath = Path.Combine(_templateFolderPath.Replace("Web", "Services"), "JoinedToParticipantsListNotificationTemplate.cshtml");
+            var modelEmail = new Booking.Services.EmailModels.RemovedJoinedFromParticipantsListModel
+            {
+                Email = email,
+                EventTitle = eventEntity.Title,
+                EventDate = eventEntity.EventDateTime.ToLongDateString()
+            };
+
+            var templateService = new TemplateService();
+            var emailHtmlBody = templateService.Parse(File.ReadAllText(emailTemplatePath), modelEmail, null, null);
+
+            var subject = "Joined to participants list notification";
+            var mailMessage = GenerateEmail(emailHtmlBody, subject);
+
+            mailMessage.To.Add(new MailAddress(modelEmail.Email));
+
+            SendMail(mailMessage);
         }
 
         public void EventEditedNotification(Event newEvent, Event oldEvent)
         {
+            var participants = oldEvent.EventParticipants;
+            var emailTemplatePath = Path.Combine(_templateFolderPath.Replace("Web", "Services"), "EventEditedNotificationTemplate.cshtml");
+            var templateService = new TemplateService();
+
+            var subject = "Event edit notification";
+            var modelEmail = new Booking.Services.EmailModels.EventEditedModel
+            {
+                Title = oldEvent.Title,
+                OldDate = oldEvent.EventDateTime.ToLongDateString(),
+                NewDate = newEvent.EventDateTime.ToLongDateString()
+            };
+
+            foreach (var participant in participants)
+            {
+                modelEmail.Email = participant.ParticipantEmail;
+                var emailHtmlBody = templateService.Parse(File.ReadAllText(emailTemplatePath), modelEmail, null, null);
+                var email = GenerateEmail(emailHtmlBody, subject);
+
+                email.To.Add(new MailAddress(modelEmail.Email));
+
+                SendMail(email);
+            }
         }
 
         public void EventEditedAuthorNotification(Event newEvent, Event oldEvent)
         {
+            var emailTemplatePath = Path.Combine(_templateFolderPath.Replace("Web", "Services"), "EventEditedAuthorNotificationTemplate.cshtml");
+            var user = oldEvent.Author;
+            var modelEmail = new Booking.Services.EmailModels.EventEditedAuthorNotificationModel
+            {
+                Name = user.UserName,
+                Email = user.Email,
+                OldDate = oldEvent.EventDateTime.ToLongDateString(),
+                NewDate = newEvent.Title
+            };
+
+            var templateService = new TemplateService();
+            var emailHtmlBody = templateService.Parse(File.ReadAllText(emailTemplatePath), modelEmail, null, null);
+
+            var subject = "Edit event notification";
+            var email = GenerateEmail(emailHtmlBody, subject);
+
+            email.To.Add(new MailAddress(modelEmail.Email, modelEmail.Name));
+
+            SendMail(email);
         }
 
         public void SendFeedbackToAdmins(string name, string surname, string email, string message)
         {
+            var service = new UsersService();
+            var adminsEmails = service.GetAdminsEmails();
+
+            var emailTemplatePath = Path.Combine(_templateFolderPath.Replace("Web", "Services"), "SendFeedbackToAdminsNotificationTemplate.cshtml");
+            var templateService = new TemplateService();
+
+            var subject = "Feedback from user";
+            var modelEmail = new Booking.Services.EmailModels.SendFeedbackToAdminsModel
+            {
+                Message = message,
+                Name = name + " " + surname,
+                UserEmail = email
+            };
+
+            foreach (var adminEmail in adminsEmails)
+            {
+                modelEmail.Email = adminEmail;
+                var emailHtmlBody = templateService.Parse(File.ReadAllText(emailTemplatePath), modelEmail, null, null);
+                var mail = GenerateEmail(emailHtmlBody, subject);
+
+                mail.To.Add(new MailAddress(modelEmail.Email));
+
+                SendMail(mail);
+            }
         }
     }
 }

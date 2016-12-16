@@ -28,7 +28,7 @@ namespace Booking.Web.Controllers
             _audienceService = new AudienceService(uof);
             var usersService = new UsersService();
             var emailNotificationService = new EmailNotificationService();
-            _eventService = new EventService(uof, usersService, emailNotificationService);
+            _eventService = new EventService();
         }
 
         [HttpGet]
