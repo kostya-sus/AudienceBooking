@@ -142,14 +142,70 @@ namespace Booking.Services.Services
 
         public void RemovedFromParticipantsListNotification(string email, Event eventEntity)
         {
+            var emailTemplatePath = Path.Combine(_templateFolderPath.Replace("Web", "Services"), "RemovedFromParticipantsListNotificationTemplate.cshtml");
+            var modelEmail = new Booking.Services.EmailModels.RemovedJoinedFromParticipantsListModel
+            {
+                Email = email,
+                EventTitle = eventEntity.Title,
+                EventDate = eventEntity.EventDateTime.ToLongDateString()
+            };
+
+            var templateService = new TemplateService();
+            var emailHtmlBody = templateService.Parse(File.ReadAllText(emailTemplatePath), modelEmail, null, null);
+
+            var subject = "Remove from participants list notification";
+            var mailMessage = GenerateEmail(emailHtmlBody, subject);
+
+            mailMessage.To.Add(new MailAddress(modelEmail.Email));
+
+            SendMail(mailMessage);
         }
 
         public void EventJoinedNotification(string email, Event eventEntity)
         {
+            var emailTemplatePath = Path.Combine(_templateFolderPath.Replace("Web", "Services"), "JoinedToParticipantsListNotificationTemplate.cshtml");
+            var modelEmail = new Booking.Services.EmailModels.RemovedJoinedFromParticipantsListModel
+            {
+                Email = email,
+                EventTitle = eventEntity.Title,
+                EventDate = eventEntity.EventDateTime.ToLongDateString()
+            };
+
+            var templateService = new TemplateService();
+            var emailHtmlBody = templateService.Parse(File.ReadAllText(emailTemplatePath), modelEmail, null, null);
+
+            var subject = "Joined to participants list notification";
+            var mailMessage = GenerateEmail(emailHtmlBody, subject);
+
+            mailMessage.To.Add(new MailAddress(modelEmail.Email));
+
+            SendMail(mailMessage);
         }
 
         public void EventEditedNotification(Event newEvent, Event oldEvent)
         {
+            var participants = oldEvent.EventParticipants;
+            var emailTemplatePath = Path.Combine(_templateFolderPath.Replace("Web", "Services"), "EventEditedNotificationTemplate.cshtml");
+            var templateService = new TemplateService();
+
+            var subject = "Event edit notification";
+            var modelEmail = new Booking.Services.EmailModels.EventEditedModel
+            {
+                Title = oldEvent.Title,
+                OldDate = oldEvent.EventDateTime.ToLongDateString(),
+                NewDate = newEvent.EventDateTime.ToLongDateString()
+            };
+
+            foreach (var participant in participants)
+            {
+                modelEmail.Email = participant.ParticipantEmail;
+                var emailHtmlBody = templateService.Parse(File.ReadAllText(emailTemplatePath), modelEmail, null, null);
+                var email = GenerateEmail(emailHtmlBody, subject);
+
+                email.To.Add(new MailAddress(modelEmail.Email));
+
+                SendMail(email);
+            }
         }
 
         public void EventEditedAuthorNotification(Event newEvent, Event oldEvent)

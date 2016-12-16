@@ -1,18 +1,18 @@
-﻿@model Booking.Services.EmailModels.EventCancellModel
+﻿@model Booking.Services.EmailModels.RemovedJoinedFromParticipantsListModel
 
 <!DOCTYPE html>
 
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="utf-8" />
-    <title>EventCancelled</title>
+    <title>Removed from participants list</title>
 </head>
 <body>
     <p>
         Hi,
     </p>
 <p>
-    @Model.EventDateTime @Model.EventTitle event is cancelled,
+    You was removed from participant list of event(@Model.EventDateTime @Model.EventTitle)
 </p>
 <p>
     see more information in<a href="http://softheme-booking.azurewebsites.net/">our awesome site</a>
