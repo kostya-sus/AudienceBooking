@@ -36,7 +36,7 @@ namespace Booking.Web.Controllers
         public ActionResult Index()
         {
             var audienceMap = _audienceMapService.GetAudienceMap(AudienceMapSelector.AudienceMapId);
-            
+
             var availableAudiences = audienceMap.Audiences.Where(a => a.IsBookingAvailable)
                 .ToDictionary(a => a.Id, a => a.Name);
 
@@ -59,19 +59,8 @@ namespace Booking.Web.Controllers
         [HttpGet]
         public ActionResult GetDaySchedule(DateTime date)
         {
-            var viewModel = new DayScheduleViewModel
-            {
-                Items = _scheduleService.GetEventsByDay(date).Select(x => new DaySheduleItemViewModel
-                {
-                    Id = x.Id,
-                    AudienceId = x.AudienceId,
-                    Duration = x.Duration,
-                    EventDateTime = x.StartTime,
-                    IsPublic = x.IsPublic,
-                    Title = x.Title,
-                    AuthorId = x.AuthorId
-                })
-            };
+            var events = _scheduleService.GetEventsByDay(date, AudienceMapSelector.AudienceMapId);
+            var viewModel = Mapper.Map<DayScheduleViewModel>(events);
 
             return Json(viewModel, JsonRequestBehavior.AllowGet);
         }

@@ -104,7 +104,7 @@ function refillSchedule(eventsList) {
 
     eventsList.forEach(function(event) {
         var $scheduleItem = $("<div></div>");
-        var date = parseMvcDate(event.EventDateTime);
+        var date = parseMvcDate(event.StartTime);
 
         var startTime = timeToStringHHMM(date);
         var endTime = timeToStringHHMM(new Date(date.getTime() + event.Duration * 60000));
@@ -193,20 +193,6 @@ function refillSchedule(eventsList) {
                             .click(function() {
                                 $("#" + formId + " .join-event-submit").click();
                             });
-                        /*
-                        var form = $("#" + formId);
-                        var validator = form.data("validator");
-            
-                        validator.settings.showErrors = function () {
-                            var disabled = this.numberOfInvalids() !== 0;
-                            if (disabled) {
-                                $("#" + formId + " .fa-plus").addClass("join-disabled");
-                            } else {
-                                $("#" + formId + " .fa-plus").removeClass("join-disabled");
-                            }
-            
-                            this.defaultShowErrors();
-                        };*/
                     });
             }
         });

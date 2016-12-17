@@ -26,7 +26,7 @@ function toggleActiveAudiences() {
         var event = events[i];
 
         if (availableAudiencesIds.includes(event.AudienceId)) {
-            var startTime = parseMvcDate(event.EventDateTime);
+            var startTime = parseMvcDate(event.StartTime);
             var endTime = new Date(startTime.getTime() + event.Duration * 60000);
             if (timestampIsBetween(time, startTime, endTime)) {
                 for (var j = 0; j < availableAudiencesDivs.length; ++j) {

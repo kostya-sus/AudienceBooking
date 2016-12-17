@@ -25,6 +25,11 @@ namespace Booking.Repositories.Repositories
             return _context.Events;
         }
 
+        public IQueryable<Event> GetEventsByAudienceMapId(Guid audienceMapId)
+        {
+            return _context.Events.Where(x => x.Audience.AudienceMapId == audienceMapId);
+        }
+
         public Event GetEventById(Guid id)
         {
             return _context.Events.Find(id);

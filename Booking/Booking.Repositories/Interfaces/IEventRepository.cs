@@ -9,6 +9,8 @@ namespace Booking.Repositories.Interfaces
     {
         IQueryable<Event> GetAllEvents();
 
+        IQueryable<Event> GetEventsByAudienceMapId(Guid audienceMapId);
+
         Event GetEventById(Guid id);
 
         void CreateEvent(Event eventEntity);

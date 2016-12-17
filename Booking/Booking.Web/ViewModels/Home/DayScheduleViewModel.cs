@@ -4,6 +4,6 @@ namespace Booking.Web.ViewModels.Home
 {
     public class DayScheduleViewModel
     {
-        public IEnumerable<DaySheduleItemViewModel> Items { get; set; }
+        public IEnumerable<DayScheduleItemViewModel> Items { get; set; }
     }
 }

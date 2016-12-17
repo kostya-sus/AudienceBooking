@@ -8,10 +8,10 @@ namespace Booking.Services.Interfaces
 {
     public interface IScheduleService
     {
-        IEnumerable<Event> GetEventsByDay(DateTime day);
+        IEnumerable<Event> GetEventsByDay(DateTime day, Guid audienceMapId);
 
         IEnumerable<Event> GetEventsByAudience(Guid audienceId, DateTime from, DateTime to);
 
-        IEnumerable<Event> GetEventsByAuthor(ApplicationUser author, DateTime day);
+        IEnumerable<Event> GetEventsByAuthor(ApplicationUser author, DateTime day, Guid audienceMapId);
     }
 }

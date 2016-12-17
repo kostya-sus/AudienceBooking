@@ -233,7 +233,7 @@
     <Compile Include="ViewModels\Event\EventEditViewModel.cs" />
     <Compile Include="ViewModels\Event\JoinEventViewModel.cs" />
     <Compile Include="ViewModels\Home\DayScheduleViewModel.cs" />
-    <Compile Include="ViewModels\Home\DaySheduleItemViewModel.cs" />
+    <Compile Include="ViewModels\Home\DayScheduleItemViewModel.cs" />
     <Compile Include="ViewModels\Event\DisplayEventPopupViewModel.cs" />
     <Compile Include="ViewModels\Home\HomeViewModel.cs" />
     <Compile Include="ViewModels\Manage\AddPhoneNumberViewModel.cs" />

@@ -13,7 +13,7 @@ namespace Booking.Web.ViewModels.Event
 
         public string AudienceName { get; set; }
 
-        public DateTime EventDateTime { get; set; }
+        public DateTime StartTime { get; set; }
 
         public string EventDate { get; set; }
 
