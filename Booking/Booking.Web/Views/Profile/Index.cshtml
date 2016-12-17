@@ -42,14 +42,14 @@
             </H3>
             <p><b>Email:</b>@Model.UserInfo.Email</p>
             <p><b>@Localization.NumberOfActiveEvent:</b> @Model.UserInfo.ActiveEventsCount</p>
-           @using (Ajax.BeginForm("Edit", "Profile", new { userid = Model.Id }, new AjaxOptions
-           {
-               InsertionMode = InsertionMode.Replace,
-               HttpMethod = "Post",
-               UpdateTargetId = "page-main"
-           }))
-           {
-            @Html.AntiForgeryToken()
+            @using (Ajax.BeginForm("Edit", "Profile", new { userid = Model.Id }, new AjaxOptions
+            {
+                InsertionMode = InsertionMode.Replace,
+                HttpMethod = "Post",
+                UpdateTargetId = "page-main"
+            }))
+            {
+                @Html.AntiForgeryToken()
                 <input type="submit" id="change" value=@Localization.Change class="profile-submit" />
             }
         </div>
@@ -87,8 +87,7 @@
                         <span>@Localization.PasswordError</span>
                     }
                 }
-                </div>
             </div>
+        </div>
     </div>
 </div>
-
