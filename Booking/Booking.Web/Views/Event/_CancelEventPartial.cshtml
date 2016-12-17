@@ -1,7 +1,7 @@
 ﻿@using Booking.Web.Localization
-@model Booking.Web.ViewModels.Event.DisplayEventPopupViewModel
+@model Guid 
 
-@using (Html.BeginForm("Cancel", "Event", FormMethod.Post))
+@using (Html.BeginForm("Cancel", "Event", new {eventId=@Model}, FormMethod.Post))
 {
     @Html.AntiForgeryToken()
     <div class="cancel-event-container">
@@ -11,8 +11,7 @@
         </div>
         <div class="btns-body-cancel-popup">
             <button class="close-this-popup" data-dismiss="modal">@Localization.No</button>
-            <input type="submit" id="del-event" class="cancel-event-submit" data-id="@Model.Id" value="@Localization.Yes"/>
-            @Html.HiddenFor(m=>m.Id)
+            <input type="submit" id="del-event" class="cancel-event-submit" data-id="@Model" value="@Localization.Yes"/>
         </div>
         <input type="hidden" id="delete-event-popup-url" value="@Url.Action("Cancel", "Event")" />
     </div>

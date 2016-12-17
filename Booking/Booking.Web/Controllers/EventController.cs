@@ -213,9 +213,8 @@ namespace Booking.Web.Controllers
         [HttpPost]
         [Authorize]
         [ValidateAntiForgeryToken]
-        public ActionResult Cancel(DisplayEventPopupViewModel vm)
+        public ActionResult Cancel(Guid eventId)
         {
-            var eventId = vm.Id;
             _eventService.CancelEvent(User, eventId);
             return RedirectToAction("Index", "Home");
         }
@@ -224,8 +223,7 @@ namespace Booking.Web.Controllers
         [Authorize]
         public ActionResult GetCancellationForm(Guid eventId)
         {
-            var vm = new DisplayEventPopupViewModel {Id = eventId};
-            return PartialView("_CancelEventPartial", vm);
+            return PartialView("_CancelEventPartial", eventId);
         }
 
         [HttpGet]
