@@ -125,13 +125,15 @@ namespace Booking.Web.Controllers
 
             if (vm.LineDetailsImage != null)
             {
-                _imageRepository.UploadImage(vm.LineDetailsImage.InputStream, vm.LineDetailsImage.FileName);
-                model.LineDetailsImageName = _imageRepository.GetImageUri(vm.LineDetailsImage.FileName);
+                var fileName = vm.AudienceMapId + vm.LineDetailsImage.FileName;
+                _imageRepository.UploadImage(vm.LineDetailsImage.InputStream, fileName);
+                model.LineDetailsImageName = fileName;
             }
             if (vm.RouteImage != null)
             {
-                _imageRepository.UploadImage(vm.RouteImage.InputStream, vm.RouteImage.FileName);
-                model.RouteImageName = _imageRepository.GetImageUri(vm.RouteImage.FileName);
+                var fileName = vm.AudienceMapId + vm.RouteImage.FileName;
+                _imageRepository.UploadImage(vm.RouteImage.InputStream, fileName);
+                model.RouteImageName = fileName;
             }
 
 
