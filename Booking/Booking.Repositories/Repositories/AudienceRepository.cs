@@ -41,6 +41,12 @@ namespace Booking.Repositories.Repositories
             _context.Entry(audience).State = EntityState.Modified;
         }
 
+        public void DeleteAudienceById(Guid id)
+        {
+            var selectQuery = _context.Audiences.Where(x => x.Id == id);
+            _context.Audiences.RemoveRange(selectQuery);
+        }
+
         public void Save()
         {
             _context.SaveChanges();

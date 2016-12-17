@@ -15,6 +15,8 @@ namespace Booking.Repositories.Interfaces
         void CreateAudience(Audience audience);
 
         void UpdateAudience(Audience audience);
+
+        void DeleteAudienceById(Guid id);
         
         void Save();
     }

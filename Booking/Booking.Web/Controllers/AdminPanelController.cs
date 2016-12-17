@@ -90,7 +90,8 @@ namespace Booking.Web.Controllers
                 {
                     Name = x.Name,
                     Style = _audienceService.GetStyleString(x),
-                    IsBookingAvailable = x.IsBookingAvailable
+                    IsBookingAvailable = x.IsBookingAvailable,
+                    Id = x.Id
                 })
             };
 
@@ -99,6 +100,7 @@ namespace Booking.Web.Controllers
 
         [HttpPost]
         [Authorize(Roles = "Admin")]
+        [ValidateAntiForgeryToken]
         public ActionResult CreateAudience(CreateAudienceViewModel vm)
         {
             var model = new Audience
@@ -132,6 +134,15 @@ namespace Booking.Web.Controllers
             _audienceService.CreateAudience(model);
 
             return RedirectToAction("AudienceMap", new {id = vm.AudienceMapId});
+        }
+
+        [HttpPost]
+        [Authorize(Roles = "Admin")]
+        [ValidateAntiForgeryToken]
+        public ActionResult DeleteAudience(Guid id, Guid audienceMapId)
+        {
+            _audienceService.DeleteAudienceById(id);
+            return RedirectToAction("AudienceMap", new {id = audienceMapId});
         }
     }
 }

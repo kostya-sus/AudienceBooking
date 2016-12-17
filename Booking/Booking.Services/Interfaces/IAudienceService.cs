@@ -14,6 +14,8 @@ namespace Booking.Services.Interfaces
 
         void UpdateAudience(Audience audience);
 
+        void DeleteAudienceById(Guid id);
+
         void CloseAudience(Guid audienceId);
 
         void OpenAudience(Guid audienceId);

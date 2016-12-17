@@ -28,4 +28,18 @@
 
 <button id="new-audience-btn" class="btn btn-default">New audience</button>
 
+<div>
+    @foreach (var audience in Model.Audiences)
+    {
+        <div class="form-group">
+            <span>@audience.Name</span>
+            @using (Html.BeginForm("DeleteAudience", "AdminPanel", new {id = audience.Id, audienceMapId = Model.Id}))
+            {
+                @Html.AntiForgeryToken()
+                <button type="submit" class="btn btn-danger">Delete</button>
+            }
+        </div>
+    }
+</div>
+
 @Html.Partial("_NewAudienceForm", new CreateAudienceViewModel {AudienceMapId = Model.Id})

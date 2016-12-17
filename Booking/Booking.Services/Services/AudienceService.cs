@@ -37,6 +37,12 @@ namespace Booking.Services.Services
             _unitOfWork.Save();
         }
 
+        public void DeleteAudienceById(Guid id)
+        {
+            _unitOfWork.AudienceRepository.DeleteAudienceById(id);
+            _unitOfWork.Save();
+        }
+
         public void CloseAudience(Guid audienceId)
         {
             var currentAudience = _unitOfWork.AudienceRepository.GetAudienceById(audienceId);
