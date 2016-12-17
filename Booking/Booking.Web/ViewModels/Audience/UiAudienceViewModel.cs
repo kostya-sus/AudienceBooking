@@ -11,5 +11,7 @@ namespace Booking.Web.ViewModels.Audience
         public string Style { get; set; }
 
         public bool IsBookingAvailable { get; set; }
+
+        public string RouteImageUrl { get; set; }
     }
 }

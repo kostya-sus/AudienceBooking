@@ -95,7 +95,14 @@
 
 .participant-email-li span { font-size: 14px; }
 
+.participant-email-li .fa-times { color: #9FA6B6; }
+
 .participant-email-li:hover .fa-times { visibility: visible; }
+
+.participant-email-li .fa-times:hover {
+    color: #828A9D;
+    cursor: pointer;
+}
 
 .remove-participant-form, .remove-participant-submit {
     display: inline;
