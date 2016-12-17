@@ -4,7 +4,10 @@
     @using (Html.BeginForm("CreateAudience", "AdminPanel", FormMethod.Post, new {enctype = "multipart/form-data", id = "new-audience-form"}))
     {
         @Html.AntiForgeryToken()
-        @Html.TextBoxFor(m => m.Name)
+        <div class="form-group">
+            @Html.LabelFor(m => m.Name)
+            @Html.TextBoxFor(m => m.Name)
+        </div>
 
         @Html.HiddenFor(m => m.AudienceMapId)
 
@@ -13,19 +16,43 @@
         @Html.HiddenFor(m => m.Width)
         @Html.HiddenFor(m => m.Height)
 
-        @Html.EditorFor(m => m.SeatsCount)
-        @Html.EditorFor(m => m.BoardsCount)
-        @Html.EditorFor(m => m.LaptopsCount)
-        @Html.EditorFor(m => m.PrintersCount)
-        @Html.EditorFor(m => m.ProjectorsCount)
+        <div class="form-group">
+            @Html.LabelFor(m => m.SeatsCount)
+            @Html.EditorFor(m => m.SeatsCount)
+        </div>
 
-        @Html.LabelFor(x => x.RouteImage)
-        @Html.TextBoxFor(x => x.RouteImage, new {type = "file"})
-        @Html.ValidationMessageFor(x => x.RouteImage)
+        <div class="form-group">
+            @Html.LabelFor(m => m.BoardsCount)
+            @Html.EditorFor(m => m.BoardsCount)
+        </div>
 
-        @Html.LabelFor(x => x.LineDetailsImage)
-        @Html.TextBoxFor(x => x.LineDetailsImage, new {type = "file"})
-        @Html.ValidationMessageFor(x => x.LineDetailsImage)
-        <button type="submit">Upload</button>
+        <div class="form-group">
+            @Html.LabelFor(m => m.LaptopsCount)
+            @Html.EditorFor(m => m.LaptopsCount)
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(m => m.PrintersCount)
+            @Html.EditorFor(m => m.PrintersCount)
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(m => m.ProjectorsCount)
+            @Html.EditorFor(m => m.ProjectorsCount)
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(x => x.RouteImage)
+            @Html.TextBoxFor(x => x.RouteImage, new {type = "file"})
+            @Html.ValidationMessageFor(x => x.RouteImage)
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(x => x.LineDetailsImage)
+            @Html.TextBoxFor(x => x.LineDetailsImage, new {type = "file"})
+            @Html.ValidationMessageFor(x => x.LineDetailsImage)
+        </div>
+
+        <button type="submit" class="btn btn-primary">Upload</button>
     }
 </div>

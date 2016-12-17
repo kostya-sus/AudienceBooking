@@ -1,23 +1,12 @@
 ﻿@model Booking.Web.ViewModels.AdminPanel.NewAudienceMapViewModel
 
-<!DOCTYPE html>
+@using (Html.BeginForm("CreateAudienceMap", "AdminPanel", FormMethod.Post, new {enctype = "multipart/form-data"}))
+{
+    @Html.AntiForgeryToken()
+    @Html.TextBoxFor(m => m.Name)
 
-<html>
-<head>
-    <title>title</title>
-</head>
-<body>
-<div>
-    @using (Html.BeginForm("CreateAudienceMap", "AdminPanel", FormMethod.Post, new { enctype = "multipart/form-data" }))
-    {
-        @Html.AntiForgeryToken()
-        @Html.TextBoxFor(m => m.Name)
-
-        @Html.LabelFor(x => x.Image)
-        @Html.TextBoxFor(x => x.Image, new { type = "file" })
-        @Html.ValidationMessageFor(x => x.Image)
-        <button type="submit">Upload</button>
-    }
-</div>
-</body>
-</html>
+    @Html.LabelFor(x => x.Image)
+    @Html.TextBoxFor(x => x.Image, new {type = "file"})
+    @Html.ValidationMessageFor(x => x.Image)
+    <button type="submit">Upload</button>
+}

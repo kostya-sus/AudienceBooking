@@ -254,6 +254,7 @@
     <Compile Include="ViewModels\Users\UsersViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\admin_panel\audience_map.css" />
     <Content Include="Content\audience-info.css" />
     <Content Include="Content\bootstrap-datepicker.css" />
     <Content Include="Content\bootstrap.css" />
@@ -321,6 +322,7 @@
     <Content Include="Scripts\bootstrap-datepicker\js\bootstrap-datepicker.js" />
     <Content Include="Scripts\bootstrap-datepicker\locales\bootstrap-datepicker.ru.min.js" />
     <Content Include="Content\checkbox-styles.css" />
+    <Content Include="Scripts\project\admin_panel\audience_map.js" />
     <Content Include="Scripts\project\datetime-updown.js" />
     <Content Include="Scripts\project\display-event-popup.js" />
     <Content Include="Scripts\project\event-edit-page.js" />
@@ -416,6 +418,7 @@
     <Content Include="Views\AdminPanel\CreateAudienceMapPage.cshtml" />
     <Content Include="Views\AdminPanel\AudienceMap.cshtml" />
     <Content Include="Views\AdminPanel\_NewAudienceForm.cshtml" />
+    <Content Include="Views\AdminPanel\_AdminLayout.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
