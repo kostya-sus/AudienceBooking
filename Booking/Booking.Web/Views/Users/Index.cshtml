@@ -1,23 +1,13 @@
 ﻿@using Booking.Web.Localization
 @using PagedList.Mvc
 
+@model PagedList.IPagedList<Booking.Models.ApplicationUser>
+
 @{
     ViewBag.ActiveLink = "Users";
     ViewBag.Title = "Users";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
-@section styles{
-    @Styles.Render("~/Content/home-page.css")
-    @Styles.Render("~/Content/Site.css")
-    @Styles.Render("~/Content/form-inputs.css")
-    @Styles.Render("~/Content/font-awesome/css/font-awesome.css")
-}
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
-    @Scripts.Render("~/Scripts/project/contact-scripts.js")
-}
-
 
 
 
@@ -30,33 +20,25 @@
             @foreach (var user in Model)
 
             {
-
                 <tr>
-
                     <td>
-
                         <p> @user.UserName </p>
-
                     </td>
-
                     <td>
-
                         <p>@user.Email</p>
-
                     </td>
-
                     <td>
-
-                        <p> @user</p>
-
+                        <p> @user.Id</p>
                     </td>
-
                 </tr>
-
             }
         </table>
-
+        Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) из @Model.PageCount
         @Html.PagedListPager(Model, page => Url.Action("Index", new { page }))
 
+
+
+        </div>
+       
     </div>
 

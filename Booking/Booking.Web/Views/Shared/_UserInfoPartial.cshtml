@@ -4,31 +4,15 @@
 @model Booking.Web.ViewModels.Profile.UserInfoViewModel
 
 
-    @using (Ajax.BeginForm("Edit", "Profile", new { model = Model}, new AjaxOptions
-    {
-        InsertionMode = InsertionMode.ReplaceWith,
-        HttpMethod = "Post",
-        UpdateTargetId = "user-info-partial"
-    }))
-    {
-        <H3 style="padding: 20px 0px">
+    
+        <H3 style="padding: 20px 0px">@Model.Name @if (Model.IsProfileAdmin){<sup class="admin-sup">admin</sup>}</H3>
+        <p><b>Email:</b> @Model.Email</p>
+        <p><b>@Localization.NumberOfActiveEvent:</b> @Model.ActiveEventsCount</p>
+        @using (Ajax.ActionLink ("Edit", "Profile",new AjaxOptions { InsertionMode = InsertionMode.ReplaceWith, HttpMethod = "Post", UpdateTargetId = "user-info-partial" }))
+        {
 
-            @Model.Name @if (Model.IsProfileAdmin)
-                                 {
-                                     <sup style="background-color: #F95752; font-size: small; color: white; border-radius: 10px; margin: 2px; padding: 2px 5px">admin</sup>
-                                 }
-        </H3>
-        <p>
-            <b>Email:</b> @Model.Email
-        </p>
-        <p>
-            <b>@Localization.NumberOfActiveEvent:</b> @Model.ActiveEventsCount
-        </p>
-
-
-        @Html.AntiForgeryToken()
-        <input type="submit" id="change" value=@Localization.Change class="profile-submit"/>
-    }
+         <input type="submit" id="change" value=@Localization.Change class="profile-submit" />
+        }
 
 
 

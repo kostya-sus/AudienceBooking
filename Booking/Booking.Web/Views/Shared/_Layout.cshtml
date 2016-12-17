@@ -49,7 +49,7 @@
                     @if (User.IsInRole("Admin"))
                     {
                         <li class="@(ViewBag.ActiveLink == "Users" ? "active" : "")">
-                            @Html.ActionLink(@Localization.Users, "Index", "Users")
+                            @Html.ActionLink(@Localization.Users, "UserList", "Manage")
                         </li>
                     }
                     <li class="@(ViewBag.ActiveLink == "Index" ? "active" : "")">

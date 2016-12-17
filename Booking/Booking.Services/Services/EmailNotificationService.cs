@@ -47,7 +47,7 @@ namespace Booking.Services.Services
         {
             
             MailMessage mail = new MailMessage();
-            var userservice = new UsersService();
+            var userservice = new SheduleService();
             var adminList = userservice.GetAdminsEmails();
             mail.From = new MailAddress(email);
             foreach (var item in adminList)

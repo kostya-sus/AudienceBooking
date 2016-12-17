@@ -18,21 +18,18 @@ namespace Booking.Web.Controllers
 {
     public class ProfileController : Controller
     {
-        
-      
-
         [HttpGet]
         public ActionResult Index(string userId)
         {
-            var user = new UsersService().GetUserById(userId);
+            var user = new SheduleService().GetUserById(userId);
             var vm = new ProfileViewModel()
             {
                 UserInfo = new UserInfoViewModel
                 {
-                    IsProfileAdmin = new UsersService().IsAdmin(user),
+                    IsProfileAdmin = new SheduleService().IsAdmin(user),
                     Name = user.UserName,
                     Email = user.Email,
-                    ActiveEventsCount = new UsersService().GetEvenByAuthor(userId),
+                    ActiveEventsCount = new SheduleService().GetEvenByAuthor(userId),
                     Id = userId
                     
                 },
@@ -52,34 +49,25 @@ namespace Booking.Web.Controllers
 
         [HttpPost]
         [Authorize]
-        public ActionResult Edit(UserInfoViewModel userInfoModeld)
+        public ActionResult Edit(string userId)
         {
-            return PartialView("_EditProfilePartial", userInfoModeld);
-        }
-        
-       
-        [Authorize(Roles = "Admin")]
-        public async Task<ActionResult> Delete(string userId)
-        {
-            throw new NotImplementedException();
-            //  ApplicationUser user = await UserManager.FindByIdAsync(userId);
-            //  if (user != null)
-            //  {
-            //      IdentityResult result = await UserManager.DeleteAsync(user);
-            //      if (result.Succeeded)
-            //      {
-            //          return RedirectToAction("Index", "Home");
-            //      }
-            //  }
-            //  return RedirectToAction("Index", "Home");
+            var user = new SheduleService().GetUserById(userId);
+            var vm = new ProfileViewModel()
+            {
+                UserInfo = new UserInfoViewModel
+                {
+                    IsProfileAdmin = new SheduleService().IsAdmin(user),
+                    Name = user.UserName,
+                    Email = user.Email,
+                    ActiveEventsCount = new SheduleService().GetEvenByAuthor(userId),
+                    Id = userId
 
-            //  var db = new BookingDbContext();
-            //  var user = db.Users.Find(userId);
-            //  db.Users.Remove(user);
-            //  db.SaveChanges();
-            //  return RedirectToAction("Index","Home");
-        }
+                },
+                Id = userId,
+                IsOwner = (User.Identity.GetUserId() == userId)
 
-        
+            };
+            return PartialView("_EdetProfilePartial", vm);
+        }        
     }
 }

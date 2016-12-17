@@ -9,6 +9,9 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using Booking.Models;
+using Booking.Repositories.Repositories;
+using Booking.Services.Services;
+using PagedList;
 
 namespace Booking.Web.Controllers
 {
@@ -228,7 +231,9 @@ namespace Booking.Web.Controllers
           var user = await UserManager.FindByIdAsync(userId);
             if (user != null)
             {
+               
                 var result = await UserManager.DeleteAsync(user);
+               
                 if (result.Succeeded)
                 {
                     return RedirectToAction("Index", "Users");
@@ -246,23 +251,25 @@ namespace Booking.Web.Controllers
             if (user != null)
             {
                 user.UserName = model.Name;
-                user.Email = model.Email;
+                user.Email = model.Email;                              
                 IdentityResult result = UserManager.Update(user);
+                if (model.oldRole != model.NewRole)
+                {
+                    result = UserManager.RemoveFromRole(model.Id, model.oldRole);
+                    result = UserManager.AddToRole(model.Id, model.NewRole);
+                }
                 if (result.Succeeded)
                 {
-                    return RedirectToAction("Index", "Home");
+                    return RedirectToAction("Index", "Profile", model.Id);
                 }
                 else
                 {
                     ModelState.AddModelError("", "Что-то пошло не так");
                 }
             }
-            else
-            {
-                ModelState.AddModelError("", "Пользователь не найден");
-            }
+           
 
-            return PartialView("_UserInfoPartial",model);
+            return RedirectToAction("Index", "Profile", model.Id);
         }
         //
         // POST: /Manage/ChangePassword
@@ -380,7 +387,14 @@ namespace Booking.Web.Controllers
             base.Dispose(disposing);
         }
 
-#region Helpers
+        public ActionResult UserList(int? page)
+        {                   
+            int pageSize = 20;
+            int pageNumber = (page ?? 1);
+            var test = UserManager.Users.ToList();
+            return View("~/Views/User/Index.cshtml",UserManager.Users.ToList().ToPagedList(pageNumber, pageSize));
+        }
+        #region Helpers
         // Used for XSRF protection when adding external logins
         private const string XsrfKey = "XsrfId";
 

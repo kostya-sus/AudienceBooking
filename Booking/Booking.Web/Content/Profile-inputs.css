@@ -1,4 +1,22 @@
-﻿.profile-input {
+﻿.password-place{
+    width: 49%; 
+    display: inline-block;
+    background-color: #EBEEF7;
+    float: right;
+}
+
+.admin-sup{
+    background-color: #F95752;
+    font-size: small;
+    color: white;
+    border-radius: 10px;
+    margin: 2px;
+    padding: 2px 5px
+}
+
+
+
+.profile-input {
     border: 1px #f5f6fb;
     border-radius: 50px;
     background: white;

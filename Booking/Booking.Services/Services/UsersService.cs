@@ -6,14 +6,16 @@ using Booking.Services.Interfaces;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 
+
 namespace Booking.Services.Services
 {
-    public class UsersService : IUsersService
+    public class SheduleService : IUsersService
     {
         private readonly BookingDbContext _context;
         private readonly UserManager<ApplicationUser> _userManager;
+        
 
-        public UsersService()
+        public SheduleService()
         {
             _context = new BookingDbContext();
             var userStore = new UserStore<ApplicationUser>(_context);
@@ -28,6 +30,11 @@ namespace Booking.Services.Services
         public IEnumerable<ApplicationUser> GetUsers(int from, int count)
         {
             return _context.Users.OrderBy(u => u.UserName).Take(count).Skip(from);
+        }
+
+        public List<ApplicationUser> GetUsers()
+        {
+            return _context.Users.OrderBy(u => u.UserName).ToList();
         }
 
         public ApplicationUser GetUserById(string id)
@@ -54,7 +61,7 @@ namespace Booking.Services.Services
         {
             return BookingDbContext.Create().Events.Count(x => x.AuthorId == userId);
         }
-
+                
         public string GetUserEmail(string userid)
         {
             return _userManager.FindById(userid).Email;

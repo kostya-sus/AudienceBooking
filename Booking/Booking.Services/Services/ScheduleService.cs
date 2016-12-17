@@ -44,6 +44,11 @@ namespace Booking.Services.Services
                                                               x.EventDateTime.Year == day.Year);
         }
 
-       
+        public IEnumerable<Event> GetEventsByAuthor(ApplicationUser author)
+        {
+            return _eventRepository.GetAllEvents().Where(x => x.AuthorId == author.Id);
+        }
+
+
     }
 }
