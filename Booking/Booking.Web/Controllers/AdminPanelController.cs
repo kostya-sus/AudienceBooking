@@ -83,7 +83,8 @@ namespace Booking.Web.Controllers
             {
                 Id = audienceMap.Id,
                 ImageUrl = _imageRepository.GetImageUri(audienceMap.ImageName),
-                Name = audienceMap.Name
+                Name = audienceMap.Name,
+                Audiences = audienceMap.Audiences
             };
 
             return View(vm);
