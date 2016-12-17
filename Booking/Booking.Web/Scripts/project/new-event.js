@@ -29,7 +29,7 @@ $(document)
     });
 
 function checkIfAudienceIsFree() {
-    var audienceId = document.getElementById("ChosenAudienceId").value;
+    var audienceId = document.getElementById("AudienceId").value;
 
     var eventStartDate = $("#new-event-popup-start-date").val();
     var eventEndDate = $("#new-event-popup-end-date").val();
