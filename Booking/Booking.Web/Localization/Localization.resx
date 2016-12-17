@@ -297,4 +297,13 @@
   <data name="AudienceIsAlreadyBooked" xml:space="preserve">
     <value>Эта аудитория занята на выбранное время. Выберите, пожалуйста другое.</value>
   </data>
+  <data name="CancelEventAskMessage" xml:space="preserve">
+    <value>Вы уверены, что хотите отменить событие?</value>
+  </data>
+  <data name="No" xml:space="preserve">
+    <value>Нет</value>
+  </data>
+  <data name="Yes" xml:space="preserve">
+    <value>Да</value>
+  </data>
 </root>

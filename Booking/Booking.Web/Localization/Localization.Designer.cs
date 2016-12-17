@@ -115,6 +115,15 @@ namespace Booking.Web.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Вы уверены, что хотите отменить событие?.
+        /// </summary>
+        public static string CancelEventAskMessage {
+            get {
+                return ResourceManager.GetString("CancelEventAskMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Отмена.
         /// </summary>
         public static string Cancellation {
@@ -318,6 +327,15 @@ namespace Booking.Web.Localization {
         public static string Name {
             get {
                 return ResourceManager.GetString("Name", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Нет.
+        /// </summary>
+        public static string No {
+            get {
+                return ResourceManager.GetString("No", resourceCulture);
             }
         }
         
@@ -597,6 +615,15 @@ namespace Booking.Web.Localization {
         public static string WriteMessage {
             get {
                 return ResourceManager.GetString("WriteMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Да.
+        /// </summary>
+        public static string Yes {
+            get {
+                return ResourceManager.GetString("Yes", resourceCulture);
             }
         }
     }

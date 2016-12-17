@@ -6,17 +6,17 @@
     <input type="hidden" id="event-page-url" value="@Url.Action("Index", "Event", new {eventId = Model.Id})"/>
 
     <div class="display-popup-header">
-        <div class="event-date">
+        <div class="event-date" id="qwe">
             <div>@Model.EventDate</div>
             <span>@Model.EventDateTime.ToString("HH:mm") - @Model.EventDateTime.AddMinutes(Model.Duration).ToString("HH:mm")</span>
         </div>
         @if (Model.CanEdit)
         {
             <button class="btn-edit-event">@Localization.Edit</button>
-            <button class="btn-cancel-event">@Localization.Cancel</button>
+            <button class="btn-cancel-event" id="btn-show-cancel-popup" data-eventId="@Model.Id" onclick="displayCancelEventPopup()" data-toggle="modal" data-target=".example-modal-sm">@Localization.Cancel</button>
         }
 
-        <button class="btn-close-event" id="close-popup-@Model.Id"></button>
+        <button class="btn-close-event-popup" id="close-popup-@Model.Id"></button>
     </div>
     <div class="display-popup-body">
         <h4>@Model.Title</h4>
@@ -49,5 +49,13 @@
             <i class="fa fa-link" id="btn-event-page-@Model.Id" aria-hidden="true"></i>
         </div>
     </div>
+
+    @*<input type="hidden" id="cancel-event-popup-url" value="@Url.Action("GetCancellationForm", "Event")"/>
+
+    <div class="modal fade example-modal-sm" id="CencelEvent" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-sm">
+            <div id="cancel-event-popup"></div>
+        </div>
+    </div>*@
 
 </div>

@@ -256,3 +256,9 @@ p { margin-top: 20px; }
     font-size: 13px;
     display: inline;
 }
+
+#cancel-event-popup {
+        width: 402px;
+    border: 1px solid #9fa6b6;
+    background: #FFF;
+}
