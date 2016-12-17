@@ -178,9 +178,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\AutoMapperConfig.cs" />
+    <Compile Include="App_Start\AutoMapper\AutoMapperProfiles\AudienceMapProfile.cs" />
+    <Compile Include="App_Start\AutoMapper\AutoMapperProfiles\AudienceProfile.cs" />
     <Compile Include="App_Start\AutoMapper\AutoMapperProfiles\EventProfile.cs" />
+    <Compile Include="App_Start\AutoMapper\CustomResolvers\AudienceMapImageUrlResolver.cs" />
     <Compile Include="App_Start\AutoMapper\CustomResolvers\EventAuthorNameResolver.cs" />
     <Compile Include="App_Start\AutoMapper\CustomResolvers\EventDateResolver.cs" />
+    <Compile Include="App_Start\AutoMapper\CustomResolvers\UiAudienceStyleResolver.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\IdentityConfig.cs" />
@@ -212,10 +216,10 @@
     <Compile Include="ViewModels\Account\SendCodeViewModel.cs" />
     <Compile Include="ViewModels\Account\VerifyCodeViewModel.cs" />
     <Compile Include="ViewModels\AdminPanel\AdminPanelViewModel.cs" />
-    <Compile Include="ViewModels\AdminPanel\AudienceMapViewModel.cs" />
+    <Compile Include="ViewModels\AudienceMap\AudienceMapViewModel.cs" />
     <Compile Include="ViewModels\AdminPanel\CreateAudienceViewModel.cs" />
     <Compile Include="ViewModels\AdminPanel\NewAudienceMapViewModel.cs" />
-    <Compile Include="ViewModels\AdminPanel\UiAudienceViewModel.cs" />
+    <Compile Include="ViewModels\Audience\UiAudienceViewModel.cs" />
     <Compile Include="ViewModels\Audience\AudienceInfoViewModel.cs" />
     <Compile Include="ViewModels\Audience\AudienceMapItemVm.cs" />
     <Compile Include="ViewModels\Audience\AudienceScheduleItemViewModel.cs" />

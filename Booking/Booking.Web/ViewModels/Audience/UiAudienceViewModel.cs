@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Booking.Web.ViewModels.AdminPanel
+namespace Booking.Web.ViewModels.Audience
 {
     public class UiAudienceViewModel
     {

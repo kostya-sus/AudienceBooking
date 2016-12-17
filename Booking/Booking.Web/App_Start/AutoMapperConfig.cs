@@ -7,7 +7,12 @@ namespace Booking.Web
     {
         public static void Configure()
         {
-            Mapper.Initialize(cfg => { cfg.AddProfile<EventProfile>(); });
+            Mapper.Initialize(cfg =>
+            {
+                cfg.AddProfile<EventProfile>();
+                cfg.AddProfile<AudienceProfile>();
+                cfg.AddProfile<AudienceMapProfile>();
+            });
         }
     }
 }

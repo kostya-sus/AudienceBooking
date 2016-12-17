@@ -2,12 +2,13 @@
 using System.Collections.Generic;
 using Booking.Enums;
 using Booking.Web.ViewModels.Audience;
+using Booking.Web.ViewModels.AudienceMap;
 
 namespace Booking.Web.ViewModels.Home
 {
     public class HomeViewModel
     {
-        public IDictionary<Guid, AudienceMapItemVm> Audiences { get; set; }
+        public AudienceMapViewModel AudienceMap { get; set; }
         
         public ScheduleTableViewModel ScheduleTable { get; set; }
 

@@ -1,10 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Web;
+using Booking.Web.ViewModels.Audience;
 
-namespace Booking.Web.ViewModels.AdminPanel
+namespace Booking.Web.ViewModels.AudienceMap
 {
     public class AudienceMapViewModel
     {
