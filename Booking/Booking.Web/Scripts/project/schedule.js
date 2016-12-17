@@ -97,6 +97,48 @@ function dateChangedEvent(newDate, loadedCallback) {
     loadSchedule(newDate, loadedCallback);
 }
 
+function rebuildTable(hourStart, hourEnd, audiences) {
+    var $tableNames = $("#schedule-rooms-column");
+    $tableNames.empty();
+    var $tr = $("<tr></tr>");
+    $tr.append($("<th></th>"));
+    $tableNames.append($tr);
+    var row;
+    for (row = 0; row < audiences.length; ++row) {
+        $tr = $("<tr></tr>");
+        var $td = $("<td class='audience-row'></td>");
+        $td.attr("id", "audience-row-" + audiences[row].Id);
+        $td.attr("data-audience-id", audiences[row].Id);
+        $td.attr("data-row-index", row);
+        $td.text(audiences[row].Name);
+        $tr.append($td);
+        $tableNames.append($tr);
+    }
+
+    var $table = $("#schedule-contents-table");
+    $table.empty();
+    $tr = $("<tr></tr>");
+    var hour;
+
+    for (hour = hourStart; hour < hourEnd; ++hour) {
+        var $th = $("<th></th>");
+        var hourStr = (hour < 10 ? "0" : "") + hour;
+        $th.text(hourStr + ":00");
+        $tr.append($th);
+    }
+
+    $table.append($tr);
+
+    for (row = 0; row < audiences.length; ++row) {
+        $tr = $("<tr></tr>");
+        for (hour = hourStart; hour < hourEnd; ++hour) {
+            $tr.append($("<td></td>"));
+        }
+
+        $table.append($tr);
+    }
+}
+
 function refillSchedule(eventsList) {
     $(".schedule-event-item").remove();
 
@@ -202,6 +244,9 @@ function loadSchedule(date, loadedCallback) {
     var url = $("#get-day-schedule-url").val() + "?date=" + date.toLocaleDateString();
     $.getJSON(url)
         .done(function(data) {
+            lowerHourBound = data.BookingHourStart;
+            upperHourBound = data.BookingHourEnd;
+            rebuildTable(lowerHourBound, upperHourBound, data.AvailableAudiences);
             refillSchedule(data.Items);
             events = data.Items;
             if (typeof loadedCallback === "function") {

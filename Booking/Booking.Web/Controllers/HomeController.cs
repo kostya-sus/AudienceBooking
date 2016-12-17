@@ -37,18 +37,9 @@ namespace Booking.Web.Controllers
         {
             var audienceMap = _audienceMapService.GetAudienceMap(AudienceMapSelector.AudienceMapId);
 
-            var availableAudiences = audienceMap.Audiences.Where(a => a.IsBookingAvailable)
-                .ToDictionary(a => a.Id, a => a.Name);
-
             var viewModel = new HomeViewModel
             {
                 AudienceMap = Mapper.Map<AudienceMapViewModel>(audienceMap),
-                ScheduleTable = new ScheduleTableViewModel
-                {
-                    AvailableAudiences = availableAudiences,
-                    LowerHourBound = (int) BookingHoursBoundsEnum.Lower,
-                    UpperHourBound = (int) BookingHoursBoundsEnum.Upper
-                },
                 IsAdmin = User.IsInRole("admin"),
                 IsLoggedIn = User.Identity.IsAuthenticated
             };
@@ -61,6 +52,13 @@ namespace Booking.Web.Controllers
         {
             var events = _scheduleService.GetEventsByDay(date, AudienceMapSelector.AudienceMapId);
             var viewModel = Mapper.Map<DayScheduleViewModel>(events);
+            viewModel.BookingHourStart = (int) BookingHoursBoundsEnum.Lower;
+            viewModel.BookingHourEnd = (int) BookingHoursBoundsEnum.Upper;
+
+            var audienceMap = _audienceMapService.GetAudienceMap(AudienceMapSelector.AudienceMapId);
+            var availableAudiences = audienceMap.Audiences.Where(a => a.IsBookingAvailable)
+                .Select(a => new ScheduleRowName {Id = a.Id, Name = a.Name});
+            viewModel.AvailableAudiences = availableAudiences;
 
             return Json(viewModel, JsonRequestBehavior.AllowGet);
         }

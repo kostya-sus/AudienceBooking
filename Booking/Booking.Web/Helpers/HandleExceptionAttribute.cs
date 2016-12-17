@@ -15,8 +15,6 @@ namespace Booking.Web.Helpers
 
             Logger.Error(ex.Message);
 
-            filterContext.ExceptionHandled = true;
-
             var rethrowedException = CreateOuterException(ex);
 
             filterContext.Result = new RedirectResult(GetRedirectUrl(rethrowedException));

@@ -9,8 +9,6 @@ namespace Booking.Web.ViewModels.Home
     public class HomeViewModel
     {
         public AudienceMapViewModel AudienceMap { get; set; }
-        
-        public ScheduleTableViewModel ScheduleTable { get; set; }
 
         public bool IsAdmin { get; set; }
 
