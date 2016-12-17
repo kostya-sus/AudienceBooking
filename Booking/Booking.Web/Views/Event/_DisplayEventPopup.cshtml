@@ -1,6 +1,6 @@
 ﻿@using Booking.Web.Localization
 @using Booking.Web.ViewModels.Event
-@model Booking.Web.ViewModels.Event.DisplayEventPopupViewModel
+@model DisplayEventPopupViewModel
 
 <div id="event-display-popup-@Model.Id" class="event-display-popup">
     <input type="hidden" id="event-page-url" value="@Url.Action("Index", "Event", new {eventId = Model.Id})"/>
@@ -21,7 +21,8 @@
             {
                 <input type="submit" class="btn-edit-event" value="@Localization.Edit"/>
             }
-            <button class="btn-cancel-event">@Localization.Cancel</button>
+            <button class="btn-edit-event">@Localization.Edit</button>
+            <button class="btn-cancel-event" id="btn-show-cancel-popup" data-eventId="@Model.Id" onclick="displayCancelEventPopup()" data-toggle="modal" data-target=".example-modal-sm">@Localization.Cancel</button>
         }
 
         <button class="btn-close-event" id="close-popup-@Model.Id"></button>

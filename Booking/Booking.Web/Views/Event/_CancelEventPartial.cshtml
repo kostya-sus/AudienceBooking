@@ -1,6 +1,18 @@
-﻿@model Guid
+﻿@using Booking.Web.Localization
+@model Guid 
 
-@using (Html.BeginForm("Cancel", "Event"))
+@using (Html.BeginForm("Cancel", "Event", new {eventId=@Model}, FormMethod.Post))
 {
     @Html.AntiForgeryToken()
+    <div class="cancel-event-container">
+        <div class="cancel-event-header">
+            <i class="fa fa-ban icon-ban" aria-hidden="true"></i>
+            <span class="cancel-event-ask-message">@Localization.CancelEventAskMessage</span>
+        </div>
+        <div class="btns-body-cancel-popup">
+            <button class="close-this-popup" data-dismiss="modal">@Localization.No</button>
+            <input type="submit" id="del-event" class="cancel-event-submit" data-id="@Model" value="@Localization.Yes"/>
+        </div>
+        <input type="hidden" id="delete-event-popup-url" value="@Url.Action("Cancel", "Event")" />
+    </div>
 }

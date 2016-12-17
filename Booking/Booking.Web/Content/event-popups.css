@@ -170,3 +170,45 @@
 .event-display-popup .join-event-container { display: inline-block; }
 
 .event-display-popup .display-popup-body { padding: 0 10px; }
+
+.cancel-event-container {
+        height: 180px;
+    width: 400px;
+    background: #FFF;
+}
+.cancel-event-header {
+    height: 50px;
+    background: #9fa6b6;
+}
+.btns-body-cancel-popup {
+    padding: 40px 40px 40px 40px;
+}
+.icon-ban {
+        font-size: 30px;
+    color: #FFF;
+    padding: 10px;
+    padding-left: 20px;
+}
+.cancel-event-ask-message {
+        font-size: 15px;
+    color: #FFF;
+    position: relative;
+    top: -5px;
+}
+.close-this-popup {
+        background: #c8ceda;
+    border: 1px solid #c8ceda;
+    border-radius: 20px;
+    height: 30px;
+    width: 110px;
+    margin-right: 25px;
+    margin-left: 25px;
+}
+.cancel-event-submit {
+    background: #f95752;
+    border: 1px solid #f95752;
+    border-radius: 20px;
+    height: 30px;
+    width: 110px;
+    color: #FFF;
+}

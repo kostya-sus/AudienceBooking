@@ -71,6 +71,7 @@
 @Scripts.Render("~/bundles/bootstrap")
 @Scripts.Render("~/Scripts/project/datetime-updown.js")
 @Scripts.Render("~/Scripts/project/new-event.js")
+@Scripts.Render("~/Scripts/project/cancel-event.js")
 @Scripts.Render("~/Scripts/jquery.unobtrusive-ajax.min.js")
 @Scripts.Render("~/Scripts/project/display-event-popup.js")
 @Scripts.Render("//code.jquery.com/ui/1.12.1/jquery-ui.js")
@@ -84,6 +85,13 @@
     </div>
 </div>
 
+    <input type="hidden" id="cancel-event-popup-url" value="@Url.Action("GetCancellationForm", "Event")" />
+
+<div class="modal fade example-modal-sm" id="CancelEvent" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-sm">
+        <div id="cancel-event-popup"></div>
+    </div>
+</div>
 
 </body>
 </html>
