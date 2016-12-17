@@ -193,7 +193,6 @@
     <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\EventController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\ImageUploadController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\ProfileController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
@@ -231,7 +230,6 @@
     <Compile Include="ViewModels\Home\DaySheduleItemViewModel.cs" />
     <Compile Include="ViewModels\Event\DisplayEventPopupViewModel.cs" />
     <Compile Include="ViewModels\Home\HomeViewModel.cs" />
-    <Compile Include="ViewModels\ImageUploadVm.cs" />
     <Compile Include="ViewModels\Manage\AddPhoneNumberViewModel.cs" />
     <Compile Include="ViewModels\Manage\ChangePasswordViewModel.cs" />
     <Compile Include="ViewModels\Manage\ConfigureTwoFactorViewModel.cs" />
@@ -371,7 +369,6 @@
       <DependentUpon>Web.config</DependentUpon>
     </Content>
     <Content Include="Views\Web.config" />
-    <Content Include="Views\ImageUpload\_ViewStart.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Account\_ExternalLoginsListPartial.cshtml" />
@@ -414,7 +411,6 @@
     <Content Include="Views\Shared\_RoomMapChoicePartial.cshtml" />
     <Content Include="Views\Event\_CancelEventPartial.cshtml" />
     <Content Include="Views\Event\_EditEventPopupPartial.cshtml" />
-    <Content Include="Views\ImageUpload\Index.cshtml" />
     <Content Include="Views\AdminPanel\_ViewStart.cshtml" />
     <Content Include="Views\AdminPanel\Index.cshtml" />
     <Content Include="Views\AdminPanel\CreateAudienceMapPage.cshtml" />
