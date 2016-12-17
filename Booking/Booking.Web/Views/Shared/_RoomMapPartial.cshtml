@@ -7,13 +7,23 @@
     <div id="room-map-container">
         @foreach (var audience in Model.Audiences)
         {
-            <div style="@audience.Style" class="room @(audience.IsBookingAvailable ? "room-available" : "room-not-available")">
+            <div style="@audience.Style"
+                 class="room @(audience.IsBookingAvailable ? "room-available" : "room-not-available")"
+                 id="audience-@audience.Id"
+                 data-audience-id="@audience.Id">
                 <div class="room-title">
                     @audience.Name
                 </div>
             </div>
+            if (audience.IsBookingAvailable)
+            {
+                <div class="room-proxy"
+                     style="@audience.Style"
+                     data-room-target="audience-@audience.Id">
+                </div>
+            }
         }
-        
+
         <img src="@Model.ImageUrl" class="map-background-image"/>
     </div>
 </div>
