@@ -32,6 +32,21 @@ namespace Booking.Web.AutoMapper.AutoMapperProfiles
 
             CreateMap<IEnumerable<Event>, DayScheduleViewModel>()
                 .ForMember(dest => dest.Items, opt => opt.MapFrom(source => source));
+
+            CreateMap<Event, CreateEditEventViewModel>()
+                .ForMember(dest => dest.EndTime,
+                    opt => opt.ResolveUsing<EventEndTimeResolver<CreateEditEventViewModel>>())
+                .ForMember(dest => dest.AuthorName,
+                    opt => opt.ResolveUsing<EventAuthorNameResolver<CreateEditEventViewModel>>());
+
+            CreateMap<Event, EventEditViewModel>()
+                .ForMember(dest => dest.EndTime, opt => opt.ResolveUsing<EventEndTimeResolver<EventEditViewModel>>())
+                .ForMember(dest => dest.AuthorName,
+                    opt => opt.ResolveUsing<EventAuthorNameResolver<EventEditViewModel>>())
+                .ForMember(dest => dest.ParticipantsEmails,
+                    opt =>
+                        opt.MapFrom(source => source.EventParticipants.ToDictionary(p => p.Id, p => p.ParticipantEmail)))
+                .ForMember(dest => dest.AudienceMap, opt => opt.MapFrom(source => source.Audience.AudienceMap));
         }
     }
 }

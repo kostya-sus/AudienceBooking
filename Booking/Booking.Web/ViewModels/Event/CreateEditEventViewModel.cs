@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using Booking.Enums;
 
 namespace Booking.Web.ViewModels.Event
 {
@@ -9,9 +8,9 @@ namespace Booking.Web.ViewModels.Event
     {
         public Guid Id { get; set; }
 
-        public DateTime StartDateTime { get; set; }
+        public DateTime StartTime { get; set; }
         
-        public DateTime EndDateTime { get; set; }
+        public DateTime EndTime { get; set; }
 
         [Required(ErrorMessageResourceType = typeof(Localization.Localization),
             ErrorMessageResourceName = "ValidationMessage_Required")]
@@ -30,9 +29,5 @@ namespace Booking.Web.ViewModels.Event
         public IDictionary<Guid, string> AvailableAudiences { get; set; }
 
         public Guid AudienceId { get; set; }
-
-        public int LowerHourBound { get; set; }
-
-        public int HigherHourBound { get; set; }
     }
 }

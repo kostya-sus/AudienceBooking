@@ -9,7 +9,7 @@
         setChosenAudience();
 
         function checkIsFree() {
-            var audienceId = parseInt($("#chosen-audience-id").val());
+            var audienceId = $("#chosen-audience-id").val();
             var startDate = $("#start-date").val();
             var endDate = $("#end-date").val();
             var eventId = $("#event-id").val();

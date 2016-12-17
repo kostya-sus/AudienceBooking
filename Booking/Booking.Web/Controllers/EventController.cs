@@ -76,8 +76,8 @@ namespace Booking.Web.Controllers
             var viewModel = new CreateEditEventViewModel
             {
                 AvailableAudiences = availableAudiences,
-                EndDateTime = date.AddMinutes(30),
-                StartDateTime = date,
+                EndTime = date.AddMinutes(30),
+                StartTime = date,
                 IsPublic = true
             };
             return PartialView("_NewEventPartial", viewModel);
@@ -97,26 +97,7 @@ namespace Booking.Web.Controllers
         public ActionResult Edit(Guid eventId)
         {
             var eventEntity = _eventService.GetEvent(eventId);
-            var audiences = _audienceService.GetAllAudiences();
-
-            var audiencesVms = audiences.ToVmDictionary();
-
-            var participants = eventEntity.EventParticipants.ToVmDictionary();
-
-            var vm = new EventEditViewModel
-            {
-                AudienceId = eventEntity.AudienceId,
-                Title = eventEntity.Title,
-                AdditionalInfo = eventEntity.AdditionalInfo,
-                Audiences = audiencesVms,
-                AuthorName = eventEntity.AuthorName,
-                EndDateTime = eventEntity.StartTime.AddMinutes(eventEntity.Duration),
-                StartDateTime = eventEntity.StartTime,
-                Id = eventEntity.Id,
-                IsJoinAvailable = eventEntity.IsJoinAvailable,
-                IsAuthorShown = eventEntity.IsAuthorShown,
-                ParticipantsEmails = participants
-            };
+            var vm = Mapper.Map<EventEditViewModel>(eventEntity);
 
             return View(vm);
         }
@@ -133,10 +114,10 @@ namespace Booking.Web.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create(CreateEditEventViewModel vm)
         {
-            TimeSpan span = vm.EndDateTime.Subtract(vm.StartDateTime);
+            TimeSpan span = vm.EndTime.Subtract(vm.StartTime);
             var duration = (int) span.TotalMinutes;
 
-            var isFree = _audienceService.IsFree(vm.AudienceId, vm.StartDateTime, duration, vm.Id);
+            var isFree = _audienceService.IsFree(vm.AudienceId, vm.StartTime, duration, vm.Id);
             if (duration < 20 || !isFree)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -149,7 +130,7 @@ namespace Booking.Web.Controllers
             Event newEvent = new Event();
             {
                 newEvent.Title = vm.Title;
-                newEvent.StartTime = vm.StartDateTime;
+                newEvent.StartTime = vm.StartTime;
                 newEvent.AdditionalInfo = vm.AdditionalInfo;
                 newEvent.AudienceId = vm.AudienceId;
                 newEvent.Duration = duration;
@@ -195,8 +176,8 @@ namespace Booking.Web.Controllers
             var viewModel = new CreateEditEventViewModel
             {
                 AvailableAudiences = availableAudiences,
-                EndDateTime = date.AddMinutes(30),
-                StartDateTime = date,
+                EndTime = date.AddMinutes(30),
+                StartTime = date,
                 IsPublic = true
             };
 
@@ -207,15 +188,14 @@ namespace Booking.Web.Controllers
         [Authorize]
         public ActionResult Save(EventEditViewModel vm)
         {
-            TimeSpan span = vm.EndDateTime.Subtract(vm.StartDateTime);
+            TimeSpan span = vm.EndTime.Subtract(vm.StartTime);
             var duration = (int) span.TotalMinutes;
 
             var eventEntity = _eventService.GetEvent(vm.Id);
 
-            if (!_audienceService.IsFree(vm.AudienceId, vm.StartDateTime, duration, vm.Id))
+            if (!_audienceService.IsFree(vm.AudienceId, vm.StartTime, duration, vm.Id))
             {
                 var audiences = _audienceService.GetAllAudiences();
-                vm.Audiences = audiences.ToVmDictionary();
                 vm.ParticipantsEmails = eventEntity.EventParticipants.ToVmDictionary();
                 return View("Edit", vm);
             }
@@ -226,7 +206,7 @@ namespace Booking.Web.Controllers
             eventEntity.AuthorName = vm.AuthorName;
             eventEntity.IsAuthorShown = vm.IsAuthorShown;
             eventEntity.IsJoinAvailable = vm.IsJoinAvailable;
-            eventEntity.StartTime = vm.StartDateTime;
+            eventEntity.StartTime = vm.StartTime;
             eventEntity.Duration = duration;
 
             _eventService.UpdateEvent(User, eventEntity);
