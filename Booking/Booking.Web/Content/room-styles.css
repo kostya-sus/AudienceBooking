@@ -22,6 +22,10 @@
 
 .room-not-available { background-color: #D7D9DE; }
 
+#room-map-container .map-background-image {
+    z-index: 15;
+    position: relative;
+}
 
 .room-title {
     display: inline-block;

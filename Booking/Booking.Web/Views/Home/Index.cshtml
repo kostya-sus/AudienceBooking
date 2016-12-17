@@ -37,7 +37,7 @@
 <input type="hidden" id="is-user-admin" value="@Model.IsAdmin"/>
 <input type="hidden" id="user-id" value="@User.Identity.GetUserId()"/>
 
-@Html.Partial("_RoomMapPartial", Model.Audiences)
+@Html.Partial("_RoomMapPartial", Model.AudienceMap)
 
 <div id="schedule-container" style="background: white">
     <div class="page-container container">

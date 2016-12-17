@@ -422,6 +422,7 @@
     <Content Include="Views\AdminPanel\AudienceMap.cshtml" />
     <Content Include="Views\AdminPanel\_NewAudienceForm.cshtml" />
     <Content Include="Views\AdminPanel\_AdminLayout.cshtml" />
+    <Content Include="Views\_ViewStart.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
