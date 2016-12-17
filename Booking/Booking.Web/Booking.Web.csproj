@@ -181,6 +181,7 @@
     <Compile Include="App_Start\AutoMapper\AutoMapperProfiles\AudienceMapProfile.cs" />
     <Compile Include="App_Start\AutoMapper\AutoMapperProfiles\AudienceProfile.cs" />
     <Compile Include="App_Start\AutoMapper\AutoMapperProfiles\EventProfile.cs" />
+    <Compile Include="App_Start\AutoMapper\CustomResolvers\AudienceLineDetailsResolver.cs" />
     <Compile Include="App_Start\AutoMapper\CustomResolvers\AudienceMapImageUrlResolver.cs" />
     <Compile Include="App_Start\AutoMapper\CustomResolvers\EventAuthorNameResolver.cs" />
     <Compile Include="App_Start\AutoMapper\CustomResolvers\EventDateResolver.cs" />

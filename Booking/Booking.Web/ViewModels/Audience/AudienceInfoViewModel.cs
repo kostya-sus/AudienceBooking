@@ -20,5 +20,7 @@ namespace Booking.Web.ViewModels.Audience
         public int ProjectorsCount { get; set; }
 
         public bool IsBookingAvailable { get; set; }
+
+        public string LineDetailsImageUrl { get; set; }
     }
 }

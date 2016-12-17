@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Web.Mvc;
+using AutoMapper;
 using Booking.Enums;
 using Booking.Repositories;
 using Booking.Services.Interfaces;
@@ -30,17 +31,7 @@ namespace Booking.Web.Controllers
         public ActionResult GetAudienceInfo(Guid audienceId)
         {
             var audience = _audienceService.GetAudience(audienceId);
-            var vm = new AudienceInfoViewModel
-            {
-                BoardsCount = audience.BoardsCount,
-                Id = audience.Id,
-                IsBookingAvailable = audience.IsBookingAvailable,
-                LaptopsCount = audience.LaptopsCount,
-                Name = audience.Name,
-                PrintersCount = audience.PrintersCount,
-                ProjectorsCount = audience.ProjectorsCount,
-                SeatsCount = audience.SeatsCount
-            };
+            var vm = Mapper.Map<AudienceInfoViewModel>(audience);
 
             return PartialView("_AudienceInfoPartial", vm);
         }
