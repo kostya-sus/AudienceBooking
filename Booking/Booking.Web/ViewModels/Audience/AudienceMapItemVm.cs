@@ -1,5 +1,4 @@
 ﻿using System;
-using Booking.Enums;
 
 namespace Booking.Web.ViewModels.Audience
 {

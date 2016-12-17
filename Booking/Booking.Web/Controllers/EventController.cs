@@ -37,7 +37,6 @@ namespace Booking.Web.Controllers
         public ActionResult DisplayEventPopup(Guid eventId)
         {
             var eventEntity = _eventService.GetEvent(eventId);
-            
             var vm = Mapper.Map<Event, DisplayEventPopupViewModel>(eventEntity);
             vm.CanEdit = _eventService.CanEdit(User, eventEntity);
 
@@ -48,30 +47,8 @@ namespace Booking.Web.Controllers
         public ActionResult Index(Guid eventId)
         {
             var eventEntity = _eventService.GetEvent(eventId);
-            var audiences = _audienceService.GetAllAudiences();
-            var authorName = eventEntity.IsAuthorShown ? eventEntity.Author.UserName : eventEntity.AuthorName;
-
-            var audiencesVms = audiences.ToVmDictionary();
-
-            var participants = eventEntity.EventParticipants.ToVmDictionary();
-
-            var audienceName = audiencesVms[eventEntity.AudienceId].Name;
-
-            var vm = new DisplayEventViewModel
-            {
-                AudienceId = eventEntity.AudienceId,
-                AudienceName = audienceName,
-                Title = eventEntity.Title,
-                AdditionalInfo = eventEntity.AdditionalInfo,
-                Audiences = audiencesVms,
-                AuthorName = authorName,
-                CanEdit = _eventService.CanEdit(User, eventEntity),
-                Duration = eventEntity.Duration,
-                EventDateTime = eventEntity.StartTime,
-                Id = eventEntity.Id,
-                IsJoinAvailable = eventEntity.IsJoinAvailable,
-                ParticipantsEmails = participants
-            };
+            var vm = Mapper.Map<DisplayEventViewModel>(eventEntity);
+            vm.CanEdit = _eventService.CanEdit(User, eventEntity);
 
             return View(vm);
         }
@@ -212,7 +189,7 @@ namespace Booking.Web.Controllers
                 .ToDictionary(a => a.Id, a => a.Name);
 
             var date = DateTime.Now.AddHours(2);
-            var newMinute = (date.Minute / 10) * 10;
+            var newMinute = (date.Minute/10)*10;
             date = date.AddMinutes(newMinute - date.Minute);
 
             var viewModel = new CreateEditEventViewModel

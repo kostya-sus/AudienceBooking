@@ -51,9 +51,9 @@
                 <div id="event-calendar">
                     <div class="event-date-container">
                         <i class="fa fa-calendar" aria-hidden="true"></i>
-                        <span>@Model.EventDateTime.ToString("dd.MM.yyyy")</span>
+                        <span>@Model.StartTime.ToString("dd.MM.yyyy")</span>
                         <i class="fa fa-clock-o" aria-hidden="true"></i>
-                        <span>@Model.EventDateTime.ToString("HH:mm") - @Model.EventDateTime.AddMinutes(Model.Duration).ToString("HH:mm")</span>
+                        <span>@Model.StartTime.ToString("HH:mm") - @Model.StartTime.AddMinutes(Model.Duration).ToString("HH:mm")</span>
                     </div>
                     <div class="icons-container">
                         <i class="fa fa-calendar-plus-o" aria-hidden="true"></i>
