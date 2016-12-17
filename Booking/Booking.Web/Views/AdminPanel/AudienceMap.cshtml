@@ -9,14 +9,17 @@
 @section styles {
     <link rel="stylesheet" type="text/css" href="http://code.jquery.com/ui/1.9.2/themes/base/jquery-ui.css">
     @Styles.Render("~/Content/admin_panel/audience_map.css")
+    @Styles.Render("~/Content/room-styles.css")
 }
 
 
 <div id="map-container">
     @foreach (var audience in Model.Audiences)
     {
-        <div style="background: gray; z-index: 3; position: absolute; left: @(audience.Left)px; top: @(audience.Top)px; width: @(audience.Width)px; height: @(audience.Height)px">
-            @audience.Name
+        <div style="@audience.Style" class="room room-not-available">
+            <div class="room-title">
+                @audience.Name
+            </div>
         </div>
     }
 

@@ -23,5 +23,7 @@ namespace Booking.Services.Interfaces
         IEnumerable<Audience> GetAllAudiences();
 
         IEnumerable<Audience> GetAvailableAudiences();
+
+        string GetStyleString(Audience audience);
     }
 }

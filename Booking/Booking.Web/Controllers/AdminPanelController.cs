@@ -84,7 +84,12 @@ namespace Booking.Web.Controllers
                 Id = audienceMap.Id,
                 ImageUrl = _imageRepository.GetImageUri(audienceMap.ImageName),
                 Name = audienceMap.Name,
-                Audiences = audienceMap.Audiences
+                Audiences = audienceMap.Audiences.Select(x => new UiAudienceViewModel
+                {
+                    Name = x.Name,
+                    Style = _audienceService.GetStyleString(x),
+                    IsBookingAvailable = x.IsBookingAvailable
+                })
             };
 
             return View(vm);

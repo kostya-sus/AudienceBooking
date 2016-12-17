@@ -215,6 +215,7 @@
     <Compile Include="ViewModels\AdminPanel\AudienceMapViewModel.cs" />
     <Compile Include="ViewModels\AdminPanel\CreateAudienceViewModel.cs" />
     <Compile Include="ViewModels\AdminPanel\NewAudienceMapViewModel.cs" />
+    <Compile Include="ViewModels\AdminPanel\UiAudienceViewModel.cs" />
     <Compile Include="ViewModels\Audience\AudienceInfoViewModel.cs" />
     <Compile Include="ViewModels\Audience\AudienceMapItemVm.cs" />
     <Compile Include="ViewModels\Audience\AudienceScheduleItemViewModel.cs" />
@@ -255,6 +256,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\admin_panel\audience_map.css" />
+    <Content Include="Content\admin_panel\layout.css" />
     <Content Include="Content\audience-info.css" />
     <Content Include="Content\bootstrap-datepicker.css" />
     <Content Include="Content\bootstrap.css" />

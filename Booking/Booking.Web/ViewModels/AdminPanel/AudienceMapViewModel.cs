@@ -17,6 +17,6 @@ namespace Booking.Web.ViewModels.AdminPanel
         [Required]
         public string ImageUrl { get; set; }
 
-        public IEnumerable<Models.EfModels.Audience> Audiences { get; set; }
+        public IEnumerable<UiAudienceViewModel> Audiences { get; set; }
     }
 }
