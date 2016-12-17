@@ -9,6 +9,11 @@
             @Html.TextBoxFor(m => m.Name)
         </div>
 
+        <div class="form-group">
+            @Html.LabelFor(m => m.IsBookingAvailable)
+            @Html.CheckBoxFor(m => m.IsBookingAvailable)
+        </div>
+
         @Html.HiddenFor(m => m.AudienceMapId)
 
         @Html.HiddenFor(m => m.Left)

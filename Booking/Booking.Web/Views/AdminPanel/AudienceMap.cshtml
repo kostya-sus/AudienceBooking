@@ -16,7 +16,7 @@
 <div id="map-container">
     @foreach (var audience in Model.Audiences)
     {
-        <div style="@audience.Style" class="room room-not-available">
+        <div style="@audience.Style" class="room @(audience.IsBookingAvailable ? "room-available" : "room-not-available")">
             <div class="room-title">
                 @audience.Name
             </div>
