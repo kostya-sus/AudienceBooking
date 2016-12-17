@@ -9,7 +9,7 @@ namespace Booking.Web.ViewModels.Event
     {
         public Guid Id { get; set; }
 
-        public AudiencesEnum AudienceId { get; set; }
+        public Guid AudienceId { get; set; }
 
         public string AudienceName { get; set; }
 
