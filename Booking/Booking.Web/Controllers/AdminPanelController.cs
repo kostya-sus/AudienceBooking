@@ -11,6 +11,7 @@ using Booking.Repositories.Interfaces;
 using Booking.Repositories.Repositories;
 using Booking.Services.Interfaces;
 using Booking.Services.Services;
+using Booking.Web.Helpers;
 using Booking.Web.ViewModels.AdminPanel;
 
 namespace Booking.Web.Controllers
@@ -34,6 +35,7 @@ namespace Booking.Web.Controllers
         {
             var vm = new AdminPanelViewModel
             {
+                ActiveMapId = AudienceMapSelector.AudienceMapId,
                 AudienceMaps = _audienceMapService.GetAllAudienceMaps().ToDictionary(x => x.Id, x => x.Name)
             };
 
@@ -143,6 +145,15 @@ namespace Booking.Web.Controllers
         {
             _audienceService.DeleteAudienceById(id);
             return RedirectToAction("AudienceMap", new {id = audienceMapId});
+        }
+
+        [HttpPost]
+        [Authorize(Roles = "Admin")]
+        [ValidateAntiForgeryToken]
+        public ActionResult SetActiveAudienceMap(Guid id)
+        {
+            AudienceMapSelector.AudienceMapId = id;
+            return RedirectToAction("Index");
         }
     }
 }

@@ -9,7 +9,13 @@
             @using (Html.BeginForm("DeleteAudienceMap", "AdminPanel", new {id = pair.Key}, FormMethod.Post))
             {
                 @Html.AntiForgeryToken()
-                <button type="submit">Delete</button>
+                <button type="submit" class="btn btn-danger">Delete</button>
+            }
+
+            @using (Html.BeginForm("SetActiveAudienceMap", "AdminPanel", new {id = pair.Key}, FormMethod.Post))
+            {
+                @Html.AntiForgeryToken()
+                <button type="submit" class="btn @(Model.ActiveMapId == pair.Key ? "btn-default" : "btn-primary")">Set active</button>
             }
         </li>
     }
