@@ -12,6 +12,7 @@ using Booking.Services.Interfaces;
 using Booking.Services.Services;
 using Booking.Web.Helpers;
 using Booking.Web.ViewModels.Audience;
+using Booking.Web.ViewModels.AudienceMap;
 using Booking.Web.ViewModels.Event;
 using Microsoft.Ajax.Utilities;
 using Microsoft.AspNet.Identity;
@@ -190,7 +191,8 @@ namespace Booking.Web.Controllers
 
             if (!_audienceService.IsFree(vm.AudienceId, vm.StartTime, duration, vm.Id))
             {
-                var audiences = _audienceService.GetAllAudiences();
+                var model = _audienceMapService.GetAudienceMap(AudienceMapSelector.AudienceMapId);
+                vm.AudienceMap = Mapper.Map<AudienceMapViewModel>(model);
                 vm.ParticipantsEmails = eventEntity.EventParticipants.ToVmDictionary();
                 return View("Edit", vm);
             }
