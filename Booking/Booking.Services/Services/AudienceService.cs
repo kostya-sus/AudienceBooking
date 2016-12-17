@@ -102,11 +102,6 @@ namespace Booking.Services.Services
             return _unitOfWork.AudienceRepository.GetAllAudiences();
         }
 
-        public IEnumerable<Audience> GetAvailableAudiences()
-        {
-            return _unitOfWork.AudienceRepository.GetAllAudiences().Where(x => x.IsBookingAvailable);
-        }
-
         public string GetStyleString(Audience audience)
         {
             return string.Format("left:{0}px; top: {1}px; width: {2}px; height: {3}px",

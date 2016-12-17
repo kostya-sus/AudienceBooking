@@ -47,6 +47,8 @@ namespace Booking.Web.AutoMapper.AutoMapperProfiles
                     opt =>
                         opt.MapFrom(source => source.EventParticipants.ToDictionary(p => p.Id, p => p.ParticipantEmail)))
                 .ForMember(dest => dest.AudienceMap, opt => opt.MapFrom(source => source.Audience.AudienceMap));
+
+            CreateMap<CreateEditEventViewModel, Event>();
         }
     }
 }

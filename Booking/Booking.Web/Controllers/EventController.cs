@@ -23,6 +23,7 @@ namespace Booking.Web.Controllers
     {
         private readonly IEventService _eventService;
         private readonly IAudienceService _audienceService;
+        private readonly IAudienceMapService _audienceMapService;
 
         public EventController()
         {
@@ -31,6 +32,7 @@ namespace Booking.Web.Controllers
             var usersService = new UsersService();
             var emailNotificationService = new EmailNotificationService();
             _eventService = new EventService(uof, usersService, emailNotificationService);
+            _audienceMapService = new AudienceMapService(uof);
         }
 
         [HttpGet]
@@ -65,7 +67,7 @@ namespace Booking.Web.Controllers
         [Authorize]
         public ActionResult GetNewEventPopup()
         {
-            var audiences = _audienceService.GetAllAudiences().ToList();
+            var audiences = _audienceMapService.GetAudienceMap(AudienceMapSelector.AudienceMapId).Audiences;
             var availableAudiences = audiences.Where(a => a.IsBookingAvailable)
                 .ToDictionary(a => a.Id, a => a.Name);
 
@@ -80,6 +82,7 @@ namespace Booking.Web.Controllers
                 StartTime = date,
                 IsPublic = true
             };
+
             return PartialView("_NewEventPartial", viewModel);
         }
 
@@ -127,21 +130,12 @@ namespace Booking.Web.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            Event newEvent = new Event();
-            {
-                newEvent.Title = vm.Title;
-                newEvent.StartTime = vm.StartTime;
-                newEvent.AdditionalInfo = vm.AdditionalInfo;
-                newEvent.AudienceId = vm.AudienceId;
-                newEvent.Duration = duration;
-                newEvent.IsAuthorShown = vm.IsAuthorShown;
-                newEvent.IsJoinAvailable = vm.IsJoinAvailable;
-                newEvent.IsPublic = vm.IsPublic;
-                newEvent.AuthorName = vm.AuthorName;
-                newEvent.AuthorId = User.Identity.GetUserId();
-            }
-
+            Event newEvent = Mapper.Map<Event>(vm);
+            newEvent.Duration = duration;
+            newEvent.AuthorId = User.Identity.GetUserId();
+            
             _eventService.CreateEvent(newEvent);
+
             return new HttpStatusCodeResult(HttpStatusCode.OK);
         }
 
@@ -165,6 +159,7 @@ namespace Booking.Web.Controllers
         [Authorize]
         public ActionResult EditPopup(Guid eventId)
         {
+            // TODO replace with mapping
             var audiences = _audienceService.GetAllAudiences().ToList();
             var availableAudiences = audiences.Where(a => a.IsBookingAvailable)
                 .ToDictionary(a => a.Id, a => a.Name);
