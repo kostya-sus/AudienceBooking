@@ -11,7 +11,9 @@ namespace Booking.Repositories.Interfaces
         IQueryable<Audience> GetAllAudiences();
 
         Audience GetAudienceById(Guid id);
-        
+
+        void CreateAudience(Audience audience);
+
         void UpdateAudience(Audience audience);
         
         void Save();

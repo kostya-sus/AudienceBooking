@@ -1,0 +1,78 @@
+﻿@using Booking.Web.ViewModels.AdminPanel
+@model Booking.Web.ViewModels.AdminPanel.AudienceMapViewModel
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>@Model.Name</title>
+    <link rel="stylesheet" type="text/css" href="http://code.jquery.com/ui/1.9.2/themes/base/jquery-ui.css">
+    <style>
+        #new-audience-div {
+            position: absolute !important;
+            background: blue;
+            width: 50px;
+            height: 50px;
+            top: 0;
+            left: 0;
+            z-index: 20;
+        }
+
+        #map-container {
+            position: relative;
+            z-index: 10;
+        }
+
+        #new-audience-form { visibility: hidden; }
+    </style>
+</head>
+<body>
+<div id="map-container">
+    <img src="@Model.ImageUrl"/>
+</div>
+
+<button id="new-audience">New audience</button>
+
+@Html.Partial("_NewAudienceForm", new CreateAudienceViewModel {AudienceMapId = Model.Id})
+
+@Scripts.Render("~/bundles/jquery")
+@Scripts.Render("//code.jquery.com/ui/1.12.1/jquery-ui.js")
+<script>
+    $(document)
+        .ready(function() {
+            $("#new-audience")
+                .click(function() {
+                    var $mapContainer = $("#map-container");
+                    var children = $("#map-container").children("#new-audience-div");
+                    if (children.length === 0) {
+                        var $modeBtn = $("<button id='mode-btn'>m</button>");
+                        var $audience = $("<div id='new-audience-div'></div>");
+                        $audience.append($modeBtn);
+                        $audience.draggable();
+                        $mapContainer.append($audience);
+                        
+                        var $newAudienceForm = $("#new-audience-form");
+                        $newAudienceForm.css("visibility", "visible");
+                        $newAudienceForm.submit(function () {
+                            $("#Left").val(parseInt($audience.css("left")));
+                            $("#Top").val(parseInt($audience.css("top")));
+                            $("#Width").val(parseInt($audience.css("width")));
+                            $("#Height").val(parseInt($audience.css("height")));
+                        });
+
+                        $modeBtn.click(function() {
+                            var $elem = $("#new-audience-div");
+                            if ($elem.data("uiDraggable")) {
+                                $elem.draggable("destroy");
+                                $elem.resizable();
+                            } else {
+                                $elem.resizable("destroy");
+                                $elem.draggable();
+                            }
+                        });
+                    }
+                });
+        });
+</script>
+</body>
+</html>

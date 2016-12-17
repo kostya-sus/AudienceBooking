@@ -10,6 +10,8 @@ namespace Booking.Services.Interfaces
     {
         Audience GetAudience(Guid audienceId);
 
+        void CreateAudience(Audience audience);
+
         void UpdateAudience(Audience audience);
 
         void CloseAudience(Guid audienceId);

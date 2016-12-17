@@ -17,13 +17,15 @@ namespace Booking.Web.Controllers
 {
     public class AdminPanelController : Controller
     {
-        private IAudienceMapService _audienceMapService;
-        private IImageRepository _imageRepository = new ImageBlobRepository();
+        private readonly IAudienceMapService _audienceMapService;
+        private readonly IAudienceService _audienceService;
+        private readonly IImageRepository _imageRepository = new ImageBlobRepository();
 
         public AdminPanelController()
         {
             var uof = new UnitOfWork();
             _audienceMapService = new AudienceMapService(uof);
+            _audienceService = new AudienceService(uof);
         }
 
         [HttpGet]
@@ -39,7 +41,7 @@ namespace Booking.Web.Controllers
         }
 
         [HttpGet]
-        [Authorize(Roles="Admin")]
+        [Authorize(Roles = "Admin")]
         public ActionResult CreateAudienceMapPage()
         {
             return View();
@@ -58,7 +60,7 @@ namespace Booking.Web.Controllers
             };
 
             _audienceMapService.CreateAudienceMap(model);
-            
+
             return RedirectToAction("Index");
         }
 
@@ -70,6 +72,51 @@ namespace Booking.Web.Controllers
             var audienceMap = _audienceMapService.GetAudienceMap(id);
             _audienceMapService.DeleteAudienceMap(audienceMap);
             return RedirectToAction("Index");
+        }
+
+        [HttpGet]
+        [Authorize(Roles = "Admin")]
+        public ActionResult AudienceMap(Guid id)
+        {
+            var audienceMap = _audienceMapService.GetAudienceMap(id);
+            var vm = new AudienceMapViewModel
+            {
+                Id = audienceMap.Id,
+                ImageUrl = _imageRepository.GetImageUri(audienceMap.ImageName),
+                Name = audienceMap.Name
+            };
+
+            return View(vm);
+        }
+
+        [HttpPost]
+        [Authorize(Roles = "Admin")]
+        public ActionResult CreateAudience(CreateAudienceViewModel vm)
+        {
+            _imageRepository.UploadImage(vm.LineDetailsImage.InputStream, vm.LineDetailsImage.FileName);
+            _imageRepository.UploadImage(vm.RouteImage.InputStream, vm.RouteImage.FileName);
+
+            var model = new Audience
+            {
+                Name = vm.Name,
+                AudienceMapId = vm.AudienceMapId,
+                IsBookingAvailable = vm.IsBookingAvailable,
+                Left = vm.Left,
+                Top = vm.Top,
+                Width = vm.Width,
+                Height = vm.Height,
+                SeatsCount = vm.SeatsCount,
+                BoardsCount = vm.BoardsCount,
+                LaptopsCount = vm.LaptopsCount,
+                PrintersCount = vm.PrintersCount,
+                ProjectorsCount = vm.ProjectorsCount,
+                LineDetailsImageName = _imageRepository.GetImageUri(vm.LineDetailsImage.FileName),
+                RouteImageName = _imageRepository.GetImageUri(vm.RouteImage.FileName)
+            };
+
+            _audienceService.CreateAudience(model);
+
+            return RedirectToAction("AudienceMap", new {id = vm.AudienceMapId});
         }
     }
 }

@@ -12,9 +12,9 @@
         @foreach (var pair in Model.AudienceMaps)
         {
             <li>
-                <a href="#">@pair.Value</a>
+                <a href="@Url.Action("AudienceMap", "AdminPanel", new {id = pair.Key})">@pair.Value</a>
 
-                @using (Html.BeginForm("DeleteAudienceMap", "AdminPanel", new {id=pair.Key}, FormMethod.Post))
+                @using (Html.BeginForm("DeleteAudienceMap", "AdminPanel", new {id = pair.Key}, FormMethod.Post))
                 {
                     @Html.AntiForgeryToken()
                     <button type="submit">Delete</button>

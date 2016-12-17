@@ -212,6 +212,8 @@
     <Compile Include="ViewModels\Account\SendCodeViewModel.cs" />
     <Compile Include="ViewModels\Account\VerifyCodeViewModel.cs" />
     <Compile Include="ViewModels\AdminPanel\AdminPanelViewModel.cs" />
+    <Compile Include="ViewModels\AdminPanel\AudienceMapViewModel.cs" />
+    <Compile Include="ViewModels\AdminPanel\CreateAudienceViewModel.cs" />
     <Compile Include="ViewModels\AdminPanel\NewAudienceMapViewModel.cs" />
     <Compile Include="ViewModels\Audience\AudienceInfoViewModel.cs" />
     <Compile Include="ViewModels\Audience\AudienceMapItemVm.cs" />
@@ -412,6 +414,8 @@
     <Content Include="Views\AdminPanel\_ViewStart.cshtml" />
     <Content Include="Views\AdminPanel\Index.cshtml" />
     <Content Include="Views\AdminPanel\CreateAudienceMapPage.cshtml" />
+    <Content Include="Views\AdminPanel\AudienceMap.cshtml" />
+    <Content Include="Views\AdminPanel\_NewAudienceForm.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

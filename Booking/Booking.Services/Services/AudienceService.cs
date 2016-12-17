@@ -25,6 +25,12 @@ namespace Booking.Services.Services
             return _unitOfWork.AudienceRepository.GetAudienceById(audienceId);
         }
 
+        public void CreateAudience(Audience audience)
+        {
+            _unitOfWork.AudienceRepository.CreateAudience(audience);
+            _unitOfWork.Save();
+        }
+
         public void UpdateAudience(Audience audience)
         {
             _unitOfWork.AudienceRepository.UpdateAudience(audience);

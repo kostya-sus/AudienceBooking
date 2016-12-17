@@ -31,6 +31,11 @@ namespace Booking.Repositories.Repositories
             return _context.Audiences.Find(id);
         }
 
+        public void CreateAudience(Audience audience)
+        {
+            _context.Audiences.Add(audience);
+        }
+
         public void UpdateAudience(Audience audience)
         {
             _context.Entry(audience).State = EntityState.Modified;
