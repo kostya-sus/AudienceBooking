@@ -52,12 +52,14 @@ namespace Booking.Web.Controllers
         [Authorize(Roles = "Admin")]
         public async Task<ActionResult> CreateAudienceMap(NewAudienceMapViewModel vm)
         {
-            await _imageRepository.UploadImageAsync(vm.Image.InputStream, vm.Image.FileName);
             var model = new AudienceMap
             {
                 Name = vm.Name,
                 ImageName = vm.Image.FileName
             };
+
+            await _imageRepository.UploadImageAsync(vm.Image.InputStream, vm.Image.FileName);
+            model.ImageName = vm.Image.FileName;
 
             _audienceMapService.CreateAudienceMap(model);
 
@@ -99,9 +101,6 @@ namespace Booking.Web.Controllers
         [Authorize(Roles = "Admin")]
         public ActionResult CreateAudience(CreateAudienceViewModel vm)
         {
-            _imageRepository.UploadImage(vm.LineDetailsImage.InputStream, vm.LineDetailsImage.FileName);
-            _imageRepository.UploadImage(vm.RouteImage.InputStream, vm.RouteImage.FileName);
-
             var model = new Audience
             {
                 Name = vm.Name,
@@ -115,10 +114,20 @@ namespace Booking.Web.Controllers
                 BoardsCount = vm.BoardsCount,
                 LaptopsCount = vm.LaptopsCount,
                 PrintersCount = vm.PrintersCount,
-                ProjectorsCount = vm.ProjectorsCount,
-                LineDetailsImageName = _imageRepository.GetImageUri(vm.LineDetailsImage.FileName),
-                RouteImageName = _imageRepository.GetImageUri(vm.RouteImage.FileName)
+                ProjectorsCount = vm.ProjectorsCount
             };
+
+            if (vm.LineDetailsImage != null)
+            {
+                _imageRepository.UploadImage(vm.LineDetailsImage.InputStream, vm.LineDetailsImage.FileName);
+                model.LineDetailsImageName = _imageRepository.GetImageUri(vm.LineDetailsImage.FileName);
+            }
+            if (vm.RouteImage != null)
+            {
+                _imageRepository.UploadImage(vm.RouteImage.InputStream, vm.RouteImage.FileName);
+                model.RouteImageName = _imageRepository.GetImageUri(vm.RouteImage.FileName);
+            }
+
 
             _audienceService.CreateAudience(model);
 
