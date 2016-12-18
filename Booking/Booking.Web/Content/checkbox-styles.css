@@ -23,19 +23,24 @@ input[type="checkbox"]:checked + label span { background: url(Images/check_btn_s
 .red-toggle input[type="checkbox"].red-toggle-input + label .red-toggle-container {
     width: 46px;
     height: 26px;
+    background: url(Images/red-toggle-container-gray.png) left top no-repeat;
+}
+
+.red-toggle input[type="checkbox"].red-toggle-input:checked + label .red-toggle-container {
     background: url(Images/red-toggle-container.png) left top no-repeat;
 }
 
 .red-toggle input[type="checkbox"].red-toggle-input + label .red-toggle-circle {
     width: 46px;
     height: 26px;
-    background: url(Images/red-toggle-circle.png) left top 2px no-repeat;
+    background: url(Images/red-toggle-circle-gray.png) left top 2px no-repeat;
     animation-duration: 0.5s;
     animation-name: red-toggle-slide-back;
     margin-left: 22px;
 }
 
 .red-toggle input[type="checkbox"].red-toggle-input:checked + label .red-toggle-circle {
+    background: url(Images/red-toggle-circle.png) left top 2px no-repeat;
     animation-duration: 0.5s;
     animation-name: red-toggle-slide;
     margin-left: 0;
