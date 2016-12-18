@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using Booking.Models;
 using Booking.Models.EfModels;
@@ -34,6 +36,13 @@ namespace Booking.Repositories.Repositories
                 StartHour = 0,
                 EndHour = 0
             };
+        }
+
+        public IQueryable<BookingScheduleRule> GetAppliedRulesByMonth(int month, int year)
+        {
+            var query = _context.BookingScheduleRules.Where(x => x.AppliedDate.Month == month &&
+                                                                 x.AppliedDate.Year == year);
+            return query;
         }
 
         public virtual void Dispose(bool disposing)

@@ -1,0 +1,60 @@
+﻿@model Booking.Web.ViewModels.AdminPanel.CreateScheduleRuleViewModel
+
+<h2>New schedule rule</h2>
+
+@using (Html.BeginForm("CreateScheduleRule", "AdminPanel", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+
+    <p>
+        Applied date:
+        @Html.EditorFor(m => m.AppliedDate, new {htmlAttributes = new {id = "datepicker" } })
+    </p>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.ForSunday)
+        @Html.EditorFor(m => m.ForSunday)
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.ForMonday)
+        @Html.EditorFor(m => m.ForMonday)
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.ForTuesday)
+        @Html.EditorFor(m => m.ForTuesday)
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.ForWednesday)
+        @Html.EditorFor(m => m.ForWednesday)
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.ForThursday)
+        @Html.EditorFor(m => m.ForThursday)
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.ForFriday)
+        @Html.EditorFor(m => m.ForFriday)
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.ForSaturday)
+        @Html.EditorFor(m => m.ForSaturday)
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.StartHour)
+        @Html.EditorFor(m => m.StartHour)
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.EndHour)
+        @Html.EditorFor(m => m.EndHour)
+    </div>
+
+    <button type="submit" class="btn btn-success">Create</button>
+}

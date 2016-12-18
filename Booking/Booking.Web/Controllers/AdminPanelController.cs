@@ -159,5 +159,14 @@ namespace Booking.Web.Controllers
             AudienceMapSelector.AudienceMapId = id;
             return RedirectToAction("Index");
         }
+
+
+        [HttpPost]
+        [Authorize(Roles = "Admin")]
+        [ValidateAntiForgeryToken]
+        public ActionResult CreateScheduleRule(CreateScheduleRuleViewModel vm)
+        {
+            return RedirectToAction("Index");
+        }
     }
 }

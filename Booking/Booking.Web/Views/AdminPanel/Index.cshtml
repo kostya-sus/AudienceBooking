@@ -1,4 +1,29 @@
-﻿@model Booking.Web.ViewModels.AdminPanel.AdminPanelViewModel
+﻿@using Booking.Web.ViewModels.AdminPanel
+@model Booking.Web.ViewModels.AdminPanel.AdminPanelViewModel
+
+@section scripts{
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/Scripts/bootstrap-datepicker/js/bootstrap-datepicker.js")
+
+    <script>
+        $(document).ready(function () {
+
+            var dp = $("#datepicker");
+
+            dp.datepicker({
+                format: 'dd/MM/yyyy'
+            });
+
+            dp.on('changeDate', function (ev) {
+                dp.val(ev.target.value);
+            });
+
+        });
+    </script>
+}
+@section styles {
+    @Styles.Render("~/Content/bootstrap-datepicker.css")
+}
 
 <ul>
     @foreach (var pair in Model.AudienceMaps)
@@ -22,3 +47,5 @@
 </ul>
 
 <a href="@Url.Action("CreateAudienceMapPage", "AdminPanel")">Create new audience map</a>
+
+@Html.Partial("_NewScheduleRulePartial", new CreateScheduleRuleViewModel {AppliedDate = DateTime.Now})

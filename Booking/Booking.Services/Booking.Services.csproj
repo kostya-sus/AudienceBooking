@@ -67,6 +67,7 @@
   <ItemGroup>
     <Compile Include="Interfaces\IAudienceMapService.cs" />
     <Compile Include="Interfaces\IAudienceService.cs" />
+    <Compile Include="Interfaces\IBookingScheduleRuleService.cs" />
     <Compile Include="Interfaces\IEmailNotificationService.cs" />
     <Compile Include="Interfaces\IEventService.cs" />
     <Compile Include="Interfaces\IScheduleService.cs" />
@@ -79,6 +80,7 @@
     </Compile>
     <Compile Include="Services\AudienceMapService.cs" />
     <Compile Include="Services\AudienceService.cs" />
+    <Compile Include="Services\BookingScheduleRuleService.cs" />
     <Compile Include="Services\EmailNotificationService.cs" />
     <Compile Include="Services\EventService.cs" />
     <Compile Include="Services\ContactService.cs" />
