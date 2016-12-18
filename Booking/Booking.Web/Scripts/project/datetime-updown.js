@@ -1,19 +1,13 @@
 ﻿function configureDatetimeUpdown(containerId, startDateId, endDateId) {
     var scheduleRuleUrl = $("#get-schedule-rule-url").val();
-    var nextAvailableDateUrl = $("#get-next-previous-date-url").val();
-
-    function getScheduleRuleUrl(date) {
-        return scheduleRuleUrl + "?date=" + date.toISOString();
+    var nextAvailableDateUrl = $("#get-next-available-date-url").val();
+    var previousAvailableDateUrl = $("#get-previous-available-date-url").val();
+    
+    function parseMvcDate(dateStr) {
+        return new Date(parseInt(dateStr.replace("/Date(", "").replace(")/", ""), 10));
     }
 
-    var currentScheduleRule;
-
-    function updateScheduleRule(date) {
-        $.get(getScheduleRuleUrl(date))
-            .done(function(data) {
-                currentScheduleRule = data;
-            });
-    }
+    setNextAvailableDate(new Date);
 
     var $container = $("#" + containerId);
     var $startDate = $("#" + startDateId);
@@ -49,6 +43,51 @@
 
     var startDate = new Date($startDate.val());
     var endDate = new Date($endDate.val());
+
+    function setAndUpdate() {
+        setStartDate();
+        setEndDate();
+        updateView();
+    }
+
+    function addMinutes(date, minutes) {
+        return new Date(date.getTime() + minutes * 60000);
+    }
+
+    function diffInMinutes(date1, date2) {
+        return Math.floor((date2 - date1) / 60000);
+    }
+
+    function getUrlWithDate(url, date) {
+        return url + "?date=" + date.toISOString();
+    }
+
+    var currentScheduleRule;
+
+    function updateScheduleRule(date) {
+        $.get(getUrlWithDate(scheduleRuleUrl, date))
+            .done(function(data) {
+                currentScheduleRule = data;
+            });
+    }
+
+    function setNextAvailableDate(date) {
+        $.get(getUrlWithDate(nextAvailableDateUrl, date))
+            .done(function(data) {
+                startDate = parseMvcDate(data.Date);
+                endDate = addMinutes(startDate, 20);
+                setAndUpdate();
+            });
+    }
+
+    function setPreviousAvailableDate(date) {
+        $.get(getUrlWithDate(previousAvailableDateUrl, date))
+            .done(function (data) {
+                startDate = parseMvcDate(data.Date);
+                endDate = addMinutes(startDate, 20);
+                setAndUpdate();
+            });
+    }
 
 
     updateScheduleRule(startDate);
@@ -103,15 +142,7 @@
         var minutes = Math.floor(diff / 60000);
         return dateNow < eventStart && minutes >= 20;
     }
-
-    function addMinutes(date, minutes) {
-        return new Date(date.getTime() + minutes * 60000);
-    }
-
-    function diffInMinutes(date1, date2) {
-        return Math.floor((date2 - date1) / 60000);
-    }
-
+    
     function backupDateAndTryToChange(callback) {
         var prevStartDate = new Date(startDate.getTime());
         var prevEndDate = new Date(endDate.getTime());
@@ -122,12 +153,6 @@
             endDate.setMinutes(startDate.getMinutes() + 20);
         }
 
-        setStartDate();
-        setEndDate();
-        updateView();
-    }
-
-    function setAndUpdate() {
         setStartDate();
         setEndDate();
         updateView();

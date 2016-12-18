@@ -130,7 +130,7 @@ namespace Booking.Services.Services
                 var rule = GetRule(date);
                 if (BookingAvailable(rule))
                 {
-                    return new DateTime(date.Year, date.Month, date.Day, rule.StartHour, 0, 0);
+                    return new DateTime(date.Year, date.Month, date.Day, rule.EndHour - 1, 40, 0);
                 }
             }
 
