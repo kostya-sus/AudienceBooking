@@ -23,15 +23,20 @@ namespace Booking.Web.Controllers
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
+        private readonly UsersService _usersService;
+        private readonly ScheduleService _schudeleServise;
 
         public ManageController()
         {
+            _usersService = new UsersService();
+            _schudeleServise = new ScheduleService();
         }
 
         public ManageController(ApplicationUserManager userManager, ApplicationSignInManager signInManager)
         {
             UserManager = userManager;
             SignInManager = signInManager;
+           
         }
 
         public ApplicationSignInManager SignInManager
@@ -234,6 +239,7 @@ namespace Booking.Web.Controllers
           var user = await UserManager.FindByIdAsync(userId);
             if (user != null)
             {
+                var events = _schudeleServise.GetEventsByAuthor(user);
                
                 var result = await UserManager.DeleteAsync(user);
                
@@ -252,7 +258,7 @@ namespace Booking.Web.Controllers
             
             ApplicationUser user =UserManager.FindById(model.Id);
             if (user != null)
-            {
+            {                
                 user.UserName = model.Name;
                 user.Email = model.Email;                              
                 IdentityResult result = UserManager.Update(user);
@@ -390,11 +396,11 @@ namespace Booking.Web.Controllers
             base.Dispose(disposing);
         }
 
-        public ActionResult UserList(int? page, string searchString)
+        public ActionResult UserList(int? page)
         {
             var Users = new List<UsersListItemViewModel>();
             var test = UserManager.Users.ToList();
-
+            string searchString = null;
             if (!String.IsNullOrEmpty(searchString))
             {
                 test = test.Where(s => s.UserName.Contains(searchString)).ToList();
@@ -411,15 +417,13 @@ namespace Booking.Web.Controllers
                     {
                         Id = item.Id,
                         Name = item.UserName,
-                        Email = item.Email,
-                        IsAdmin = new SheduleService().IsAdmin(item),
-                        ActiveEventsCount = new SheduleService().GetEvenByAuthor(item.Id)
+                        Email = item.Email,                                                      
+                        IsAdmin = _usersService.IsAdmin(item),
+                        ActiveEventsCount = _usersService.GetEvenByAuthor(item.Id)
                     }
                     );
                 
-            }          
-            
-          
+            }  
             return View("UsersList", Users.ToPagedList(pageNumber, pageSize));
         }
         #region Helpers

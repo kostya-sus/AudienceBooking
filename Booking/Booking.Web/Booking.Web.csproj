@@ -291,6 +291,7 @@
     <Content Include="Content\Images\schedule\today-bottom.png" />
     <Content Include="Content\Images\schedule\today-top.png" />
     <Content Include="Content\PagedList.css" />
+    <Content Include="Content\Users.css" />
     <Content Include="Content\Profile-inputs.css" />
     <Content Include="Content\schedule.css" />
     <Content Include="Content\Images\contact-bg.png" />

@@ -1,0 +1,135 @@
+﻿.password-place{
+    width: 49%; 
+    display: inline-block;
+    background-color: #EBEEF7;
+    float: right;
+}
+
+.admin{
+    background-color: #F95752;
+    color: white;
+    border-radius: 15px;
+    margin: 2px auto;
+    padding: 2px 5px;
+    width: 55px;
+    display: inline-block;
+    text-align: center;
+}
+
+tbody tr:hover{
+    background-color:#F4F6FB;
+}
+
+
+tbody tr td:last-child:hover{   
+    text-decoration-color: red; 
+    color: red;
+    visibility: visible;
+}
+
+
+
+.profile-input {
+    border: 1px #f5f6fb;
+    border-radius: 50px;
+    background: white;
+    margin: 0px auto;
+    outline: none;
+    height: 35px;
+    color: #656d7f;
+    font-size: 13px;
+    padding: 15px;
+    width: 100%;
+}
+.profile-input-edit {
+    border: 2px solid #f5f6fb;
+    border-radius: 50px;
+    background: white;
+    margin: 0px auto;
+    outline: none;
+    height: 35px;
+    color: #656d7f;
+    font-size: 13px;
+    padding: 15px;
+    width: 60%;
+}
+
+
+.profile-input[type=password] {
+    letter-spacing: 5px;
+    font-size: 20px;
+}
+
+.profile-input[type=password]::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+    letter-spacing: normal;
+    font-size: 13px;
+    /*color: #a6abb6;*/
+}
+
+.profile-input[type=password]::-moz-placeholder { /* Firefox 19+ */
+    letter-spacing: normal;
+    font-size: 13px;
+}
+
+.profile-input[type=password]:-ms-input-placeholder { /* IE 10+ */
+    letter-spacing: normal;
+    font-size: 13px;
+}
+
+.profile-input[type=password]:-moz-placeholder { /* Firefox 18- */
+    letter-spacing: normal;
+    font-size: 13px;
+}
+
+
+.profile-submit {
+    background: #c8cdd9;
+    display: block;
+    margin: 10px auto;
+    min-width: 150px;
+    height: 35px;
+    border: 0 none;
+    cursor: pointer;
+    border-radius: 50px;
+    font-size: 12px;
+    color: #000000;
+}
+
+.profile-submit:hover {
+    background: #f95752;
+    display: block;
+    margin: 10px auto;
+    min-width: 150px;
+    height: 35px;
+    border: 0 none;
+    cursor: pointer;
+    border-radius: 50px;
+    font-size: 12px;
+    color: white;
+}
+
+.validation-error {
+    display: block;
+    color: #656d7f;
+    font-size: 9px;
+    margin-left: 0;
+    height: 12px;
+}
+
+.validation-error i { color: #f95752; }
+
+.validation-summary-error {
+    margin-top: 7px;
+    margin-left: -30px;
+    margin-right: -30px;
+    color: #656d7f;
+    height: 20px;
+    font-size: 13px;
+    text-align: center;
+}
+
+.validation-summary-error > i {
+    color: #f95752;
+    font-size: 20px;
+}
+

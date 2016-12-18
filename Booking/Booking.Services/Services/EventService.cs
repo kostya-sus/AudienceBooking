@@ -119,5 +119,7 @@ namespace Booking.Services.Services
 
             return (userId == eventEntity.AuthorId) || _usersService.IsAdmin(userPrincipal);
         }
+
+       
     }
 }

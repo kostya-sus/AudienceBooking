@@ -18,18 +18,27 @@ namespace Booking.Web.Controllers
 {
     public class ProfileController : Controller
     {
+
+        private readonly IUsersService _usersService;
+
+        public ProfileController()
+        {
+           _usersService = new UsersService();
+           
+
+        }
         [HttpGet]
         public ActionResult Index(string userId)
         {
-            var user = new SheduleService().GetUserById(userId);
+            var user = _usersService.GetUserById(userId);
             var vm = new ProfileViewModel()
             {
                 UserInfo = new UserInfoViewModel
                 {
-                    IsProfileAdmin = new SheduleService().IsAdmin(user),
+                    IsProfileAdmin = _usersService.IsAdmin(user),
                     Name = user.UserName,
                     Email = user.Email,
-                    ActiveEventsCount = new SheduleService().GetEvenByAuthor(userId),
+                    ActiveEventsCount = _usersService.GetEvenByAuthor(userId),
                     Id = userId
                     
                 },
@@ -51,15 +60,15 @@ namespace Booking.Web.Controllers
         [Authorize]
         public ActionResult Edit(string userId)
         {
-            var user = new SheduleService().GetUserById(userId);
+            var user = _usersService.GetUserById(userId);
             var vm = new ProfileViewModel()
             {
                 UserInfo = new UserInfoViewModel
                 {
-                    IsProfileAdmin = new SheduleService().IsAdmin(user),
+                    IsProfileAdmin = _usersService.IsAdmin(user),
                     Name = user.UserName,
                     Email = user.Email,
-                    ActiveEventsCount = new SheduleService().GetEvenByAuthor(userId),
+                    ActiveEventsCount = _usersService.GetEvenByAuthor(userId),
                     Id = userId
 
                 },

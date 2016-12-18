@@ -23,7 +23,7 @@ namespace Booking.Web.Controllers
         {
             var uof = new UnitOfWork();
             _audienceService = new AudienceService(uof);
-            var usersService = new SheduleService();
+            var usersService = new UsersService();
             var emailNotificationService = new EmailNotificationService();
             _eventService = new EventService(uof, usersService, emailNotificationService);
            

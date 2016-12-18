@@ -9,13 +9,13 @@ using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace Booking.Services.Services
 {
-    public class SheduleService : IUsersService
+    public class UsersService : IUsersService
     {
         private readonly BookingDbContext _context;
         private readonly UserManager<ApplicationUser> _userManager;
         
 
-        public SheduleService()
+        public UsersService()
         {
             _context = new BookingDbContext();
             var userStore = new UserStore<ApplicationUser>(_context);

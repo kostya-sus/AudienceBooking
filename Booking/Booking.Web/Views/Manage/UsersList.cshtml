@@ -9,41 +9,56 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+@section styles{
+        @Styles.Render("~/Content/Users.css")
+        @Styles.Render("~/Content/PagedList.css")
+}
+@Scripts.Render("~/bundles/modernizr")
+
 
 
 
 <div class="page-container container">
-    <div style="width:75%">
+    <div style="width:800px">
     <h2 style="padding-top: 20px">@Localization.UserList</h2>
     <h4>@Localization.All: @Model.Count</h4>
-        @Html.TextBoxFor(m => m.user, new { @class = "profile-input-edit", placeholder = @Localization.Search, @id = "search", })
+        
         <div><i class="fa fa-search" aria-hidden="true"></i></div>
+        
         <div id="users">
             <table cellspacing="5" cellpadding="10">
 
                 @foreach (var user in Model)
 
-            {
+            {                 
+                        
+                    
+                <tbody>
                     <tr>
-                        <td>
-                            <p> @user.Name   </p>
-                        </td>
-                        <td>
-                            <p>@user.Email</p>
-                        </td>
-                        <td>
-                            <p><i class="fa fa-calendar-o" aria-hidden="true"></i>@user.ActiveEventsCount </p>
-
-                           
-                    </td>
-                        <td>
-                            <i class="fa fa-times" aria-hidden="true"></i>
-                        </td>
-                </tr>
+                        
+                            
+                            <td class='clickable-row' data-href='http://localhost:52755/' style="width: 250px">
+                                <div>
+                                    @user.Name @if (user.IsAdmin)
+                                    {<div class="admin">admin</div>}
+                                </div>
+                            </td>
+                            <td style="width: 250px">
+                                <p>@user.Email</p>
+                            </td>
+                            <td style="width: 100px; text-align:center">
+                                <p><i class="fa fa-calendar-o" aria-hidden="true">   </i>@user.ActiveEventsCount </p>
+                            </td>
+                         
+                       
+                        <td style="width: 100px; text-align:center">
+                                <i class="fa fa-times" aria-hidden="true" style="font-size:large;"></i>
+                            </td>
+                        </tr>
+                </tbody>
                 }
             </table>
-            <div style="float:right">
-                Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) из @Model.PageCount
+            <div style="float:right">               
                 @Html.PagedListPager(Model, page => Url.Action("Index", new { page }))
             </div>
         </div>

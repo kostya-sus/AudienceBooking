@@ -50,8 +50,7 @@
   z-index: 2;
   color: #ffffff;
   cursor: default;
-  background-color: #428bca;
-  border-color: #428bca;
+ 
 }
 
 .pagination > .disabled > span,
@@ -134,8 +133,7 @@
 .pager li > a,
 .pager li > span {
   display: inline-block;
-  padding: 5px 14px;
-  background-color: #ffffff;
+  padding: 5px 14px; 
   border: 1px solid #dddddd;
   border-radius: 15px;
 }
@@ -143,7 +141,7 @@
 .pager li > a:hover,
 .pager li > a:focus {
   text-decoration: none;
-  background-color: #eeeeee;
+  
 }
 
 .pager .next > a,
