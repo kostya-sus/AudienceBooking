@@ -2,7 +2,6 @@
 using System.Linq;
 using System.Web.Mvc;
 using AutoMapper;
-using Booking.Enums;
 using Booking.Repositories;
 using Booking.Services.Interfaces;
 using Booking.Services.Services;
@@ -16,7 +15,7 @@ namespace Booking.Web.Controllers
     {
         private readonly IScheduleService _scheduleService;
         private readonly IAudienceMapService _audienceMapService;
-        private IBookingScheduleRuleService _bookingScheduleRuleService;
+        private readonly IBookingScheduleRuleService _bookingScheduleRuleService;
 
         public ScheduleController()
         {
@@ -29,10 +28,12 @@ namespace Booking.Web.Controllers
         [HttpGet]
         public ActionResult GetDaySchedule(DateTime date)
         {
+            var rule = _bookingScheduleRuleService.GetRule(date);
+
             var events = _scheduleService.GetEventsByDay(date, AudienceMapSelector.AudienceMapId);
             var viewModel = Mapper.Map<DayScheduleViewModel>(events);
-            viewModel.BookingHourStart = (int)BookingHoursBoundsEnum.Lower;
-            viewModel.BookingHourEnd = (int)BookingHoursBoundsEnum.Upper;
+            viewModel.BookingHourStart = rule.StartHour;
+            viewModel.BookingHourEnd = rule.EndHour;
 
             var audienceMap = _audienceMapService.GetAudienceMap(AudienceMapSelector.AudienceMapId);
             var availableAudiences = audienceMap.Audiences.Where(a => a.IsBookingAvailable)
@@ -48,12 +49,42 @@ namespace Booking.Web.Controllers
             var rule = _bookingScheduleRuleService.GetRule(date);
             var ruleVm = new ScheduleRuleVm
             {
-                IsBookingAvailable = rule.EndHour - rule.StartHour > 0,
+                IsBookingAvailable = _bookingScheduleRuleService.BookingAvailable(rule),
                 StartHour = rule.StartHour,
                 EndHour = rule.EndHour
             };
 
             return Json(ruleVm, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpGet]
+        public ActionResult GetNextAvailableDate(DateTime date)
+        {
+            var next = _bookingScheduleRuleService.GetNextAvailableDate(date);
+            var rule = _bookingScheduleRuleService.GetRule(next);
+            var vm = new AvailableDayViewModel
+            {
+                Date = next,
+                StartHour = rule.StartHour,
+                EndHour = rule.EndHour
+            };
+
+            return Json(vm, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpGet]
+        public ActionResult GetPreviousAvailableDate(DateTime date)
+        {
+            var next = _bookingScheduleRuleService.GetPreviousAvailableDate(date);
+            var rule = _bookingScheduleRuleService.GetRule(next);
+            var vm = new AvailableDayViewModel
+            {
+                Date = next,
+                StartHour = rule.StartHour,
+                EndHour = rule.EndHour
+            };
+
+            return Json(vm, JsonRequestBehavior.AllowGet);
         }
     }
 }

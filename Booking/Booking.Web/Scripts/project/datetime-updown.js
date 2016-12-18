@@ -1,4 +1,20 @@
 ﻿function configureDatetimeUpdown(containerId, startDateId, endDateId) {
+    var scheduleRuleUrl = $("#get-schedule-rule-url").val();
+    var nextAvailableDateUrl = $("#get-next-previous-date-url").val();
+
+    function getScheduleRuleUrl(date) {
+        return scheduleRuleUrl + "?date=" + date.toISOString();
+    }
+
+    var currentScheduleRule;
+
+    function updateScheduleRule(date) {
+        $.get(getScheduleRuleUrl(date))
+            .done(function(data) {
+                currentScheduleRule = data;
+            });
+    }
+
     var $container = $("#" + containerId);
     var $startDate = $("#" + startDateId);
     var $endDate = $("#" + endDateId);
@@ -28,14 +44,14 @@
             "Октября", "Ноября", "Декабря"
         ];
     } else {
-        monthDisplayedValues = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
+        monthDisplayedValues = ["01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12"];
     }
-
-    var lowerHoursBound = parseInt($("#booking-hours-bounds-lower").val());
-    var upperHoursBound = parseInt($("#booking-hours-bounds-upper").val());
 
     var startDate = new Date($startDate.val());
     var endDate = new Date($endDate.val());
+
+
+    updateScheduleRule(startDate);
 
     function setStartDate() {
         $startDate.val(startDate.toISOString()).trigger("change");
@@ -88,18 +104,33 @@
         return dateNow < eventStart && minutes >= 20;
     }
 
+    function addMinutes(date, minutes) {
+        return new Date(date.getTime() + minutes * 60000);
+    }
+
+    function diffInMinutes(date1, date2) {
+        return Math.floor((date2 - date1) / 60000);
+    }
+
     function backupDateAndTryToChange(callback) {
         var prevStartDate = new Date(startDate.getTime());
         var prevEndDate = new Date(endDate.getTime());
         callback();
-        if (isDateValid(startDate, endDate)) {
-            setStartDate();
-            setEndDate();
-            updateView();
-        } else {
-            startDate = prevStartDate;
-            endDate = prevEndDate;
+        var diff = endDate - startDate;
+        var minutes = Math.floor(diff / 60000);
+        if (minutes < 20) {
+            endDate.setMinutes(startDate.getMinutes() + 20);
         }
+
+        setStartDate();
+        setEndDate();
+        updateView();
+    }
+
+    function setAndUpdate() {
+        setStartDate();
+        setEndDate();
+        updateView();
     }
 
     if (!isDateValid(startDate, endDate)) {
@@ -124,98 +155,70 @@
 
     $day.find(".fa-caret-up")
         .click(function() {
-            backupDateAndTryToChange(function() {
-                startDate.setDate(startDate.getDate() + 1);
-                endDate.setDate(endDate.getDate() + 1);
-            });
+            startDate.setDate(startDate.getDate() + 1);
+            endDate.setDate(endDate.getDate() + 1);
         });
     $day.find(".fa-caret-down")
         .click(function() {
-            backupDateAndTryToChange(function() {
-                startDate.setDate(startDate.getDate() - 1);
-                endDate.setDate(endDate.getDate() - 1);
-            });
+            startDate.setDate(startDate.getDate() - 1);
+            endDate.setDate(endDate.getDate() - 1);
         });
 
     $month.find(".fa-caret-up")
         .click(function() {
-            backupDateAndTryToChange(function() {
-                startDate.setMonth(startDate.getMonth() + 1);
-                endDate.setMonth(endDate.getMonth() + 1);
-            });
+            startDate.setMonth(startDate.getMonth() + 1);
+            endDate.setMonth(endDate.getMonth() + 1);
         });
     $month.find(".fa-caret-down")
         .click(function() {
-            backupDateAndTryToChange(function() {
-                startDate.setMonth(startDate.getMonth() - 1);
-                endDate.setMonth(endDate.getMonth() - 1);
-            });
+            startDate.setMonth(startDate.getMonth() - 1);
+            endDate.setMonth(endDate.getMonth() - 1);
         });
 
     $year.find(".fa-caret-up")
         .click(function() {
-            backupDateAndTryToChange(function() {
-                startDate.setYear(startDate.getYear() + 1);
-                endDate.setYear(endDate.getYear() + 1);
-            });
+            startDate.setYear(startDate.getYear() + 1);
+            endDate.setYear(endDate.getYear() + 1);
         });
     $year.find(".fa-caret-down")
         .click(function() {
-            backupDateAndTryToChange(function() {
-                startDate.setYear(startDate.getYear() - 1);
-                endDate.setYear(endDate.getYear() - 1);
-            });
+            startDate.setYear(startDate.getYear() - 1);
+            endDate.setYear(endDate.getYear() - 1);
         });
 
     $startHour.find(".fa-caret-up")
         .click(function() {
-            backupDateAndTryToChange(function() {
-                startDate.setHours(startDate.getHours() + 1);
-            });
+            startDate.setHours(startDate.getHours() + 1);
         });
     $startHour.find(".fa-caret-down")
         .click(function() {
-            backupDateAndTryToChange(function() {
-                startDate.setHours(startDate.getHours() - 1);
-            });
+            startDate.setHours(startDate.getHours() - 1);
         });
 
     $endHour.find(".fa-caret-up")
         .click(function() {
-            backupDateAndTryToChange(function() {
-                endDate.setHours(endDate.getHours() + 1);
-            });
+            endDate.setHours(endDate.getHours() + 1);
         });
     $endHour.find(".fa-caret-down")
         .click(function() {
-            backupDateAndTryToChange(function() {
-                endDate.setHours(endDate.getHours() - 1);
-            });
+            endDate.setHours(endDate.getHours() - 1);
         });
 
     $startMinute.find(".fa-caret-up")
         .click(function() {
-            backupDateAndTryToChange(function() {
-                startDate.setMinutes(startDate.getMinutes() + 10);
-            });
+            startDate.setMinutes(startDate.getMinutes() + 10);
         });
     $startMinute.find(".fa-caret-down")
         .click(function() {
-            backupDateAndTryToChange(function() {
-                startDate.setMinutes(startDate.getMinutes() - 10);
-            });
+            startDate.setMinutes(startDate.getMinutes() - 10);
         });
 
     $endMinute.find(".fa-caret-up")
         .click(function() {
-            backupDateAndTryToChange(function() {
-                endDate.setMinutes(endDate.getMinutes() + 10);
-            });
+            endDate.setMinutes(endDate.getMinutes() + 10);
         });
     $endMinute.find(".fa-caret-down")
         .click(function() {
-            backupDateAndTryToChange(function() {
-                endDate.setMinutes(endDate.getMinutes() - 10);
-            });
+            endDate.setMinutes(endDate.getMinutes() - 10);
         });
 }

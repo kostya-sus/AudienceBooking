@@ -101,5 +101,40 @@ namespace Booking.Services.Services
                 }
             }
         }
+
+        public bool BookingAvailable(BookingScheduleRule rule)
+        {
+            return rule.EndHour - rule.StartHour > 0;
+        }
+
+        public DateTime GetNextAvailableDate(DateTime date)
+        {
+            for (int i = 0; i < 30; i++)
+            {
+                date = date.AddDays(1);
+                var rule = GetRule(date);
+                if (BookingAvailable(rule))
+                {
+                    return new DateTime(date.Year, date.Month, date.Day, rule.StartHour, 0, 0);
+                }
+            }
+
+            throw new Exception("Sorry, booking temporarily unavailable.");
+        }
+
+        public DateTime GetPreviousAvailableDate(DateTime date)
+        {
+            for (int i = 0; i < 30; i++)
+            {
+                date = date.AddDays(-1);
+                var rule = GetRule(date);
+                if (BookingAvailable(rule))
+                {
+                    return new DateTime(date.Year, date.Month, date.Day, rule.StartHour, 0, 0);
+                }
+            }
+
+            throw new Exception("No previous dates available.");
+        }
     }
 }

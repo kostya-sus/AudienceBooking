@@ -15,5 +15,11 @@ namespace Booking.Services.Interfaces
         IList<BookingScheduleRule> GetRulesForMonth(int month, int year);
 
         void CreateRule(BookingScheduleRule rule);
+
+        bool BookingAvailable(BookingScheduleRule rule);
+
+        DateTime GetNextAvailableDate(DateTime date);
+
+        DateTime GetPreviousAvailableDate(DateTime date);
     }
 }

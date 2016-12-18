@@ -223,6 +223,7 @@
     <Compile Include="ViewModels\AudienceMap\AudienceMapViewModel.cs" />
     <Compile Include="ViewModels\AdminPanel\CreateAudienceViewModel.cs" />
     <Compile Include="ViewModels\AdminPanel\NewAudienceMapViewModel.cs" />
+    <Compile Include="ViewModels\Schedule\AvailableDayViewModel.cs" />
     <Compile Include="ViewModels\Schedule\ScheduleRowName.cs" />
     <Compile Include="ViewModels\Audience\UiAudienceViewModel.cs" />
     <Compile Include="ViewModels\Audience\AudienceInfoViewModel.cs" />
