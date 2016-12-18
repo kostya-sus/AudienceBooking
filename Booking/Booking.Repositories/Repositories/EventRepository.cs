@@ -36,7 +36,7 @@ namespace Booking.Repositories.Repositories
         public void UpdateEvent(Event eventEntity)
         {
             _context.Entry(eventEntity).State = EntityState.Modified;
-        }
+        }                
 
         public void DeleteEvent(Event eventEntity)
         {

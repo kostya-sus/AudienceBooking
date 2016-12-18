@@ -1,15 +1,44 @@
 ﻿using System;
 using System.Web.Mvc;
+using Booking.Services.Interfaces;
+using Booking.Services.Services;
 using Booking.Web.ViewModels.Profile;
+using Microsoft.AspNet.Identity;
+
 
 namespace Booking.Web.Controllers
 {
     public class ProfileController : Controller
     {
+
+        private readonly IUsersService _usersService;
+
+        public ProfileController()
+        {
+           _usersService = new UsersService();
+        }
+
         [HttpGet]
         public ActionResult Index(string userId)
         {
-            throw new NotImplementedException();
+            var user = _usersService.GetUserById(userId);
+            var vm = new ProfileViewModel()
+            {
+                UserInfo = new UserInfoViewModel
+                {
+                    IsProfileAdmin = _usersService.IsAdmin(user),
+                    Name = user.UserName,
+                    Email = user.Email,
+                    ActiveEventsCount = _usersService.GetEvenByAuthor(userId),
+                    Id = userId
+                    
+                },
+                Id = userId,
+                IsOwner = (User.Identity.GetUserId() == userId)
+
+            };
+          
+            return View(vm);
         }
 
         [HttpGet]
@@ -18,25 +47,24 @@ namespace Booking.Web.Controllers
             throw new NotImplementedException();
         }
 
-        [HttpGet]
+        [HttpPost]
         [Authorize]
         public ActionResult Edit(string userId)
         {
-            throw new NotImplementedException();
-        }
+            var user = _usersService.GetUserById(userId);
 
-        [HttpPost]
-        [Authorize]
-        public ActionResult Save(EditProfileViewModel editProfileViewModel)
-        {
-            throw new NotImplementedException();
-        }
+            var UserInfo = new UserInfoViewModel
+            {
+                IsProfileAdmin = _usersService.IsAdmin(user),
+                Name = user.UserName,
+                Email = user.Email,
+                ActiveEventsCount = _usersService.GetEvenByAuthor(userId),
+                Id = userId,
+                IsOwner = (User.Identity.GetUserId() == userId)
 
-        [HttpDelete]
-        [Authorize(Roles = "Admin")]
-        public ActionResult Delete(string userId)
-        {
-            throw new NotImplementedException();
-        }
+            };
+              
+            return PartialView("_EditProfilePartialView", UserInfo);
+        }        
     }
 }

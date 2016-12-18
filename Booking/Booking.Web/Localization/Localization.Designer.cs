@@ -10,8 +10,8 @@
 
 namespace Booking.Web.Localization {
     using System;
-    
-    
+
+
     /// <summary>
     ///   A strongly-typed resource class, for looking up localized strings, etc.
     /// </summary>
@@ -23,15 +23,15 @@ namespace Booking.Web.Localization {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     public class Localization {
-        
+
         private static global::System.Resources.ResourceManager resourceMan;
-        
+
         private static global::System.Globalization.CultureInfo resourceCulture;
-        
+
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
         internal Localization() {
         }
-        
+
         /// <summary>
         ///   Returns the cached ResourceManager instance used by this class.
         /// </summary>
@@ -45,7 +45,7 @@ namespace Booking.Web.Localization {
                 return resourceMan;
             }
         }
-        
+
         /// <summary>
         ///   Overrides the current thread's CurrentUICulture property for all
         ///   resource lookups using this strongly typed resource class.
@@ -59,7 +59,7 @@ namespace Booking.Web.Localization {
                 resourceCulture = value;
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Дополнительная информация.
         /// </summary>
@@ -68,7 +68,14 @@ namespace Booking.Web.Localization {
                 return ResourceManager.GetString("AdditionalInformation", resourceCulture);
             }
         }
-        
+        ///   Looks up a localized string similar to Всего:.
+        /// </summary>
+        public static string All {
+            get {
+                return ResourceManager.GetString("All", resourceCulture);
+            }
+        }
+
         /// <summary>
         ///   Looks up a localized string similar to Все права защищены.
         /// </summary>
@@ -77,7 +84,7 @@ namespace Booking.Web.Localization {
                 return ResourceManager.GetString("All_rights_reserved", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Расписание всех аудиторий.
         /// </summary>
@@ -86,7 +93,7 @@ namespace Booking.Web.Localization {
                 return ResourceManager.GetString("AllAudiencesSchedule", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Эта аудитория занята на выбранное время. Выберите, пожалуйста другое..
         /// </summary>
@@ -95,7 +102,7 @@ namespace Booking.Web.Localization {
                 return ResourceManager.GetString("AudienceIsAlreadyBooked", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Расписание аудитории.
         /// </summary>
@@ -104,7 +111,7 @@ namespace Booking.Web.Localization {
                 return ResourceManager.GetString("AudienceSchedule", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Отменить.
         /// </summary>
@@ -113,7 +120,7 @@ namespace Booking.Web.Localization {
                 return ResourceManager.GetString("Cancel", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Вы уверены, что хотите отменить событие?.
         /// </summary>
@@ -122,7 +129,7 @@ namespace Booking.Web.Localization {
                 return ResourceManager.GetString("CancelEventAskMessage", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Отмена.
         /// </summary>
@@ -131,7 +138,7 @@ namespace Booking.Web.Localization {
                 return ResourceManager.GetString("Cancellation", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Выберите аудиторию на 10 этаже.
         /// </summary>
@@ -140,7 +147,14 @@ namespace Booking.Web.Localization {
                 return ResourceManager.GetString("ChooseAudience", resourceCulture);
             }
         }
-        
+        ///   Looks up a localized string similar to Изменить.
+        /// </summary>
+        public static string Change {
+            get {
+                return ResourceManager.GetString("Change", resourceCulture);
+            }
+        }
+
         /// <summary>
         ///   Looks up a localized string similar to Повторить пароль.
         /// </summary>
@@ -149,7 +163,7 @@ namespace Booking.Web.Localization {
                 return ResourceManager.GetString("ConfirmPasswordPlaceholder", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to &lt;i class=&quot;fa fa-exclamation-circle&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt; Сообщения слишком большое, максимальная длина 2000 символов..
         /// </summary>
@@ -158,16 +172,16 @@ namespace Booking.Web.Localization {
                 return ResourceManager.GetString("ContactViewModel_Message_ValidationMessage", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Спасибо. Ваше сообщение отправлено администратору..
         /// </summary>
-        public static string ContactViewModel_SucsessMessage {
+        public static string ContactViewModel_SuccessMessage {
             get {
-                return ResourceManager.GetString("ContactViewModel_SucsessMessage", resourceCulture);
+                return ResourceManager.GetString("ContactViewModel_SuccessMessage", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to &lt;i class=&quot;fa fa-exclamation-circle&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt; Неправильный формат имени..
         /// </summary>
@@ -176,7 +190,7 @@ namespace Booking.Web.Localization {
                 return ResourceManager.GetString("ContactViewModel_UserName_ValidationMessage", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to &lt;i class=&quot;fa fa-exclamation-circle&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt; Неправильный формат фамилии..
         /// </summary>
@@ -185,7 +199,7 @@ namespace Booking.Web.Localization {
                 return ResourceManager.GetString("ContactViewModel_UserSurname_ValidationMessage", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Создать.
         /// </summary>
@@ -194,7 +208,7 @@ namespace Booking.Web.Localization {
                 return ResourceManager.GetString("Create", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Изменить.
         /// </summary>
@@ -203,7 +217,14 @@ namespace Booking.Web.Localization {
                 return ResourceManager.GetString("Edit", resourceCulture);
             }
         }
-        
+        ///   Looks up a localized string similar to Удалить.
+        /// </summary>
+        public static string Delete {
+            get {
+                return ResourceManager.GetString("Delete", resourceCulture);
+            }
+        }
+
         /// <summary>
         ///   Looks up a localized string similar to Адрес электронной почты.
         /// </summary>
@@ -212,7 +233,7 @@ namespace Booking.Web.Localization {
                 return ResourceManager.GetString("EmailAddressPlaceholder", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Укажите email, чтобы присоединится.
         /// </summary>
@@ -221,7 +242,7 @@ namespace Booking.Web.Localization {
                 return ResourceManager.GetString("EnterEmailToJoin", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Ошибка.
         /// </summary>
@@ -230,7 +251,7 @@ namespace Booking.Web.Localization {
                 return ResourceManager.GetString("Error", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Планируют принять участие {0} человек..
         /// </summary>
@@ -239,7 +260,7 @@ namespace Booking.Web.Localization {
                 return ResourceManager.GetString("EventPageParticipantsCount", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Обратная связь.
         /// </summary>
@@ -248,7 +269,7 @@ namespace Booking.Web.Localization {
                 return ResourceManager.GetString("Feedback", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Этаж.
         /// </summary>
@@ -257,7 +278,7 @@ namespace Booking.Web.Localization {
                 return ResourceManager.GetString("Floor", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to На домашнюю страницу.
         /// </summary>
@@ -266,7 +287,16 @@ namespace Booking.Web.Localization {
                 return ResourceManager.GetString("GoHome", resourceCulture);
             }
         }
-        
+
+        /// <summary>
+        ///   Looks up a localized string similar to &lt;i class=&quot;fa fa-user&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;.
+        /// </summary>
+        public static string IconUser {
+            get {
+                return ResourceManager.GetString("IconUser", resourceCulture);
+            }
+        }
+
         /// <summary>
         ///   Looks up a localized string similar to Неверные данные.
         /// </summary>
@@ -275,7 +305,7 @@ namespace Booking.Web.Localization {
                 return ResourceManager.GetString("InvalidLoginAttempt_Message", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Присоединиться.
         /// </summary>
@@ -284,7 +314,7 @@ namespace Booking.Web.Localization {
                 return ResourceManager.GetString("Join", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Регистрация желающих.
         /// </summary>
@@ -293,7 +323,7 @@ namespace Booking.Web.Localization {
                 return ResourceManager.GetString("JoinAvailable", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Вход.
         /// </summary>
@@ -302,7 +332,7 @@ namespace Booking.Web.Localization {
                 return ResourceManager.GetString("Login", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Войти.
         /// </summary>
@@ -311,7 +341,16 @@ namespace Booking.Web.Localization {
                 return ResourceManager.GetString("LoginSubmit", resourceCulture);
             }
         }
-        
+
+        /// <summary>
+        ///   Looks up a localized string similar to Выйти.
+        /// </summary>
+        public static string Logout {
+            get {
+                return ResourceManager.GetString("Logout", resourceCulture);
+            }
+        }
+
         /// <summary>
         ///   Looks up a localized string similar to Напишите, если у вас есть идеи, предложения, замечания или вопросы..
         /// </summary>
@@ -320,7 +359,7 @@ namespace Booking.Web.Localization {
                 return ResourceManager.GetString("MessageIdea", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Имя.
         /// </summary>
@@ -329,7 +368,7 @@ namespace Booking.Web.Localization {
                 return ResourceManager.GetString("Name", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Нет.
         /// </summary>
@@ -338,7 +377,7 @@ namespace Booking.Web.Localization {
                 return ResourceManager.GetString("No", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Такой страницы не существует.
         /// </summary>
@@ -347,7 +386,7 @@ namespace Booking.Web.Localization {
                 return ResourceManager.GetString("NotFound404", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Сейчас.
         /// </summary>
@@ -356,7 +395,7 @@ namespace Booking.Web.Localization {
                 return ResourceManager.GetString("Now", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to или.
         /// </summary>
@@ -365,7 +404,59 @@ namespace Booking.Web.Localization {
                 return ResourceManager.GetString("Or", resourceCulture);
             }
         }
-        
+        ///   Looks up a localized string similar to Количество активных событий.
+        /// </summary>
+        public static string NumberOfActiveEvent {
+            get {
+                return ResourceManager.GetString("NumberOfActiveEvent", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to Изменить пароль.
+        /// </summary>
+        public static string PasswordChange {
+            get {
+                return ResourceManager.GetString("PasswordChange", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to Вы ввели неверный пароль.
+        /// </summary>
+        public static string PasswordError {
+            get {
+                return ResourceManager.GetString("PasswordError", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to Новый пароль.
+        /// </summary>
+        public static string PasswordNew {
+            get {
+                return ResourceManager.GetString("PasswordNew", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to Повторить новый пароль.
+        /// </summary>
+        public static string PasswordNewRepeat {
+            get {
+                return ResourceManager.GetString("PasswordNewRepeat", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to Старый пароль.
+        /// </summary>
+        public static string PasswordOld {
+            get {
+                return ResourceManager.GetString("PasswordOld", resourceCulture);
+            }
+        }
+
         /// <summary>
         ///   Looks up a localized string similar to Пароль.
         /// </summary>
@@ -374,7 +465,7 @@ namespace Booking.Web.Localization {
                 return ResourceManager.GetString("PasswordPlaceholder", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Приватно.
         /// </summary>
@@ -383,7 +474,7 @@ namespace Booking.Web.Localization {
                 return ResourceManager.GetString("Private", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Публично.
         /// </summary>
@@ -392,7 +483,14 @@ namespace Booking.Web.Localization {
                 return ResourceManager.GetString("Public", resourceCulture);
             }
         }
-        
+        ///   Looks up a localized string similar to Пароль успешно изменен.
+        /// </summary>
+        public static string PasswordSuccess {
+            get {
+                return ResourceManager.GetString("PasswordSuccess", resourceCulture);
+            }
+        }
+
         /// <summary>
         ///   Looks up a localized string similar to Регистрация.
         /// </summary>
@@ -401,7 +499,7 @@ namespace Booking.Web.Localization {
                 return ResourceManager.GetString("Register", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Пользователь с такими данными уже существует.
         /// </summary>
@@ -410,7 +508,7 @@ namespace Booking.Web.Localization {
                 return ResourceManager.GetString("RegisterAction_UserAlreadyExists", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Зарегистрированные участники.
         /// </summary>
@@ -419,7 +517,7 @@ namespace Booking.Web.Localization {
                 return ResourceManager.GetString("RegisteredParticipants", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Зарегистрироваться.
         /// </summary>
@@ -428,7 +526,7 @@ namespace Booking.Web.Localization {
                 return ResourceManager.GetString("RegisterSubmit", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to &lt;i class=&quot;fa fa-exclamation-circle&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt; Пароли не совпадают.
         /// </summary>
@@ -437,7 +535,7 @@ namespace Booking.Web.Localization {
                 return ResourceManager.GetString("RegisterViewModel_ConfirmPassword_ValidationMessage", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to &lt;i class=&quot;fa fa-exclamation-circle&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt; Неверный адрес электронной почты.
         /// </summary>
@@ -446,7 +544,7 @@ namespace Booking.Web.Localization {
                 return ResourceManager.GetString("RegisterViewModel_Email_ValidationMessage", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to &lt;i class=&quot;fa fa-exclamation-circle&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt; Пароль должен содержать 8-15 символов.
         /// </summary>
@@ -455,7 +553,7 @@ namespace Booking.Web.Localization {
                 return ResourceManager.GetString("RegisterViewModel_Password_ValidationMessage", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to &lt;i class=&quot;fa fa-exclamation-circle&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt; Неправильный формат имени и фамилии..
         /// </summary>
@@ -464,7 +562,7 @@ namespace Booking.Web.Localization {
                 return ResourceManager.GetString("RegisterViewModel_UserName_ValidationMessage", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Регистрация желающих.
         /// </summary>
@@ -473,7 +571,7 @@ namespace Booking.Web.Localization {
                 return ResourceManager.GetString("RegistrationTo", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Зарезервировать аудиторию.
         /// </summary>
@@ -482,7 +580,7 @@ namespace Booking.Web.Localization {
                 return ResourceManager.GetString("ReserveAudience", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Смена пароля.
         /// </summary>
@@ -491,7 +589,7 @@ namespace Booking.Web.Localization {
                 return ResourceManager.GetString("ResetPassword", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Сохранить.
         /// </summary>
@@ -500,7 +598,7 @@ namespace Booking.Web.Localization {
                 return ResourceManager.GetString("Save", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Расписание.
         /// </summary>
@@ -509,7 +607,16 @@ namespace Booking.Web.Localization {
                 return ResourceManager.GetString("Schedule", resourceCulture);
             }
         }
-        
+
+        /// <summary>
+        ///   Looks up a localized string similar to Поиск.
+        /// </summary>
+        public static string Search {
+            get {
+                return ResourceManager.GetString("Search", resourceCulture);
+            }
+        }
+
         /// <summary>
         ///   Looks up a localized string similar to Отправить.
         /// </summary>
@@ -518,7 +625,7 @@ namespace Booking.Web.Localization {
                 return ResourceManager.GetString("Send", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Показать автора.
         /// </summary>
@@ -527,7 +634,7 @@ namespace Booking.Web.Localization {
                 return ResourceManager.GetString("ShowAuthor", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Указать организатора.
         /// </summary>
@@ -536,7 +643,7 @@ namespace Booking.Web.Localization {
                 return ResourceManager.GetString("ShowOrganizer", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Что-то пошло не так.
         /// </summary>
@@ -545,7 +652,7 @@ namespace Booking.Web.Localization {
                 return ResourceManager.GetString("SomethingWentWrong", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Фамилия.
         /// </summary>
@@ -554,7 +661,7 @@ namespace Booking.Web.Localization {
                 return ResourceManager.GetString("Surname", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Заголовок.
         /// </summary>
@@ -563,7 +670,7 @@ namespace Booking.Web.Localization {
                 return ResourceManager.GetString("Title", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Сегодня.
         /// </summary>
@@ -572,7 +679,16 @@ namespace Booking.Web.Localization {
                 return ResourceManager.GetString("Today", resourceCulture);
             }
         }
-        
+
+        /// <summary>
+        ///   Looks up a localized string similar to Список пользователей.
+        /// </summary>
+        public static string UserList {
+            get {
+                return ResourceManager.GetString("UserList", resourceCulture);
+            }
+        }
+
         /// <summary>
         ///   Looks up a localized string similar to Имя Фамилия.
         /// </summary>
@@ -581,7 +697,16 @@ namespace Booking.Web.Localization {
                 return ResourceManager.GetString("UserNamePlaceholder", resourceCulture);
             }
         }
-        
+
+        /// <summary>
+        ///   Looks up a localized string similar to Пользователи.
+        /// </summary>
+        public static string Users {
+            get {
+                return ResourceManager.GetString("Users", resourceCulture);
+            }
+        }
+
         /// <summary>
         ///   Looks up a localized string similar to &lt;i class=&quot;fa fa-exclamation-circle&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt; Поле должно быть заполнено..
         /// </summary>
@@ -590,7 +715,7 @@ namespace Booking.Web.Localization {
                 return ResourceManager.GetString("ValidationMessage_Required", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Когда.
         /// </summary>
@@ -599,7 +724,7 @@ namespace Booking.Web.Localization {
                 return ResourceManager.GetString("When", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Где.
         /// </summary>
@@ -608,7 +733,7 @@ namespace Booking.Web.Localization {
                 return ResourceManager.GetString("Where", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Написать сообщение.
         /// </summary>
@@ -617,7 +742,7 @@ namespace Booking.Web.Localization {
                 return ResourceManager.GetString("WriteMessage", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Да.
         /// </summary>

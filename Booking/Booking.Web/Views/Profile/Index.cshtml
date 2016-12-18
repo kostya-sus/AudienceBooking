@@ -1,0 +1,68 @@
+﻿@using Booking.Models
+@using Booking.Repositories.Repositories
+@using Booking.Services.Services
+@using Booking.Web.Localization;
+@using Booking.Web.ViewModels.Manage;
+@using Booking.Web.ViewModels.Profile
+@using Microsoft.AspNet.Identity
+@model Booking.Web.ViewModels.Profile.ProfileViewModel
+  
+
+@{
+    ViewBag.Title = "Profile";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    if (Model.IsOwner) { ViewBag.ActiveLink = "Profile"; }
+}
+@section styles{
+   @Styles.Render("~/Content/Site.css")
+    @Styles.Render("~/Content/Profile-inputs.css")
+    @Styles.Render("~/Content/font-awesome/css/font-awesome.css")
+}
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+
+
+<div style="background-color: white">
+    <div id="page-main" class="page-container">
+        <div id="profile-partial">
+            @Html.Partial("_InfoProfilePartialView", Model)
+        </div>
+
+        <div style="width:50%; float:right" class="password-place">
+            <div id="passwordReplace" style="width: 60%; margin: 0px auto">
+                @using (Ajax.BeginForm("ChangePassword", "Manage", new AjaxOptions
+            {
+                InsertionMode = InsertionMode.Replace,
+                HttpMethod = "Post",
+                UpdateTargetId = "passwordReplace"
+            }))
+            {
+                    @Html.AntiForgeryToken()
+                    <H3 style="text-align: center">@Localization.PasswordChange</H3>
+                    @Html.ValidationMessageFor(m => m.ChangePasswordForm.OldPassword, "", new { @class = "validation-error" })
+                    @Html.PasswordFor(m => m.ChangePasswordForm.OldPassword, new { @class = "profile-input", placeholder = @Localization.PasswordOld, @id = "oldPassword", })
+
+                    @Html.ValidationMessageFor(m => m.ChangePasswordForm.NewPassword, "", new { @class = "validation-error" })
+                    @Html.PasswordFor(m => m.ChangePasswordForm.NewPassword, new { @class = "profile-input", placeholder = @Localization.PasswordNew, @id = "newPassword", })
+
+                    @Html.ValidationMessageFor(m => m.ChangePasswordForm.ConfirmPassword, "", new { @class = "validation-error" })
+                    @Html.PasswordFor(m => m.ChangePasswordForm.ConfirmPassword, new { @class = "profile-input", placeholder = @Localization.PasswordNewRepeat, @id = "confirmNewPassword", })
+                    
+                    <input type="submit" value=@Localization.Save class="profile-submit" />
+                   
+                    if (ViewData["PasswordSuccess"] != null)
+                    {
+                        <div style="margin: 0px auto; text-align:center">
+                            <i class="fa fa-check-circle" style="font-size: 30px; text-align: center" aria-hidden="true"></i><span>@Localization.PasswordSuccess</span>
+                        </div>
+                    }
+                    if (ViewData["PasswordFaild"] != null)
+                    {
+                        <span>@Localization.PasswordError</span>
+                    }
+                }
+            </div>
+        </div>
+    </div>
+</div>

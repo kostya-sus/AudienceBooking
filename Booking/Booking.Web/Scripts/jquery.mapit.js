@@ -40,8 +40,11 @@ document.write('<scr' + 'ipt type="text/javascript" src="https://maps.googleapis
 				title: 			'Softheme',
 				open: 			false,
 				center: 		true
-			}, 
-			address: '<h2>Softheme</h2><p>town Kiev, streat Dilova 5A </p><p>softheme.com<br />info@softheme.com</p>',			
+			},
+			address: '<h2>Softheme</h2>' +
+			    '<p>town Kiev, streat Dilova 5A </p><br/>' +
+			    '<p><i class="fa fa-globe" aria-hidden="true" style="font-size: 20px;color:red"></i> softheme.com</p>' +
+			    '<p><i class="fa fa-envelope-o" aria-hidden="true" style="font-size: 18px;color:red"></i> info@softheme.com</p>',
 	    styles: 'GRAYSCALE',
         
 						

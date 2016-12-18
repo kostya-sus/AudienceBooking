@@ -5,6 +5,8 @@ namespace Booking.Web.ViewModels.Profile
 {
     public class ProfileViewModel
     {
+        public string Id { get; set; }
+
         public UserInfoViewModel UserInfo { get; set; }
 
         public ChangePasswordViewModel ChangePasswordForm { get; set; }
@@ -12,7 +14,6 @@ namespace Booking.Web.ViewModels.Profile
         public ScheduleTableViewModel ScheduleTable { get; set; }
 
         public bool IsOwner { get; set; }
-
-        public bool IsAdmin { get; set; }
+        
     }
 }

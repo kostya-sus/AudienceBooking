@@ -1,5 +1,6 @@
-﻿@using Booking.Enums
-@using Booking.Web.Localization;
+﻿﻿@using Booking.Enums
+@using Booking.Web.Localization
+@using Microsoft.AspNet.Identity
 
 <!DOCTYPE html>
 <html>
@@ -31,12 +32,31 @@
                             </a>
                         </div>
                     </li>
-                    <li class="@(ViewBag.ActiveLink == "Login" ? "active" : "")">
-                        @Html.ActionLink(@Localization.Login, "Login", "Account")
-                    </li>
+                   
+                    
+                        @if (User.Identity.IsAuthenticated)
+                        {
+                            <li class="@(ViewBag.ActiveLink == "Profile" ? "active" : "")">
+                                <a href="@Url.Action("Index", "Profile",new { userId = User.Identity.GetUserId()})">
+                                    <i class="fa fa-user" aria-hidden="true"></i> @User.Identity.Name</a>
+                            </li>
+                        }
+                        else
+                        {
+                            <li class="@(ViewBag.ActiveLink == "Login" ? "active" : "")">
+                                @Html.ActionLink(@Localization.Login, "Login", "Account")
+                            </li>
+                        }
+                           
                     <li class="@(ViewBag.ActiveLink == "Contact" ? "active" : "")">
                         @Html.ActionLink(@Localization.Feedback, "Index", "Contact")
                     </li>
+                    @if (User.IsInRole("Admin"))
+                    {
+                        <li class="@(ViewBag.ActiveLink == "Users" ? "active" : "")">
+                            @Html.ActionLink(@Localization.Users, "UserList", "Manage")
+                        </li>
+                    }
                     <li class="@(ViewBag.ActiveLink == "Index" ? "active" : "")">
                         @Html.ActionLink(@Localization.Schedule, "Index", "Home")
                     </li>

@@ -17,6 +17,10 @@ namespace Booking.Services.Services
             _eventRepository = eventRepository;
         }
 
+        public ScheduleService()
+        {
+        }
+
         public IEnumerable<Event> GetEventsByDay(DateTime day)
         {
             return _eventRepository.GetAllEvents()
@@ -39,5 +43,12 @@ namespace Booking.Services.Services
                                                               x.EventDateTime.Month == day.Month &&
                                                               x.EventDateTime.Year == day.Year);
         }
+
+        public IEnumerable<Event> GetEventsByAuthor(ApplicationUser author)
+        {
+            return _eventRepository.GetAllEvents().Where(x => x.AuthorId == author.Id);
+        }
+
+
     }
 }

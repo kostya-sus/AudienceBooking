@@ -52,6 +52,14 @@
     <Reference Include="NLog, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c, processorArchitecture=MSIL">
       <HintPath>..\packages\NLog.4.3.11\lib\net45\NLog.dll</HintPath>
     </Reference>
+    <Reference Include="PagedList, Version=1.17.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\PagedList.1.17.0.0\lib\net40\PagedList.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="PagedList.Mvc, Version=4.5.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\PagedList.Mvc.4.5.0.0\lib\net40\PagedList.Mvc.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Postal, Version=1.0.0.0, Culture=neutral, PublicKeyToken=45719375b8b4d528, processorArchitecture=MSIL">
       <HintPath>..\packages\Postal.Mvc5.1.2.0\lib\net45\Postal.dll</HintPath>
       <Private>True</Private>
@@ -184,6 +192,7 @@
     <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\EventController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\ProfileController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
@@ -244,7 +253,6 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\datetime-updown.css" />
-    <Content Include="Content\edit-event-popup.css" />
     <Content Include="Content\error.css" />
     <Content Include="Content\datepicker.css" />
     <Content Include="Content\event-page.css" />
@@ -282,15 +290,16 @@
     <Content Include="Content\Images\path\path-web-2.png" />
     <Content Include="Content\Images\path\path-web-3.png" />
     <Content Include="Content\Images\private-event-bg.png" />
-    <Content Include="Content\Images\red-toggle-circle-gray.png" />
     <Content Include="Content\Images\red-toggle-circle.png" />
-    <Content Include="Content\Images\red-toggle-container-gray.png" />
     <Content Include="Content\Images\red-toggle-container.png" />
     <Content Include="Content\Images\schedule\today-active-bottom.png" />
     <Content Include="Content\Images\schedule\today-active-top.png" />
     <Content Include="Content\Images\schedule\today-bottom.png" />
     <Content Include="Content\Images\schedule\today-top.png" />
     <Content Include="Content\new-event-popup.css" />
+    <Content Include="Content\PagedList.css" />
+    <Content Include="Content\Users.css" />
+    <Content Include="Content\Profile-inputs.css" />
     <Content Include="Content\schedule.css" />
     <Content Include="Content\Images\contact-bg.png" />
     <Content Include="Content\Images\login-background.svg">
@@ -309,12 +318,14 @@
     <Content Include="Scripts\bootstrap-datepicker\js\bootstrap-datepicker.js" />
     <Content Include="Scripts\bootstrap-datepicker\locales\bootstrap-datepicker.ru.min.js" />
     <Content Include="Content\checkbox-styles.css" />
-    <Content Include="Scripts\project\cancel-event.js" />
     <Content Include="Scripts\project\datetime-updown.js" />
-    <Content Include="Scripts\project\edit-event-popup.js" />
+    <Content Include="Scripts\project\display-event-popup.js" />
     <Content Include="Scripts\project\event-edit-page.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
     <Content Include="Scripts\project\event-page.js" />
     <Content Include="Scripts\project\home-scripts.js" />
+    <Content Include="Scripts\project\profile-scripts.js" />
     <Content Include="Scripts\project\room-map.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -397,12 +408,14 @@
     <Content Include="Views\Shared\_RoomMapChoicePartial.cshtml" />
     <Content Include="Views\Event\_CancelEventPartial.cshtml" />
     <Content Include="Views\Event\_EditEventPopupPartial.cshtml" />
+    <Content Include="Views\Profile\Index.cshtml" />
+    <Content Include="Views\Manage\UsersList.cshtml" />
+    <Content Include="Views\Profile\_EditProfilePartialView.cshtml" />
+    <Content Include="Views\Profile\_InfoProfilePartialView.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Views\Audience\" />
-    <Folder Include="Views\Profile\" />
-    <Folder Include="Views\Users\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

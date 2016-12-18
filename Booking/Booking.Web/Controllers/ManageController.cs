@@ -4,9 +4,17 @@ using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using Booking.Web.ViewModels.Manage;
+using Booking.Web.ViewModels.Profile;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
+using Booking.Models;
+using Booking.Repositories.Repositories;
+using Booking.Services.Services;
+using PagedList;
+using Booking.Web.ViewModels.Users;
+using Booking.Services.Interfaces;
+using System.Collections.Generic;
 
 namespace Booking.Web.Controllers
 {
@@ -15,15 +23,20 @@ namespace Booking.Web.Controllers
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
+        private readonly UsersService _usersService;
+        private readonly ScheduleService _schudeleServise;
 
         public ManageController()
         {
+            _usersService = new UsersService();
+            _schudeleServise = new ScheduleService();
         }
 
         public ManageController(ApplicationUserManager userManager, ApplicationSignInManager signInManager)
         {
             UserManager = userManager;
             SignInManager = signInManager;
+           
         }
 
         public ApplicationSignInManager SignInManager
@@ -220,28 +233,78 @@ namespace Booking.Web.Controllers
             return View();
         }
 
+
+        public async Task<ActionResult> Delete(string userId)
+        {
+          var user = await UserManager.FindByIdAsync(userId);
+            if (user != null)
+            {
+                var events = _schudeleServise.GetEventsByAuthor(user);
+               
+                var result = await UserManager.DeleteAsync(user);
+               
+                if (result.Succeeded)
+                {
+                    return RedirectToAction("Index", "Users");
+                }
+            }
+            return RedirectToAction("Index", "Home");
+        }
+
+
+        [HttpPost]
+        public ActionResult EditUser(UserInfoViewModel model)
+        {
+            
+            ApplicationUser user =UserManager.FindById(model.Id);
+            if (user != null)
+            {                
+                user.UserName = model.Name;
+                user.Email = model.Email;                              
+                IdentityResult result = UserManager.Update(user);
+                if (model.oldRole != model.NewRole)
+                {
+                    result = UserManager.RemoveFromRole(model.Id, model.oldRole);
+                    result = UserManager.AddToRole(model.Id, model.NewRole);
+                }
+                if (result.Succeeded)
+                {
+                    return RedirectToAction("Index", "Profile", new { userId = model.Id });
+                }
+                else
+                {
+                    ModelState.AddModelError("", "Что-то пошло не так");
+                }
+            }
+           
+
+            return RedirectToAction("Index", "Profile", new { userId = model.Id });
+        }
         //
         // POST: /Manage/ChangePassword
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> ChangePassword(ChangePasswordViewModel model)
+        public ActionResult ChangePassword(ProfileViewModel model)
         {
-            if (!ModelState.IsValid)
+           if (!ModelState.IsValid)
             {
                 return View(model);
             }
-            var result = await UserManager.ChangePasswordAsync(User.Identity.GetUserId(), model.OldPassword, model.NewPassword);
+            var result =  UserManager.ChangePassword(User.Identity.GetUserId(), model.ChangePasswordForm.OldPassword, model.ChangePasswordForm.NewPassword);
             if (result.Succeeded)
             {
-                var user = await UserManager.FindByIdAsync(User.Identity.GetUserId());
+                var user =  UserManager.FindById(User.Identity.GetUserId());
                 if (user != null)
                 {
-                    await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
+                    SignInManager.SignIn(user, isPersistent: false, rememberBrowser: false);
                 }
-                return RedirectToAction("Index", new { Message = ManageMessageId.ChangePasswordSuccess });
+                ViewData["PasswordSuccess"] = Localization.Localization.PasswordSuccess;
+                
+                return PartialView("_ResetPasswordPartial",model);
             }
-            AddErrors(result);
-            return View(model);
+            ViewData["PasswordFaild"] = Localization.Localization.Error;
+
+            return PartialView("_ResetPasswordPartial",model);
         }
 
         //
@@ -333,7 +396,37 @@ namespace Booking.Web.Controllers
             base.Dispose(disposing);
         }
 
-#region Helpers
+        public ActionResult UserList(int? page)
+        {
+            var Users = new List<UsersListItemViewModel>();
+            var test = UserManager.Users.ToList();
+            string searchString = null;
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                test = test.Where(s => s.UserName.Contains(searchString)).ToList();
+            }
+
+            int pageSize = 20;
+            int pageNumber = (page ?? 1);
+           
+            foreach (var item in test)
+            {               
+                    Users.Add
+                    (
+                    new UsersListItemViewModel
+                    {
+                        Id = item.Id,
+                        Name = item.UserName,
+                        Email = item.Email,                                                      
+                        IsAdmin = _usersService.IsAdmin(item),
+                        ActiveEventsCount = _usersService.GetEvenByAuthor(item.Id)
+                    }
+                    );
+                
+            }  
+            return View("UsersList", Users.ToPagedList(pageNumber, pageSize));
+        }
+        #region Helpers
         // Used for XSRF protection when adding external logins
         private const string XsrfKey = "XsrfId";
 

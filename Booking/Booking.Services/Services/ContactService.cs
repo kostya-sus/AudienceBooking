@@ -4,16 +4,16 @@ using System.Linq;
 using System.Net;
 using System.Net.Mail;
 using System.Text;
-using System.Threading.Tasks;
-using Booking.Services.Interfaces;
+
 
 namespace Booking.Services.Services
 {
     public class ContactService 
     {
-        public static bool SendMessage(string name, string surname, string email, string text)
+        public static void SendMessage(string name, string surname, string email, string text)
         {
             MailAddress from = new MailAddress(email);
+           
             MailAddress to = new MailAddress("audiencebookingtest@gmail.com");
             MailMessage mail = new MailMessage(from, to)
             {
@@ -21,7 +21,7 @@ namespace Booking.Services.Services
                 Subject = "Feedback ||"+ email +"|| "+ surname + " " + name ,
                 BodyEncoding = Encoding.Unicode
             };
-
+           
             SmtpClient smtp = new SmtpClient("smtp.gmail.com", 587)
             {
                 Host = "smtp.gmail.com",
@@ -43,8 +43,7 @@ namespace Booking.Services.Services
                 }
                     
             }
-
-            return true;
+           
         }
         
     }

@@ -1,17 +1,17 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <root>
-  <!-- 
-    Microsoft ResX Schema 
-    
+  <!--
+    Microsoft ResX Schema
+
     Version 2.0
-    
-    The primary goals of this format is to allow a simple XML format 
-    that is mostly human readable. The generation and parsing of the 
-    various data types are done through the TypeConverter classes 
+
+    The primary goals of this format is to allow a simple XML format
+    that is mostly human readable. The generation and parsing of the
+    various data types are done through the TypeConverter classes
     associated with the data types.
-    
+
     Example:
-    
+
     ... ado.net/XML headers & schema ...
     <resheader name="resmimetype">text/microsoft-resx</resheader>
     <resheader name="version">2.0</resheader>
@@ -26,36 +26,36 @@
         <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
         <comment>This is a comment</comment>
     </data>
-                
-    There are any number of "resheader" rows that contain simple 
+
+    There are any number of "resheader" rows that contain simple
     name/value pairs.
-    
-    Each data row contains a name, and value. The row also contains a 
-    type or mimetype. Type corresponds to a .NET class that support 
-    text/value conversion through the TypeConverter architecture. 
-    Classes that don't support this are serialized and stored with the 
+
+    Each data row contains a name, and value. The row also contains a
+    type or mimetype. Type corresponds to a .NET class that support
+    text/value conversion through the TypeConverter architecture.
+    Classes that don't support this are serialized and stored with the
     mimetype set.
-    
-    The mimetype is used for serialized objects, and tells the 
-    ResXResourceReader how to depersist the object. This is currently not 
+
+    The mimetype is used for serialized objects, and tells the
+    ResXResourceReader how to depersist the object. This is currently not
     extensible. For a given mimetype the value must be set accordingly:
-    
-    Note - application/x-microsoft.net.object.binary.base64 is the format 
-    that the ResXResourceWriter will generate, however the reader can 
+
+    Note - application/x-microsoft.net.object.binary.base64 is the format
+    that the ResXResourceWriter will generate, however the reader can
     read any of the formats listed below.
-    
+
     mimetype: application/x-microsoft.net.object.binary.base64
-    value   : The object must be serialized with 
+    value   : The object must be serialized with
             : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
             : and then encoded with base64 encoding.
-    
+
     mimetype: application/x-microsoft.net.object.soap.base64
-    value   : The object must be serialized with 
+    value   : The object must be serialized with
             : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
             : and then encoded with base64 encoding.
 
     mimetype: application/x-microsoft.net.object.bytearray.base64
-    value   : The object must be serialized into a byte array 
+    value   : The object must be serialized into a byte array
             : using a System.ComponentModel.TypeConverter
             : and then encoded with base64 encoding.
     -->
@@ -219,7 +219,7 @@
   <data name="Send" xml:space="preserve">
     <value>Отправить</value>
   </data>
-  <data name="ContactViewModel_SucsessMessage" xml:space="preserve">
+  <data name="ContactViewModel_SuccessMessage" xml:space="preserve">
     <value>Спасибо. Ваше сообщение отправлено администратору.</value>
   </data>
   <data name="EventPageParticipantsCount" xml:space="preserve">
@@ -248,6 +248,21 @@
   </data>
   <data name="Cancellation" xml:space="preserve">
     <value>Отмена</value>
+  </data>
+  <data name="IconUser" xml:space="preserve">
+    <value>&lt;i class="fa fa-user" aria-hidden="true"&gt;&lt;/i&gt;</value>
+  </data>
+  <data name="PasswordSuccess" xml:space="preserve">
+    <value>Пароль успешно изменен</value>
+  </data>
+  <data name="PasswordNew" xml:space="preserve">
+    <value>Новый пароль</value>
+  </data>
+  <data name="PasswordNewRepeat" xml:space="preserve">
+    <value>Повторить новый пароль</value>
+  </data>
+  <data name="PasswordOld" xml:space="preserve">
+    <value>Старый пароль</value>
   </data>
   <data name="Save" xml:space="preserve">
     <value>Сохранить</value>
@@ -305,5 +320,35 @@
   </data>
   <data name="Yes" xml:space="preserve">
     <value>Да</value>
+  </data>
+  <data name="Users" xml:space="preserve">
+    <value>Пользователи</value>
+  </data>
+  <data name="Logout" xml:space="preserve">
+    <value>Выйти</value>
+  </data>
+  <data name="NumberOfActiveEvent" xml:space="preserve">
+    <value>Количество активных событий</value>
+  </data>
+  <data name="PasswordChange" xml:space="preserve">
+    <value>Изменить пароль</value>
+  </data>
+  <data name="Change" xml:space="preserve">
+    <value>Изменить</value>
+  </data>
+  <data name="PasswordError" xml:space="preserve">
+    <value>Вы ввели неверный пароль</value>
+  </data>
+  <data name="UserList" xml:space="preserve">
+    <value>Список пользователей</value>
+  </data>
+  <data name="All" xml:space="preserve">
+    <value>Всего:</value>
+  </data>
+  <data name="Search" xml:space="preserve">
+    <value>Поиск</value>
+  </data>
+  <data name="Delete" xml:space="preserve">
+    <value>Удалить</value>
   </data>
 </root>

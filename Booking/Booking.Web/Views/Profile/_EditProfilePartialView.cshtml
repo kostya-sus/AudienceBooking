@@ -1,0 +1,35 @@
+﻿@using Booking.Web.Localization;
+
+@model Booking.Web.ViewModels.Profile.UserInfoViewModel
+
+<div style="background-color: white">
+
+    <div id="delete" style="width: 100%; height: 30px; ">
+        @using (Html.BeginForm("Delete", "Manage", new { userId = Model.Id }))
+            {
+            @Html.AntiForgeryToken()
+            <input type="submit" id="delete" value=@Localization.Delete class="profile-submit" style="float: right" />
+        }
+    </div>
+    @using (Html.BeginForm("EditUser", "Manage",Model,FormMethod.Post, new { style = "width:50%; display: inline-block; float:left" }))
+    {
+        <div style="padding: 50px 0px ">
+            @Html.HiddenFor(m => m.Id)
+            @Html.AntiForgeryToken()
+            @Html.ValidationMessageFor(m => m.Name, "", new { @class = "validation-error" })
+            @Html.TextBoxFor(m => m.Name, new { @class = "profile-input-edit", @id = "name", })
+
+            @Html.ValidationMessageFor(m => m.Email, "", new { @class = "validation-error" })
+            @Html.TextBoxFor(m => m.Email, new { @class = "profile-input-edit", @id = "email", })
+            @if (Model.IsEditorAdmin)
+            {
+                <div>
+                    <input id="admin" type="submit" value="Admin" />
+                </div>
+            }
+            <div style="width: 65%; padding-top: 15px">
+                <input type="submit" id="save" value=@Localization.Save class="profile-submit" />
+            </div>
+        </div>
+    }
+</div>

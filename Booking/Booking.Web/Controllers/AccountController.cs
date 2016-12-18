@@ -22,6 +22,7 @@ namespace Booking.Web.Controllers
         public AccountController()
         {
         }
+       
 
         public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager)
         {

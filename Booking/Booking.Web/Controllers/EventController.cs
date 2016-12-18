@@ -9,7 +9,6 @@ using Booking.Repositories;
 using Booking.Services.Interfaces;
 using Booking.Services.Services;
 using Booking.Web.Helpers;
-using Booking.Web.ViewModels.Audience;
 using Booking.Web.ViewModels.Event;
 using Microsoft.Ajax.Utilities;
 using Microsoft.AspNet.Identity;
@@ -21,7 +20,7 @@ namespace Booking.Web.Controllers
     {
         private readonly IEventService _eventService;
         private readonly IAudienceService _audienceService;
-
+       
         public EventController()
         {
             var uof = new UnitOfWork();
@@ -29,6 +28,7 @@ namespace Booking.Web.Controllers
             var usersService = new UsersService();
             var emailNotificationService = new EmailNotificationService();
             _eventService = new EventService(uof, usersService, emailNotificationService);
+           
         }
 
         [HttpGet]
@@ -288,5 +288,8 @@ namespace Booking.Web.Controllers
 
             return RedirectToAction("DisplayEventPopup", new { eventId = eventEntity.Id });
         }
-    }
+
+       
+
+}
 }
