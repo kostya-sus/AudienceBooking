@@ -1,5 +1,4 @@
 ﻿function configureDatetimeUpdown(containerId, startDateId, endDateId) {
-    var scheduleRuleUrl = $("#get-schedule-rule-url").val();
     var nextAvailableDateUrl = $("#get-next-available-date-url").val();
     var previousAvailableDateUrl = $("#get-previous-available-date-url").val();
 

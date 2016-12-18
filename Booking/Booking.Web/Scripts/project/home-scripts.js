@@ -1,4 +1,7 @@
-﻿function timestampIsBetween(time, left, right) {
+﻿var month;
+var year;
+
+function timestampIsBetween(time, left, right) {
     var timeMins = time.getHours() * 60 + time.getMinutes();
     var leftMins = left.getHours() * 60 + left.getMinutes();
     var rightMins = right.getHours() * 60 + right.getMinutes();
@@ -89,10 +92,12 @@ $(document)
 
         $datepicker.datepicker({ language: "ru" });
 
-        $datepicker.datepicker("setDaysOfWeekDisabled", "06");
+        month = time.getMonth();
+        year = time.getYear();
 
         $datepicker.on("changeDate",
-            function() {
+            function () {
+
                 dateChangedEvent($datepicker.datepicker("getDate"),
                     function() {
                         toggleActiveAudiences();

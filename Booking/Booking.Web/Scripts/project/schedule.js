@@ -289,21 +289,28 @@ function isWeekend(date) {
 function incrementDate() {
     var $datepicker = $("#datepicker");
     var date = $datepicker.datepicker("getDate");
-    date.setDate(date.getDate() + 1);
-    setDate(date);
-    if (isWeekend(date)) {
-        incrementDate();
-    }
+
+    var url = $("#get-next-available-date-url").val() + "?date=" + date.toISOString();
+
+    $.get(url)
+        .done(function(data) {
+            date = parseMvcDate(data.Date);
+            setDate(date);
+        });
 }
+
 
 function decrementDate() {
     var $datepicker = $("#datepicker");
     var date = $datepicker.datepicker("getDate");
-    date.setDate(date.getDate() - 1);
-    setDate(date);
-    if (isWeekend(date)) {
-        decrementDate();
-    }
+
+    var url = $("#get-previous-available-date-url").val() + "?date=" + date.toISOString();
+
+    $.get(url)
+        .done(function(data) {
+            date = parseMvcDate(data.Date);
+            setDate(date);
+        });
 }
 
 function checkIfNewDateIsToday(newDate) {
