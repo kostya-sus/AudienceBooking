@@ -68,7 +68,7 @@
     @foreach (var rule in Model.ScheduleRules)
     {
         <li>
-            @rule.AppliedDate: @rule.DayOfWeek (@rule.StartHour:00 - @rule.EndHour:00)
+            @rule.DayOfWeek (@rule.StartHour:00 - @rule.EndHour:00) - Applied on @rule.AppliedDate
         </li>
     }
 </ul>

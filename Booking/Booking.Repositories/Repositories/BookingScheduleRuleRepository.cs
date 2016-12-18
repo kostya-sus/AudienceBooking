@@ -51,7 +51,7 @@ namespace Booking.Repositories.Repositories
             var query = _context.BookingScheduleRules.Where(x => x.AppliedDate.Year == appliedDate.Year &&
                                                                  x.AppliedDate.Month == appliedDate.Month &&
                                                                  x.AppliedDate.Day == appliedDate.Day);
-            return query.AsEnumerable().FirstOrDefault(x => x.AppliedDate.DayOfWeek == dayOfWeek);
+            return query.AsEnumerable().FirstOrDefault(x => x.DayOfWeek == dayOfWeek);
         }
 
         public BookingScheduleRule NextRuleForDayOfWeek(DayOfWeek dayOfWeek, DateTime after)
