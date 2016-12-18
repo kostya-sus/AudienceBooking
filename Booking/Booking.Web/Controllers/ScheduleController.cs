@@ -8,6 +8,7 @@ using Booking.Services.Interfaces;
 using Booking.Services.Services;
 using Booking.Web.Helpers;
 using Booking.Web.ViewModels.Home;
+using Booking.Web.ViewModels.Schedule;
 
 namespace Booking.Web.Controllers
 {
@@ -15,12 +16,14 @@ namespace Booking.Web.Controllers
     {
         private readonly IScheduleService _scheduleService;
         private readonly IAudienceMapService _audienceMapService;
+        private IBookingScheduleRuleService _bookingScheduleRuleService;
 
         public ScheduleController()
         {
             var uof = new UnitOfWork();
             _scheduleService = new ScheduleService(uof.EventRepository);
             _audienceMapService = new AudienceMapService(uof);
+            _bookingScheduleRuleService = new BookingScheduleRuleService(uof);
         }
 
         [HttpGet]
@@ -37,6 +40,20 @@ namespace Booking.Web.Controllers
             viewModel.AvailableAudiences = availableAudiences;
 
             return Json(viewModel, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpGet]
+        public ActionResult GetScheduleRule(DateTime date)
+        {
+            var rule = _bookingScheduleRuleService.GetRule(date);
+            var ruleVm = new ScheduleRuleVm
+            {
+                IsBookingAvailable = rule.EndHour - rule.StartHour > 0,
+                StartHour = rule.StartHour,
+                EndHour = rule.EndHour
+            };
+
+            return Json(ruleVm, JsonRequestBehavior.AllowGet);
         }
     }
 }

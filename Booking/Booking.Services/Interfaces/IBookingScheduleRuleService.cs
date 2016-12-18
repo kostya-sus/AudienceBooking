@@ -10,6 +10,8 @@ namespace Booking.Services.Interfaces
 
         BookingScheduleRule GetRule(DateTime day);
 
+        IEnumerable<BookingScheduleRule> GetAllBookingScheduleRules();
+
         IList<BookingScheduleRule> GetRulesForMonth(int month, int year);
 
         void CreateRule(BookingScheduleRule rule);

@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+using Booking.Models.EfModels;
 
 namespace Booking.Web.ViewModels.AdminPanel
 {
@@ -10,5 +9,7 @@ namespace Booking.Web.ViewModels.AdminPanel
         public IDictionary<Guid, string> AudienceMaps { get; set; }
 
         public Guid ActiveMapId { get; set; }
+
+        public IEnumerable<BookingScheduleRule> ScheduleRules { get; set; }
     }
 }

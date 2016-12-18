@@ -6,24 +6,28 @@
     @Scripts.Render("~/Scripts/bootstrap-datepicker/js/bootstrap-datepicker.js")
 
     <script>
-        $(document).ready(function () {
+        $(document)
+            .ready(function() {
 
-            var dp = $("#datepicker");
+                var dp = $("#datepicker");
 
-            dp.datepicker({
-                format: 'dd/MM/yyyy'
+                dp.datepicker({
+                    format: 'dd/MM/yyyy'
+                });
+
+                dp.on('changeDate',
+                    function(ev) {
+                        dp.val(ev.target.value);
+                    });
+
             });
-
-            dp.on('changeDate', function (ev) {
-                dp.val(ev.target.value);
-            });
-
-        });
     </script>
 }
 @section styles {
     @Styles.Render("~/Content/bootstrap-datepicker.css")
 }
+
+<h2>Audience maps</h2>
 
 <ul>
     @foreach (var pair in Model.AudienceMaps)
@@ -31,21 +35,44 @@
         <li>
             <a href="@Url.Action("AudienceMap", "AdminPanel", new {id = pair.Key})">@pair.Value</a>
 
-            @using (Html.BeginForm("DeleteAudienceMap", "AdminPanel", new {id = pair.Key}, FormMethod.Post))
+            @if (Model.ActiveMapId != pair.Key)
+            {
+                using (Html.BeginForm("SetActiveAudienceMap", "AdminPanel", new {id = pair.Key}, FormMethod.Post, new {@class = "inline-form"}))
+                {
+                    @Html.AntiForgeryToken()
+                    <button type="submit" class="btn btn-primary">Set active</button>
+                }
+            }
+            else
+            {
+                <label class="label label-success">active</label>
+            }
+
+            @using (Html.BeginForm("DeleteAudienceMap", "AdminPanel", new {id = pair.Key}, FormMethod.Post, new {@class = "inline-form"}))
             {
                 @Html.AntiForgeryToken()
                 <button type="submit" class="btn btn-danger">Delete</button>
-            }
-
-            @using (Html.BeginForm("SetActiveAudienceMap", "AdminPanel", new {id = pair.Key}, FormMethod.Post))
-            {
-                @Html.AntiForgeryToken()
-                <button type="submit" class="btn @(Model.ActiveMapId == pair.Key ? "btn-default" : "btn-primary")">Set active</button>
             }
         </li>
     }
 </ul>
 
+
 <a href="@Url.Action("CreateAudienceMapPage", "AdminPanel")">Create new audience map</a>
+
+<br/>
+
+<h2>Schedule rules</h2>
+
+<ul>
+    @foreach (var rule in Model.ScheduleRules)
+    {
+        <li>
+            @rule.AppliedDate: @rule.DayOfWeek (@rule.StartHour:00 - @rule.EndHour:00)
+        </li>
+    }
+</ul>
+
+<br/>
 
 @Html.Partial("_NewScheduleRulePartial", new CreateScheduleRuleViewModel {AppliedDate = DateTime.Now})

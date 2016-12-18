@@ -1,7 +1,6 @@
 ﻿using System;
-using Booking.Enums;
 
-namespace Booking.Web.ViewModels.Home
+namespace Booking.Web.ViewModels.Schedule
 {
     public class DayScheduleItemViewModel
     {

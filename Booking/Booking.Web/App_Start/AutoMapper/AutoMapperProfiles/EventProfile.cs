@@ -4,7 +4,7 @@ using AutoMapper;
 using Booking.Models.EfModels;
 using Booking.Web.AutoMapper.CustomResolvers;
 using Booking.Web.ViewModels.Event;
-using Booking.Web.ViewModels.Home;
+using Booking.Web.ViewModels.Schedule;
 
 namespace Booking.Web.AutoMapper.AutoMapperProfiles
 {

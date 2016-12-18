@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
+using Booking.Web.ViewModels.Home;
 
-namespace Booking.Web.ViewModels.Home
+namespace Booking.Web.ViewModels.Schedule
 {
     public class DayScheduleViewModel
     {

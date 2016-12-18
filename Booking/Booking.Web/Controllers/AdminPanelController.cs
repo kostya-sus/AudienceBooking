@@ -40,7 +40,8 @@ namespace Booking.Web.Controllers
             var vm = new AdminPanelViewModel
             {
                 ActiveMapId = AudienceMapSelector.AudienceMapId,
-                AudienceMaps = _audienceMapService.GetAllAudienceMaps().ToDictionary(x => x.Id, x => x.Name)
+                AudienceMaps = _audienceMapService.GetAllAudienceMaps().ToDictionary(x => x.Id, x => x.Name),
+                ScheduleRules = _scheduleRuleService.GetAllBookingScheduleRules()
             };
 
             return View(vm);

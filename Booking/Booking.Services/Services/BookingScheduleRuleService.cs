@@ -32,6 +32,11 @@ namespace Booking.Services.Services
             return _unitOfWork.BookingScheduleRuleRepository.RuleForDate(dateOnly);
         }
 
+        public IEnumerable<BookingScheduleRule> GetAllBookingScheduleRules()
+        {
+            return _unitOfWork.BookingScheduleRuleRepository.GetAllRules();
+        }
+
         public IList<BookingScheduleRule> GetRulesForMonth(int month, int year)
         {
             var query = _unitOfWork.BookingScheduleRuleRepository.GetAppliedRulesByMonth(month, year);
