@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity.Core.Objects;
 using System.Linq;
 using Booking.Models.EfModels;
 using Booking.Repositories;
@@ -12,9 +13,9 @@ namespace Booking.Services.Services
     {
         private readonly IUnitOfWork _unitOfWork;
 
-        public BookingScheduleRuleService()
+        public BookingScheduleRuleService(IUnitOfWork unitOfWork)
         {
-            _unitOfWork = new UnitOfWork();
+            _unitOfWork = unitOfWork;
         }
 
         public bool CanBook(DateTime dateTime)
@@ -53,20 +54,34 @@ namespace Booking.Services.Services
                     var nextRule = _unitOfWork.BookingScheduleRuleRepository.NextRuleForDayOfWeek(rule.DayOfWeek,
                         rule.AppliedDate);
 
-                    var eventsByDayOfWeek =
-                        _unitOfWork.EventRepository.GetAllEvents().Where(x => x.StartTime.DayOfWeek == rule.DayOfWeek);
-                    var eventsBetween = nextRule != null
-                        ? eventsByDayOfWeek.Where(x => x.StartTime > rule.AppliedDate &&
-                                                       x.StartTime < nextRule.AppliedDate)
-                        : eventsByDayOfWeek.Where(x => x.StartTime > rule.AppliedDate);
 
-                    var notMatchedEvents = eventsBetween.Where(x => x.StartTime.Hour < rule.StartHour &&
+                    var allEvents = _unitOfWork.EventRepository.GetAllEvents();
+                    var eventsBetween = nextRule != null
+                        ? allEvents.Where(x => x.StartTime > rule.AppliedDate &&
+                                               x.StartTime < nextRule.AppliedDate)
+                        : allEvents.Where(x => x.StartTime > rule.AppliedDate);
+
+                    var notMatchedEvents = eventsBetween.Where(x => x.StartTime.Hour < rule.StartHour ||
                                                                     (x.EndTime.Hour > rule.EndHour ||
-                                                                     x.EndTime.Hour == rule.EndHour &&
-                                                                     x.EndTime.Minute != 0));
-                    if (notMatchedEvents.Any())
+                                                                     (x.EndTime.Hour == rule.EndHour &&
+                                                                      x.EndTime.Minute != 0)));
+
+                    var filteredByDayOfWeek =
+                        notMatchedEvents.AsEnumerable().Where(x => x.StartTime.DayOfWeek == rule.DayOfWeek);
+
+                    if (filteredByDayOfWeek.Any())
                     {
-                        throw new InvalidOperationException("You cannot apply this rule, because there are events, which do not match it.");
+                        throw new InvalidOperationException(
+                            "You cannot apply this rule, because there are events, which do not match it.");
+                    }
+
+                    var oldRule =
+                        _unitOfWork.BookingScheduleRuleRepository.GetRuleByAppliedDateAndDayOfWeek(rule.AppliedDate,
+                            rule.DayOfWeek);
+
+                    if (oldRule != null)
+                    {
+                        _unitOfWork.BookingScheduleRuleRepository.DeleteRule(oldRule);
                     }
 
                     _unitOfWork.BookingScheduleRuleRepository.CreateRule(rule);
@@ -77,6 +92,7 @@ namespace Booking.Services.Services
                 catch (Exception)
                 {
                     transaction.Rollback();
+                    throw;
                 }
             }
         }

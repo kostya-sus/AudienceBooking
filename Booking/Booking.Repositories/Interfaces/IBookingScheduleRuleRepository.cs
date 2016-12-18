@@ -10,7 +10,11 @@ namespace Booking.Repositories.Interfaces
 
         void CreateRule(BookingScheduleRule rule);
 
+        void DeleteRule(BookingScheduleRule rule);
+
         BookingScheduleRule RuleForDate(DateTime date);
+
+        BookingScheduleRule GetRuleByAppliedDateAndDayOfWeek(DateTime appliedDate, DayOfWeek dayOfWeek);
 
         BookingScheduleRule NextRuleForDayOfWeek(DayOfWeek dayOfWeek, DateTime after);
 

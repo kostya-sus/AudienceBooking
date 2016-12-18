@@ -22,6 +22,7 @@ namespace Booking.Web.Controllers
     {
         private readonly IAudienceMapService _audienceMapService;
         private readonly IAudienceService _audienceService;
+        private readonly IBookingScheduleRuleService _scheduleRuleService;
         private readonly IImageRepository _imageRepository = new ImageBlobRepository();
 
         public AdminPanelController()
@@ -29,6 +30,7 @@ namespace Booking.Web.Controllers
             var uof = new UnitOfWork();
             _audienceMapService = new AudienceMapService(uof);
             _audienceService = new AudienceService(uof);
+            _scheduleRuleService = new BookingScheduleRuleService(uof);
         }
 
         [HttpGet]
@@ -166,6 +168,28 @@ namespace Booking.Web.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult CreateScheduleRule(CreateScheduleRuleViewModel vm)
         {
+            var daysOfWeek = new List<DayOfWeek>();
+            if (vm.ForSunday) daysOfWeek.Add(DayOfWeek.Sunday);
+            if (vm.ForMonday) daysOfWeek.Add(DayOfWeek.Monday);
+            if (vm.ForTuesday) daysOfWeek.Add(DayOfWeek.Tuesday);
+            if (vm.ForWednesday) daysOfWeek.Add(DayOfWeek.Wednesday);
+            if (vm.ForThursday) daysOfWeek.Add(DayOfWeek.Thursday);
+            if (vm.ForFriday) daysOfWeek.Add(DayOfWeek.Friday);
+            if (vm.ForSaturday) daysOfWeek.Add(DayOfWeek.Saturday);
+
+            foreach (var dayOfWeek in daysOfWeek)
+            {
+                var rule = new BookingScheduleRule
+                {
+                    AppliedDate = vm.AppliedDate,
+                    DayOfWeek = dayOfWeek,
+                    EndHour = vm.EndHour,
+                    StartHour = vm.StartHour
+                };
+
+                _scheduleRuleService.CreateRule(rule);
+            }
+
             return RedirectToAction("Index");
         }
     }
