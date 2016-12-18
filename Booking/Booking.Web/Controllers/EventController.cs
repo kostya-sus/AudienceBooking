@@ -266,12 +266,13 @@ namespace Booking.Web.Controllers
 
             var eventEntity = _eventService.GetEvent(vm.Id);
 
-            if (!_audienceService.IsFree((AudiencesEnum) vm.ChosenAudienceId, vm.StartDateTime, duration, vm.Id))
+            if (!_audienceService.IsFree((AudiencesEnum) vm.ChosenAudienceId, vm.StartDateTime, duration, vm.Id) ||
+                !ModelState.IsValid || (!vm.IsAuthorShown && vm.AuthorName.IsNullOrWhiteSpace()))
             {
                 var audiences = _audienceService.GetAllAudiences();
                 vm.Audiences = audiences.ToVmDictionary();
                 vm.ParticipantsEmails = eventEntity.EventParticipants.ToVmDictionary();
-                return View("Edit", vm);
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
             eventEntity.Title = vm.Title;
@@ -285,7 +286,7 @@ namespace Booking.Web.Controllers
 
             _eventService.UpdateEvent(User, eventEntity);
 
-            return RedirectToAction("Index", new {eventId = eventEntity.Id});
+            return RedirectToAction("DisplayEventPopup", new { eventId = eventEntity.Id });
         }
     }
 }

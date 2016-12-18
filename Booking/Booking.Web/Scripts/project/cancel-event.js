@@ -7,3 +7,9 @@
             function() {
             });
 }
+
+function closeDisplayEventPopup() {
+    var id = $("#Id").val();
+    $("#display-event-popup-container-" + id).remove();
+}
+

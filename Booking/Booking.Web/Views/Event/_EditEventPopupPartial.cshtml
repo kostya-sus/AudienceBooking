@@ -1,13 +1,19 @@
 ﻿@using Booking.Web.Localization
 @model Booking.Web.ViewModels.Event.CreateEditEventViewModel
     
-@using (Html.BeginForm("Save", "Event", FormMethod.Post))
+@using (Ajax.BeginForm("Save", "Event", new { eventId = Model.Id }, new AjaxOptions
+{
+    HttpMethod = "Post",
+    UpdateTargetId = string.Format("event-display-popup-{0}", Model.Id),
+    OnSuccess = "onEventEditeSucceeded",
+    OnFailure = "onEventEditeFailured"
+}))
 {
     <div id="edit-event-popup">
         <div class="form-group head">
             @Html.TextBoxFor(m => m.StartDateTime, "{0:MM/dd/yyyy HH:mm:ss}", htmlAttributes: new {@type = "hidden", id = "edit-event-popup-start-date-"+@Model.Id, value = @Model.StartDateTime})
             @Html.TextBoxFor(m => m.EndDateTime, "{0:MM/dd/yyyy HH:mm:ss}", htmlAttributes: new {@type = "hidden", id = "edit-event-popup-end-date-"+@Model.Id, value = @Model.EndDateTime})
-            <div id="edit-event-popup-event-date" class="">
+            <div id="edit-event-popup-event-date-@Model.Id" class="">
                 <div class="datetime-updown-outer" style="margin-left: 15px">
                     <div class="datetime-updown-control datetime-updown-day">
                         <i class="fa fa-caret-up" aria-hidden="true"></i>
@@ -55,7 +61,8 @@
                     @Html.DropDownListFor(m => m.ChosenAudienceId, new SelectList(Model.AvailableAudiences,
                         "Key", "Value"), new {@class = "select-style", value = @Model.ChosenAudienceId})
                 </div>
-                <button type="button" class="btn-close-edit-event-popup" id="close-popup-@Model.Id"></button>
+
+                <button type="button" class="btn-close-edit-event-popup" onclick="displayEventPopup()" data-eventid="@Model.Id" id="close-popup-@Model.Id"></button>
             </div>
         </div>
         <div id="edit-event-popup-body">
@@ -102,13 +109,13 @@
                 @Html.TextBoxFor(m => m.AuthorName, new {@class = "input-style-org", placeholder = Localization.ShowOrganizer, value = @Model.AuthorName})
             </div>
             <div class="form-group">
-                <button type="button" class="btn-cancel-edit-event-popup">@Localization.Cancel</button>
+                <button type="button" class="btn-cancel-edit-event-popup" id="btn-show-cancel-popup" data-eventId="@Model.Id" onclick="displayEventPopup()">@Localization.Cancel</button>
                 <input type="submit" class="btn-submit" value="@Localization.Save"/>
                 @Html.HiddenFor(m => m.Id, new {value = @Model.Id})
             </div>
         </div>
     </div>
     <script>
-        configureDatetimeUpdown("edit-event-popup-event-date", "edit-event-popup-start-date-@Model.Id", "edit-event-popup-end-date-@Model.Id");
+        configureDatetimeUpdown("edit-event-popup-event-date-@Model.Id", "edit-event-popup-start-date-@Model.Id", "edit-event-popup-end-date-@Model.Id");
     </script>
 }

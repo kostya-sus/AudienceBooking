@@ -24,7 +24,8 @@
             <button class="btn-cancel-event" id="btn-show-cancel-popup" data-eventId="@Model.Id" onclick="displayCancelEventPopup()" data-toggle="modal" data-target=".example-modal-sm">@Localization.Cancel</button>
         }
 
-        <button class="btn-close-event" id="close-popup-@Model.Id"></button>
+        <button class="btn-close-event" onclick="closeDisplayEventPopup()" id="close-popup-@Model.Id"></button>
+        @Html.HiddenFor(m=>m.Id)
     </div>
     <div class="display-popup-body">
         <h4>@Model.Title</h4>
