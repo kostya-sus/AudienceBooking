@@ -244,6 +244,7 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\datetime-updown.css" />
+    <Content Include="Content\edit-event-popup.css" />
     <Content Include="Content\error.css" />
     <Content Include="Content\datepicker.css" />
     <Content Include="Content\event-page.css" />
@@ -308,6 +309,7 @@
     <Content Include="Content\checkbox-styles.css" />
     <Content Include="Scripts\project\cancel-event.js" />
     <Content Include="Scripts\project\datetime-updown.js" />
+    <Content Include="Scripts\project\edit-event-popup.js" />
     <Content Include="Scripts\project\event-edit-page.js" />
     <Content Include="Scripts\project\event-page.js" />
     <Content Include="Scripts\project\home-scripts.js" />
