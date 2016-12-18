@@ -6,13 +6,12 @@
 @using Booking.Web.ViewModels.Profile
 @using Microsoft.AspNet.Identity
 @model Booking.Web.ViewModels.Profile.ProfileViewModel
-    
+  
 
 @{
     ViewBag.Title = "Profile";
     Layout = "~/Views/Shared/_Layout.cshtml";
     if (Model.IsOwner) { ViewBag.ActiveLink = "Profile"; }
-
 }
 @section styles{
    @Styles.Render("~/Content/Site.css")
@@ -24,36 +23,10 @@
 }
 
 
-
 <div style="background-color: white">
     <div id="page-main" class="page-container">
-
-        <div id="Log_off" style="width: 100%; height: 30px">
-            @using (Html.BeginForm("LogOff", "Account", FormMethod.Post))
-            {
-                @Html.AntiForgeryToken()
-                <input type="submit" id="exit" value=@Localization.Logout class="profile-submit" style="float: right" />
-            }
-        </div>
-        <div style="width:50%; float:left">
-            <H3 style="padding: 20px 0px">
-                @Model.UserInfo.Name @if (Model.UserInfo.IsProfileAdmin)
-            {<sup class="admin-sup">admin</sup>}
-            </H3>
-            <p><b>Email:</b>@Model.UserInfo.Email</p>
-            <p><b>@Localization.NumberOfActiveEvent:</b> @Model.UserInfo.ActiveEventsCount</p>
-            @using (Ajax.BeginForm("Edit", "Profile", new { userid = Model.Id }, new AjaxOptions
-            {
-                InsertionMode = InsertionMode.Replace,
-                HttpMethod = "Post",
-                UpdateTargetId = "page-main"
-            }))
-            {
-                @Html.AntiForgeryToken()
-                <div style="width: 65%; padding-top: 15px">
-                    <input type="submit" id="change" value=@Localization.Change class="profile-submit" />
-                </div>
-            }
+        <div id="profile-partial">
+            @Html.Partial("_InfoProfilePartialView", Model)
         </div>
 
         <div style="width:50%; float:right" class="password-place">

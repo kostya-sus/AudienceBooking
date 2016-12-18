@@ -269,7 +269,7 @@ namespace Booking.Web.Controllers
                 }
                 if (result.Succeeded)
                 {
-                    return RedirectToAction("Index", "Profile", model.Id);
+                    return RedirectToAction("Index", "Profile", new { userId = model.Id });
                 }
                 else
                 {
@@ -278,7 +278,7 @@ namespace Booking.Web.Controllers
             }
            
 
-            return RedirectToAction("Index", "Profile", model.Id);
+            return RedirectToAction("Index", "Profile", new { userId = model.Id });
         }
         //
         // POST: /Manage/ChangePassword

@@ -27,5 +27,7 @@ namespace Booking.Web.ViewModels.Profile
         public string oldRole { get; set; }
 
         public string NewRole { get; set; }
+
+        public bool IsOwner { get; set; }
     }
 }
