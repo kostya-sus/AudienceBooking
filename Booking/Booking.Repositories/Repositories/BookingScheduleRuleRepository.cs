@@ -23,7 +23,10 @@ namespace Booking.Repositories.Repositories
 
         public BookingScheduleRule RuleForDate(DateTime date)
         {
-            var rule = _context.BookingScheduleRules.First(x => x.DayOfWeek == date.DayOfWeek && x.AppliedDate < date);
+            var rule = _context.BookingScheduleRules.Where(x => x.DayOfWeek == date.DayOfWeek && x.AppliedDate < date)
+                .OrderByDescending(x => x.AppliedDate)
+                .First();
+
             return rule ?? new BookingScheduleRule
             {
                 AppliedDate = new DateTime(date.Year, date.Month, date.Day, 0, 0, 0),
