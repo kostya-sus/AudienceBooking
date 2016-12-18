@@ -12,6 +12,8 @@ namespace Booking.Repositories.Interfaces
 
         IAudienceMapRepository AudienceMapRepository { get; }
 
+        IBookingScheduleRuleRepository BookingScheduleRuleRepository { get; }
+
         void Save();
     }
 }

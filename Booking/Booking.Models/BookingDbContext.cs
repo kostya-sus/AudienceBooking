@@ -15,7 +15,7 @@ namespace Booking.Models
         public DbSet<Audience> Audiences { get; set; }
         public DbSet<Event> Events { get; set; }
         public DbSet<EventParticipant> EventParticipants { get; set; }
-        public DbSet<BookingScheduleRule> BookingRanges { get; set; }
+        public DbSet<BookingScheduleRule> BookingScheduleRules { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
