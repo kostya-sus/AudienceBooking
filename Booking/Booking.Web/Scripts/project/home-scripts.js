@@ -1,7 +1,4 @@
-﻿var availableAudiencesIds = [];
-var availableAudiencesDivs;
-
-function timestampIsBetween(time, left, right) {
+﻿function timestampIsBetween(time, left, right) {
     var timeMins = time.getHours() * 60 + time.getMinutes();
     var leftMins = left.getHours() * 60 + left.getMinutes();
     var rightMins = right.getHours() * 60 + right.getMinutes();
@@ -47,13 +44,6 @@ $(document)
         tdWidth = parseInt($("#schedule-contents-table td").css("width"));
         tdHeight = parseInt($("#schedule-contents-table td").css("height"));
         thHeight = parseInt($("#schedule-contents-table th").css("height"));
-
-        var rows = $(".audience-row");
-        for (var i = 0; i < rows.length; ++i) {
-            availableAudiencesIds.push($(rows[i]).data("audience-id"));
-        }
-
-        availableAudiencesDivs = $(".room-available");
 
         $("#slider-draggable")
             .draggable({

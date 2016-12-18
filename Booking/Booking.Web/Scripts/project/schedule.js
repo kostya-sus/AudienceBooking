@@ -4,6 +4,8 @@ var tdWidth;
 var tdHeight;
 var thHeight;
 var events;
+var availableAudiencesIds = [];
+var availableAudiencesDivs;
 
 function posToTime(l, u, w, pos) {
     var time = new Date();
@@ -248,6 +250,16 @@ function loadSchedule(date, loadedCallback) {
             upperHourBound = data.BookingHourEnd;
             rebuildTable(lowerHourBound, upperHourBound, data.AvailableAudiences);
             refillSchedule(data.Items);
+
+            var rows = $(".audience-row");
+            availableAudiencesIds = [];
+
+            for (var i = 0; i < rows.length; ++i) {
+                availableAudiencesIds.push($(rows[i]).attr("data-audience-id"));
+            }
+
+            availableAudiencesDivs = $(".room-available");
+
             events = data.Items;
             if (typeof loadedCallback === "function") {
                 loadedCallback();
