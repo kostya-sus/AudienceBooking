@@ -63,13 +63,17 @@
     <Compile Include="EfModels\Audience.cs" />
     <Compile Include="EfModels\AudienceMap.cs" />
     <Compile Include="BookingDbContext.cs" />
-    <Compile Include="EfModels\BookingRangeHistory.cs" />
+    <Compile Include="EfModels\BookingScheduleRule.cs" />
     <Compile Include="EfModels\Event.cs" />
     <Compile Include="EfModels\EventParticipant.cs" />
     <Compile Include="Helpers\RandomChoiceExtension.cs" />
     <Compile Include="Migrations\201612162250430_DatabaseRedesign.cs" />
     <Compile Include="Migrations\201612162250430_DatabaseRedesign.Designer.cs">
       <DependentUpon>201612162250430_DatabaseRedesign.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201612180957539_RedesignedBookingScheduleRuleTable.cs" />
+    <Compile Include="Migrations\201612180957539_RedesignedBookingScheduleRuleTable.Designer.cs">
+      <DependentUpon>201612180957539_RedesignedBookingScheduleRuleTable.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -87,6 +91,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201612162250430_DatabaseRedesign.resx">
       <DependentUpon>201612162250430_DatabaseRedesign.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201612180957539_RedesignedBookingScheduleRuleTable.resx">
+      <DependentUpon>201612180957539_RedesignedBookingScheduleRuleTable.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

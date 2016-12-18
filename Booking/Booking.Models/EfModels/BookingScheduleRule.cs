@@ -4,8 +4,8 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Booking.Models.EfModels
 {
-    [Table("BookingRangeHistory")]
-    public class BookingRangeHistory
+    [Table("BookingScheduleRule")]
+    public class BookingScheduleRule
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
@@ -15,16 +15,10 @@ namespace Booking.Models.EfModels
         public int StartHour { get; set; }
 
         [Required]
-        public int StartMinute { get; set; }
-
-        [Required]
         public int EndHour { get; set; }
 
         [Required]
-        public int EndMinute { get; set; }
-
-        [Required]
-        public int DaysOfWeekAllowed { get; set; }
+        public DayOfWeek DayOfWeek { get; set; }
 
         [Required]
         [Column(TypeName = "datetime2")]
