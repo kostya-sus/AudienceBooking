@@ -1,4 +1,5 @@
 ﻿using System;
+using Booking.Models;
 
 namespace Booking.Repositories.Interfaces
 {
@@ -13,6 +14,8 @@ namespace Booking.Repositories.Interfaces
         IAudienceMapRepository AudienceMapRepository { get; }
 
         IBookingScheduleRuleRepository BookingScheduleRuleRepository { get; }
+
+        BookingDbContext Context { get; }
 
         void Save();
     }

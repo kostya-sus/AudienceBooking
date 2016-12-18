@@ -11,5 +11,7 @@ namespace Booking.Services.Interfaces
         BookingScheduleRule GetRule(DateTime day);
 
         IList<BookingScheduleRule> GetRulesForMonth(int month, int year);
+
+        void CreateRule(BookingScheduleRule rule);
     }
 }

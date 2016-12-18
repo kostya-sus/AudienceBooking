@@ -23,11 +23,16 @@ namespace Booking.Repositories.Repositories
             return _context.BookingScheduleRules;
         }
 
+        public void CreateRule(BookingScheduleRule rule)
+        {
+            _context.BookingScheduleRules.Add(rule);
+        }
+
         public BookingScheduleRule RuleForDate(DateTime date)
         {
             var rule = _context.BookingScheduleRules.Where(x => x.DayOfWeek == date.DayOfWeek && x.AppliedDate < date)
                 .OrderByDescending(x => x.AppliedDate)
-                .First();
+                .FirstOrDefault();
 
             return rule ?? new BookingScheduleRule
             {
@@ -36,6 +41,13 @@ namespace Booking.Repositories.Repositories
                 StartHour = 0,
                 EndHour = 0
             };
+        }
+
+        public BookingScheduleRule NextRuleForDayOfWeek(DayOfWeek dayOfWeek, DateTime after)
+        {
+            return _context.BookingScheduleRules.Where(x => x.DayOfWeek == dayOfWeek && x.AppliedDate > after)
+                .OrderBy(x => x.AppliedDate)
+                .FirstOrDefault();
         }
 
         public IQueryable<BookingScheduleRule> GetAppliedRulesByMonth(int month, int year)
