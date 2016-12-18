@@ -20,7 +20,7 @@ namespace Booking.Services.Interfaces
 
         void OpenAudience(Guid audienceId);
 
-        bool IsFree(Guid audienceId, DateTime dateTime, int duration, Guid? eventId);
+        bool IsFree(Guid audienceId, DateTime eventStart, DateTime eventEnd, Guid? eventId);
 
         IEnumerable<Audience> GetAllAudiences();
 

@@ -118,10 +118,10 @@ namespace Booking.Web.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create(CreateEditEventViewModel vm)
         {
-            TimeSpan span = vm.EndTime.Subtract(vm.StartTime);
-            var duration = (int) span.TotalMinutes;
+            var isFree = _audienceService.IsFree(vm.AudienceId, vm.StartTime, vm.EndTime, vm.Id);
 
-            var isFree = _audienceService.IsFree(vm.AudienceId, vm.StartTime, duration, vm.Id);
+            var duration = vm.EndTime.Subtract(vm.StartTime).TotalMinutes;
+
             if (duration < 20 || !isFree)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -132,7 +132,6 @@ namespace Booking.Web.Controllers
             }
 
             Event newEvent = Mapper.Map<Event>(vm);
-            newEvent.Duration = duration;
             newEvent.AuthorId = User.Identity.GetUserId();
             
             _eventService.CreateEvent(newEvent);
@@ -189,7 +188,7 @@ namespace Booking.Web.Controllers
 
             var eventEntity = _eventService.GetEvent(vm.Id);
 
-            if (!_audienceService.IsFree(vm.AudienceId, vm.StartTime, duration, vm.Id))
+            if (!_audienceService.IsFree(vm.AudienceId, vm.StartTime, vm.EndTime, vm.Id) || duration < 20)
             {
                 var model = _audienceMapService.GetAudienceMap(AudienceMapSelector.AudienceMapId);
                 vm.AudienceMap = Mapper.Map<AudienceMapViewModel>(model);
@@ -204,7 +203,7 @@ namespace Booking.Web.Controllers
             eventEntity.IsAuthorShown = vm.IsAuthorShown;
             eventEntity.IsJoinAvailable = vm.IsJoinAvailable;
             eventEntity.StartTime = vm.StartTime;
-            eventEntity.Duration = duration;
+            eventEntity.EndTime = vm.EndTime;
 
             _eventService.UpdateEvent(User, eventEntity);
 

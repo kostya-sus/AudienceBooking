@@ -65,28 +65,26 @@ namespace Booking.Services.Services
             }
         }
 
-        public bool IsFree(Guid audienceId, DateTime dateTime, int duration, Guid? currentEventId)
+        public bool IsFree(Guid audienceId, DateTime eventStart, DateTime eventEnd, Guid? currentEventId)
         {
             var events =
                 _unitOfWork.EventRepository.GetAllEvents()
                     .Where(x => x.AudienceId == audienceId && x.Id != currentEventId.Value);
 
-            var endOfEvent = dateTime.AddMinutes(duration);
-
-            if (dateTime.DayOfWeek != 0 && (int) dateTime.DayOfWeek != 6)
+            if (eventStart.DayOfWeek != 0 && (int) eventStart.DayOfWeek != 6)
             {
-                if ((endOfEvent.Hour < (int) BookingHoursBoundsEnum.Upper ||
-                     (endOfEvent.Hour == (int) BookingHoursBoundsEnum.Upper & endOfEvent.Minute == 0))
-                    && dateTime.Hour >= (int) BookingHoursBoundsEnum.Lower)
+                if ((eventEnd.Hour < (int) BookingHoursBoundsEnum.Upper ||
+                     (eventEnd.Hour == (int) BookingHoursBoundsEnum.Upper & eventEnd.Minute == 0))
+                    && eventStart.Hour >= (int) BookingHoursBoundsEnum.Lower)
                 {
                     foreach (var currentEvent in events)
                     {
-                        var endOfCurrentEvent = currentEvent.StartTime.AddMinutes(currentEvent.Duration);
-                        if (dateTime <= currentEvent.StartTime && currentEvent.StartTime < endOfEvent)
+                        var endOfCurrentEvent = currentEvent.EndTime;
+                        if (eventStart <= currentEvent.StartTime && currentEvent.StartTime < eventEnd)
                         {
                             return false;
                         }
-                        if (dateTime > currentEvent.StartTime && dateTime < endOfCurrentEvent)
+                        if (eventStart > currentEvent.StartTime && eventStart < endOfCurrentEvent)
                         {
                             return false;
                         }

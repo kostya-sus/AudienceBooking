@@ -22,7 +22,8 @@ namespace Booking.Models.EfModels
         public DateTime StartTime { get; set; }
 
         [Required]
-        public int Duration { get; set; }
+        [Column(TypeName = "datetime2")]
+        public DateTime EndTime { get; set; }
         
         [StringLength(50)]
         public string Title { get; set; }

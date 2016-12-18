@@ -75,6 +75,10 @@
     <Compile Include="Migrations\201612180957539_RedesignedBookingScheduleRuleTable.Designer.cs">
       <DependentUpon>201612180957539_RedesignedBookingScheduleRuleTable.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201612181422027_ReplacedDurationWithEndTime.cs" />
+    <Compile Include="Migrations\201612181422027_ReplacedDurationWithEndTime.Designer.cs">
+      <DependentUpon>201612181422027_ReplacedDurationWithEndTime.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -94,6 +98,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201612180957539_RedesignedBookingScheduleRuleTable.resx">
       <DependentUpon>201612180957539_RedesignedBookingScheduleRuleTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201612181422027_ReplacedDurationWithEndTime.resx">
+      <DependentUpon>201612181422027_ReplacedDurationWithEndTime.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -186,7 +186,6 @@
     <Compile Include="App_Start\AutoMapper\CustomResolvers\AudienceRouteImageResolver.cs" />
     <Compile Include="App_Start\AutoMapper\CustomResolvers\EventAuthorNameResolver.cs" />
     <Compile Include="App_Start\AutoMapper\CustomResolvers\EventDateResolver.cs" />
-    <Compile Include="App_Start\AutoMapper\CustomResolvers\EventEndTimeResolver.cs" />
     <Compile Include="App_Start\AutoMapper\CustomResolvers\UiAudienceStyleResolver.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />

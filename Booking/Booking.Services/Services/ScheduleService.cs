@@ -29,7 +29,7 @@ namespace Booking.Services.Services
         public IEnumerable<Event> GetEventsByAudience(Guid audienceId, DateTime from, DateTime to)
         {
             return _eventRepository.GetAllEvents().Where(x => x.AudienceId == audienceId && x.StartTime <= from &&
-                                                              x.StartTime.AddMinutes(x.Duration) < to);
+                                                              x.EndTime < to);
         }
 
         public IEnumerable<Event> GetEventsByAuthor(ApplicationUser author, DateTime day, Guid audienceMapId)

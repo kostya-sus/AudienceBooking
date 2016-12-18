@@ -45,10 +45,7 @@ namespace Booking.Web.Controllers
         [HttpGet]
         public ActionResult IsFree(Guid audienceId, DateTime startEvent, DateTime endEvent, Guid? eventId)
         {
-            TimeSpan span = endEvent.Subtract(startEvent);
-            var duration = (int)span.TotalMinutes;
-
-            var isFree = _audienceService.IsFree(audienceId, startEvent, duration, eventId);
+            var isFree = _audienceService.IsFree(audienceId, startEvent, endEvent, eventId);
             return Content(isFree.ToString());
         }
 
