@@ -213,7 +213,7 @@ function refillSchedule(eventsList) {
 }
 
 function loadSchedule(date, loadedCallback) {
-    var url = $("#get-day-schedule-url").val() + "?date=" + date.toLocaleDateString();
+    var url = $("#get-day-schedule-url").val() + "?date=" + date.toISOString();
     $.getJSON(url)
         .done(function(data) {
             refillSchedule(data.Items);

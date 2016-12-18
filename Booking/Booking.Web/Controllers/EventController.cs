@@ -230,20 +230,28 @@ namespace Booking.Web.Controllers
         [Authorize]
         public ActionResult EditPopup(Guid eventId)
         {
+            var eventEntity = _eventService.GetEvent(eventId);
             var audiences = _audienceService.GetAllAudiences().ToList();
             var availableAudiences = audiences.Where(a => a.IsBookingAvailable)
                 .ToDictionary(a => (int)a.Id, a => a.Name);
 
-            var date = DateTime.Now.AddHours(2);
-            var newMinute = (date.Minute / 10) * 10;
-            date = date.AddMinutes(newMinute - date.Minute);
+          //  var date = DateTime.Now.AddHours(2);
+          //  var newMinute = (date.Minute / 10) * 10;
+         //   date = date.AddMinutes(newMinute - date.Minute);
 
             var viewModel = new CreateEditEventViewModel
             {
+                Id = eventId,
+                IsJoinAvailable = eventEntity.IsJoinAvailable,
+                AdditionalInfo = eventEntity.AdditionalInfo,
+                AuthorName = eventEntity.AuthorName,
                 AvailableAudiences = availableAudiences,
-                EndDateTime = date.AddMinutes(30),
-                StartDateTime = date,
-                IsPublic = true
+                IsAuthorShown = eventEntity.IsAuthorShown,
+                ChosenAudienceId = (int)eventEntity.AudienceId,
+                EndDateTime = eventEntity.EventDateTime.AddMinutes(eventEntity.Duration),
+                StartDateTime = eventEntity.EventDateTime,
+                Title = eventEntity.Title,
+                IsPublic = eventEntity.IsPublic,
             };
 
             return PartialView("_EditEventPopupPartial", viewModel);

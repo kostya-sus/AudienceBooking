@@ -1,3 +1,114 @@
-﻿@model Booking.Web.ViewModels.Event.CreateEditEventViewModel
+﻿@using Booking.Web.Localization
+@model Booking.Web.ViewModels.Event.CreateEditEventViewModel
     
-Empty
+@using (Html.BeginForm("Save", "Event", FormMethod.Post))
+{
+    <div id="edit-event-popup">
+        <div class="form-group head">
+            @Html.TextBoxFor(m => m.StartDateTime, "{0:MM/dd/yyyy HH:mm:ss}", htmlAttributes: new {@type = "hidden", id = "edit-event-popup-start-date-"+@Model.Id, value = @Model.StartDateTime})
+            @Html.TextBoxFor(m => m.EndDateTime, "{0:MM/dd/yyyy HH:mm:ss}", htmlAttributes: new {@type = "hidden", id = "edit-event-popup-end-date-"+@Model.Id, value = @Model.EndDateTime})
+            <div id="edit-event-popup-event-date" class="">
+                <div class="datetime-updown-outer" style="margin-left: 15px">
+                    <div class="datetime-updown-control datetime-updown-day">
+                        <i class="fa fa-caret-up" aria-hidden="true"></i>
+                        <span class="datetime-updown-label">18.</span>
+                        <i class="fa fa-caret-down" aria-hidden="true"></i>
+                    </div>
+                    <div class="datetime-updown-control datetime-updown-month datetime-updown-month-name">
+                        <i class="fa fa-caret-up" aria-hidden="true"></i>
+                        <span class="datetime-updown-label">09.</span>
+                        <i class="fa fa-caret-down" aria-hidden="true"></i>
+                    </div>
+                    <div class="datetime-updown-control datetime-updown-year datetime-updown-control-hidden">
+                        <i class="fa fa-caret-up" aria-hidden="true"></i>
+                        <span class="datetime-updown-label">16</span>
+                        <i class="fa fa-caret-down" aria-hidden="true"></i>
+                    </div>
+                </div>
+
+                <div class="datetime-updown-outer">
+                    <div class="datetime-updown-control datetime-updown-start-hour">
+                        <i class="fa fa-caret-up" aria-hidden="true"></i>
+                        <span class="datetime-updown-label">18:</span>
+                        <i class="fa fa-caret-down" aria-hidden="true"></i>
+                    </div>
+                    <div class="datetime-updown-control datetime-updown-start-minute">
+                        <i class="fa fa-caret-up" aria-hidden="true"></i>
+                        <span class="datetime-updown-label">00</span>
+                        <i class="fa fa-caret-down" aria-hidden="true"></i>
+                    </div>
+                </div>
+                <span style="margin-top: 5px">-</span>
+                <div class="datetime-updown-outer" style="margin-left: 0px">
+                    <div class="datetime-updown-control datetime-updown-end-hour">
+                        <i class="fa fa-caret-up" aria-hidden="true"></i>
+                        <span class="datetime-updown-label">18:</span>
+                        <i class="fa fa-caret-down" aria-hidden="true"></i>
+                    </div>
+                    <div class="datetime-updown-control datetime-updown-end-minute">
+                        <i class="fa fa-caret-up" aria-hidden="true"></i>
+                        <span class="datetime-updown-label">30</span>
+                        <i class="fa fa-caret-down" aria-hidden="true"></i>
+                    </div>
+                </div>
+                <div class="audiences-dropdown">
+                    @Html.DropDownListFor(m => m.ChosenAudienceId, new SelectList(Model.AvailableAudiences,
+                        "Key", "Value"), new {@class = "select-style", value = @Model.ChosenAudienceId})
+                </div>
+                <button class="btn-close-edit-event-popup" id="close-popup-@Model.Id"></button>
+            </div>
+        </div>
+        <div id="edit-event-popup-body">
+            <div class="form-group">
+                @Html.ValidationMessageFor(m => m.Title, "", new {@class = "validation-error"})
+                @Html.TextBoxFor(m => m.Title, new {@class = "input-style", placeholder = Localization.Title, value = @Model.Title})
+            </div>
+
+            <div class="form-group">
+                @Html.TextAreaFor(m => m.AdditionalInfo, new {@class = "textarea", placeholder = Localization.AdditionalInformation, value = @Model.AdditionalInfo})
+            </div>
+
+
+            <div class="form-group">
+                <input type="checkbox" id="new-event-popup-is-join-available" name="IsJoinAvailable" value=true @(Model.IsJoinAvailable ? "checked" : "")/>
+                <label for="new-event-popup-is-join-available">
+                    <span></span>@Localization.JoinAvailable
+                </label>
+                <input name="IsJoinAvailable" type="hidden" value="false"/>
+
+                <div class="red-toggle">
+                    <span class="red-toggle-checked">@Localization.Public</span>
+
+                    <input type="checkbox" class="red-toggle-input" id="edit-event-popup-is-public" name="IsPublic" value=true @(Model.IsPublic ? "checked" : "")/>
+                    <label for="edit-event-popup-is-public">
+                        <span class="red-toggle-container"><span class="red-toggle-circle"></span></span>
+                    </label>
+                    <input name="IsPublic" type="hidden" value="false"/>
+
+                    <span class="red-toggle-not-checked">@Localization.Private</span>
+                </div>
+            </div>
+
+
+            <div class="form-group">
+                <input type="checkbox" id="new-event-popup-is-author-shown" name="IsAuthorShown" value="true" @(Model.IsAuthorShown ? "checked" : "")/>
+                <label for="new-event-popup-is-author-shown">
+                    <span></span>@Localization.ShowAuthor
+                </label>
+
+                <input name="IsAuthorShown" type="hidden" value="false"/>
+                <span style="margin-left: 10px;">@Localization.Or</span>
+
+                @Html.TextBoxFor(m => m.AuthorName, new {@class = "input-style-org", placeholder = Localization.ShowOrganizer, value = @Model.AuthorName})
+            </div>
+            <div class="form-group">
+                <button class="btn-cancel-edit-event-popup">@Localization.Cancel</button>
+                <input type="submit" class="btn-submit" value="@Localization.Save"/>
+                @Html.HiddenFor(m => m.Id, new {value = @Model.Id})
+            </div>
+        </div>
+    </div>
+    <script>
+        configureDatetimeUpdown("edit-event-popup-event-date", "edit-event-popup-start-date-@Model.Id", "edit-event-popup-end-date-@Model.Id");
+    </script>
+}

@@ -1,9 +1,9 @@
 ﻿.event-display-popup-container { z-index: 200; }
 
 .event-display-popup {
-    border: #f65857 solid 1px;
+    /*border: #f65857 solid 1px;*/
     cursor: default;
-    width: 320px;
+    /*width: 320px;*/
     background: #FFF;
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.6);
 }
