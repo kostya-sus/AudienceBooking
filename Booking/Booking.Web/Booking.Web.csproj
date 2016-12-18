@@ -389,7 +389,6 @@
     <Content Include="Views\Shared\_JoinEventPartial.cshtml" />
     <Content Include="Views\Profile\Index.cshtml" />
     <Content Include="Views\Manage\UsersList.cshtml" />
-    <Content Include="Views\Profile\_EdetProfilePartial.cshtml" />
     <Content Include="Views\Profile\_EditProfilePartialView.cshtml" />
     <Content Include="Views\Profile\_InfoProfilePartialView.cshtml" />
   </ItemGroup>
