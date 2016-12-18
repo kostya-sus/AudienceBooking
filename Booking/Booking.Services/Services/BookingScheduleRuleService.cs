@@ -53,15 +53,25 @@ namespace Booking.Services.Services
                     var nextRule = _unitOfWork.BookingScheduleRuleRepository.NextRuleForDayOfWeek(rule.DayOfWeek,
                         rule.AppliedDate);
 
-                    var allEvents = _unitOfWork.EventRepository.GetAllEvents();
+                    var eventsByDayOfWeek =
+                        _unitOfWork.EventRepository.GetAllEvents().Where(x => x.StartTime.DayOfWeek == rule.DayOfWeek);
                     var eventsBetween = nextRule != null
-                        ? allEvents.Where(x => x.StartTime > rule.AppliedDate &&
-                                               x.StartTime < nextRule.AppliedDate)
-                        : allEvents.Where(x => x.StartTime > rule.AppliedDate);
+                        ? eventsByDayOfWeek.Where(x => x.StartTime > rule.AppliedDate &&
+                                                       x.StartTime < nextRule.AppliedDate)
+                        : eventsByDayOfWeek.Where(x => x.StartTime > rule.AppliedDate);
 
-                    // TODO
+                    var notMatchedEvents = eventsBetween.Where(x => x.StartTime.Hour < rule.StartHour &&
+                                                                    (x.EndTime.Hour > rule.EndHour ||
+                                                                     x.EndTime.Hour == rule.EndHour &&
+                                                                     x.EndTime.Minute != 0));
+                    if (notMatchedEvents.Any())
+                    {
+                        throw new InvalidOperationException("You cannot apply this rule, because there are events, which do not match it.");
+                    }
 
-                    _unitOfWork.Context.SaveChanges();
+                    _unitOfWork.BookingScheduleRuleRepository.CreateRule(rule);
+                    _unitOfWork.Save();
+
                     transaction.Commit();
                 }
                 catch (Exception)
