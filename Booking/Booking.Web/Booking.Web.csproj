@@ -387,7 +387,7 @@
     <Content Include="Views\Shared\_RoomMapRoutePartial.cshtml" />
     <Content Include="Views\Shared\_JoinEventPartial.cshtml" />
     <Content Include="Views\Profile\Index.cshtml" />
-    <Content Include="Views\Users\Index.cshtml" />
+    <Content Include="Views\Manage\UsersList.cshtml" />
     <Content Include="Views\Profile\_EdetProfilePartial.cshtml" />
   </ItemGroup>
   <ItemGroup>

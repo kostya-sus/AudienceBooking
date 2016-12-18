@@ -19,14 +19,13 @@
                 <input type="submit" id="delete" value=@Localization.Delete class="profile-submit" style="float: right" />
             }
         </div>
-@using (Ajax.BeginForm("EditUser", "Manage", new{ Model }, new AjaxOptions
+@using (Ajax.BeginForm("EditUser", "Manage", new{ Model.UserInfo }, new AjaxOptions
 {
     InsertionMode = InsertionMode.Replace,
     HttpMethod = "Post",
     UpdateTargetId = "page-main"
 }, new { style="width:50%; display: inline-block; float:left"}))
 {
-
         <div style="padding: 50px 0px ">
             @Html.HiddenFor(m=>m.UserInfo.Id)
             @Html.AntiForgeryToken()
@@ -41,9 +40,10 @@
                     <input id="admin" type="submit" value="Admin" />
                 </div>
             }
-
-            <input type="submit" id="save" value=@Localization.Save class="profile-submit" />
-        </div>
+            <div style="width: 65%; padding-top: 15px">
+                <input type="submit" id="save" value=@Localization.Save class="profile-submit" />
+            </div>
+            </div>
 }
         <div style="width:50%; float:right; top: -200px;" class="password-place">
             <div id="passwordReplace" style="width: 60%;  margin: 0px auto">

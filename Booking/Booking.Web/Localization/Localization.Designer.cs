@@ -313,7 +313,7 @@ namespace Booking.Web.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Вы ввели неправельный пароль.
+        ///   Looks up a localized string similar to Вы ввели неверный пароль.
         /// </summary>
         public static string PasswordError {
             get {

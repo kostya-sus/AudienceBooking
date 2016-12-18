@@ -14,7 +14,7 @@ namespace Booking.Web.Controllers
         
         public ActionResult Index()
         {
-            throw new NotImplementedException();
+            return View();
 
         }
     }

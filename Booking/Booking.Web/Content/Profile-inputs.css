@@ -29,7 +29,7 @@
     width: 100%;
 }
 .profile-input-edit {
-    border: 1px solid #f5f6fb;
+    border: 2px solid #f5f6fb;
     border-radius: 50px;
     background: white;
     margin: 0px auto;
@@ -74,7 +74,7 @@
     display: block;
     margin: 10px auto;
     min-width: 150px;
-    height: 30px;
+    height: 35px;
     border: 0 none;
     cursor: pointer;
     border-radius: 50px;
@@ -87,7 +87,7 @@
     display: block;
     margin: 10px auto;
     min-width: 150px;
-    height: 30px;
+    height: 35px;
     border: 0 none;
     cursor: pointer;
     border-radius: 50px;

@@ -265,7 +265,7 @@
     <value>Изменить</value>
   </data>
   <data name="PasswordError" xml:space="preserve">
-    <value>Вы ввели неправельный пароль</value>
+    <value>Вы ввели неверный пароль</value>
   </data>
   <data name="UserList" xml:space="preserve">
     <value>Список пользователей</value>

@@ -12,6 +12,9 @@ using Booking.Models;
 using Booking.Repositories.Repositories;
 using Booking.Services.Services;
 using PagedList;
+using Booking.Web.ViewModels.Users;
+using Booking.Services.Interfaces;
+using System.Collections.Generic;
 
 namespace Booking.Web.Controllers
 {
@@ -387,12 +390,37 @@ namespace Booking.Web.Controllers
             base.Dispose(disposing);
         }
 
-        public ActionResult UserList(int? page)
-        {                   
+        public ActionResult UserList(int? page, string searchString)
+        {
+            var Users = new List<UsersListItemViewModel>();
+            var test = UserManager.Users.ToList();
+
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                test = test.Where(s => s.UserName.Contains(searchString)).ToList();
+            }
+
             int pageSize = 20;
             int pageNumber = (page ?? 1);
-            var test = UserManager.Users.ToList();
-            return View("~/Views/User/Index.cshtml",UserManager.Users.ToList().ToPagedList(pageNumber, pageSize));
+           
+            foreach (var item in test)
+            {               
+                    Users.Add
+                    (
+                    new UsersListItemViewModel
+                    {
+                        Id = item.Id,
+                        Name = item.UserName,
+                        Email = item.Email,
+                        IsAdmin = new SheduleService().IsAdmin(item),
+                        ActiveEventsCount = new SheduleService().GetEvenByAuthor(item.Id)
+                    }
+                    );
+                
+            }          
+            
+          
+            return View("UsersList", Users.ToPagedList(pageNumber, pageSize));
         }
         #region Helpers
         // Used for XSRF protection when adding external logins
