@@ -1,6 +1,9 @@
 ﻿@model Booking.Web.ViewModels.Audience.AudienceInfoViewModel
 
-<img class="line-details" src="@Model.LineDetailsImageUrl"/>
+@if (Model.LineDetailsImageUrl != null)
+{
+    <img class="line-details" src="@Model.LineDetailsImageUrl"/>
+}
 
 <div class="audience-info-container">
     <img src="@Url.Content("~/Content/Images/audience-info-icons/icon-table.png")"/>
