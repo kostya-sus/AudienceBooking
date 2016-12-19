@@ -231,7 +231,6 @@
     <Compile Include="ViewModels\Audience\AudienceMapItemVm.cs" />
     <Compile Include="ViewModels\Audience\AudienceScheduleItemViewModel.cs" />
     <Compile Include="ViewModels\Audience\AudienceScheduleViewModel.cs" />
-    <Compile Include="ViewModels\Audience\AudienceViewModel.cs" />
     <Compile Include="ViewModels\Contact\ContactViewModel.cs" />
     <Compile Include="ViewModels\ErrorViewModel.cs" />
     <Compile Include="ViewModels\Event\CreateEditEventViewModel.cs" />
