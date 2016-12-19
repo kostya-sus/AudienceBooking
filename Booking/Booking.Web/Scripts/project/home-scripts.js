@@ -153,3 +153,7 @@ $(document)
             setTimeout(toggleActiveAudiences, 300);
         }
     });
+
+function forceScheduleReload() {
+    dateChangedEvent($("#datepicker").datepicker("getDate"));
+}

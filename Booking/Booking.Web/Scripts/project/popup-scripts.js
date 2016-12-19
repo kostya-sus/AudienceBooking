@@ -7,6 +7,7 @@
 
 function closeCancelEventPopup() {
     $("#CancelEvent").modal("toggle");
+    forceScheduleReload();
 }
 
 function closeDisplayEventPopup(id) {

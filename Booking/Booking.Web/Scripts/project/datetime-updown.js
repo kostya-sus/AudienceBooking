@@ -119,7 +119,13 @@
     if (!isDateValid(endDate, startDate)) {
         setNextAvailableDate(new Date);
     } else {
-        updateView();
+        var getScheduleRuleUrl = getUrlWithDate($("#get-schedule-rule-url").val(), startDate);
+        $.get(getScheduleRuleUrl)
+            .done(function (data) {
+                lowerHoursBound = data.StartHour;
+                upperHoursBound = data.EndHour;
+                updateView();
+            });
     }
 
     function isDateValid(eventStart, eventEnd) {
@@ -139,15 +145,33 @@
         return dateNow < eventStart;
     }
 
+    function setMaxDayTimeOnlyEnd() {
+        endDate.setHours(upperHoursBound);
+        endDate.setMinutes(0);
+    }
+
     function setMaxDayTime() {
         endDate.setHours(upperHoursBound);
         endDate.setMinutes(0);
         startDate = addMinutes(endDate, -20);
     }
 
-    function setMinDayTime() {
+    function setMinDayTimeOnlyStart() {
         startDate.setHours(lowerHoursBound);
         startDate.setMinutes(0);
+        var now = new Date();
+        if (startDate < now) {
+            startDate = now;
+        }
+    }
+
+    function setMinDayTime() {
+        var now = new Date();
+        startDate.setHours(lowerHoursBound);
+        startDate.setMinutes(0);
+        if (startDate < now) {
+            startDate = now;
+        }
         endDate = addMinutes(startDate, 20);
     }
 
@@ -208,8 +232,7 @@
         .click(function() {
             startDate.setHours(startDate.getHours() - 1);
             if (!isDateValid(startDate, endDate)) {
-                startDate.setHours(lowerHoursBound);
-                startDate.setMinutes(0);
+                setMinDayTimeOnlyStart();
             }
             setAndUpdate();
         });
@@ -218,8 +241,7 @@
         .click(function() {
             endDate.setHours(endDate.getHours() + 1);
             if (!isDateValid(startDate, endDate)) {
-                endDate.setHours(upperHoursBound);
-                endDate.setMinutes(0);
+                setMaxDayTimeOnlyEnd();
             }
             setAndUpdate();
         });
@@ -252,8 +274,7 @@
         .click(function() {
             startDate.setMinutes(startDate.getMinutes() - 10);
             if (!isDateValid(startDate, endDate)) {
-                startDate.setHours(lowerHoursBound);
-                startDate.setMinutes(0);
+                setMinDayTimeOnlyStart();
             }
             setAndUpdate();
         });
@@ -262,8 +283,7 @@
         .click(function() {
             endDate.setMinutes(endDate.getMinutes() + 10);
             if (!isDateValid(startDate, endDate)) {
-                endDate.setHours(upperHoursBound);
-                endDate.setMinutes(0);
+                setMaxDayTimeOnlyEnd();
             }
             setAndUpdate();
         });
