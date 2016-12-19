@@ -14,10 +14,12 @@ namespace Booking.Services.Services
     public class AudienceService : IAudienceService
     {
         private readonly IUnitOfWork _unitOfWork;
+        private readonly IBookingScheduleRuleService _bookingScheduleRuleService;
 
         public AudienceService(IUnitOfWork unitOfWork)
         {
             _unitOfWork = unitOfWork;
+            _bookingScheduleRuleService = new BookingScheduleRuleService(_unitOfWork);
         }
 
         public Audience GetAudience(Guid audienceId)
@@ -67,32 +69,14 @@ namespace Booking.Services.Services
 
         public bool IsFree(Guid audienceId, DateTime eventStart, DateTime eventEnd, Guid? currentEventId)
         {
-            var events =
-                _unitOfWork.EventRepository.GetAllEvents()
-                    .Where(x => x.AudienceId == audienceId && x.Id != currentEventId.Value);
+            if (!_bookingScheduleRuleService.CanBook(eventStart)) return false;
 
-            if (eventStart.DayOfWeek != 0 && (int) eventStart.DayOfWeek != 6)
-            {
-                if ((eventEnd.Hour < (int) BookingHoursBoundsEnum.Upper ||
-                     (eventEnd.Hour == (int) BookingHoursBoundsEnum.Upper & eventEnd.Minute == 0))
-                    && eventStart.Hour >= (int) BookingHoursBoundsEnum.Lower)
-                {
-                    foreach (var currentEvent in events)
-                    {
-                        var endOfCurrentEvent = currentEvent.EndTime;
-                        if (eventStart <= currentEvent.StartTime && currentEvent.StartTime < eventEnd)
-                        {
-                            return false;
-                        }
-                        if (eventStart > currentEvent.StartTime && eventStart < endOfCurrentEvent)
-                        {
-                            return false;
-                        }
-                    }
-                    return true;
-                }
-            }
-            return false;
+            var events = _unitOfWork.EventRepository.GetAllEvents()
+                .Where(x => x.AudienceId == audienceId && x.Id != currentEventId.Value &&
+                            ((x.StartTime < eventStart && x.EndTime > eventStart) ||
+                             (x.StartTime < eventEnd) && (x.EndTime > eventEnd)));
+
+            return events.Any();
         }
 
         public IEnumerable<Audience> GetAllAudiences()
