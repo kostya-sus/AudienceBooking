@@ -74,7 +74,9 @@ namespace Booking.Services.Services
             var events = _unitOfWork.EventRepository.GetAllEvents()
                 .Where(x => x.AudienceId == audienceId && x.Id != currentEventId.Value &&
                             ((x.StartTime < eventStart && x.EndTime > eventStart) ||
-                             (x.StartTime < eventEnd) && (x.EndTime > eventEnd)));
+                             (x.StartTime < eventEnd) && (x.EndTime > eventEnd)) ||
+                            (eventStart < x.StartTime) && (eventEnd > x.StartTime) ||
+                            (x.StartTime == eventStart) && (x.EndTime == eventEnd));
 
             return !events.Any();
         }
