@@ -19,6 +19,6 @@
         @Html.ValidationMessageFor(m => m.Email, "", new {@class = "validation-error"})
         @Html.TextBoxFor(m => m.Email, new {@class = "join-event-form-email", placeholder = Localization.EnterEmailToJoin, autocomplete = "off" })
     </div>
-    <i class="fa fa-plus" aria-hidden="true"></i>
+    <i class="fa fa-plus" onclick="joinEvent('@Model.EventId')" aria-hidden="true"></i>
     <input type="submit" value="submit" class="join-event-submit"/>
 }

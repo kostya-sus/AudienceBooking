@@ -190,5 +190,34 @@ namespace Booking.Web.Controllers
 
             return RedirectToAction("DisplayEventPopup", new {eventId = eventEntity.Id});
         }
+        [HttpPost]
+        [Authorize]
+        public ActionResult SaveFromPopup(EventEditViewModel vm)
+        {
+            TimeSpan span = vm.EndTime.Subtract(vm.StartTime);
+            var duration = (int)span.TotalMinutes;
+
+            var eventEntity = _eventService.GetEvent(vm.Id);
+            if (!_audienceService.IsFree(vm.AudienceId, vm.StartTime, vm.EndTime, vm.Id) || duration < 20)
+            {
+                var model = _audienceMapService.GetAudienceMap(AudienceMapSelector.AudienceMapId);
+                vm.AudienceMap = Mapper.Map<AudienceMapViewModel>(model);
+                vm.ParticipantsEmails = eventEntity.EventParticipants.ToVmDictionary();
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            eventEntity.Title = vm.Title;
+            eventEntity.AdditionalInfo = vm.AdditionalInfo;
+            eventEntity.AudienceId = vm.AudienceId;
+            eventEntity.AuthorName = vm.AuthorName;
+            eventEntity.IsAuthorShown = vm.IsAuthorShown;
+            eventEntity.IsJoinAvailable = vm.IsJoinAvailable;
+            eventEntity.StartTime = vm.StartTime;
+            eventEntity.EndTime = vm.EndTime;
+
+            _eventService.UpdateEvent(User, eventEntity);
+
+            return RedirectToAction("DisplayEventPopup", new { eventId = eventEntity.Id });
+        }
     }
 }

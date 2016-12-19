@@ -24,7 +24,7 @@
             <button class="btn-cancel-event" id="btn-show-cancel-popup" data-eventId="@Model.Id" onclick="displayCancelEventPopup()" data-toggle="modal" data-target=".example-modal-sm">@Localization.Cancel</button>
         }
 
-        <button class="btn-close-event" onclick="closeDisplayEventPopup()" id="close-popup-@Model.Id"></button>
+        <button class="btn-close-event" onclick="closeDisplayEventPopup('@Model.Id')" id="close-popup-@Model.Id"></button>
         @Html.HiddenFor(m=>m.Id)
     </div>
     <div class="display-popup-body">
@@ -55,8 +55,7 @@
             <i class="fa fa-calendar-plus-o" aria-hidden="true"></i>
             <i class="fa fa-envelope-o" aria-hidden="true"></i>
             <i class="fa fa-print" aria-hidden="true"></i>
-            <i class="fa fa-link" id="btn-event-page-@Model.Id" aria-hidden="true"></i>
+            <i class="fa fa-link" onclick="redirectToEventPage('@Model.Id')" aria-hidden="true"></i>
         </div>
     </div>
-
 </div>

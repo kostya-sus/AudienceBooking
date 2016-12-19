@@ -220,24 +220,7 @@ function refillSchedule(eventsList) {
                 $("#page-content").append($div);
                 $div.draggable();
 
-                $div.load(url,
-                    function() {
-                        $("#close-popup-" + id)
-                            .click(function() {
-                                $("#" + divId).remove();
-                            });
-                        $("#btn-event-page-" + id)
-                            .click(function() {
-                                var url = $("#redirect-to-event-url").val() + "?eventId=" + id;
-                                window.location.replace(url);
-                            });
-
-                        var formId = "join-event-form-" + id;
-                        $("#" + formId + " .fa-plus")
-                            .click(function() {
-                                $("#" + formId + " .join-event-submit").click();
-                            });
-                    });
+                $div.load(url);
             }
         });
 }

@@ -8,8 +8,16 @@
             });
 }
 
-function closeDisplayEventPopup() {
-    var id = $("#Id").val();
+function closeDisplayEventPopup(id) {
     $("#display-event-popup-container-" + id).remove();
 }
 
+function redirectToEventPage(id) {
+    var url = $("#redirect-to-event-url").val() + "?eventId=" + id;
+    window.location.replace(url);
+}
+
+function joinEvent(id) {
+    var formId = "join-event-form-" + id;
+    $("#" + formId + " .join-event-submit").click();
+}

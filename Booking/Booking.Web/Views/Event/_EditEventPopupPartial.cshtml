@@ -1,12 +1,10 @@
 ﻿@using Booking.Web.Localization
 @model Booking.Web.ViewModels.Event.CreateEditEventViewModel
 
-@using (Ajax.BeginForm("Save", "Event", new {eventId = Model.Id}, new AjaxOptions
+@using (Ajax.BeginForm("SaveFromPopup", "Event", new {eventId = Model.Id}, new AjaxOptions
 {
     HttpMethod = "Post",
-    UpdateTargetId = string.Format("event-display-popup-{0}", Model.Id),
-    OnSuccess = "onEventEditeSucceeded",
-    OnFailure = "onEventEditeFailured"
+    UpdateTargetId = string.Format("event-display-popup-{0}", Model.Id)
 }))
 {
     <div id="edit-event-popup">
