@@ -20,10 +20,10 @@
     </div>
 
     @Html.ValidationMessageFor(m => m.Email, "", new { @class = "validation-error" })
-    @Html.TextBoxFor(m => m.Email, new {@class = "login-input", placeholder = Localization.EmailAddressPlaceholder})
+    @Html.TextBoxFor(m => m.Email, new {@class = "login-input", autocomplete = "off", placeholder = Localization.EmailAddressPlaceholder})
 
     @Html.ValidationMessageFor(m => m.Password, "", new { @class = "validation-error" })
-    @Html.PasswordFor(m => m.Password, new {@class = "login-input", placeholder = Localization.PasswordPlaceholder})
+    @Html.PasswordFor(m => m.Password, new {@class = "login-input", autocomplete = "off", placeholder = Localization.PasswordPlaceholder})
 
     <div style="width: 100%;">
         <input type="submit" disabled="disabled" value=@Localization.LoginSubmit class="login-submit"/>
