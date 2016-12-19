@@ -116,7 +116,11 @@
             });
     }
 
-    setNextAvailableDate(new Date);
+    if (!isDateValid(endDate, startDate)) {
+        setNextAvailableDate(new Date);
+    } else {
+        updateView();
+    }
 
     function isDateValid(eventStart, eventEnd) {
         var startHours = eventStart.getHours();
@@ -138,7 +142,7 @@
     function setMaxDayTime() {
         endDate.setHours(upperHoursBound);
         endDate.setMinutes(0);
-        startDate = addMinutes(startDate, -20);
+        startDate = addMinutes(endDate, -20);
     }
 
     function setMinDayTime() {
@@ -224,7 +228,7 @@
             endDate.setHours(endDate.getHours() - 1);
             var diff = diffInMinutes(endDate, startDate);
             if (diff < 20) {
-                startDate = addMinutes(startDate, -20);
+                startDate = addMinutes(endDate, -20);
                 if (!isDateValid(startDate, endDate)) {
                     setMinDayTime();
                 }
@@ -268,7 +272,7 @@
             endDate.setMinutes(endDate.getMinutes() - 10);
             var diff = diffInMinutes(endDate, startDate);
             if (diff < 20) {
-                startDate = addMinutes(startDate, -20);
+                startDate = addMinutes(endDate, -20);
                 if (!isDateValid(startDate, endDate)) {
                     setMinDayTime();
                 }
