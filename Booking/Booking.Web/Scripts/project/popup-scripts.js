@@ -21,3 +21,8 @@ function joinEvent(id) {
     var formId = "join-event-form-" + id;
     $("#" + formId + " .join-event-submit").click();
 }
+
+function displayEventPopup(id) {
+    var url = $("#display-event-popup-url").val() + "?eventId=" + id;
+    $("#display-event-popup-container-" + id).load(url);
+}

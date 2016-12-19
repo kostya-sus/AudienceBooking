@@ -282,9 +282,11 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\datetime-updown.css" />
+    <Content Include="Content\edit-event-popup.css" />
     <Content Include="Content\error.css" />
     <Content Include="Content\datepicker.css" />
     <Content Include="Content\event-page.css" />
+    <Content Include="Content\event-popup.css" />
     <Content Include="Content\event-popups.css" />
     <Content Include="Content\font-awesome\css\font-awesome.css" />
     <Content Include="Content\font-awesome\css\font-awesome.min.css" />
