@@ -1,4 +1,6 @@
-﻿using System.Web.Mvc;
+﻿using System;
+using System.Linq;
+using System.Web.Mvc;
 using AutoMapper;
 using Booking.Repositories;
 using Booking.Services.Interfaces;
@@ -23,7 +25,13 @@ namespace Booking.Web.Controllers
         [HttpGet]
         public ActionResult Index()
         {
-            var audienceMap = _audienceMapService.GetAudienceMap(AudienceMapSelector.AudienceMapId);
+            return AudienceMap(AudienceMapSelector.AudienceMapId);
+        }
+
+        [HttpGet]
+        public ActionResult AudienceMap(Guid id)
+        {
+            var audienceMap = _audienceMapService.GetAudienceMap(id);
 
             var viewModel = new HomeViewModel
             {
@@ -32,7 +40,14 @@ namespace Booking.Web.Controllers
                 IsLoggedIn = User.Identity.IsAuthenticated
             };
 
-            return View(viewModel);
+            return View("Index", viewModel);
+        }
+
+        [HttpGet]
+        public ActionResult SelectMap()
+        {
+            var maps = _audienceMapService.GetAllAudienceMaps().ToDictionary(x => x.Id, x => x.Name);
+            return View(maps);
         }
     }
 }

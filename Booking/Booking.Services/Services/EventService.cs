@@ -25,6 +25,7 @@ namespace Booking.Services.Services
 
         public void CreateEvent(Event eventEntity)
         {
+            // TODO add transaction and is free check
             _unitOfWork.EventRepository.CreateEvent(eventEntity);
             _unitOfWork.Save();
         }
