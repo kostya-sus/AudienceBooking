@@ -14,18 +14,23 @@
     @using (Html.BeginForm("EditUser", "Manage",Model,FormMethod.Post, new { style = "width:50%; display: inline-block; float:left" }))
     {
         <div style="padding: 50px 0px ">
-            @Html.HiddenFor(m => m.Id)
+            
             @Html.AntiForgeryToken()
             @Html.ValidationMessageFor(m => m.Name, "", new { @class = "validation-error" })
-            @Html.TextBoxFor(m => m.Name, new { @class = "profile-input-edit", @id = "name", })
+            @Html.TextBoxFor(m => m.Name, new { @class = "profile-input-edit", @id = "name", autocomplete = "off" })
 
             @Html.ValidationMessageFor(m => m.Email, "", new { @class = "validation-error" })
-            @Html.TextBoxFor(m => m.Email, new { @class = "profile-input-edit", @id = "email", })
+            @Html.TextBoxFor(m => m.Email, new { @class = "profile-input-edit", @id = "email", autocomplete = "off" })
             @if (Model.IsEditorAdmin)
             {
-                <div>
-                    <input id="admin" type="submit" value="Admin" />
-                </div>
+                <div class="red-toggle" style="display: block; padding-top: 20px">
+                    <input type="checkbox" class="red-toggle-input" id="is-Admin" name="IsProfileAdmin" value="true" @(Model.IsProfileAdmin ? "checked" : "") />
+                    <label for="is-Admin">
+                        <span class="red-toggle-container"><span class="red-toggle-circle"></span></span>
+                    </label>
+                    <input name="IsProfileAdmin" type="hidden" value="false" />
+                    <span class="red-toggle-not-checked">@Localization.Admin</span>
+                </div>               
             }
             <div style="width: 65%; padding-top: 15px">
                 <input type="submit" id="save" value=@Localization.Save class="profile-submit" />

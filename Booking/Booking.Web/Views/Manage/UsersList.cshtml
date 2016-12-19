@@ -13,57 +13,77 @@
         @Styles.Render("~/Content/Users.css")
         @Styles.Render("~/Content/PagedList.css")
 }
-@Scripts.Render("~/bundles/modernizr")
+
+@section scripts{
+@Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/modernizr")
+    @Scripts.Render("//code.jquery.com/ui/1.12.1/jquery-ui.js")
+}
 
 
 
 
-<div class="page-container container">
+
+
+<div class="page-container container" style="min-height: calc(100vh - 50px);">
     <div style="width:800px">
-    <h2 style="padding-top: 20px">@Localization.UserList</h2>
-    <h4>@Localization.All: @Model.Count</h4>
-        
-        <div><i class="fa fa-search" aria-hidden="true"></i></div>
-        
+        <h2 style="padding-top: 20px">@Localization.UserList</h2>
+        <h4>@Localization.All: @Model.Count</h4>
+
+       @using (Html.BeginForm("UserList","Manage", new {page = 1}))
+       {
+        <p style="float:right">
+            @Html.TextBox("SearchString") <br />
+            <input type="submit" value="Filter" />
+        </p>
+       }
+    
+
         <div id="users">
             <table cellspacing="5" cellpadding="10">
 
                 @foreach (var user in Model)
 
-            {                 
-                        
-                    
-                <tbody>
+                {
+                    <tbody>
                     <tr>
-                        
-                            
-                            <td class='clickable-row' data-href='http://localhost:52755/' style="width: 250px">
-                                <div>
-                                    @user.Name @if (user.IsAdmin)
-                                    {<div class="admin">admin</div>}
-                                </div>
-                            </td>
-                            <td style="width: 250px">
-                                <p>@user.Email</p>
-                            </td>
-                            <td style="width: 100px; text-align:center">
-                                <p><i class="fa fa-calendar-o" aria-hidden="true">   </i>@user.ActiveEventsCount </p>
-                            </td>
-                         
-                       
-                        <td style="width: 100px; text-align:center">
-                                <i class="fa fa-times" aria-hidden="true" style="font-size:large;"></i>
-                            </td>
-                        </tr>
-                </tbody>
+                        <td class='profile-link clickable-row' data-href="@Url.Action("Index", "Profile", new {userId = user.Id})" style="width: 250px">
+                            <div>
+                                @user.Name @if (user.IsAdmin)
+                                           {<div class="admin">admin</div>}
+                            </div>
+                        </td>
+                        <td class='clickable-row' style="width: 250px">
+                            <p>@user.Email</p>
+                        </td>
+                        <td class='clickable-row' style="width: 100px;">
+                            <p><i class="fa fa-calendar-o" aria-hidden="true">&nbsp;</i>@user.ActiveEventsCount
+                            </p>
+                        </td>
+                        <td class="delete-profile" style="width: 100px; text-align: center">
+                            <i class="fa fa-times" aria-hidden="true" style="font-size: large;"></i>
+                        </td>
+                    </tr>
+                    </tbody>
                 }
             </table>
-            <div style="float:right">               
+            <div style="float:right">
                 @Html.PagedListPager(Model, page => Url.Action("Index", new { page }))
             </div>
         </div>
 
-        </div>
-       
     </div>
+
+</div>
+
+<script>
+    $(document).ready(function ($) {
+        $(".profile-link").click(function () {
+            window.document.location = $(this).data("href");
+        });
+        $(".delete-profile").click(function () {
+            window.document.location = $(this).data("href");
+        });
+    });
+</script>
 

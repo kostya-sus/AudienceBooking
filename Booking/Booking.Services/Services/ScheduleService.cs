@@ -17,7 +17,7 @@ namespace Booking.Services.Services
         {
             _eventRepository = eventRepository;
         }
-
+        
         public IEnumerable<Event> GetEventsByDay(DateTime day, Guid audienceMapId)
         {
             return _eventRepository.GetEventsByAudienceMapId(audienceMapId)
