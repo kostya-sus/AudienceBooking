@@ -10,6 +10,8 @@ namespace Booking.Services.Interfaces
 
         AudienceMap GetAudienceMap(Guid id);
 
+        bool Exists(Guid id);
+
         void CreateAudienceMap(AudienceMap audienceMap);
 
         void DeleteAudienceMap(AudienceMap audienceMap);

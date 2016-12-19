@@ -1,36 +1,92 @@
 ﻿using System;
 using System.Configuration;
+using System.IO;
+using System.Linq;
+using Booking.Models.EfModels;
+using Booking.Repositories;
+using Booking.Repositories.Repositories;
+using Booking.Services.Services;
 
 namespace Booking.Web.Helpers
 {
     public static class AudienceMapSelector
     {
-        private static Configuration _configuration;
+        private static readonly Configuration Configuration;
         private static readonly string KeyName = "AudienceMapId";
 
         static AudienceMapSelector()
         {
-            _configuration = System.Web.Configuration.WebConfigurationManager.OpenWebConfiguration("~");
-            if (_configuration.AppSettings.Settings[KeyName] == null)
-            {
-                _configuration.AppSettings.Settings.Add(KeyName, Guid.Empty.ToString());
-                _configuration.Save();
-            }
+            Configuration = System.Web.Configuration.WebConfigurationManager.OpenWebConfiguration("~");
         }
 
         public static Guid AudienceMapId
         {
             get
             {
-                var str = _configuration.AppSettings.Settings[KeyName].Value;
-                return new Guid(str);
+                var setting = Configuration.AppSettings.Settings[KeyName];
+                var uof = new UnitOfWork();
+                var audienceMapService = new AudienceMapService(uof);
+
+
+                Guid guid;
+                if (setting == null)
+                {
+                    guid = GetDefaultAudienceMap();
+                    Configuration.AppSettings.Settings.Add(KeyName, guid.ToString());
+                    Configuration.Save();
+                }
+                else if (!audienceMapService.Exists(new Guid(setting.Value)))
+                {
+                    guid = GetDefaultAudienceMap();
+                    Configuration.AppSettings.Settings[KeyName].Value = guid.ToString();
+                }
+                else
+                {
+                    guid = new Guid(setting.Value);
+                }
+
+                return guid;
             }
 
             set
             {
-                _configuration.AppSettings.Settings[KeyName].Value = value.ToString();
-                _configuration.Save();
+                Configuration.AppSettings.Settings[KeyName].Value = value.ToString();
+                Configuration.Save();
             }
+        }
+
+        private static Guid GetDefaultAudienceMap()
+        {
+            var uof = new UnitOfWork();
+
+            if (!uof.Context.AudienceMaps.Any())
+            {
+                CreateDefaultAudienceMap();
+            }
+
+            return uof.Context.AudienceMaps.First().Id;
+        }
+
+        private static void CreateDefaultAudienceMap()
+        {
+            var uof = new UnitOfWork();
+            var audienceMapService = new AudienceMapService(uof);
+
+            var blobFileName = "_default_room_map_generated";
+            var filePath = System.Web.Hosting.HostingEnvironment.MapPath("~/Content/Images/walls.png");
+            var model = new AudienceMap
+            {
+                Name = "Default",
+                ImageName = blobFileName
+            };
+
+            var imageRepository = new ImageBlobRepository();
+            using (FileStream fs = new FileStream(filePath, FileMode.Open, FileAccess.Read))
+            {
+                imageRepository.UploadImage(fs, blobFileName);
+            }
+
+            audienceMapService.CreateAudienceMap(model);
         }
     }
 }

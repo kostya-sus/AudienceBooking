@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using Booking.Models.EfModels;
 using Booking.Repositories.Interfaces;
 using Booking.Services.Interfaces;
@@ -23,6 +24,11 @@ namespace Booking.Services.Services
         public AudienceMap GetAudienceMap(Guid id)
         {
             return _unitOfWork.AudienceMapRepository.GetAudienceById(id);
+        }
+
+        public bool Exists(Guid id)
+        {
+            return _unitOfWork.AudienceMapRepository.GetAllAudienceMaps().Any(map => map.Id == id);
         }
 
         public void CreateAudienceMap(AudienceMap audienceMap)
