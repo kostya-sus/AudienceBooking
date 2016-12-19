@@ -243,7 +243,8 @@ function refillSchedule(eventsList) {
 }
 
 function loadSchedule(date, loadedCallback) {
-    var url = $("#get-day-schedule-url").val() + "?date=" + date.toLocaleDateString();
+    var audienceMapIdParameter = "&audienceMapId=" + $("#audience-map-id").val();
+    var url = $("#get-day-schedule-url").val() + "?date=" + date.toLocaleDateString() + audienceMapIdParameter;
     $.getJSON(url)
         .done(function(data) {
             lowerHourBound = data.BookingHourStart;

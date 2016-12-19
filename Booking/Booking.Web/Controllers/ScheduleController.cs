@@ -26,16 +26,16 @@ namespace Booking.Web.Controllers
         }
 
         [HttpGet]
-        public ActionResult GetDaySchedule(DateTime date)
+        public ActionResult GetDaySchedule(DateTime date, Guid audienceMapId)
         {
             var rule = _bookingScheduleRuleService.GetRule(date);
 
-            var events = _scheduleService.GetEventsByDay(date, AudienceMapSelector.AudienceMapId);
+            var events = _scheduleService.GetEventsByDay(date, audienceMapId);
             var viewModel = Mapper.Map<DayScheduleViewModel>(events);
             viewModel.BookingHourStart = rule.StartHour;
             viewModel.BookingHourEnd = rule.EndHour;
 
-            var audienceMap = _audienceMapService.GetAudienceMap(AudienceMapSelector.AudienceMapId);
+            var audienceMap = _audienceMapService.GetAudienceMap(audienceMapId);
             var availableAudiences = audienceMap.Audiences.Where(a => a.IsBookingAvailable)
                 .Select(a => new ScheduleRowName { Id = a.Id, Name = a.Name });
             viewModel.AvailableAudiences = availableAudiences;
