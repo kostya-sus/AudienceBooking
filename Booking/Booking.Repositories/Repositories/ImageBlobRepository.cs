@@ -55,8 +55,8 @@ namespace Booking.Repositories.Repositories
             CloudStorageAccount storageAccount = CloudStorageAccount.Parse(_storageConnectionString);
             CloudBlobClient blobClient = storageAccount.CreateCloudBlobClient();
             var container = blobClient.GetContainerReference(_storageContainerName);
-            container.SetPermissions(new BlobContainerPermissions { PublicAccess = BlobContainerPublicAccessType.Container });
             container.CreateIfNotExists();
+            container.SetPermissions(new BlobContainerPermissions { PublicAccess = BlobContainerPublicAccessType.Container });
             return container;
         }
     }
