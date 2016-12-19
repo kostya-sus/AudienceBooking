@@ -117,6 +117,60 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="Account_remove_from" xml:space="preserve">
+    <value>Удаление аккаунта с </value>
+  </data>
+  <data name="AudienceBooking" xml:space="preserve">
+    <value>AudienceBooking</value>
+  </data>
+  <data name="Cancel_event_notification_to_author" xml:space="preserve">
+    <value>Уведомление об удалении вашего события</value>
+  </data>
+  <data name="Confirm_account_for" xml:space="preserve">
+    <value>Подтверждение аккаунта</value>
+  </data>
+  <data name="Edit_event_notification_to_author" xml:space="preserve">
+    <value>Изменение вашего события</value>
+  </data>
+  <data name="Event_cancelled_notification" xml:space="preserve">
+    <value>Уведомление об удалении события</value>
+  </data>
+  <data name="Event_edit_notification" xml:space="preserve">
+    <value>Изменение события</value>
+  </data>
+  <data name="Event_is_cancelled" xml:space="preserve">
+    <value>Событие было отменено</value>
+  </data>
+  <data name="Feedback_from_user" xml:space="preserve">
+    <value>Отзыв</value>
+  </data>
+  <data name="Hi" xml:space="preserve">
+    <value>Здравствуйте</value>
+  </data>
+  <data name="Joined_to_participants_list_notification" xml:space="preserve">
+    <value>Добавление к списку участников события</value>
+  </data>
+  <data name="oursite" xml:space="preserve">
+    <value>наш сайт</value>
+  </data>
+  <data name="our_site" xml:space="preserve">
+    <value>на нашем сайте</value>
+  </data>
+  <data name="Registered_to" xml:space="preserve">
+    <value>Регистрация на сайте</value>
+  </data>
+  <data name="Remove_from_participants_list_notification" xml:space="preserve">
+    <value>Удаление со списка участников события</value>
+  </data>
+  <data name="Site_address" xml:space="preserve">
+    <value>softheme-booking.azurewebsites.net</value>
+  </data>
+  <data name="Thanks_For_registration" xml:space="preserve">
+    <value>Спасибо за регистрацию</value>
+  </data>
+  <data name="Visit_site_for_more_info" xml:space="preserve">
+    <value>Для дополнительной информации посетите</value>
+  </data>
   <data name="YouCantJoinEvent" xml:space="preserve">
     <value>Вы не можете принять участие в данном событии.</value>
   </data>
@@ -125,5 +179,11 @@
   </data>
   <data name="YouHaveNotRightsToRemoveParticipant" xml:space="preserve">
     <value>Вы не можете редактировать список участников данного события.</value>
+  </data>
+  <data name="Your_account_was_removed" xml:space="preserve">
+    <value>Ваш аккаунт удален с</value>
+  </data>
+  <data name="Your_event_cancelled" xml:space="preserve">
+    <value>Ваше событие успешно отменено</value>
   </data>
 </root>

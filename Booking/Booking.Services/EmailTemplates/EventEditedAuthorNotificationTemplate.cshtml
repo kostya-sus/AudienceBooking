@@ -1,4 +1,5 @@
-﻿@model Booking.Services.EmailModels.EventEditedAuthorNotificationModel
+﻿@using Booking.Services.Resources
+@model Booking.Services.EmailModels.EventEditedAuthorNotificationModel
 
 <!DOCTYPE html>
 
@@ -9,16 +10,16 @@
 </head>
 <body>
     <p>
-        Hi, @Model.Name
+        @Resources.Hi, @Model.Name
     </p>
 <p>
-    Your @Model.Title (Date: @Model.OldDate) event is edited for (new Date: @Model.NewDate),
+    @Resources.Your_event (@Model.Title Date: @Model.OldDate) @Resources.Was_edited_on (new Date: @Model.NewDate),
 </p>
 <p>
-    see more information in<a href="http://softheme-booking.azurewebsites.net/">our awesome site</a>
+    @Resources.Visit_site_for_more_info <a href="http://softheme-booking.azurewebsites.net/">@Resources.oursite</a>
 </p>
     
-    <p>AudienceBooking</p>
+    <p>@Resources.AudienceBooking</p>
 
 </body>
 </html>  

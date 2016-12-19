@@ -161,12 +161,11 @@ namespace Booking.Web.Controllers
                     var user = new ApplicationUser {UserName = model.UserName, Email = model.Email};
                     var result = await UserManager.CreateAsync(user, model.Password);
                     if (result.Succeeded)
-                    {
-                        
-                        await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
+                    {                    
+                        //await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
                         var emailBody = string.Format("Для завершения регистрации перейдите по ссылке:" +
                                                       "<a href=\"{0}\" title=\"Подтвердить регистрацию\">{0}</a>",
-                            Url.Action("Index", "Home", new {Token = user.Id, Email = user.Email},
+                            Url.Action("ConfirmEmail", "Account", new {Token = user.Id, Email = user.Email},
                                 Request.Url.Scheme));
 
                         _emailNotificationService.ConfirmEmailAddress(user, emailBody);
@@ -199,16 +198,18 @@ namespace Booking.Web.Controllers
         //
         // GET: /Account/ConfirmEmail
         [AllowAnonymous]
-        public async Task<ActionResult> ConfirmEmail(string userId, string code)
+        public async Task<ActionResult> ConfirmEmail(string Token, string Email)
         {
-            ApplicationUser user = UserManager.FindById(userId);
+            ApplicationUser user = UserManager.FindById(Token);
+
             if (user != null)
             {
-                if (user.Email == code)
+                if (user.Email == Email)
                 {
                     user.EmailConfirmed = true;
                     await UserManager.UpdateAsync(user);
                     await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
+                    _emailNotificationService.AccountRegisteredNotification(user);
                     return RedirectToAction("Index", "Home", new { ConfirmedEmail = user.Email });
                 }
                 else

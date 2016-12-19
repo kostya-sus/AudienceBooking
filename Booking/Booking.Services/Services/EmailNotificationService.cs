@@ -66,7 +66,7 @@ namespace Booking.Services.Services
 
             var emailHtmlBody = _templateService.Parse(File.ReadAllText(emailTemplatePath), modelEmail, null, null);
 
-            var subject = "Registered to softheme-booking.azurewebsites.net";
+            var subject = Resources.Resources.Registered_to + " " + Resources.Resources.Site_address;
             var email = GenerateEmail(emailHtmlBody, subject);
 
             email.To.Add(new MailAddress(modelEmail.Email, modelEmail.Name));    
@@ -87,7 +87,7 @@ namespace Booking.Services.Services
 
             var emailHtmlBody = _templateService.Parse(File.ReadAllText(emailTemplatePath), modelEmail, null, null);
 
-            var subject = "Account remove from softheme-booking.azurewebsites.net";
+            var subject = Resources.Resources.Account_remove_from + " " + Resources.Resources.Site_address;
             var email = GenerateEmail(emailHtmlBody, subject);
 
             email.To.Add(new MailAddress(modelEmail.Email, modelEmail.Name));
@@ -100,7 +100,7 @@ namespace Booking.Services.Services
             var participants = eventEntity.EventParticipants;
             var emailTemplatePath = Path.Combine(_templateFolderPath.Replace("Web", "Services"), "EventCancelledNotificationTemplate.cshtml");
             
-            var subject = "Event cancelled notification";
+            var subject = Resources.Resources.Event_cancelled_notification;
             var modelEmail = new Booking.Services.EmailModels.EventCancellModel
             {
                 EventTitle = eventEntity.Title,
@@ -134,7 +134,7 @@ namespace Booking.Services.Services
 
             var emailHtmlBody = _templateService.Parse(File.ReadAllText(emailTemplatePath), modelEmail, null, null);
 
-            var subject = "Cancel event notification";
+            var subject = Resources.Resources.Cancel_event_notification_to_author;
             var email = GenerateEmail(emailHtmlBody, subject);
 
             email.To.Add(new MailAddress(modelEmail.Email, modelEmail.Name));
@@ -154,7 +154,7 @@ namespace Booking.Services.Services
 
             var emailHtmlBody = _templateService.Parse(File.ReadAllText(emailTemplatePath), modelEmail, null, null);
 
-            var subject = "Remove from participants list notification";
+            var subject = Resources.Resources.Remove_from_participants_list_notification;
             var mailMessage = GenerateEmail(emailHtmlBody, subject);
 
             mailMessage.To.Add(new MailAddress(modelEmail.Email));
@@ -174,7 +174,7 @@ namespace Booking.Services.Services
 
             var emailHtmlBody = _templateService.Parse(File.ReadAllText(emailTemplatePath), modelEmail, null, null);
 
-            var subject = "Joined to participants list notification";
+            var subject = Resources.Resources.Joined_to_participants_list_notification;
             var mailMessage = GenerateEmail(emailHtmlBody, subject);
 
             mailMessage.To.Add(new MailAddress(modelEmail.Email));
@@ -187,7 +187,7 @@ namespace Booking.Services.Services
             var participants = oldEvent.EventParticipants;
             var emailTemplatePath = Path.Combine(_templateFolderPath.Replace("Web", "Services"), "EventEditedNotificationTemplate.cshtml");
 
-            var subject = "Event edit notification";
+            var subject = Resources.Resources.Event_edit_notification;
             var modelEmail = new Booking.Services.EmailModels.EventEditedModel
             {
                 Title = oldEvent.Title,
@@ -221,7 +221,7 @@ namespace Booking.Services.Services
 
             var emailHtmlBody = _templateService.Parse(File.ReadAllText(emailTemplatePath), modelEmail, null, null);
 
-            var subject = "Edit event notification";
+            var subject = Resources.Resources.Edit_event_notification_to_author;
             var email = GenerateEmail(emailHtmlBody, subject);
 
             email.To.Add(new MailAddress(modelEmail.Email, modelEmail.Name));
@@ -236,7 +236,7 @@ namespace Booking.Services.Services
 
             var emailTemplatePath = Path.Combine(_templateFolderPath.Replace("Web", "Services"), "SendFeedbackToAdminsNotificationTemplate.cshtml");
 
-            var subject = "Feedback from user";
+            var subject = Resources.Resources.Feedback_from_user;
             var modelEmail = new Booking.Services.EmailModels.SendFeedbackToAdminsModel
             {
                 Message = message,
@@ -258,38 +258,18 @@ namespace Booking.Services.Services
 
         public void ConfirmEmailAddress(ApplicationUser user, string  emailBody)
         {
-            ////var emailTemplatePath = Path.Combine(_templateFolderPath.Replace("Web", "Services"), "AccountConfirmTemplate.cshtml");
-
             var modelEmail = new Booking.Services.EmailModels.AccountRegisteredRemovedNotificationModel
             {
                 Name = user.UserName,
                 Email = user.Email
             };
 
-            ////var emailHtmlBody = _templateService.Parse(File.ReadAllText(emailTemplatePath), modelEmail, null, null);
-            
-            var subject = "Confirm account for softheme-booking.azurewebsites.net";
+            var subject = Resources.Resources.Confirm_account_for + " " + Resources.Resources.Site_address;
             var email = GenerateEmail(emailBody, subject);
 
             email.To.Add(new MailAddress(modelEmail.Email, modelEmail.Name));
 
             SendMail(email);
-
-            //MailAddress from = new MailAddress("somemail@yandex.ru", "Web Registration");
-            //// кому отправляем
-            //MailAddress to = new MailAddress(user.Email);
-            //// создаем объект сообщения
-            //MailMessage m = new MailMessage(from, to);
-            //// тема письма
-            //m.Subject = "Email confirmation";
-            //// текст письма - включаем в него ссылку
-            
-            //m.IsBodyHtml = true;
-            //// адрес smtp-сервера, с которого мы и будем отправлять письмо
-            //SmtpClient smtp = new System.Net.Mail.SmtpClient("smtp.yandex.ru", 25);
-            //// логин и пароль
-            //smtp.Credentials = new System.Net.NetworkCredential("somemail@yandex.ru", "password");
-            //smtp.Send(m);
         }
     }
 }

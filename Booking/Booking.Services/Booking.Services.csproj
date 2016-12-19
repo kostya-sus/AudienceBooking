@@ -107,10 +107,10 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="EmailTemplates\logo.png" />
     <None Include="App.config" />
     <Content Include="EmailTemplates\AccountRegisteredNotificationTemplate.cshtml" />
     <Content Include="EmailTemplates\AccountRemovedNotificationTemplate.cshtml" />
-    <None Include="EmailTemplates\AccountConfirmTemplate.cshtml" />
     <None Include="EmailTemplates\EventCancelledAuthorNotificationTemplate.cshtml" />
     <None Include="EmailTemplates\EventCancelledNotificationTemplate.cshtml" />
     <None Include="EmailTemplates\EventEditedAuthorNotificationTemplate.cshtml" />

@@ -1,4 +1,5 @@
-﻿@model Booking.Services.EmailModels.EventCancelledAuthorModel
+﻿@using Booking.Services.Resources
+@model Booking.Services.EmailModels.EventCancelledAuthorModel
 
 <!DOCTYPE html>
 
@@ -9,16 +10,16 @@
 </head>
 <body>
     <p>
-        Hi, @Model.Name
+        @Resources.Hi, @Model.Name
     </p>
 <p>
-    Your @Model.EventTitle Date: @Model.EventDateTime event is cancelled,
+    @Resources.Your_event_cancelled (@Model.EventTitle @Model.EventDateTime)
 </p>
 <p>
-    see more information in<a href="http://softheme-booking.azurewebsites.net/">our awesome site</a>
+    @Resources.Visit_site_for_more_info <a href="http://softheme-booking.azurewebsites.net/">@Resources.oursite</a>
 </p>
     
-    <p>AudienceBooking</p>
+    <p>@Resources.AudienceBooking</p>
 
 </body>
 </html>  

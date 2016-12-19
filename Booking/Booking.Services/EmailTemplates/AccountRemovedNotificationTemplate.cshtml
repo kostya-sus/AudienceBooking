@@ -1,4 +1,5 @@
-﻿@model Booking.Services.EmailModels.AccountRegisteredRemovedNotificationModel
+﻿@using Booking.Services.Resources
+@model Booking.Services.EmailModels.AccountRegisteredRemovedNotificationModel
 
 <!DOCTYPE html>
 
@@ -9,13 +10,13 @@
 </head>
 <body>
     <p>
-        Hi @Model.Name,
+        @Resources.Hi, @Model.Name
     </p>
 <p>
-    Your account was removed from our <a href="http://softheme-booking.azurewebsites.net/">our awesome site</a>!
+    @Resources.Your_account_was_removed <a href="http://softheme-booking.azurewebsites.net/">@Resources.our_site</a>!
 </p>
 
-    <p>AudienceBooking</p>
+    <p>@Resources.AudienceBooking</p>
 
 </body>
 </html>  
