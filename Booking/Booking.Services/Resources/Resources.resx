@@ -186,4 +186,19 @@
   <data name="Your_event_cancelled" xml:space="preserve">
     <value>Ваше событие успешно отменено</value>
   </data>
+  <data name="Event" xml:space="preserve">
+    <value>Событие</value>
+  </data>
+  <data name="WasEdited" xml:space="preserve">
+    <value>было изменено </value>
+  </data>
+  <data name="YouJoinedToParticipantList" xml:space="preserve">
+    <value>Вы успешно добавлены в список участников события:</value>
+  </data>
+  <data name="YouRemovedFromParticipantList" xml:space="preserve">
+    <value>Вы успешно удалены со списка участнков события:</value>
+  </data>
+  <data name="Your_event" xml:space="preserve">
+    <value>Ваше событие</value>
+  </data>
 </root>

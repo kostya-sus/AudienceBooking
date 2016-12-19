@@ -107,7 +107,6 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="EmailTemplates\logo.png" />
     <None Include="App.config" />
     <Content Include="EmailTemplates\AccountRegisteredNotificationTemplate.cshtml" />
     <Content Include="EmailTemplates\AccountRemovedNotificationTemplate.cshtml" />

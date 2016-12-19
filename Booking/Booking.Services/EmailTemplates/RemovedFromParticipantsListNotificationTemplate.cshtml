@@ -1,4 +1,5 @@
-﻿@model Booking.Services.EmailModels.RemovedJoinedFromParticipantsListModel
+﻿@using Booking.Services.Resources
+@model Booking.Services.EmailModels.RemovedJoinedFromParticipantsListModel
 
 <!DOCTYPE html>
 
@@ -9,16 +10,16 @@
 </head>
 <body>
     <p>
-        Hi,
+        @Resources.Hi,
     </p>
 <p>
-    You was removed from participant list of event(@Model.EventDateTime @Model.EventTitle)
+    @Resources.YouRemovedFromParticipantList (@Model.EventDateTime @Model.EventTitle)
 </p>
 <p>
-    see more information in<a href="http://softheme-booking.azurewebsites.net/">our awesome site</a>
+    @Resources.Visit_site_for_more_info <a href="http://softheme-booking.azurewebsites.net/">@Resources.oursite</a>
 </p>
     
-    <p>AudienceBooking</p>
+    <p>@Resources.AudienceBooking</p>
 
 </body>
 </html>  
