@@ -61,6 +61,186 @@ namespace Booking.Services.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Удаление аккаунта с .
+        /// </summary>
+        internal static string Account_remove_from {
+            get {
+                return ResourceManager.GetString("Account_remove_from", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to AudienceBooking.
+        /// </summary>
+        internal static string AudienceBooking {
+            get {
+                return ResourceManager.GetString("AudienceBooking", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Уведомление об удалении вашего события.
+        /// </summary>
+        internal static string Cancel_event_notification_to_author {
+            get {
+                return ResourceManager.GetString("Cancel_event_notification_to_author", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Подтверждение аккаунта.
+        /// </summary>
+        internal static string Confirm_account_for {
+            get {
+                return ResourceManager.GetString("Confirm_account_for", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Изменение вашего события.
+        /// </summary>
+        internal static string Edit_event_notification_to_author {
+            get {
+                return ResourceManager.GetString("Edit_event_notification_to_author", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Событие.
+        /// </summary>
+        internal static string Event {
+            get {
+                return ResourceManager.GetString("Event", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Уведомление об удалении события.
+        /// </summary>
+        internal static string Event_cancelled_notification {
+            get {
+                return ResourceManager.GetString("Event_cancelled_notification", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Изменение события.
+        /// </summary>
+        internal static string Event_edit_notification {
+            get {
+                return ResourceManager.GetString("Event_edit_notification", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Событие было отменено.
+        /// </summary>
+        internal static string Event_is_cancelled {
+            get {
+                return ResourceManager.GetString("Event_is_cancelled", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Отзыв.
+        /// </summary>
+        internal static string Feedback_from_user {
+            get {
+                return ResourceManager.GetString("Feedback_from_user", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Здравствуйте.
+        /// </summary>
+        internal static string Hi {
+            get {
+                return ResourceManager.GetString("Hi", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Добавление к списку участников события.
+        /// </summary>
+        internal static string Joined_to_participants_list_notification {
+            get {
+                return ResourceManager.GetString("Joined_to_participants_list_notification", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to на нашем сайте.
+        /// </summary>
+        internal static string our_site {
+            get {
+                return ResourceManager.GetString("our_site", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to наш сайт.
+        /// </summary>
+        internal static string oursite {
+            get {
+                return ResourceManager.GetString("oursite", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Регистрация на сайте.
+        /// </summary>
+        internal static string Registered_to {
+            get {
+                return ResourceManager.GetString("Registered_to", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Удаление со списка участников события.
+        /// </summary>
+        internal static string Remove_from_participants_list_notification {
+            get {
+                return ResourceManager.GetString("Remove_from_participants_list_notification", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to softheme-booking.azurewebsites.net.
+        /// </summary>
+        internal static string Site_address {
+            get {
+                return ResourceManager.GetString("Site_address", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Спасибо за регистрацию.
+        /// </summary>
+        internal static string Thanks_For_registration {
+            get {
+                return ResourceManager.GetString("Thanks_For_registration", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Для дополнительной информации посетите.
+        /// </summary>
+        internal static string Visit_site_for_more_info {
+            get {
+                return ResourceManager.GetString("Visit_site_for_more_info", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to было изменено .
+        /// </summary>
+        internal static string WasEdited {
+            get {
+                return ResourceManager.GetString("WasEdited", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Вы не можете принять участие в данном событии..
         /// </summary>
         internal static string YouCantJoinEvent {
@@ -84,6 +264,51 @@ namespace Booking.Services.Resources {
         internal static string YouHaveNotRightsToRemoveParticipant {
             get {
                 return ResourceManager.GetString("YouHaveNotRightsToRemoveParticipant", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Вы успешно добавлены в список участников события:.
+        /// </summary>
+        internal static string YouJoinedToParticipantList {
+            get {
+                return ResourceManager.GetString("YouJoinedToParticipantList", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Ваш аккаунт удален с.
+        /// </summary>
+        internal static string Your_account_was_removed {
+            get {
+                return ResourceManager.GetString("Your_account_was_removed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Ваше событие.
+        /// </summary>
+        internal static string Your_event {
+            get {
+                return ResourceManager.GetString("Your_event", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Ваше событие успешно отменено.
+        /// </summary>
+        internal static string Your_event_cancelled {
+            get {
+                return ResourceManager.GetString("Your_event_cancelled", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Вы успешно удалены со списка участнков события:.
+        /// </summary>
+        internal static string YouRemovedFromParticipantList {
+            get {
+                return ResourceManager.GetString("YouRemovedFromParticipantList", resourceCulture);
             }
         }
     }

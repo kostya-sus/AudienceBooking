@@ -1,0 +1,39 @@
+﻿@using System
+@using Booking.Services.Resources
+@model Booking.Services.EmailModels.AccountRegisteredRemovedNotificationModel
+
+<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title>Welcome</title>
+    <style>
+        .emailBody {
+            border: 1px solid blue;
+            position: fixed;
+            height: 160px;
+            padding-left: 10px;
+            padding-right: 10px;
+            padding-top: 15px;
+        }
+
+        .logistyle {
+            padding-left: 50px;
+        }
+    </style>
+</head>
+<body>
+    <div class="emailBody">
+        <div>
+            <p>@Resources.Hi, @Model.Name</p>
+        </div>
+
+        <p>
+             @Resources.Thanks_For_registration <a href="http://softheme-booking.azurewebsites.net/">@Resources.our_site</a>!
+        </p>
+
+        <p>@Resources.AudienceBooking</p>
+    </div>
+</body>
+</html>

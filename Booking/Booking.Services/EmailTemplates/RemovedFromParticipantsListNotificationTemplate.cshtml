@@ -1,0 +1,25 @@
+﻿@using Booking.Services.Resources
+@model Booking.Services.EmailModels.RemovedJoinedFromParticipantsListModel
+
+<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title>Removed from participants list</title>
+</head>
+<body>
+    <p>
+        @Resources.Hi,
+    </p>
+<p>
+    @Resources.YouRemovedFromParticipantList (@Model.EventDateTime @Model.EventTitle)
+</p>
+<p>
+    @Resources.Visit_site_for_more_info <a href="http://softheme-booking.azurewebsites.net/">@Resources.oursite</a>
+</p>
+    
+    <p>@Resources.AudienceBooking</p>
+
+</body>
+</html>  

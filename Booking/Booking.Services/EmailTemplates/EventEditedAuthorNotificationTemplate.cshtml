@@ -1,0 +1,25 @@
+﻿@using Booking.Services.Resources
+@model Booking.Services.EmailModels.EventEditedAuthorNotificationModel
+
+<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title>Event edit author notification</title>
+</head>
+<body>
+    <p>
+        @Resources.Hi, @Model.Name
+    </p>
+<p>
+    @Resources.Your_event (@Model.Title Date: @Model.OldDate) @Resources.WasEdited (new Date: @Model.NewDate),
+</p>
+<p>
+    @Resources.Visit_site_for_more_info <a href="http://softheme-booking.azurewebsites.net/">@Resources.oursite</a>
+</p>
+    
+    <p>@Resources.AudienceBooking</p>
+
+</body>
+</html>  

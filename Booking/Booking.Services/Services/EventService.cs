@@ -14,7 +14,7 @@ namespace Booking.Services.Services
         private readonly IUsersService _usersService;
         private readonly IEmailNotificationService _emailNotificationService;
         private readonly IAudienceService _audienceService;
-
+        
         public EventService(IUnitOfWork unitOfWork, IUsersService usersService,
             IEmailNotificationService emailNotificationService, IAudienceService audienceService)
         {
