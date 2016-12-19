@@ -76,7 +76,7 @@ namespace Booking.Services.Services
                             ((x.StartTime < eventStart && x.EndTime > eventStart) ||
                              (x.StartTime < eventEnd) && (x.EndTime > eventEnd)));
 
-            return events.Any();
+            return !events.Any();
         }
 
         public IEnumerable<Audience> GetAllAudiences()
