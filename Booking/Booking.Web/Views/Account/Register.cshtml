@@ -17,16 +17,16 @@
     </div>
 
     @Html.ValidationMessageFor(m => m.UserName, null, new {@class = "validation-error"})
-    @Html.TextBoxFor(m => m.UserName, new {@class = "login-input", placeholder = Localization.UserNamePlaceholder})
+    @Html.TextBoxFor(m => m.UserName, new {@class = "login-input", autocomplete = "off", placeholder = Localization.UserNamePlaceholder})
 
     @Html.ValidationMessageFor(m => m.Email, "", new {@class = "validation-error"})
-    @Html.TextBoxFor(m => m.Email, new {@class = "login-input", placeholder = Localization.EmailAddressPlaceholder})
+    @Html.TextBoxFor(m => m.Email, new {@class = "login-input", autocomplete = "off", placeholder = Localization.EmailAddressPlaceholder})
 
     @Html.ValidationMessageFor(m => m.Password, "", new {@class = "validation-error"})
-    @Html.PasswordFor(m => m.Password, new {@class = "login-input", placeholder = Localization.PasswordPlaceholder})
+    @Html.PasswordFor(m => m.Password, new {@class = "login-input", autocomplete = "off", placeholder = Localization.PasswordPlaceholder})
 
     @Html.ValidationMessageFor(m => m.ConfirmPassword, "", new {@class = "validation-error"})
-    @Html.PasswordFor(m => m.ConfirmPassword, new {@class = "login-input", placeholder = Localization.ConfirmPasswordPlaceholder})
+    @Html.PasswordFor(m => m.ConfirmPassword, new {@class = "login-input", autocomplete = "off", placeholder = Localization.ConfirmPasswordPlaceholder})
 
     <div style="width: 100%;">
         <input type="submit" disabled="disabled" value=@Localization.RegisterSubmit class="login-submit"/>
