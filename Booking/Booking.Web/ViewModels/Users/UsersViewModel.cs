@@ -6,6 +6,8 @@ namespace Booking.Web.ViewModels.Users
     {
         public IEnumerable<UsersListItemViewModel> Users { get; set; }
 
+        public string stringSearch { get; set; }
+
         public int TotalPages { get; set; }
 
         public int Page { get; set; }

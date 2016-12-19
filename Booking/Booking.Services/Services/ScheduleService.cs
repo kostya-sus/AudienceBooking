@@ -17,10 +17,6 @@ namespace Booking.Services.Services
             _eventRepository = eventRepository;
         }
 
-        public ScheduleService()
-        {
-        }
-
         public IEnumerable<Event> GetEventsByDay(DateTime day)
         {
             return _eventRepository.GetAllEvents()

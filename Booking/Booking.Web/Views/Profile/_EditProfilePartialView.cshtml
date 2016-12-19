@@ -17,18 +17,18 @@
             
             @Html.AntiForgeryToken()
             @Html.ValidationMessageFor(m => m.Name, "", new { @class = "validation-error" })
-            @Html.TextBoxFor(m => m.Name, new { @class = "profile-input-edit", @id = "name", })
+            @Html.TextBoxFor(m => m.Name, new { @class = "profile-input-edit", @id = "name", autocomplete = "off" })
 
             @Html.ValidationMessageFor(m => m.Email, "", new { @class = "validation-error" })
-            @Html.TextBoxFor(m => m.Email, new { @class = "profile-input-edit", @id = "email", })
+            @Html.TextBoxFor(m => m.Email, new { @class = "profile-input-edit", @id = "email", autocomplete = "off" })
             @if (Model.IsEditorAdmin)
             {
                 <div class="red-toggle" style="display: block; padding-top: 20px">
-                    <input type="checkbox" class="red-toggle-input" id="new-event-popup-is-public" name="NewRole" value="Admin" @(Model.IsProfileAdmin ? "checked" : "") />
-                    <label for="new-event-popup-is-public">
+                    <input type="checkbox" class="red-toggle-input" id="is-Admin" name="IsProfileAdmin" value="true" @(Model.IsProfileAdmin ? "checked" : "") />
+                    <label for="is-Admin">
                         <span class="red-toggle-container"><span class="red-toggle-circle"></span></span>
                     </label>
-                    <input name="NewRole" type="hidden" value="User" />
+                    <input name="IsProfileAdmin" type="hidden" value="false" />
                     <span class="red-toggle-not-checked">@Localization.Admin</span>
                 </div>               
             }

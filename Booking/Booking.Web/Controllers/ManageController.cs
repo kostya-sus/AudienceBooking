@@ -15,6 +15,8 @@ using PagedList;
 using Booking.Web.ViewModels.Users;
 using Booking.Services.Interfaces;
 using System.Collections.Generic;
+using Booking.Repositories;
+using Booking.Repositories.Interfaces;
 
 namespace Booking.Web.Controllers
 {
@@ -24,19 +26,24 @@ namespace Booking.Web.Controllers
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
         private readonly UsersService _usersService;
-        private readonly ScheduleService _schudeleServise;
+        private readonly ScheduleService _scheduleService;
+        private readonly EventService _eventService;
+        private readonly EmailNotificationService _emailNotificationService;
 
         public ManageController()
         {
+            var unitofWork = new UnitOfWork();
             _usersService = new UsersService();
-            _schudeleServise = new ScheduleService();
+            _scheduleService = new ScheduleService(unitofWork.EventRepository);
+            _emailNotificationService = new EmailNotificationService();
+            _eventService = new EventService(unitofWork, _usersService, _emailNotificationService);
         }
 
         public ManageController(ApplicationUserManager userManager, ApplicationSignInManager signInManager)
         {
             UserManager = userManager;
             SignInManager = signInManager;
-           
+
         }
 
         public ApplicationSignInManager SignInManager
@@ -45,9 +52,9 @@ namespace Booking.Web.Controllers
             {
                 return _signInManager ?? HttpContext.GetOwinContext().Get<ApplicationSignInManager>();
             }
-            private set 
-            { 
-                _signInManager = value; 
+            private set
+            {
+                _signInManager = value;
             }
         }
 
@@ -236,15 +243,22 @@ namespace Booking.Web.Controllers
 
         public async Task<ActionResult> Delete(string userId)
         {
-          var user = await UserManager.FindByIdAsync(userId);
+            var user = await UserManager.FindByIdAsync(userId);
             if (user != null)
             {
-                var events = _schudeleServise.GetEventsByAuthor(user);
-               
+                var events = _scheduleService.GetEventsByAuthor(user);
+
+                foreach (var single in events)
+                {
+                    _eventService.CancelEvent(User, single.Id);
+                }
+
+
                 var result = await UserManager.DeleteAsync(user);
-               
+
                 if (result.Succeeded)
                 {
+                    AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
                     return RedirectToAction("Index", "Users");
                 }
             }
@@ -255,28 +269,32 @@ namespace Booking.Web.Controllers
         [HttpPost]
         public ActionResult EditUser(UserInfoViewModel model)
         {
-            
-            ApplicationUser user = UserManager.FindById(model.Id);
-            if (user != null)
-            {                
-                user.UserName = model.Name;
-                user.Email = model.Email;                              
-                IdentityResult result = UserManager.Update(user);
-                if (model.OldRole==model.NewRole)
+            if (ModelState.IsValid)
+            {
+                ApplicationUser user = UserManager.FindById(model.Id);
+                if (user != null)
                 {
-                    result = UserManager.RemoveFromRole(model.Id, model.OldRole);
-                    result = UserManager.AddToRole(model.Id, model.OldRole);
-                }
-                if (result.Succeeded)
-                {
-                    return RedirectToAction("Index", "Profile", new { userId = model.Id });
-                }
-                else
-                {
-                    ModelState.AddModelError("", "Что-то пошло не так");
+                    user.UserName = model.Name;
+                    user.Email = model.Email;
+                    IdentityResult result = UserManager.Update(user);
+                    if (model.IsProfileAdmin)
+                    {
+                        result = UserManager.AddToRole(model.Id, "Admin");
+                    }
+                    else
+                    {
+                        result = UserManager.RemoveFromRole(model.Id, "Admin");
+                    }
+                    if (result.Succeeded)
+                    {
+                        return RedirectToAction("Index", "Profile", new { userId = model.Id });
+                    }
+                    else
+                    {
+                        ModelState.AddModelError("", "Что-то пошло не так");
+                    }
                 }
             }
-           
 
             return RedirectToAction("Index", "Profile", new { userId = model.Id });
         }
@@ -286,25 +304,25 @@ namespace Booking.Web.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult ChangePassword(ProfileViewModel model)
         {
-           if (!ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
                 return View(model);
             }
-            var result =  UserManager.ChangePassword(User.Identity.GetUserId(), model.ChangePasswordForm.OldPassword, model.ChangePasswordForm.NewPassword);
+            var result = UserManager.ChangePassword(User.Identity.GetUserId(), model.ChangePasswordForm.OldPassword, model.ChangePasswordForm.NewPassword);
             if (result.Succeeded)
             {
-                var user =  UserManager.FindById(User.Identity.GetUserId());
+                var user = UserManager.FindById(User.Identity.GetUserId());
                 if (user != null)
                 {
                     SignInManager.SignIn(user, isPersistent: false, rememberBrowser: false);
                 }
                 ViewData["PasswordSuccess"] = Localization.Localization.PasswordSuccess;
-                
-                return PartialView("_ResetPasswordPartial",model);
+
+                return PartialView("_ResetPasswordPartial", model);
             }
             ViewData["PasswordFaild"] = Localization.Localization.Error;
 
-            return PartialView("_ResetPasswordPartial",model);
+            return PartialView("_ResetPasswordPartial", model);
         }
 
         //
@@ -396,34 +414,45 @@ namespace Booking.Web.Controllers
             base.Dispose(disposing);
         }
 
-        public ActionResult UserList(int? page)
+        public ActionResult UserList(int? page, string searchString)
         {
             var Users = new List<UsersListItemViewModel>();
+            List<ApplicationUser> UsersList = new List<ApplicationUser>();
             var test = UserManager.Users.ToList();
-            string searchString = null;
             if (!String.IsNullOrEmpty(searchString))
             {
-                test = test.Where(s => s.UserName.Contains(searchString)).ToList();
-            }
+                foreach (var user in test)
+                {
+                    if (user.UserName.Contains(searchString))
+                    {
+                        UsersList.Add(user);
+                    }
 
+                }
+
+            }
+            else
+            {
+                UsersList = test;
+            }
             int pageSize = 20;
             int pageNumber = (page ?? 1);
-           
-            foreach (var item in test)
-            {               
-                    Users.Add
-                    (
-                    new UsersListItemViewModel
-                    {
-                        Id = item.Id,
-                        Name = item.UserName,
-                        Email = item.Email,                                                      
-                        IsAdmin = _usersService.IsAdmin(item),
-                        ActiveEventsCount = _usersService.GetEvenByAuthor(item.Id)
-                    }
-                    );
-                
-            }  
+
+            foreach (var item in UsersList)
+            {
+                Users.Add
+                (
+                new UsersListItemViewModel
+                {
+                    Id = item.Id,
+                    Name = item.UserName,
+                    Email = item.Email,
+                    IsAdmin = _usersService.IsAdmin(item),
+                    ActiveEventsCount = _usersService.GetEvenByAuthor(item.Id)
+                }
+                );
+
+            }
             return View("UsersList", Users.ToPagedList(pageNumber, pageSize));
         }
         #region Helpers
@@ -477,6 +506,6 @@ namespace Booking.Web.Controllers
             Error
         }
 
-#endregion
+        #endregion
     }
 }
