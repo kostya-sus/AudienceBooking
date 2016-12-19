@@ -13,6 +13,8 @@ namespace Booking.Services.Interfaces
 
         void CancelEvent(IPrincipal editor, Guid eventId);
 
+        void CancelEventsByAuthor(string userId);
+
         void UpdateEvent(IPrincipal editor, Event eventEntity);
 
         void AddParticipant(string email, Guid eventId);

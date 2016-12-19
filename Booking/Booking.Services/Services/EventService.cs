@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Security.Principal;
 using Booking.Models;
 using Booking.Models.EfModels;
@@ -71,6 +72,21 @@ namespace Booking.Services.Services
             {
                 throw new UnauthorizedAccessException("You do not have access rights to cancel this event.");
             }
+        }
+
+        public void CancelEventsByAuthor(string userId)
+        {
+            var eventsQuery = _unitOfWork.EventRepository.GetAllEvents().
+                Where(e => e.AuthorId == userId);
+
+            foreach (var eventEntity in eventsQuery)
+            {
+                _unitOfWork.EventRepository.DeleteEvent(eventEntity);
+                _emailNotificationService.EventCancelledAuthorNotification(eventEntity);
+                _emailNotificationService.EventCancelledNotification(eventEntity);
+            }
+
+            _unitOfWork.Save();
         }
 
         public void UpdateEvent(IPrincipal editor, Event eventEntity)
