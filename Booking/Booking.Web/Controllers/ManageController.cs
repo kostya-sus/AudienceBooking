@@ -29,16 +29,21 @@ namespace Booking.Web.Controllers
         private readonly ScheduleService _scheduleService;
         private readonly EventService _eventService;
 
-        public ManageController(ApplicationUserManager userManager, ApplicationSignInManager signInManager)
+        public ManageController()
         {
-            UserManager = userManager;
-            SignInManager = signInManager;
             var unitofWork = new UnitOfWork();
             _usersService = new UsersService();
             _scheduleService = new ScheduleService(unitofWork.EventRepository);
             var emailNotificationService = new EmailNotificationService();
             IAudienceService audienceService = new AudienceService(unitofWork);
             _eventService = new EventService(unitofWork, _usersService, emailNotificationService, audienceService);
+        }
+
+        public ManageController(ApplicationUserManager userManager, ApplicationSignInManager signInManager)
+        {
+            UserManager = userManager;
+            SignInManager = signInManager;
+            
         }
 
         public ApplicationSignInManager SignInManager
