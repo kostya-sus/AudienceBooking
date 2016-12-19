@@ -3,6 +3,7 @@ using System.IO;
 using System.Net.Mail;
 using Booking.Models;
 using System.Net;
+using System.Security.Policy;
 using System.Text;
 using Booking.Services.EmailModels;
 using Booking.Services.Interfaces;
@@ -253,6 +254,42 @@ namespace Booking.Services.Services
 
                 SendMail(mail);
             }
+        }
+
+        public void ConfirmEmailAddress(ApplicationUser user, string  emailBody)
+        {
+            ////var emailTemplatePath = Path.Combine(_templateFolderPath.Replace("Web", "Services"), "AccountConfirmTemplate.cshtml");
+
+            var modelEmail = new Booking.Services.EmailModels.AccountRegisteredRemovedNotificationModel
+            {
+                Name = user.UserName,
+                Email = user.Email
+            };
+
+            ////var emailHtmlBody = _templateService.Parse(File.ReadAllText(emailTemplatePath), modelEmail, null, null);
+            
+            var subject = "Confirm account for softheme-booking.azurewebsites.net";
+            var email = GenerateEmail(emailBody, subject);
+
+            email.To.Add(new MailAddress(modelEmail.Email, modelEmail.Name));
+
+            SendMail(email);
+
+            //MailAddress from = new MailAddress("somemail@yandex.ru", "Web Registration");
+            //// кому отправляем
+            //MailAddress to = new MailAddress(user.Email);
+            //// создаем объект сообщения
+            //MailMessage m = new MailMessage(from, to);
+            //// тема письма
+            //m.Subject = "Email confirmation";
+            //// текст письма - включаем в него ссылку
+            
+            //m.IsBodyHtml = true;
+            //// адрес smtp-сервера, с которого мы и будем отправлять письмо
+            //SmtpClient smtp = new System.Net.Mail.SmtpClient("smtp.yandex.ru", 25);
+            //// логин и пароль
+            //smtp.Credentials = new System.Net.NetworkCredential("somemail@yandex.ru", "password");
+            //smtp.Send(m);
         }
     }
 }

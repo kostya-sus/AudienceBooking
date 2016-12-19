@@ -67,6 +67,11 @@ namespace Booking.Web.Controllers
 
             ApplicationUser signedUser = UserManager.FindByEmail(model.Email);
 
+            if (!signedUser.EmailConfirmed)
+            {
+                return RedirectToAction("Confirm", "Account", new { Email = signedUser.Email });
+            }
+
             var result = signedUser != null
                 ? await SignInManager.PasswordSignInAsync(signedUser.UserName, model.Password, model.RememberMe, false)
                 : SignInStatus.Failure;
@@ -159,13 +164,19 @@ namespace Booking.Web.Controllers
                     {
                         
                         await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
+                        var emailBody = string.Format("Для завершения регистрации перейдите по ссылке:" +
+                                                      "<a href=\"{0}\" title=\"Подтвердить регистрацию\">{0}</a>",
+                            Url.Action("Index", "Home", new {Token = user.Id, Email = user.Email},
+                                Request.Url.Scheme));
 
+                        _emailNotificationService.ConfirmEmailAddress(user, emailBody);
+                        return RedirectToAction("Confirm", "Account", new { Email = user.Email });
                         // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
                         // Send an email with this link
                         // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
                         // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
                         // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
-                        _emailNotificationService.AccountRegisteredNotification(user);
+                        //_emailNotificationService.AccountRegisteredNotification(user);
                         return RedirectToAction("Index", "Home");
                     }
                 }
@@ -179,17 +190,36 @@ namespace Booking.Web.Controllers
             return View(model);
         }
 
+        [AllowAnonymous]
+        public string Confirm(string email)
+        {
+            return "На почтовый адрес " + email + " Вам высланы дальнейшие" +
+                    " инструкции по завершению регистрации";
+        }
         //
         // GET: /Account/ConfirmEmail
         [AllowAnonymous]
         public async Task<ActionResult> ConfirmEmail(string userId, string code)
         {
-            if (userId == null || code == null)
+            ApplicationUser user = UserManager.FindById(userId);
+            if (user != null)
             {
-                return View("Error");
+                if (user.Email == code)
+                {
+                    user.EmailConfirmed = true;
+                    await UserManager.UpdateAsync(user);
+                    await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
+                    return RedirectToAction("Index", "Home", new { ConfirmedEmail = user.Email });
+                }
+                else
+                {
+                    return RedirectToAction("Confirm", "Account", new { Email = user.Email });
+                }
             }
-            var result = await UserManager.ConfirmEmailAsync(userId, code);
-            return View(result.Succeeded ? "ConfirmEmail" : "Error");
+            else
+            {
+                return RedirectToAction("Confirm", "Account", new { Email = "" });
+            }
         }
 
         //

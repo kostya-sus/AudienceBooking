@@ -21,5 +21,7 @@ namespace Booking.Services.Interfaces
         void EventEditedAuthorNotification(Event newEvent, Event oldEvent);
 
         void SendFeedbackToAdmins(string name, string surname, string email, string message);
+
+        void ConfirmEmailAddress(ApplicationUser user, string emailBody);
     }
 }
