@@ -22,9 +22,9 @@ namespace Booking.Web.ViewModels.Profile
 
         public bool IsProfileAdmin { get; set; }
 
-        public bool IsEditorAdmin { get; set; }
+        public bool IsEditorAdmin { get; set; }    
 
-        public string oldRole { get; set; }
+        public string OldRole { get; set; }   
 
         public string NewRole { get; set; }
 

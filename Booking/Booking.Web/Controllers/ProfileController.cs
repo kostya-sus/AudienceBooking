@@ -60,7 +60,8 @@ namespace Booking.Web.Controllers
                 Email = user.Email,
                 ActiveEventsCount = _usersService.GetEvenByAuthor(userId),
                 Id = userId,
-                IsOwner = (User.Identity.GetUserId() == userId)
+                IsOwner = (User.Identity.GetUserId() == userId),
+                IsEditorAdmin = _usersService.IsAdmin(_usersService.GetUserById(User.Identity.GetUserId()))
 
             };
               

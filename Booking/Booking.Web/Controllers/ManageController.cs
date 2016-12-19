@@ -256,16 +256,16 @@ namespace Booking.Web.Controllers
         public ActionResult EditUser(UserInfoViewModel model)
         {
             
-            ApplicationUser user =UserManager.FindById(model.Id);
+            ApplicationUser user = UserManager.FindById(model.Id);
             if (user != null)
             {                
                 user.UserName = model.Name;
                 user.Email = model.Email;                              
                 IdentityResult result = UserManager.Update(user);
-                if (model.oldRole != model.NewRole)
+                if (model.OldRole==model.NewRole)
                 {
-                    result = UserManager.RemoveFromRole(model.Id, model.oldRole);
-                    result = UserManager.AddToRole(model.Id, model.NewRole);
+                    result = UserManager.RemoveFromRole(model.Id, model.OldRole);
+                    result = UserManager.AddToRole(model.Id, model.OldRole);
                 }
                 if (result.Succeeded)
                 {
