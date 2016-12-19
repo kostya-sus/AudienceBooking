@@ -50,6 +50,26 @@ namespace Booking.Services.Services
             return list;
         }
 
+        public IEnumerable<int> GetDisabledDaysForMonth(int month, int year)
+        {
+            var rules = GetRulesForMonth(month, year);
+            var days = new List<int>();
+
+            for (int day = 1; day <= DateTime.DaysInMonth(year, month); ++day)
+            {
+                var date = new DateTime(year, month, day);
+                var rule = rules.Where(r => r.DayOfWeek == date.DayOfWeek && r.AppliedDate < date)
+                    .OrderByDescending(r => r.AppliedDate)
+                    .FirstOrDefault();
+                if (!BookingAvailable(rule))
+                {
+                    days.Add(day);
+                }
+            }
+
+            return days;
+        }
+
         public void CreateRule(BookingScheduleRule rule)
         {
             using (var transaction = _unitOfWork.Context.Database.BeginTransaction())
@@ -104,7 +124,7 @@ namespace Booking.Services.Services
 
         public bool BookingAvailable(BookingScheduleRule rule)
         {
-            return rule.EndHour - rule.StartHour > 0;
+            return rule != null && rule.EndHour - rule.StartHour > 0;
         }
 
         public DateTime GetNextAvailableDate(DateTime date)

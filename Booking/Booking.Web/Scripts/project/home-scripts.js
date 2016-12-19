@@ -1,7 +1,4 @@
-﻿var month;
-var year;
-
-function timestampIsBetween(time, left, right) {
+﻿function timestampIsBetween(time, left, right) {
     var timeMins = time.getHours() * 60 + time.getMinutes();
     var leftMins = left.getHours() * 60 + left.getMinutes();
     var rightMins = right.getHours() * 60 + right.getMinutes();
@@ -90,38 +87,69 @@ $(document)
 
         var $datepicker = $("#datepicker");
 
-        $datepicker.datepicker({ language: "ru" });
+        var disabledDays = {};
 
-        month = time.getMonth();
-        year = time.getYear();
+        function loadMonth(date) {
+            var month = date.getMonth() + 1;
+            var year = date.getFullYear();
+            var url = $("#get-disabled-days-month-url").val() + "?month=" + month + "&year=" + year;
+            $.get(url)
+                .done(function(data) {
+                    disabledDays[data.Month.toString() + data.Year.toString()] = data.Days;
+                });
+        }
 
-        $datepicker.on("changeDate",
-            function () {
+        loadMonth(time);
 
-                dateChangedEvent($datepicker.datepicker("getDate"),
-                    function() {
-                        toggleActiveAudiences();
-                    });
+        setTimeout(configureDatepicker, 300);
+
+        function configureDatepicker() {
+            $datepicker.datepicker({
+                language: "ru",
+                beforeShowDay:
+                    function(dt) {
+                        var month = dt.getMonth() + 1;
+                        var key = month.toString() + dt.getFullYear().toString();
+                        return disabledDays && key in disabledDays && !disabledDays[key].includes(dt.getDate());
+                    },
+                changeMonth: true,
+                changeYear: false
             });
 
-        setDateToday();
+            $datepicker.on("changeDate",
+                function() {
+                    dateChangedEvent($datepicker.datepicker("getDate"),
+                        function() {
+                            toggleActiveAudiences();
+                        });
+                });
 
-        moveSliderNow(lowerHourBound, upperHourBound, tdWidth);
+            $datepicker.on("changeMonth",
+                function(dt) {
+                    var time = new Date(dt.date.getTime());
+                    time.setMonth(time.getMonth() + 1);
+                    loadMonth(time);
+                });
 
-        toggleWithCalendarMode();
+            setDateToday();
 
-        $(".btn-goto-today").click(function() { setDateToday(toggleActiveAudiences); });
+            moveSliderNow(lowerHourBound, upperHourBound, tdWidth);
 
-        $(".btn-goto-now")
-            .click(function() {
-                bindDraggableSliderToNow();
-                toggleActiveAudiences();
-            });
+            toggleWithCalendarMode();
 
-        checkSliderNowPosition();
+            $(".btn-goto-today").click(function() { setDateToday(toggleActiveAudiences); });
 
-        $(".room-proxy").mouseenter(onRoomProxyMouseEnterShowInfo);
-        $(".room-proxy").mouseleave(onRoomProxyMouseLeaveHideInfo);
+            $(".btn-goto-now")
+                .click(function() {
+                    bindDraggableSliderToNow();
+                    toggleActiveAudiences();
+                });
 
-        setTimeout(toggleActiveAudiences, 300);
+            checkSliderNowPosition();
+
+            $(".room-proxy").mouseenter(onRoomProxyMouseEnterShowInfo);
+            $(".room-proxy").mouseleave(onRoomProxyMouseLeaveHideInfo);
+
+            setTimeout(toggleActiveAudiences, 300);
+        }
     });

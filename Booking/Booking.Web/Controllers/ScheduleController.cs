@@ -86,5 +86,19 @@ namespace Booking.Web.Controllers
 
             return Json(vm, JsonRequestBehavior.AllowGet);
         }
+
+        [HttpGet]
+        public ActionResult GetDisabledDaysForMonth(int month, int year)
+        {
+            var days = _bookingScheduleRuleService.GetDisabledDaysForMonth(month, year);
+            var vm = new DisabledDaysViewModel
+            {
+                Days = days,
+                Month = month,
+                Year = year
+            };
+
+            return Json(vm, JsonRequestBehavior.AllowGet);
+        }
     }
 }

@@ -14,6 +14,8 @@ namespace Booking.Services.Interfaces
 
         IList<BookingScheduleRule> GetRulesForMonth(int month, int year);
 
+        IEnumerable<int> GetDisabledDaysForMonth(int month, int year);
+
         void CreateRule(BookingScheduleRule rule);
 
         bool BookingAvailable(BookingScheduleRule rule);
