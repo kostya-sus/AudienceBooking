@@ -35,7 +35,7 @@ function onRoomProxyClickToggleChosenAudience() {
 function setChosenAudience() {
     var id = $("#chosen-audience-id").val();
     $(".room-available")
-        .each(function () {
+        .each(function() {
             var $room = $(this);
             if (parseInt($room.data("audience-id")) === id) {
                 $room.addClass("room-active");
@@ -43,4 +43,12 @@ function setChosenAudience() {
         });
     var audienceName = $("#audience-" + id + "-name").val();
     $("#audience-name").text(audienceName);
+}
+
+function onRoomProxyClickRedirectToAudiencePage() {
+    var targetDivId = "#" + $(this).data("room-target");
+    $(targetDivId).addClass("room-proxy-hover");
+    var audienceId = $(targetDivId).data("audience-id");
+    var url = $("#audience-page-url").val() + "?audienceId=" + audienceId;
+    window.location.replace(url);
 }

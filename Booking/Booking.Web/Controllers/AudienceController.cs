@@ -21,9 +21,11 @@ namespace Booking.Web.Controllers
         }
 
         [HttpGet]
-        public ActionResult Index(int audienceId)
+        public ActionResult Index(Guid audienceId)
         {
-            throw new NotImplementedException();
+            var model = _audienceService.GetAudience(audienceId);
+            var vm = Mapper.Map<AudienceIndexViewModel>(model);
+            return View(vm);
         }
 
         [HttpGet]
@@ -36,7 +38,7 @@ namespace Booking.Web.Controllers
         }
 
         [HttpGet]
-        public ActionResult GetSchedule(int audienceId, DateTime startDate, DateTime endDate)
+        public ActionResult GetSchedule(Guid audienceId, DateTime startDate, DateTime endDate)
         {
             throw new NotImplementedException();
         }
@@ -51,7 +53,7 @@ namespace Booking.Web.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "Admin")]
-        public ActionResult Open(int audienceId)
+        public ActionResult Open(Guid audienceId)
         {
             throw new NotImplementedException();
         }
@@ -59,14 +61,14 @@ namespace Booking.Web.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "Admin")]
-        public ActionResult Close(int audienceId)
+        public ActionResult Close(Guid audienceId)
         {
             throw new NotImplementedException();
         }
 
         [HttpGet]
         [Authorize(Roles = "Admin")]
-        public ActionResult Edit(int audienceId)
+        public ActionResult Edit(Guid audienceId)
         {
             throw new NotImplementedException();
         }

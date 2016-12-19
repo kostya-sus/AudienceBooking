@@ -15,6 +15,10 @@ namespace Booking.Web.AutoMapper.AutoMapperProfiles
 
             CreateMap<Audience, AudienceInfoViewModel>()
                 .ForMember(dest => dest.LineDetailsImageUrl, opt => opt.ResolveUsing<AudienceLineDetailsImageResolver>());
+
+            CreateMap<Audience, AudienceIndexViewModel>()
+                .ForMember(dest => dest.AudienceMap, opt => opt.MapFrom(source => source.AudienceMap))
+                .ForMember(dest => dest.AudienceInfo, opt => opt.MapFrom(source => source));
         }
     }
 }

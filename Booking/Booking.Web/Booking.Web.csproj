@@ -233,6 +233,7 @@
     <Compile Include="ViewModels\AudienceMap\AudienceMapViewModel.cs" />
     <Compile Include="ViewModels\AdminPanel\CreateAudienceViewModel.cs" />
     <Compile Include="ViewModels\AdminPanel\NewAudienceMapViewModel.cs" />
+    <Compile Include="ViewModels\Audience\AudienceIndexViewModel.cs" />
     <Compile Include="ViewModels\Schedule\AvailableDayViewModel.cs" />
     <Compile Include="ViewModels\Schedule\DisabledDaysViewModel.cs" />
     <Compile Include="ViewModels\Schedule\ScheduleRowName.cs" />
@@ -278,6 +279,7 @@
     <Content Include="Content\admin_panel\audience_map.css" />
     <Content Include="Content\admin_panel\layout.css" />
     <Content Include="Content\audience-info.css" />
+    <Content Include="Content\audience-page.css" />
     <Content Include="Content\bootstrap-datepicker.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
@@ -430,7 +432,7 @@
     </Content>
     <Content Include="Views\Error\Error.cshtml" />
     <Content Include="Views\Error\_ViewStart.cshtml" />
-    <Content Include="Views\Shared\_AudienceInfoPartial.cshtml" />
+    <Content Include="Views\Audience\_AudienceInfoPartial.cshtml" />
     <Content Include="Views\Event\Index.cshtml" />
     <Content Include="Views\Event\_RoomMapRoutePartial.cshtml" />
     <Content Include="Views\Shared\_JoinEventPartial.cshtml" />
@@ -438,7 +440,7 @@
     <Content Include="Views\Event\_DisplayEventPopup.cshtml" />
     <Content Include="Views\Error\_ViewStart.cshtml" />
     <Content Include="Views\Event\_NewEventPartial.cshtml" />
-    <Content Include="Views\Event\_RoomMapChoicePartial.cshtml" />
+    <Content Include="Views\Audience\_AudienceMapPartial.cshtml" />
     <Content Include="Views\Event\_CancelEventPartial.cshtml" />
     <Content Include="Views\Event\_EditEventPopupPartial.cshtml" />
     <Content Include="Views\Profile\Index.cshtml" />
@@ -455,10 +457,11 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\AdminPanel\_NewScheduleRulePartial.cshtml" />
     <Content Include="Views\Home\SelectMap.cshtml" />
+    <Content Include="Views\Audience\Index.cshtml" />
+    <Content Include="Views\Event\_RoomMapChoicePartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Audience\" />
     <Folder Include="Views\Schedule\" />
     <Folder Include="Views\Users\" />
   </ItemGroup>

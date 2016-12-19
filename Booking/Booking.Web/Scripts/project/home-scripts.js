@@ -149,6 +149,7 @@ $(document)
 
             $(".room-proxy").mouseenter(onRoomProxyMouseEnterShowInfo);
             $(".room-proxy").mouseleave(onRoomProxyMouseLeaveHideInfo);
+            $(".room-proxy").click(onRoomProxyClickRedirectToAudiencePage);
 
             setTimeout(toggleActiveAudiences, 300);
         }
