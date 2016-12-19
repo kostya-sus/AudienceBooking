@@ -39,7 +39,8 @@ namespace Booking.Web.AutoMapper.AutoMapperProfiles
 
             CreateMap<Event, CreateEditEventViewModel>()
                 .ForMember(dest => dest.AuthorName,
-                    opt => opt.ResolveUsing<EventAuthorNameResolver<CreateEditEventViewModel>>());
+                    opt => opt.ResolveUsing<EventAuthorNameResolver<CreateEditEventViewModel>>())
+                    .ForMember(dest => dest.AvailableAudiences, opt => opt.ResolveUsing<EventAvailableAudiencesResolver>());
 
             CreateMap<Event, EventEditViewModel>()
                 .ForMember(dest => dest.AuthorName,
