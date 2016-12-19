@@ -32,7 +32,7 @@ namespace Booking.Web.Controllers
             _audienceService = new AudienceService(uof);
             var usersService = new UsersService();
             var emailNotificationService = new EmailNotificationService();
-            _eventService = new EventService(uof, usersService, emailNotificationService);
+            _eventService = new EventService(uof, usersService, emailNotificationService, _audienceService);
             _audienceMapService = new AudienceMapService(uof);
         }
 
@@ -133,7 +133,7 @@ namespace Booking.Web.Controllers
 
             Event newEvent = Mapper.Map<Event>(vm);
             newEvent.AuthorId = User.Identity.GetUserId();
-            
+
             _eventService.CreateEvent(newEvent);
 
             return new HttpStatusCodeResult(HttpStatusCode.OK);
