@@ -140,7 +140,7 @@ namespace Booking.Web.Controllers
         public ActionResult Cancel(Guid eventId)
         {
             _eventService.CancelEvent(User, eventId);
-            return RedirectToAction("Index", "Home");
+            return new HttpStatusCodeResult(HttpStatusCode.OK);
         }
 
         [HttpGet]
