@@ -1,0 +1,45 @@
+﻿@using Booking.Web.ViewModels.AdminPanel
+@model Booking.Web.ViewModels.AudienceMap.AudienceMapViewModel
+
+@section scripts{
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("//code.jquery.com/ui/1.12.1/jquery-ui.js")
+    @Scripts.Render("~/Scripts/project/admin_panel/audience_map.js")
+}
+@section styles {
+    <link rel="stylesheet" type="text/css" href="http://code.jquery.com/ui/1.9.2/themes/base/jquery-ui.css">
+    @Styles.Render("~/Content/admin_panel/audience_map.css")
+    @Styles.Render("~/Content/room-styles.css")
+}
+
+
+<div id="map-container">
+    @foreach (var audience in Model.Audiences)
+    {
+        <div style="@audience.Style" class="room @(audience.IsBookingAvailable ? "room-available" : "room-not-available")">
+            <div class="room-title">
+                @audience.Name
+            </div>
+        </div>
+    }
+
+    <img id="map-image" src="@Model.ImageUrl"/>
+</div>
+
+<button id="new-audience-btn" class="btn btn-default">New audience</button>
+
+<div>
+    @foreach (var audience in Model.Audiences)
+    {
+        <div class="form-group">
+            <span>@audience.Name</span>
+            @using (Html.BeginForm("DeleteAudience", "AdminPanel", new {id = audience.Id, audienceMapId = Model.Id}))
+            {
+                @Html.AntiForgeryToken()
+                <button type="submit" class="btn btn-danger">Delete</button>
+            }
+        </div>
+    }
+</div>
+
+@Html.Partial("_NewAudienceForm", new CreateAudienceViewModel {AudienceMapId = Model.Id})

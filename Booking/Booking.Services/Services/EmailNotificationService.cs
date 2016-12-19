@@ -3,6 +3,7 @@ using System.Net;
 using System.Net.Mail;
 using System.Text;
 using Booking.Models;
+using Booking.Models.EfModels;
 using Booking.Services.Interfaces;
 
 

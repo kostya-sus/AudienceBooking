@@ -1,4 +1,11 @@
 ﻿function configureDatetimeUpdown(containerId, startDateId, endDateId) {
+    var nextAvailableDateUrl = $("#get-next-available-date-url").val();
+    var previousAvailableDateUrl = $("#get-previous-available-date-url").val();
+
+    function parseMvcDate(dateStr) {
+        return new Date(parseInt(dateStr.replace("/Date(", "").replace(")/", ""), 10));
+    }
+
     var $container = $("#" + containerId);
     var $startDate = $("#" + startDateId);
     var $endDate = $("#" + endDateId);
@@ -28,11 +35,10 @@
             "Октября", "Ноября", "Декабря"
         ];
     } else {
-        monthDisplayedValues = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
+        monthDisplayedValues = ["01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12"];
     }
 
-    var lowerHoursBound = parseInt($("#booking-hours-bounds-lower").val());
-    var upperHoursBound = parseInt($("#booking-hours-bounds-upper").val());
+    var lowerHoursBound, upperHoursBound;
 
     var startDate = new Date($startDate.val());
     var endDate = new Date($endDate.val());
@@ -69,6 +75,49 @@
         $endMinuteView.text(minutes);
     }
 
+
+    function setAndUpdate() {
+        setStartDate();
+        setEndDate();
+        updateView();
+    }
+
+    function addMinutes(date, minutes) {
+        return new Date(date.getTime() + minutes * 60000);
+    }
+
+    function diffInMinutes(date1, date2) {
+        return Math.floor((date1 - date2) / 60000);
+    }
+
+    function getUrlWithDate(url, date) {
+        return url + "?date=" + date.toISOString();
+    }
+
+    function setNextAvailableDate(date) {
+        $.get(getUrlWithDate(nextAvailableDateUrl, date))
+            .done(function(data) {
+                startDate = parseMvcDate(data.Date);
+                endDate = addMinutes(startDate, 20);
+                lowerHoursBound = data.StartHour;
+                upperHoursBound = data.EndHour;
+                setAndUpdate();
+            });
+    }
+
+    function setPreviousAvailableDate(date) {
+        $.get(getUrlWithDate(previousAvailableDateUrl, date))
+            .done(function(data) {
+                startDate = parseMvcDate(data.Date);
+                endDate = addMinutes(startDate, 20);
+                lowerHoursBound = data.StartHour;
+                upperHoursBound = data.EndHour;
+                setAndUpdate();
+            });
+    }
+
+    setNextAvailableDate(new Date);
+
     function isDateValid(eventStart, eventEnd) {
         var startHours = eventStart.getHours();
         var endHours = eventEnd.getHours();
@@ -83,139 +132,147 @@
         }
 
         var dateNow = new Date();
-        var diff = eventEnd - eventStart;
-        var minutes = Math.floor(diff / 60000);
-        return dateNow < eventStart && minutes >= 20;
+        return dateNow < eventStart;
     }
 
-    function backupDateAndTryToChange(callback) {
-        var prevStartDate = new Date(startDate.getTime());
-        var prevEndDate = new Date(endDate.getTime());
-        callback();
-        if (isDateValid(startDate, endDate)) {
-            setStartDate();
-            setEndDate();
-            updateView();
-        } else {
-            startDate = prevStartDate;
-            endDate = prevEndDate;
-        }
+    function setMaxDayTime() {
+        endDate.setHours(upperHoursBound);
+        endDate.setMinutes(0);
+        startDate = addMinutes(startDate, -20);
     }
 
-    if (!isDateValid(startDate, endDate)) {
-        var now = new Date();
-        startDate.setDate(now.getDate() + 1);
+    function setMinDayTime() {
         startDate.setHours(lowerHoursBound);
         startDate.setMinutes(0);
-
-        endDate = new Date(startDate.getTime());
-        endDate.setMinutes(endDate.getMinutes() + 30);
+        endDate = addMinutes(startDate, 20);
     }
-
-    startDate.setSeconds(0);
-    startDate.setMilliseconds(0);
-    endDate.setSeconds(0);
-    endDate.setMilliseconds(0);
-
-    setStartDate();
-    setEndDate();
-
-    updateView();
 
     $day.find(".fa-caret-up")
         .click(function() {
-            backupDateAndTryToChange(function() {
-                startDate.setDate(startDate.getDate() + 1);
-                endDate.setDate(endDate.getDate() + 1);
-            });
+            setNextAvailableDate(startDate);
+            setAndUpdate();
         });
     $day.find(".fa-caret-down")
         .click(function() {
-            backupDateAndTryToChange(function() {
-                startDate.setDate(startDate.getDate() - 1);
-                endDate.setDate(endDate.getDate() - 1);
-            });
+            setPreviousAvailableDate(startDate);
+            setAndUpdate();
         });
 
     $month.find(".fa-caret-up")
         .click(function() {
-            backupDateAndTryToChange(function() {
-                startDate.setMonth(startDate.getMonth() + 1);
-                endDate.setMonth(endDate.getMonth() + 1);
-            });
+            startDate.setMonth(startDate.getMonth() + 1);
+            startDate.setDate(startDate.getDate() - 1);
+            setNextAvailableDate(startDate);
+            setAndUpdate();
         });
     $month.find(".fa-caret-down")
         .click(function() {
-            backupDateAndTryToChange(function() {
-                startDate.setMonth(startDate.getMonth() - 1);
-                endDate.setMonth(endDate.getMonth() - 1);
-            });
+            startDate.setMonth(startDate.getMonth() - 1);
+            startDate.setDate(startDate.getDate() - 1);
+            setPreviousAvailableDate(startDate);
+            setAndUpdate();
         });
 
     $year.find(".fa-caret-up")
         .click(function() {
-            backupDateAndTryToChange(function() {
-                startDate.setYear(startDate.getYear() + 1);
-                endDate.setYear(endDate.getYear() + 1);
-            });
+            startDate.setYear(startDate.setYear() + 1);
+            startDate.setDate(startDate.getDate() - 1);
+            setNextAvailableDate(startDate);
+            setAndUpdate();
         });
     $year.find(".fa-caret-down")
         .click(function() {
-            backupDateAndTryToChange(function() {
-                startDate.setYear(startDate.getYear() - 1);
-                endDate.setYear(endDate.getYear() - 1);
-            });
+            startDate.setYear(startDate.setYear() - 1);
+            startDate.setDate(startDate.getDate() - 1);
+            setPreviousAvailableDate(startDate);
+            setAndUpdate();
         });
 
     $startHour.find(".fa-caret-up")
         .click(function() {
-            backupDateAndTryToChange(function() {
-                startDate.setHours(startDate.getHours() + 1);
-            });
+            startDate.setHours(startDate.getHours() + 1);
+            var diff = diffInMinutes(endDate, startDate);
+            if (diff < 20) {
+                endDate = addMinutes(startDate, 20);
+            };
+            if (!isDateValid(startDate, endDate)) {
+                setMaxDayTime();
+            }
+            setAndUpdate();
         });
     $startHour.find(".fa-caret-down")
         .click(function() {
-            backupDateAndTryToChange(function() {
-                startDate.setHours(startDate.getHours() - 1);
-            });
+            startDate.setHours(startDate.getHours() - 1);
+            if (!isDateValid(startDate, endDate)) {
+                startDate.setHours(lowerHoursBound);
+                startDate.setMinutes(0);
+            }
+            setAndUpdate();
         });
 
     $endHour.find(".fa-caret-up")
         .click(function() {
-            backupDateAndTryToChange(function() {
-                endDate.setHours(endDate.getHours() + 1);
-            });
+            endDate.setHours(endDate.getHours() + 1);
+            if (!isDateValid(startDate, endDate)) {
+                endDate.setHours(upperHoursBound);
+                endDate.setMinutes(0);
+            }
+            setAndUpdate();
         });
     $endHour.find(".fa-caret-down")
         .click(function() {
-            backupDateAndTryToChange(function() {
-                endDate.setHours(endDate.getHours() - 1);
-            });
+            endDate.setHours(endDate.getHours() - 1);
+            var diff = diffInMinutes(endDate, startDate);
+            if (diff < 20) {
+                startDate = addMinutes(startDate, -20);
+                if (!isDateValid(startDate, endDate)) {
+                    setMinDayTime();
+                }
+            };
+            setAndUpdate();
         });
 
     $startMinute.find(".fa-caret-up")
         .click(function() {
-            backupDateAndTryToChange(function() {
-                startDate.setMinutes(startDate.getMinutes() + 10);
-            });
+            startDate.setMinutes(startDate.getMinutes() + 10);
+            var diff = diffInMinutes(endDate, startDate);
+            if (diff < 20) {
+                endDate = addMinutes(startDate, 20);
+            };
+            if (!isDateValid(startDate, endDate)) {
+                setMaxDayTime();
+            }
+            setAndUpdate();
         });
     $startMinute.find(".fa-caret-down")
         .click(function() {
-            backupDateAndTryToChange(function() {
-                startDate.setMinutes(startDate.getMinutes() - 10);
-            });
+            startDate.setMinutes(startDate.getMinutes() - 10);
+            if (!isDateValid(startDate, endDate)) {
+                startDate.setHours(lowerHoursBound);
+                startDate.setMinutes(0);
+            }
+            setAndUpdate();
         });
 
     $endMinute.find(".fa-caret-up")
         .click(function() {
-            backupDateAndTryToChange(function() {
-                endDate.setMinutes(endDate.getMinutes() + 10);
-            });
+            endDate.setMinutes(endDate.getMinutes() + 10);
+            if (!isDateValid(startDate, endDate)) {
+                endDate.setHours(upperHoursBound);
+                endDate.setMinutes(0);
+            }
+            setAndUpdate();
         });
     $endMinute.find(".fa-caret-down")
         .click(function() {
-            backupDateAndTryToChange(function() {
-                endDate.setMinutes(endDate.getMinutes() - 10);
-            });
+            endDate.setMinutes(endDate.getMinutes() - 10);
+            var diff = diffInMinutes(endDate, startDate);
+            if (diff < 20) {
+                startDate = addMinutes(startDate, -20);
+                if (!isDateValid(startDate, endDate)) {
+                    setMinDayTime();
+                }
+            };
+            setAndUpdate();
         });
 }

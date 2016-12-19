@@ -1,7 +1,6 @@
 ﻿@using Booking.Web.Localization
-@model Booking.Web.ViewModels.ScheduleTableViewModel
 
-<input type="hidden" id="get-day-schedule-url" value="@Url.Action("GetDaySchedule", "Home")"/>
+<input type="hidden" id="get-day-schedule-url" value="@Url.Action("GetDaySchedule", "Schedule")"/>
 
 <div id="main-schedule-container">
     <div id="schedule-control-container">
@@ -25,21 +24,6 @@
 
         <div id="schedule-table">
             <table id="schedule-rooms-column">
-                <tr>
-                    <th></th>
-                </tr>
-                @{
-                    int i = 0;
-                }
-                @foreach (var pair in Model.AvailableAudiences)
-                {
-                    <tr>
-                        <td id="audience-row-@pair.Key" 
-                            class="audience-row" 
-                            data-audience-id="@pair.Key" 
-                            data-row-index="@(i++)">@pair.Value</td>
-                    </tr>
-                }
             </table>
             <div id="schedule-viewport-outer">
                 <div id="schedule-viewport">
@@ -55,21 +39,6 @@
                         <div class="slider-caption"></div>
                     </div>
                     <table id="schedule-contents-table">
-                        <tr>
-                            @for (int hour = Model.LowerHourBound; hour < Model.UpperHourBound; ++hour)
-                            {
-                                <th>@string.Format("{0}:00", hour.ToString("D2"))</th>
-                            }
-                        </tr>
-                        @foreach (var key in Model.AvailableAudiences.Keys)
-                        {
-                            <tr>
-                                @for (int hour = Model.LowerHourBound; hour < Model.UpperHourBound; ++hour)
-                                {
-                                    <td></td>
-                                }
-                            </tr>
-                        }
                     </table>
                 </div>
             </div>

@@ -2,23 +2,28 @@
 using System.Collections.Generic;
 using Booking.Enums;
 using Booking.Models;
+using Booking.Models.EfModels;
 
 namespace Booking.Services.Interfaces
 {
     public interface IAudienceService
     {
-        Audience GetAudience(AudiencesEnum audienceId);
+        Audience GetAudience(Guid audienceId);
+
+        void CreateAudience(Audience audience);
 
         void UpdateAudience(Audience audience);
 
-        void CloseAudience(AudiencesEnum audienceId);
+        void DeleteAudienceById(Guid id);
 
-        void OpenAudience(AudiencesEnum audienceId);
+        void CloseAudience(Guid audienceId);
 
-        bool IsFree(AudiencesEnum audienceId, DateTime dateTime, int duration, Guid? eventId);
+        void OpenAudience(Guid audienceId);
+
+        bool IsFree(Guid audienceId, DateTime eventStart, DateTime eventEnd, Guid? eventId);
 
         IEnumerable<Audience> GetAllAudiences();
 
-        IEnumerable<Audience> GetAvailableAudiences();
+        string GetStyleString(Audience audience);
     }
 }

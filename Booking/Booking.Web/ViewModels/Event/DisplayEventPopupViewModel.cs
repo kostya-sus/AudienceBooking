@@ -9,11 +9,11 @@ namespace Booking.Web.ViewModels.Event
     {
         public Guid Id { get; set; }
 
-        public AudiencesEnum AudienceId { get; set; }
+        public Guid AudienceId { get; set; }
 
         public string AudienceName { get; set; }
 
-        public DateTime EventDateTime { get; set; }
+        public DateTime StartTime { get; set; }
 
         public string EventDate { get; set; }
 
@@ -29,8 +29,6 @@ namespace Booking.Web.ViewModels.Event
 
         public bool CanEdit { get; set; }
 
-        public IDictionary<Guid, string> ParticipantsEmails { get; set; }
-
-        public IDictionary<AudiencesEnum, AudienceMapItemVm> Audiences { get; set; }
+        public int ParticipantsCount { get; set; }
     }
 }

@@ -1,0 +1,24 @@
+﻿@using Booking.Enums
+@model Booking.Web.ViewModels.Event.DisplayEventViewModel
+
+<div class="page-container">
+    <h2 style="text-align: center; margin-bottom: -60px; margin-top: 40px; z-index: 60">@Model.AudienceMap.Name</h2>
+    <div id="room-map-container">
+        @foreach (var audience in Model.AudienceMap.Audiences)
+        {
+            if (audience.Id == Model.AudienceId)
+            {
+                <img id="route-img" src="@audience.RouteImageUrl"/>
+            }
+
+            <div class="room @(Model.AudienceId == audience.Id ? "room-active" : "room-not-available")"
+                 style="@audience.Style">
+                <div class="room-title">
+                    @audience.Name
+                </div>
+            </div>
+        }
+
+        <img src="@Model.AudienceMap.ImageUrl" class="map-background-image" />
+    </div>
+</div>

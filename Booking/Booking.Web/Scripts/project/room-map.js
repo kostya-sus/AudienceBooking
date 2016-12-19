@@ -33,7 +33,7 @@ function onRoomProxyClickToggleChosenAudience() {
 }
 
 function setChosenAudience() {
-    var id = parseInt($("#chosen-audience-id").val());
+    var id = $("#chosen-audience-id").val();
     $(".room-available")
         .each(function () {
             var $room = $(this);

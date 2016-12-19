@@ -38,14 +38,15 @@
 <input type="hidden" id="redirect-to-event-url" value="@Url.Action("Index", "Event")"/>
 <input type="hidden" id="display-event-popup-url" value="@Url.Action("DisplayEventPopup", "Event")"/>
 
+<input type="hidden" id="audience-map-id" value="@Model.AudienceMap.Id"/>
 <input type="hidden" id="is-user-admin" value="@Model.IsAdmin"/>
 <input type="hidden" id="user-id" value="@User.Identity.GetUserId()"/>
 
-@Html.Partial("_RoomMapPartial", Model.Audiences)
+@Html.Partial("_RoomMapPartial", Model.AudienceMap)
 
 <div id="schedule-container" style="background: white">
     <div class="page-container container">
-        @Html.Partial("_HorizontalSchedulePartial", Model.ScheduleTable)
+        @Html.Partial("_HorizontalSchedulePartial")
     </div>
 </div>
 <div id="map_canvas"></div>

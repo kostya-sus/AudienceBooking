@@ -307,7 +307,7 @@
     <value>Где</value>
   </data>
   <data name="ChooseAudience" xml:space="preserve">
-    <value>Выберите аудиторию на 10 этаже</value>
+    <value>Выберите аудиторию</value>
   </data>
   <data name="AudienceIsAlreadyBooked" xml:space="preserve">
     <value>Эта аудитория занята на выбранное время. Выберите, пожалуйста другое.</value>

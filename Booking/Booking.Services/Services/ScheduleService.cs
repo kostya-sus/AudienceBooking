@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Booking.Enums;
 using Booking.Models;
+using Booking.Models.EfModels;
 using Booking.Repositories.Interfaces;
 using Booking.Services.Interfaces;
 
@@ -17,38 +18,31 @@ namespace Booking.Services.Services
             _eventRepository = eventRepository;
         }
 
-        public ScheduleService()
+        public IEnumerable<Event> GetEventsByDay(DateTime day, Guid audienceMapId)
         {
+            return _eventRepository.GetEventsByAudienceMapId(audienceMapId)
+                .Where(x => x.StartTime.Day == day.Day &&
+                            x.StartTime.Month == day.Month &&
+                            x.StartTime.Year == day.Year);
         }
 
-        public IEnumerable<Event> GetEventsByDay(DateTime day)
+        public IEnumerable<Event> GetEventsByAudience(Guid audienceId, DateTime from, DateTime to)
         {
-            return _eventRepository.GetAllEvents()
-                .Where(x => x.EventDateTime.Day == day.Day &&
-                            x.EventDateTime.Month == day.Month &&
-                            x.EventDateTime.Year == day.Year);
+            return _eventRepository.GetAllEvents().Where(x => x.AudienceId == audienceId && x.StartTime <= from &&
+                                                              x.EndTime < to);
         }
 
-        public IEnumerable<Event> GetEventsByAudience(AudiencesEnum audienceId, DateTime from, DateTime to)
+        public IEnumerable<Event> GetEventsByAuthor(ApplicationUser author, DateTime day, Guid audienceMapId)
         {
-            // TODO test and maybe fix with let clause(?)
-            return _eventRepository.GetAllEvents().Where(x => x.AudienceId == audienceId && x.EventDateTime <= from &&
-                                                              x.EventDateTime.AddMinutes(x.Duration) < to);
-        }
-
-        public IEnumerable<Event> GetEventsByAuthor(ApplicationUser author, DateTime day)
-        {
-            return _eventRepository.GetAllEvents().Where(x => x.AuthorId == author.Id &&
-                                                              x.EventDateTime.Day == day.Day &&
-                                                              x.EventDateTime.Month == day.Month &&
-                                                              x.EventDateTime.Year == day.Year);
+            return _eventRepository.GetEventsByAudienceMapId(audienceMapId).Where(x => x.AuthorId == author.Id &&
+                                                                                       x.StartTime.Day == day.Day &&
+                                                                                       x.StartTime.Month == day.Month &&
+                                                                                       x.StartTime.Year == day.Year);
         }
 
         public IEnumerable<Event> GetEventsByAuthor(ApplicationUser author)
         {
             return _eventRepository.GetAllEvents().Where(x => x.AuthorId == author.Id);
         }
-
-
     }
 }

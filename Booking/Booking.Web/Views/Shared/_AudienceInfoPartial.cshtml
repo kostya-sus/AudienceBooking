@@ -1,56 +1,9 @@
-﻿@using Booking.Enums
-@model Booking.Web.ViewModels.Audience.AudienceInfoViewModel
+﻿@model Booking.Web.ViewModels.Audience.AudienceInfoViewModel
 
-@{
-    string linePath = "";
-    string linePosition = "";
-
-    switch (Model.Id)
-    {
-        case AudiencesEnum.EmptyRoom:
-            linePath = "line-details-empty.png";
-            linePosition = "left: 100px";
-            break;
-        case AudiencesEnum.HrOffice:
-            linePath = "line-details-hr.png";
-            linePosition = "left: 215px";
-            break;
-        case AudiencesEnum.EinsteinClassroom:
-            linePath = "line-details-einstein.png";
-            linePosition = "right: 595px";
-            break;
-        case AudiencesEnum.English:
-            linePath = "line-details-english.png";
-            linePosition = "right: 42px";
-            break;
-        case AudiencesEnum.TeslaClassroom:
-            linePath = "line-details-tesla.png";
-            linePosition = "left: 340px";
-            break;
-        case AudiencesEnum.NewtonClassroom:
-            linePath = "line-details-newton.png";
-            linePosition = "right: 510px";
-            break;
-        case AudiencesEnum.InfoCenter:
-            linePath = "line-details-info.png";
-            linePosition = "right: 410px";
-            break;
-        case AudiencesEnum.WebAndMarketing1:
-            linePath = "line-details-web-1.png";
-            linePosition = "right: 315px";
-            break;
-        case AudiencesEnum.WebAndMarketing2:
-            linePath = "line-details-web-2.png";
-            linePosition = "right: 205px";
-            break;
-        case AudiencesEnum.WebAndMarketing3:
-            linePath = "line-details-web-3.png";
-            linePosition = "right: 110px";
-            break;
-    }
+@if (Model.LineDetailsImageUrl != null)
+{
+    <img class="line-details" src="@Model.LineDetailsImageUrl"/>
 }
-
-<img class="line-details" style="@linePosition" src="@Url.Content("~/Content/Images/line-details/" + linePath)"/>
 
 <div class="audience-info-container">
     <img src="@Url.Content("~/Content/Images/audience-info-icons/icon-table.png")"/>

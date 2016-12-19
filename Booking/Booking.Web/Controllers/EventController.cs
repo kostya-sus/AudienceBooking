@@ -1,16 +1,15 @@
 ﻿using System;
-using System.Globalization;
 using System.Linq;
 using System.Net;
 using System.Web.Mvc;
-using Booking.Enums;
-using Booking.Models;
+using AutoMapper;
+using Booking.Models.EfModels;
 using Booking.Repositories;
 using Booking.Services.Interfaces;
 using Booking.Services.Services;
 using Booking.Web.Helpers;
+using Booking.Web.ViewModels.AudienceMap;
 using Booking.Web.ViewModels.Event;
-using Microsoft.Ajax.Utilities;
 using Microsoft.AspNet.Identity;
 
 namespace Booking.Web.Controllers
@@ -20,6 +19,7 @@ namespace Booking.Web.Controllers
     {
         private readonly IEventService _eventService;
         private readonly IAudienceService _audienceService;
+        private readonly IAudienceMapService _audienceMapService;
 
         public EventController()
         {
@@ -27,42 +27,16 @@ namespace Booking.Web.Controllers
             _audienceService = new AudienceService(uof);
             var usersService = new UsersService();
             var emailNotificationService = new EmailNotificationService();
-            _eventService = new EventService(uof, usersService, emailNotificationService);
-
+            _eventService = new EventService(uof, usersService, emailNotificationService, _audienceService);
+            _audienceMapService = new AudienceMapService(uof);
         }
 
         [HttpGet]
         public ActionResult DisplayEventPopup(Guid eventId)
         {
             var eventEntity = _eventService.GetEvent(eventId);
-            var audiences = _audienceService.GetAllAudiences();
-            var authorName = eventEntity.IsAuthorShown ? eventEntity.Author.UserName : eventEntity.AuthorName;
-
-            var audiencesVms = audiences.ToVmDictionary();
-
-            var participants = eventEntity.EventParticipants.ToVmDictionary();
-
-            var audienceName = audiencesVms[eventEntity.AudienceId].Name;
-
-            CultureInfo culture = CultureInfo.CreateSpecificCulture("ru-RU");
-            string eventDate = eventEntity.EventDateTime.ToString("ddd, d MMMM", culture);
-
-            var vm = new DisplayEventPopupViewModel
-            {
-                AudienceId = eventEntity.AudienceId,
-                AudienceName = audienceName,
-                Title = eventEntity.Title,
-                AdditionalInfo = eventEntity.AdditionalInfo,
-                Audiences = audiencesVms,
-                AuthorName = authorName,
-                CanEdit = _eventService.CanEdit(User, eventEntity),
-                EventDateTime = eventEntity.EventDateTime,
-                Id = eventEntity.Id,
-                IsJoinAvailable = eventEntity.IsJoinAvailable,
-                ParticipantsEmails = participants,
-                Duration = eventEntity.Duration,
-                EventDate = eventDate
-            };
+            var vm = Mapper.Map<Event, DisplayEventPopupViewModel>(eventEntity);
+            vm.CanEdit = _eventService.CanEdit(User, eventEntity);
 
             return PartialView("_DisplayEventPopup", vm);
         }
@@ -71,30 +45,8 @@ namespace Booking.Web.Controllers
         public ActionResult Index(Guid eventId)
         {
             var eventEntity = _eventService.GetEvent(eventId);
-            var audiences = _audienceService.GetAllAudiences();
-            var authorName = eventEntity.IsAuthorShown ? eventEntity.Author.UserName : eventEntity.AuthorName;
-
-            var audiencesVms = audiences.ToVmDictionary();
-
-            var participants = eventEntity.EventParticipants.ToVmDictionary();
-
-            var audienceName = audiencesVms[eventEntity.AudienceId].Name;
-
-            var vm = new DisplayEventViewModel
-            {
-                AudienceId = eventEntity.AudienceId,
-                AudienceName = audienceName,
-                Title = eventEntity.Title,
-                AdditionalInfo = eventEntity.AdditionalInfo,
-                Audiences = audiencesVms,
-                AuthorName = authorName,
-                CanEdit = _eventService.CanEdit(User, eventEntity),
-                Duration = eventEntity.Duration,
-                EventDateTime = eventEntity.EventDateTime,
-                Id = eventEntity.Id,
-                IsJoinAvailable = eventEntity.IsJoinAvailable,
-                ParticipantsEmails = participants
-            };
+            var vm = Mapper.Map<DisplayEventViewModel>(eventEntity);
+            vm.CanEdit = _eventService.CanEdit(User, eventEntity);
 
             return View(vm);
         }
@@ -111,9 +63,9 @@ namespace Booking.Web.Controllers
         [Authorize]
         public ActionResult GetNewEventPopup()
         {
-            var audiences = _audienceService.GetAllAudiences().ToList();
+            var audiences = _audienceMapService.GetAudienceMap(AudienceMapSelector.AudienceMapId).Audiences;
             var availableAudiences = audiences.Where(a => a.IsBookingAvailable)
-                .ToDictionary(a => (int) a.Id, a => a.Name);
+                .ToDictionary(a => a.Id, a => a.Name);
 
             var date = DateTime.Now.AddHours(2);
             var newMinute = (date.Minute/10)*10;
@@ -122,10 +74,11 @@ namespace Booking.Web.Controllers
             var viewModel = new CreateEditEventViewModel
             {
                 AvailableAudiences = availableAudiences,
-                EndDateTime = date.AddMinutes(30),
-                StartDateTime = date,
+                EndTime = date.AddMinutes(30),
+                StartTime = date,
                 IsPublic = true
             };
+
             return PartialView("_NewEventPartial", viewModel);
         }
 
@@ -143,26 +96,7 @@ namespace Booking.Web.Controllers
         public ActionResult Edit(Guid eventId)
         {
             var eventEntity = _eventService.GetEvent(eventId);
-            var audiences = _audienceService.GetAllAudiences();
-
-            var audiencesVms = audiences.ToVmDictionary();
-
-            var participants = eventEntity.EventParticipants.ToVmDictionary();
-
-            var vm = new EventEditViewModel
-            {
-                ChosenAudienceId = (int) eventEntity.AudienceId,
-                Title = eventEntity.Title,
-                AdditionalInfo = eventEntity.AdditionalInfo,
-                Audiences = audiencesVms,
-                AuthorName = eventEntity.AuthorName,
-                EndDateTime = eventEntity.EventDateTime.AddMinutes(eventEntity.Duration),
-                StartDateTime = eventEntity.EventDateTime,
-                Id = eventEntity.Id,
-                IsJoinAvailable = eventEntity.IsJoinAvailable,
-                IsAuthorShown = eventEntity.IsAuthorShown,
-                ParticipantsEmails = participants
-            };
+            var vm = Mapper.Map<EventEditViewModel>(eventEntity);
 
             return View(vm);
         }
@@ -179,10 +113,10 @@ namespace Booking.Web.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create(CreateEditEventViewModel vm)
         {
-            TimeSpan span = vm.EndDateTime.Subtract(vm.StartDateTime);
-            var duration = (int) span.TotalMinutes;
+            var isFree = _audienceService.IsFree(vm.AudienceId, vm.StartTime, vm.EndTime, vm.Id);
 
-            var isFree = _audienceService.IsFree((AudiencesEnum) vm.ChosenAudienceId, vm.StartDateTime, duration, vm.Id);
+            var duration = vm.EndTime.Subtract(vm.StartTime).TotalMinutes;
+
             if (duration < 20 || !isFree)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -192,21 +126,11 @@ namespace Booking.Web.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            Event newEvent = new Event();
-            {
-                newEvent.Title = vm.Title ?? " ";
-                newEvent.EventDateTime = vm.StartDateTime;
-                newEvent.AdditionalInfo = vm.AdditionalInfo;
-                newEvent.AudienceId = (AudiencesEnum) vm.ChosenAudienceId;
-                newEvent.Duration = duration;
-                newEvent.IsAuthorShown = vm.IsAuthorShown;
-                newEvent.IsJoinAvailable = vm.IsJoinAvailable;
-                newEvent.IsPublic = vm.IsPublic;
-                newEvent.AuthorName = vm.AuthorName;
-                newEvent.AuthorId = User.Identity.GetUserId();
-            }
+            Event newEvent = Mapper.Map<Event>(vm);
+            newEvent.AuthorId = User.Identity.GetUserId();
 
             _eventService.CreateEvent(newEvent);
+
             return new HttpStatusCodeResult(HttpStatusCode.OK);
         }
 
@@ -231,28 +155,8 @@ namespace Booking.Web.Controllers
         public ActionResult EditPopup(Guid eventId)
         {
             var eventEntity = _eventService.GetEvent(eventId);
-            var audiences = _audienceService.GetAllAudiences().ToList();
-            var availableAudiences = audiences.Where(a => a.IsBookingAvailable)
-                .ToDictionary(a => (int) a.Id, a => a.Name);
 
-            //  var date = DateTime.Now.AddHours(2);
-            //  var newMinute = (date.Minute / 10) * 10;
-            //   date = date.AddMinutes(newMinute - date.Minute);
-
-            var viewModel = new CreateEditEventViewModel
-            {
-                Id = eventId,
-                IsJoinAvailable = eventEntity.IsJoinAvailable,
-                AdditionalInfo = eventEntity.AdditionalInfo,
-                AuthorName = eventEntity.AuthorName,
-                AvailableAudiences = availableAudiences,
-                IsAuthorShown = eventEntity.IsAuthorShown,
-                ChosenAudienceId = (int) eventEntity.AudienceId,
-                EndDateTime = eventEntity.EventDateTime.AddMinutes(eventEntity.Duration),
-                StartDateTime = eventEntity.EventDateTime,
-                Title = eventEntity.Title,
-                IsPublic = eventEntity.IsPublic,
-            };
+            var viewModel = Mapper.Map<CreateEditEventViewModel>(eventEntity);
 
             return PartialView("_EditEventPopupPartial", viewModel);
         }
@@ -261,28 +165,26 @@ namespace Booking.Web.Controllers
         [Authorize]
         public ActionResult Save(EventEditViewModel vm)
         {
-            TimeSpan span = vm.EndDateTime.Subtract(vm.StartDateTime);
+            TimeSpan span = vm.EndTime.Subtract(vm.StartTime);
             var duration = (int) span.TotalMinutes;
 
             var eventEntity = _eventService.GetEvent(vm.Id);
-
-            if (!_audienceService.IsFree((AudiencesEnum) vm.ChosenAudienceId, vm.StartDateTime, duration, vm.Id) ||
-                !ModelState.IsValid)
+            if (!_audienceService.IsFree(vm.AudienceId, vm.StartTime, vm.EndTime, vm.Id) || duration < 20)
             {
-                var audiences = _audienceService.GetAllAudiences();
-                vm.Audiences = audiences.ToVmDictionary();
+                var model = _audienceMapService.GetAudienceMap(AudienceMapSelector.AudienceMapId);
+                vm.AudienceMap = Mapper.Map<AudienceMapViewModel>(model);
                 vm.ParticipantsEmails = eventEntity.EventParticipants.ToVmDictionary();
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
             eventEntity.Title = vm.Title;
             eventEntity.AdditionalInfo = vm.AdditionalInfo;
-            eventEntity.AudienceId = (AudiencesEnum) vm.ChosenAudienceId;
+            eventEntity.AudienceId = vm.AudienceId;
             eventEntity.AuthorName = vm.AuthorName;
             eventEntity.IsAuthorShown = vm.IsAuthorShown;
             eventEntity.IsJoinAvailable = vm.IsJoinAvailable;
-            eventEntity.EventDateTime = vm.StartDateTime;
-            eventEntity.Duration = duration;
+            eventEntity.StartTime = vm.StartTime;
+            eventEntity.EndTime = vm.EndTime;
 
             _eventService.UpdateEvent(User, eventEntity);
 

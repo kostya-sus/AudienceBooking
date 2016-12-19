@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Booking.Enums;
 using Booking.Models;
+using Booking.Models.EfModels;
 using Booking.Repositories.Interfaces;
 using Booking.Services.Interfaces;
 
@@ -11,15 +12,23 @@ namespace Booking.Services.Services
     public class AudienceService : IAudienceService
     {
         private readonly IUnitOfWork _unitOfWork;
+        private readonly IBookingScheduleRuleService _bookingScheduleRuleService;
 
         public AudienceService(IUnitOfWork unitOfWork)
         {
             _unitOfWork = unitOfWork;
+            _bookingScheduleRuleService = new BookingScheduleRuleService(_unitOfWork);
         }
 
-        public Audience GetAudience(AudiencesEnum audienceId)
+        public Audience GetAudience(Guid audienceId)
         {
             return _unitOfWork.AudienceRepository.GetAudienceById(audienceId);
+        }
+
+        public void CreateAudience(Audience audience)
+        {
+            _unitOfWork.AudienceRepository.CreateAudience(audience);
+            _unitOfWork.Save();
         }
 
         public void UpdateAudience(Audience audience)
@@ -28,7 +37,13 @@ namespace Booking.Services.Services
             _unitOfWork.Save();
         }
 
-        public void CloseAudience(AudiencesEnum audienceId)
+        public void DeleteAudienceById(Guid id)
+        {
+            _unitOfWork.AudienceRepository.DeleteAudienceById(id);
+            _unitOfWork.Save();
+        }
+
+        public void CloseAudience(Guid audienceId)
         {
             var currentAudience = _unitOfWork.AudienceRepository.GetAudienceById(audienceId);
             if (currentAudience != null)
@@ -39,7 +54,7 @@ namespace Booking.Services.Services
             }
         }
 
-        public void OpenAudience(AudiencesEnum audienceId)
+        public void OpenAudience(Guid audienceId)
         {
             var currentAudience = _unitOfWork.AudienceRepository.GetAudienceById(audienceId);
             if (currentAudience != null)
@@ -50,36 +65,18 @@ namespace Booking.Services.Services
             }
         }
 
-        public bool IsFree(AudiencesEnum audienceId, DateTime dateTime, int duration, Guid? currentEventId)
+        public bool IsFree(Guid audienceId, DateTime eventStart, DateTime eventEnd, Guid? currentEventId)
         {
-            var events =
-                _unitOfWork.EventRepository.GetAllEvents()
-                    .Where(x => x.AudienceId == audienceId && x.Id != currentEventId.Value);
+            if (!_bookingScheduleRuleService.CanBook(eventStart)) return false;
 
-            var endOfEvent = dateTime.AddMinutes(duration);
+            var events = _unitOfWork.EventRepository.GetAllEvents()
+                .Where(x => x.AudienceId == audienceId && x.Id != currentEventId.Value &&
+                            ((x.StartTime < eventStart && x.EndTime > eventStart) ||
+                             (x.StartTime < eventEnd) && (x.EndTime > eventEnd)) ||
+                            (eventStart < x.StartTime) && (eventEnd > x.StartTime) ||
+                            (x.StartTime == eventStart) && (x.EndTime == eventEnd));
 
-            if (dateTime.DayOfWeek != 0 && (int) dateTime.DayOfWeek != 6)
-            {
-                if ((endOfEvent.Hour < (int) BookingHoursBoundsEnum.Upper ||
-                     (endOfEvent.Hour == (int) BookingHoursBoundsEnum.Upper & endOfEvent.Minute == 0))
-                    && dateTime.Hour >= (int) BookingHoursBoundsEnum.Lower)
-                {
-                    foreach (var currentEvent in events)
-                    {
-                        var endOfCurrentEvent = currentEvent.EventDateTime.AddMinutes(currentEvent.Duration);
-                        if (dateTime <= currentEvent.EventDateTime && currentEvent.EventDateTime < endOfEvent)
-                        {
-                            return false;
-                        }
-                        if (dateTime > currentEvent.EventDateTime && dateTime < endOfCurrentEvent)
-                        {
-                            return false;
-                        }
-                    }
-                    return true;
-                }
-            }
-            return false;
+            return !events.Any();
         }
 
         public IEnumerable<Audience> GetAllAudiences()
@@ -87,9 +84,10 @@ namespace Booking.Services.Services
             return _unitOfWork.AudienceRepository.GetAllAudiences();
         }
 
-        public IEnumerable<Audience> GetAvailableAudiences()
+        public string GetStyleString(Audience audience)
         {
-            return _unitOfWork.AudienceRepository.GetAllAudiences().Where(x => x.IsBookingAvailable);
+            return string.Format("left:{0}px; top: {1}px; width: {2}px; height: {3}px",
+                audience.Left, audience.Top, audience.Width, audience.Height);
         }
     }
 }

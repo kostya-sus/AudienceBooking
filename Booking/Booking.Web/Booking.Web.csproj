@@ -44,6 +44,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="AutoMapper, Version=5.2.0.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
+      <HintPath>..\packages\AutoMapper.5.2.0\lib\net45\AutoMapper.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
       <Private>True</Private>
@@ -181,12 +185,23 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="App_Start\AutoMapperConfig.cs" />
+    <Compile Include="App_Start\AutoMapper\AutoMapperProfiles\AudienceMapProfile.cs" />
+    <Compile Include="App_Start\AutoMapper\AutoMapperProfiles\AudienceProfile.cs" />
+    <Compile Include="App_Start\AutoMapper\AutoMapperProfiles\EventProfile.cs" />
+    <Compile Include="App_Start\AutoMapper\CustomResolvers\AudienceLineDetailsImageResolver.cs" />
+    <Compile Include="App_Start\AutoMapper\CustomResolvers\AudienceMapImageUrlResolver.cs" />
+    <Compile Include="App_Start\AutoMapper\CustomResolvers\AudienceRouteImageResolver.cs" />
+    <Compile Include="App_Start\AutoMapper\CustomResolvers\EventAuthorNameResolver.cs" />
+    <Compile Include="App_Start\AutoMapper\CustomResolvers\EventDateResolver.cs" />
+    <Compile Include="App_Start\AutoMapper\CustomResolvers\UiAudienceStyleResolver.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\IdentityConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\AdminPanelController.cs" />
     <Compile Include="Controllers\AudienceController.cs" />
     <Compile Include="Controllers\ContactController.cs" />
     <Compile Include="Controllers\ErrorController.cs" />
@@ -195,10 +210,12 @@
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\ProfileController.cs" />
+    <Compile Include="Controllers\ScheduleController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\AudienceMapSelector.cs" />
     <Compile Include="Helpers\HandleExceptionAttribute.cs" />
     <Compile Include="Helpers\ViewModelMapper.cs" />
     <Compile Include="ViewModels\Account\ExternalLoginConfirmationViewModel.cs" />
@@ -210,19 +227,27 @@
     <Compile Include="ViewModels\Account\ResetPasswordViewModel.cs" />
     <Compile Include="ViewModels\Account\SendCodeViewModel.cs" />
     <Compile Include="ViewModels\Account\VerifyCodeViewModel.cs" />
+    <Compile Include="ViewModels\AdminPanel\AdminPanelViewModel.cs" />
+    <Compile Include="ViewModels\AdminPanel\CreateScheduleRuleViewModel.cs" />
+    <Compile Include="ViewModels\AudienceMap\AudienceMapViewModel.cs" />
+    <Compile Include="ViewModels\AdminPanel\CreateAudienceViewModel.cs" />
+    <Compile Include="ViewModels\AdminPanel\NewAudienceMapViewModel.cs" />
+    <Compile Include="ViewModels\Schedule\AvailableDayViewModel.cs" />
+    <Compile Include="ViewModels\Schedule\DisabledDaysViewModel.cs" />
+    <Compile Include="ViewModels\Schedule\ScheduleRowName.cs" />
+    <Compile Include="ViewModels\Audience\UiAudienceViewModel.cs" />
     <Compile Include="ViewModels\Audience\AudienceInfoViewModel.cs" />
     <Compile Include="ViewModels\Audience\AudienceMapItemVm.cs" />
     <Compile Include="ViewModels\Audience\AudienceScheduleItemViewModel.cs" />
     <Compile Include="ViewModels\Audience\AudienceScheduleViewModel.cs" />
-    <Compile Include="ViewModels\Audience\AudienceViewModel.cs" />
     <Compile Include="ViewModels\Contact\ContactViewModel.cs" />
     <Compile Include="ViewModels\ErrorViewModel.cs" />
     <Compile Include="ViewModels\Event\CreateEditEventViewModel.cs" />
     <Compile Include="ViewModels\Event\DisplayEventViewModel.cs" />
     <Compile Include="ViewModels\Event\EventEditViewModel.cs" />
     <Compile Include="ViewModels\Event\JoinEventViewModel.cs" />
-    <Compile Include="ViewModels\Home\DayScheduleViewModel.cs" />
-    <Compile Include="ViewModels\Home\DaySheduleItemViewModel.cs" />
+    <Compile Include="ViewModels\Schedule\DayScheduleViewModel.cs" />
+    <Compile Include="ViewModels\Schedule\DayScheduleItemViewModel.cs" />
     <Compile Include="ViewModels\Event\DisplayEventPopupViewModel.cs" />
     <Compile Include="ViewModels\Home\HomeViewModel.cs" />
     <Compile Include="ViewModels\Manage\AddPhoneNumberViewModel.cs" />
@@ -244,10 +269,13 @@
     <Compile Include="ViewModels\Profile\ProfileViewModel.cs" />
     <Compile Include="ViewModels\Profile\UserInfoViewModel.cs" />
     <Compile Include="ViewModels\ScheduleTableViewModel.cs" />
+    <Compile Include="ViewModels\Schedule\ScheduleRuleVm.cs" />
     <Compile Include="ViewModels\Users\UsersListItemViewModel.cs" />
     <Compile Include="ViewModels\Users\UsersViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\admin_panel\audience_map.css" />
+    <Content Include="Content\admin_panel\layout.css" />
     <Content Include="Content\audience-info.css" />
     <Content Include="Content\bootstrap-datepicker.css" />
     <Content Include="Content\bootstrap.css" />
@@ -318,8 +346,8 @@
     <Content Include="Scripts\bootstrap-datepicker\js\bootstrap-datepicker.js" />
     <Content Include="Scripts\bootstrap-datepicker\locales\bootstrap-datepicker.ru.min.js" />
     <Content Include="Content\checkbox-styles.css" />
+    <Content Include="Scripts\project\admin_panel\audience_map.js" />
     <Content Include="Scripts\project\datetime-updown.js" />
-    <Content Include="Scripts\project\display-event-popup.js" />
     <Content Include="Scripts\project\event-edit-page.js" />
     <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
     <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
@@ -357,7 +385,9 @@
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\_references.js" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
@@ -365,7 +395,6 @@
       <DependentUpon>Web.config</DependentUpon>
     </Content>
     <Content Include="Views\Web.config" />
-    <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Account\_ExternalLoginsListPartial.cshtml" />
@@ -390,7 +419,7 @@
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Shared\_LoginLayout.cshtml" />
     <Content Include="Views\Account\_ViewStart.cshtml" />
-    <Content Include="Views\Shared\_RoomMapPartial.cshtml" />
+    <Content Include="Views\Home\_RoomMapPartial.cshtml" />
     <Content Include="Views\Shared\_HorizontalSchedulePartial.cshtml" />
     <Content Include="Views\Contact\Index.cshtml">
       <BrowseToURL>~/Contact/Index</BrowseToURL>
@@ -399,13 +428,13 @@
     <Content Include="Views\Error\_ViewStart.cshtml" />
     <Content Include="Views\Shared\_AudienceInfoPartial.cshtml" />
     <Content Include="Views\Event\Index.cshtml" />
-    <Content Include="Views\Shared\_RoomMapRoutePartial.cshtml" />
+    <Content Include="Views\Event\_RoomMapRoutePartial.cshtml" />
     <Content Include="Views\Shared\_JoinEventPartial.cshtml" />
     <Content Include="Views\Event\Edit.cshtml" />
     <Content Include="Views\Event\_DisplayEventPopup.cshtml" />
     <Content Include="Views\Error\_ViewStart.cshtml" />
     <Content Include="Views\Event\_NewEventPartial.cshtml" />
-    <Content Include="Views\Shared\_RoomMapChoicePartial.cshtml" />
+    <Content Include="Views\Event\_RoomMapChoicePartial.cshtml" />
     <Content Include="Views\Event\_CancelEventPartial.cshtml" />
     <Content Include="Views\Event\_EditEventPopupPartial.cshtml" />
     <Content Include="Views\Profile\Index.cshtml" />
@@ -413,10 +442,21 @@
     <Content Include="Views\Profile\_EditProfilePartialView.cshtml" />
     <Content Include="Views\Profile\_InfoProfilePartialView.cshtml" />
     <Content Include="Views\Shared\_ResetPasswordPartial.cshtml" />
+    <Content Include="Views\AdminPanel\_ViewStart.cshtml" />
+    <Content Include="Views\AdminPanel\Index.cshtml" />
+    <Content Include="Views\AdminPanel\CreateAudienceMapPage.cshtml" />
+    <Content Include="Views\AdminPanel\AudienceMap.cshtml" />
+    <Content Include="Views\AdminPanel\_NewAudienceForm.cshtml" />
+    <Content Include="Views\AdminPanel\_AdminLayout.cshtml" />
+    <Content Include="Views\_ViewStart.cshtml" />
+    <Content Include="Views\AdminPanel\_NewScheduleRulePartial.cshtml" />
+    <Content Include="Views\Home\SelectMap.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Views\Audience\" />
+    <Folder Include="Views\Schedule\" />
+    <Folder Include="Views\Users\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
@@ -439,9 +479,9 @@
       <LastGenOutput>Localization.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <ProjectReference Include="..\Booking.Repositories\Booking.Repositories.csproj">
+    <ProjectReference Include="..\Booking.Repositories\Booking.DataAccess.csproj">
       <Project>{FD3CD658-F5A9-4DB5-9F06-3A7A8CB4C47D}</Project>
-      <Name>Booking.Repositories</Name>
+      <Name>Booking.DataAccess</Name>
     </ProjectReference>
     <ProjectReference Include="..\Booking.Services\Booking.Services.csproj">
       <Project>{8C8D1B88-47A6-4825-81F7-A3AA86CC3589}</Project>

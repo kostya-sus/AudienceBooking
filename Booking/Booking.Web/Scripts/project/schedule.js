@@ -4,6 +4,8 @@ var tdWidth;
 var tdHeight;
 var thHeight;
 var events;
+var availableAudiencesIds = [];
+var availableAudiencesDivs;
 
 function posToTime(l, u, w, pos) {
     var time = new Date();
@@ -97,6 +99,48 @@ function dateChangedEvent(newDate, loadedCallback) {
     loadSchedule(newDate, loadedCallback);
 }
 
+function rebuildTable(hourStart, hourEnd, audiences) {
+    var $tableNames = $("#schedule-rooms-column");
+    $tableNames.empty();
+    var $tr = $("<tr></tr>");
+    $tr.append($("<th></th>"));
+    $tableNames.append($tr);
+    var row;
+    for (row = 0; row < audiences.length; ++row) {
+        $tr = $("<tr></tr>");
+        var $td = $("<td class='audience-row'></td>");
+        $td.attr("id", "audience-row-" + audiences[row].Id);
+        $td.attr("data-audience-id", audiences[row].Id);
+        $td.attr("data-row-index", row);
+        $td.text(audiences[row].Name);
+        $tr.append($td);
+        $tableNames.append($tr);
+    }
+
+    var $table = $("#schedule-contents-table");
+    $table.empty();
+    $tr = $("<tr></tr>");
+    var hour;
+
+    for (hour = hourStart; hour < hourEnd; ++hour) {
+        var $th = $("<th></th>");
+        var hourStr = (hour < 10 ? "0" : "") + hour;
+        $th.text(hourStr + ":00");
+        $tr.append($th);
+    }
+
+    $table.append($tr);
+
+    for (row = 0; row < audiences.length; ++row) {
+        $tr = $("<tr></tr>");
+        for (hour = hourStart; hour < hourEnd; ++hour) {
+            $tr.append($("<td></td>"));
+        }
+
+        $table.append($tr);
+    }
+}
+
 function refillSchedule(eventsList) {
     $(".schedule-event-item").remove();
 
@@ -104,7 +148,7 @@ function refillSchedule(eventsList) {
 
     eventsList.forEach(function(event) {
         var $scheduleItem = $("<div></div>");
-        var date = parseMvcDate(event.EventDateTime);
+        var date = parseMvcDate(event.StartTime);
 
         var startTime = timeToStringHHMM(date);
         var endTime = timeToStringHHMM(new Date(date.getTime() + event.Duration * 60000));
@@ -193,30 +237,30 @@ function refillSchedule(eventsList) {
                             .click(function() {
                                 $("#" + formId + " .join-event-submit").click();
                             });
-                        /*
-                        var form = $("#" + formId);
-                        var validator = form.data("validator");
-            
-                        validator.settings.showErrors = function () {
-                            var disabled = this.numberOfInvalids() !== 0;
-                            if (disabled) {
-                                $("#" + formId + " .fa-plus").addClass("join-disabled");
-                            } else {
-                                $("#" + formId + " .fa-plus").removeClass("join-disabled");
-                            }
-            
-                            this.defaultShowErrors();
-                        };*/
                     });
             }
         });
 }
 
 function loadSchedule(date, loadedCallback) {
-    var url = $("#get-day-schedule-url").val() + "?date=" + date.toISOString();
+    var audienceMapIdParameter = "&audienceMapId=" + $("#audience-map-id").val();
+    var url = $("#get-day-schedule-url").val() + "?date=" + date.toISOString() + audienceMapIdParameter;
     $.getJSON(url)
         .done(function(data) {
+            lowerHourBound = data.BookingHourStart;
+            upperHourBound = data.BookingHourEnd;
+            rebuildTable(lowerHourBound, upperHourBound, data.AvailableAudiences);
             refillSchedule(data.Items);
+
+            var rows = $(".audience-row");
+            availableAudiencesIds = [];
+
+            for (var i = 0; i < rows.length; ++i) {
+                availableAudiencesIds.push($(rows[i]).attr("data-audience-id"));
+            }
+
+            availableAudiencesDivs = $(".room-available");
+
             events = data.Items;
             if (typeof loadedCallback === "function") {
                 loadedCallback();
@@ -246,21 +290,28 @@ function isWeekend(date) {
 function incrementDate() {
     var $datepicker = $("#datepicker");
     var date = $datepicker.datepicker("getDate");
-    date.setDate(date.getDate() + 1);
-    setDate(date);
-    if (isWeekend(date)) {
-        incrementDate();
-    }
+
+    var url = $("#get-next-available-date-url").val() + "?date=" + date.toISOString();
+
+    $.get(url)
+        .done(function(data) {
+            date = parseMvcDate(data.Date);
+            setDate(date);
+        });
 }
+
 
 function decrementDate() {
     var $datepicker = $("#datepicker");
     var date = $datepicker.datepicker("getDate");
-    date.setDate(date.getDate() - 1);
-    setDate(date);
-    if (isWeekend(date)) {
-        decrementDate();
-    }
+
+    var url = $("#get-previous-available-date-url").val() + "?date=" + date.toISOString();
+
+    $.get(url)
+        .done(function(data) {
+            date = parseMvcDate(data.Date);
+            setDate(date);
+        });
 }
 
 function checkIfNewDateIsToday(newDate) {

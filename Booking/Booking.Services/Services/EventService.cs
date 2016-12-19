@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Security.Principal;
 using Booking.Models;
+using Booking.Models.EfModels;
 using Booking.Repositories.Interfaces;
 using Booking.Services.Interfaces;
 using Microsoft.AspNet.Identity;
@@ -13,19 +14,40 @@ namespace Booking.Services.Services
         private readonly IUnitOfWork _unitOfWork;
         private readonly IUsersService _usersService;
         private readonly IEmailNotificationService _emailNotificationService;
+        private readonly IAudienceService _audienceService;
 
         public EventService(IUnitOfWork unitOfWork, IUsersService usersService,
-            IEmailNotificationService emailNotificationService)
+            IEmailNotificationService emailNotificationService, IAudienceService audienceService)
         {
             _unitOfWork = unitOfWork;
             _usersService = usersService;
             _emailNotificationService = emailNotificationService;
+            _audienceService = audienceService;
         }
 
         public void CreateEvent(Event eventEntity)
         {
-            _unitOfWork.EventRepository.CreateEvent(eventEntity);
-            _unitOfWork.Save();
+            using (var transaction = _unitOfWork.Context.Database.BeginTransaction())
+            {
+                try
+                {
+                    if (!_audienceService.IsFree(eventEntity.AudienceId, eventEntity.StartTime,
+                        eventEntity.EndTime, eventEntity.Id))
+                    {
+                        throw new InvalidOperationException("Sorry, you cannot book this audience for this period.");
+                    }
+
+                    _unitOfWork.EventRepository.CreateEvent(eventEntity);
+                    _unitOfWork.Save();
+
+                    transaction.Commit();
+                }
+                catch (Exception)
+                {
+                    transaction.Rollback();
+                    throw;
+                }
+            }
         }
 
         public Event GetEvent(Guid id)
@@ -98,7 +120,6 @@ namespace Booking.Services.Services
 
             if (CanEdit(editor, eventEntity))
             {
-
                 _unitOfWork.EventParticipantRepository.DeleteEventParticipant(participant);
                 _unitOfWork.Save();
 

@@ -1,4 +1,5 @@
 ﻿using Booking.Models;
+using Booking.Models.EfModels;
 
 namespace Booking.Services.Interfaces
 {

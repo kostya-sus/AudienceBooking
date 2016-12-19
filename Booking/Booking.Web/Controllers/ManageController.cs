@@ -15,6 +15,7 @@ using PagedList;
 using Booking.Web.ViewModels.Users;
 using Booking.Services.Interfaces;
 using System.Collections.Generic;
+using Booking.Repositories;
 
 namespace Booking.Web.Controllers
 {
@@ -28,8 +29,9 @@ namespace Booking.Web.Controllers
 
         public ManageController()
         {
+            var uof = new UnitOfWork();
             _usersService = new UsersService();
-            _schudeleServise = new ScheduleService();
+            _schudeleServise = new ScheduleService(uof.EventRepository);
         }
 
         public ManageController(ApplicationUserManager userManager, ApplicationSignInManager signInManager)

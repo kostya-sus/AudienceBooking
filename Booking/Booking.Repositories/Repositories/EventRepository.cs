@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Booking.Models;
+using Booking.Models.EfModels;
 using Booking.Repositories.Interfaces;
 
 namespace Booking.Repositories.Repositories
@@ -12,6 +13,7 @@ namespace Booking.Repositories.Repositories
     public class EventRepository : IEventRepository
     {
         private readonly BookingDbContext _context;
+        private bool _disposed;
 
         public EventRepository(BookingDbContext context)
         {
@@ -21,6 +23,11 @@ namespace Booking.Repositories.Repositories
         public IQueryable<Event> GetAllEvents()
         {
             return _context.Events;
+        }
+
+        public IQueryable<Event> GetEventsByAudienceMapId(Guid audienceMapId)
+        {
+            return _context.Events.Where(x => x.Audience.AudienceMapId == audienceMapId);
         }
 
         public Event GetEventById(Guid id)
@@ -47,8 +54,6 @@ namespace Booking.Repositories.Repositories
         {
             _context.SaveChanges();
         }
-
-        private bool _disposed;
 
         public virtual void Dispose(bool disposing)
         {

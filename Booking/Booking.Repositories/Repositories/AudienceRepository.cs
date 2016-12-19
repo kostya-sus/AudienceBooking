@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Booking.Enums;
 using Booking.Models;
+using Booking.Models.EfModels;
 using Booking.Repositories.Interfaces;
 
 namespace Booking.Repositories.Repositories
@@ -13,6 +14,7 @@ namespace Booking.Repositories.Repositories
     public class AudienceRepository : IAudienceRepository
     {
         private readonly BookingDbContext _context;
+        private bool _disposed;
 
         public AudienceRepository(BookingDbContext context)
         {
@@ -24,9 +26,14 @@ namespace Booking.Repositories.Repositories
             return _context.Audiences;
         }
 
-        public Audience GetAudienceById(AudiencesEnum id)
+        public Audience GetAudienceById(Guid id)
         {
             return _context.Audiences.Find(id);
+        }
+
+        public void CreateAudience(Audience audience)
+        {
+            _context.Audiences.Add(audience);
         }
 
         public void UpdateAudience(Audience audience)
@@ -34,12 +41,16 @@ namespace Booking.Repositories.Repositories
             _context.Entry(audience).State = EntityState.Modified;
         }
 
+        public void DeleteAudienceById(Guid id)
+        {
+            var selectQuery = _context.Audiences.Where(x => x.Id == id);
+            _context.Audiences.RemoveRange(selectQuery);
+        }
+
         public void Save()
         {
             _context.SaveChanges();
         }
-
-        private bool _disposed;
 
         public virtual void Dispose(bool disposing)
         {

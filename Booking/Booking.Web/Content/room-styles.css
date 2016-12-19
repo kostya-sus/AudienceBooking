@@ -22,20 +22,24 @@
 
 .room-not-available { background-color: #D7D9DE; }
 
+#room-map-container .map-background-image {
+    z-index: 15;
+    position: relative;
+}
 
 .room-title {
-    line-height: 1.5;
     display: inline-block;
     vertical-align: middle;
     border-color: #ffffff;
     border-radius: 10px;
     background-color: rgba(0, 0, 0, 0.2);
-}
-
-.room-title > p {
-    padding: 5px;
+    padding: 5px 10px;
     color: #ffffff;
-    margin: 0 5px;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
 }
 
 .room-proxy {

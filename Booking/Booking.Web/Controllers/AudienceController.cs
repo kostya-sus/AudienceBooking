@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Web.Mvc;
+using AutoMapper;
 using Booking.Enums;
 using Booking.Repositories;
 using Booking.Services.Interfaces;
@@ -27,20 +28,10 @@ namespace Booking.Web.Controllers
         }
 
         [HttpGet]
-        public ActionResult GetAudienceInfo(int audienceId)
+        public ActionResult GetAudienceInfo(Guid audienceId)
         {
-            var audience = _audienceService.GetAudience((AudiencesEnum) audienceId);
-            var vm = new AudienceInfoViewModel
-            {
-                BoardsCount = audience.BoardsCount,
-                Id = audience.Id,
-                IsBookingAvailable = audience.IsBookingAvailable,
-                LaptopsCount = audience.LaptopsCount,
-                Name = audience.Name,
-                PrintersCount = audience.PrintersCount,
-                ProjectorsCount = audience.ProjectorsCount,
-                SeatsCount = audience.SeatsCount
-            };
+            var audience = _audienceService.GetAudience(audienceId);
+            var vm = Mapper.Map<AudienceInfoViewModel>(audience);
 
             return PartialView("_AudienceInfoPartial", vm);
         }
@@ -52,12 +43,9 @@ namespace Booking.Web.Controllers
         }
 
         [HttpGet]
-        public ActionResult IsFree(AudiencesEnum audienceId, DateTime startEvent, DateTime endEvent, Guid? eventId)
+        public ActionResult IsFree(Guid audienceId, DateTime startEvent, DateTime endEvent, Guid? eventId)
         {
-            TimeSpan span = endEvent.Subtract(startEvent);
-            var duration = (int)span.TotalMinutes;
-
-            var isFree = _audienceService.IsFree(audienceId, startEvent, duration, eventId);
+            var isFree = _audienceService.IsFree(audienceId, startEvent, endEvent, eventId);
             return Content(isFree.ToString());
         }
 

@@ -140,7 +140,7 @@ namespace Booking.Web.Localization {
         }
 
         /// <summary>
-        ///   Looks up a localized string similar to Выберите аудиторию на 10 этаже.
+        ///   Looks up a localized string similar to Выберите аудиторию.
         /// </summary>
         public static string ChooseAudience {
             get {

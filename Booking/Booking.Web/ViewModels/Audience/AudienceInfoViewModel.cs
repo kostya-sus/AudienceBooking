@@ -1,10 +1,11 @@
-﻿using Booking.Enums;
+﻿using System;
+using Booking.Enums;
 
 namespace Booking.Web.ViewModels.Audience
 {
     public class AudienceInfoViewModel
     {
-        public AudiencesEnum Id { get; set; }
+        public Guid Id { get; set; }
 
         public string Name { get; set; }
 
@@ -19,5 +20,7 @@ namespace Booking.Web.ViewModels.Audience
         public int ProjectorsCount { get; set; }
 
         public bool IsBookingAvailable { get; set; }
+
+        public string LineDetailsImageUrl { get; set; }
     }
 }

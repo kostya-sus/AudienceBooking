@@ -1,7 +1,7 @@
 ﻿@using Booking.Web.Localization
 @model Booking.Web.ViewModels.Event.CreateEditEventViewModel
-    
-@using (Ajax.BeginForm("Save", "Event", new { eventId = Model.Id }, new AjaxOptions
+
+@using (Ajax.BeginForm("Save", "Event", new {eventId = Model.Id}, new AjaxOptions
 {
     HttpMethod = "Post",
     UpdateTargetId = string.Format("event-display-popup-{0}", Model.Id),
@@ -11,8 +11,8 @@
 {
     <div id="edit-event-popup">
         <div class="form-group head">
-            @Html.TextBoxFor(m => m.StartDateTime, "{0:MM/dd/yyyy HH:mm:ss}", htmlAttributes: new {@type = "hidden", id = "edit-event-popup-start-date-"+@Model.Id, value = @Model.StartDateTime})
-            @Html.TextBoxFor(m => m.EndDateTime, "{0:MM/dd/yyyy HH:mm:ss}", htmlAttributes: new {@type = "hidden", id = "edit-event-popup-end-date-"+@Model.Id, value = @Model.EndDateTime})
+            @Html.TextBoxFor(m => m.StartTime, "{0:MM/dd/yyyy HH:mm:ss}", htmlAttributes: new {@type = "hidden", id = "edit-event-popup-start-date-" + @Model.Id, value = @Model.StartTime})
+            @Html.TextBoxFor(m => m.EndTime, "{0:MM/dd/yyyy HH:mm:ss}", htmlAttributes: new {@type = "hidden", id = "edit-event-popup-end-date-" + @Model.Id, value = @Model.EndTime})
             <div id="edit-event-popup-event-date-@Model.Id" class="">
                 <div class="datetime-updown-outer" style="margin-left: 15px">
                     <div class="datetime-updown-control datetime-updown-day">
@@ -58,8 +58,7 @@
                     </div>
                 </div>
                 <div class="audiences-dropdown">
-                    @Html.DropDownListFor(m => m.ChosenAudienceId, new SelectList(Model.AvailableAudiences,
-                        "Key", "Value"), new {@class = "select-style", value = @Model.ChosenAudienceId})
+                    @Html.DropDownListFor(m => m.AudienceId, new SelectList(Model.AvailableAudiences, "Key", "Value"), new {@class = "select-style", value = @Model.AudienceId})
                 </div>
 
                 <button type="button" class="btn-close-edit-event-popup" onclick="displayEventPopup()" data-eventid="@Model.Id" id="close-popup-@Model.Id"></button>
@@ -116,6 +115,8 @@
         </div>
     </div>
     <script>
-        configureDatetimeUpdown("edit-event-popup-event-date-@Model.Id", "edit-event-popup-start-date-@Model.Id", "edit-event-popup-end-date-@Model.Id");
+        configureDatetimeUpdown("edit-event-popup-event-date-@Model.Id",
+            "edit-event-popup-start-date-@Model.Id",
+            "edit-event-popup-end-date-@Model.Id");
     </script>
 }

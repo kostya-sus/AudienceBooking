@@ -1,0 +1,15 @@
+﻿@model System.Collections.Generic.Dictionary<System.Guid, string>
+
+<div class="container" style="min-height:500px">
+
+    <h2>Select audience map</h2>
+
+    <ul>
+        @foreach (var pair in Model)
+        {
+            <li>
+                <a href="@Url.Action("AudienceMap", "Home", new {id = pair.Key})">@pair.Value</a>
+            </li>
+        }
+    </ul>
+</div>

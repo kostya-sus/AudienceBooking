@@ -29,7 +29,8 @@
 }
 
 .line-details {
+    top: 0;
+    left: 0;
     z-index: 80;
     position: absolute;
-    bottom: 87px;
 }

@@ -1,0 +1,17 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width"/>
+    <title>@ViewBag.Title</title>
+    @Styles.Render("~/Content/admin_panel/layout.css")
+    @Styles.Render("~/Content/bootstrap.min.css")
+    @RenderSection("styles", required: false)
+</head>
+<body>
+<div class="page-container">
+    @RenderBody()
+    @RenderSection("scripts", required: false)
+</div>
+</body>
+</html>

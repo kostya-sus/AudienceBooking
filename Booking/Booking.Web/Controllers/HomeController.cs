@@ -1,13 +1,12 @@
 ﻿using System;
 using System.Linq;
 using System.Web.Mvc;
-using Booking.Enums;
+using AutoMapper;
 using Booking.Repositories;
 using Booking.Services.Interfaces;
 using Booking.Services.Services;
 using Booking.Web.Helpers;
-using Booking.Web.ViewModels;
-using Booking.Web.ViewModels.Audience;
+using Booking.Web.ViewModels.AudienceMap;
 using Booking.Web.ViewModels.Home;
 
 namespace Booking.Web.Controllers
@@ -15,67 +14,40 @@ namespace Booking.Web.Controllers
     [HandleException]
     public class HomeController : Controller
     {
-        private readonly IAudienceService _audienceService;
-        private readonly IScheduleService _scheduleService;
+        private readonly IAudienceMapService _audienceMapService;
 
         public HomeController()
         {
             var uof = new UnitOfWork();
-            _audienceService = new AudienceService(uof);
-            _scheduleService = new ScheduleService(uof.EventRepository);
+            _audienceMapService = new AudienceMapService(uof);
         }
 
         [HttpGet]
         public ActionResult Index()
         {
-            var audiences = _audienceService.GetAllAudiences().ToList();
+            return AudienceMap(AudienceMapSelector.AudienceMapId);
+        }
 
-            var audiencesVms = audiences.ToDictionary(
-                a => a.Id,
-                a => new AudienceMapItemVm
-                {
-                    Id = a.Id,
-                    IsAvailable = a.IsBookingAvailable,
-                    Name = a.Name
-                });
-
-            var availableAudiences = audiences.Where(a => a.IsBookingAvailable)
-                .ToDictionary(a => (int) a.Id, a => a.Name);
+        [HttpGet]
+        public ActionResult AudienceMap(Guid id)
+        {
+            var audienceMap = _audienceMapService.GetAudienceMap(id);
 
             var viewModel = new HomeViewModel
             {
-                Audiences = audiencesVms,
-                ScheduleTable = new ScheduleTableViewModel
-                {
-                    AvailableAudiences = availableAudiences,
-                    LowerHourBound = (int) BookingHoursBoundsEnum.Lower,
-                    UpperHourBound = (int) BookingHoursBoundsEnum.Upper
-                },
+                AudienceMap = Mapper.Map<AudienceMapViewModel>(audienceMap),
                 IsAdmin = User.IsInRole("admin"),
                 IsLoggedIn = User.Identity.IsAuthenticated
             };
 
-            return View(viewModel);
+            return View("Index", viewModel);
         }
-        
-        [HttpGet]
-        public ActionResult GetDaySchedule(DateTime date)
-        {
-            var viewModel = new DayScheduleViewModel
-            {
-                Items = _scheduleService.GetEventsByDay(date).Select(x => new DaySheduleItemViewModel
-                {
-                    Id = x.Id,
-                    AudienceId = x.AudienceId,
-                    Duration = x.Duration,
-                    EventDateTime = x.EventDateTime,
-                    IsPublic = x.IsPublic,
-                    Title = x.Title,
-                    AuthorId = x.AuthorId
-                })
-            };
 
-            return Json(viewModel, JsonRequestBehavior.AllowGet);
+        [HttpGet]
+        public ActionResult SelectMap()
+        {
+            var maps = _audienceMapService.GetAllAudienceMaps().ToDictionary(x => x.Id, x => x.Name);
+            return View(maps);
         }
     }
 }
