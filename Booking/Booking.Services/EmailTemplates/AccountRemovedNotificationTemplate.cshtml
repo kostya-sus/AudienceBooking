@@ -1,0 +1,22 @@
+﻿@using Booking.Services.Resources
+@model Booking.Services.EmailModels.AccountRegisteredRemovedNotificationModel
+
+<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title>GoodBye</title>
+</head>
+<body>
+    <p>
+        @Resources.Hi, @Model.Name
+    </p>
+<p>
+    @Resources.Your_account_was_removed <a href="http://softheme-booking.azurewebsites.net/">@Resources.our_site</a>!
+</p>
+
+    <p>@Resources.AudienceBooking</p>
+
+</body>
+</html>  
