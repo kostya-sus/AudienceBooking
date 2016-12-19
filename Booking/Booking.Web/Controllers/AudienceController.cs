@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Web.Mvc;
 using AutoMapper;
-using Booking.Enums;
 using Booking.Repositories;
 using Booking.Services.Interfaces;
 using Booking.Services.Services;

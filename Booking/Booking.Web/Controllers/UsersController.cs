@@ -1,11 +1,4 @@
-﻿using Booking.Services.Services;
-using System;
-using System.Web.Mvc;
-using PagedList;
-using PagedList.Mvc;
-using Microsoft.AspNet.Identity;
-using System.Web;
-using Microsoft.AspNet.Identity.Owin;
+﻿using System.Web.Mvc;
 
 namespace Booking.Web.Controllers
 {

@@ -1,5 +1,4 @@
-﻿using System;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
 using Booking.Services.Services;
 using Booking.Web.ViewModels.Contact;
 

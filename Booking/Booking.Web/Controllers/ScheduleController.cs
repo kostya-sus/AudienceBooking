@@ -5,7 +5,6 @@ using AutoMapper;
 using Booking.Repositories;
 using Booking.Services.Interfaces;
 using Booking.Services.Services;
-using Booking.Web.Helpers;
 using Booking.Web.ViewModels.Home;
 using Booking.Web.ViewModels.Schedule;
 

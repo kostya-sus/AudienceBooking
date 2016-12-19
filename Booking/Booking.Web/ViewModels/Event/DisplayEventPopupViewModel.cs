@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using Booking.Enums;
-using Booking.Web.ViewModels.Audience;
 
 namespace Booking.Web.ViewModels.Event
 {

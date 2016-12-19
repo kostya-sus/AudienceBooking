@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using Booking.Web.ViewModels.Audience;
 using Booking.Web.ViewModels.AudienceMap;
 
 namespace Booking.Web.ViewModels.Event

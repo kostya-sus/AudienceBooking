@@ -1,5 +1,4 @@
-﻿using Booking.Web.ViewModels.Audience;
-using Booking.Web.ViewModels.Manage;
+﻿using Booking.Web.ViewModels.Manage;
 
 namespace Booking.Web.ViewModels.Profile
 {

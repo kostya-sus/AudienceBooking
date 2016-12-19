@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Booking.Enums;
-using Booking.Models;
 using Booking.Models.EfModels;
 using Booking.Web.ViewModels.Audience;
 

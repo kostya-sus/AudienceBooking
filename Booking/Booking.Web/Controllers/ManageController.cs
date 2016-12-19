@@ -9,14 +9,12 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using Booking.Models;
-using Booking.Repositories.Repositories;
 using Booking.Services.Services;
 using PagedList;
 using Booking.Web.ViewModels.Users;
 using Booking.Services.Interfaces;
 using System.Collections.Generic;
 using Booking.Repositories;
-using Booking.Repositories.Interfaces;
 
 namespace Booking.Web.Controllers
 {
@@ -29,16 +27,20 @@ namespace Booking.Web.Controllers
         private readonly ScheduleService _scheduleService;
         private readonly EventService _eventService;
 
-        public ManageController(ApplicationUserManager userManager, ApplicationSignInManager signInManager)
+        public ManageController()
         {
-            UserManager = userManager;
-            SignInManager = signInManager;
             var unitofWork = new UnitOfWork();
             _usersService = new UsersService();
             _scheduleService = new ScheduleService(unitofWork.EventRepository);
             var emailNotificationService = new EmailNotificationService();
             IAudienceService audienceService = new AudienceService(unitofWork);
             _eventService = new EventService(unitofWork, _usersService, emailNotificationService, audienceService);
+        }
+
+        public ManageController(ApplicationUserManager userManager, ApplicationSignInManager signInManager)
+        {
+            UserManager = userManager;
+            SignInManager = signInManager;
         }
 
         public ApplicationSignInManager SignInManager

@@ -1,15 +1,8 @@
-using System.Collections.Generic;
-using System.Data.Entity;
-using System.Data.Entity.Validation;
-using System.Text;
-using Booking.Enums;
-using Booking.Models.Helpers;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace Booking.Models.Migrations
 {
-    using System;
     using System.Data.Entity.Migrations;
     using System.Linq;
 

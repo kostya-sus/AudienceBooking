@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Security.Principal;
-using Booking.Models;
 using Booking.Models.EfModels;
 
 namespace Booking.Services.Interfaces

@@ -1,6 +1,5 @@
 ﻿using System.Globalization;
 using AutoMapper;
-using Booking.Models;
 using Booking.Models.EfModels;
 using Booking.Web.ViewModels.Event;
 

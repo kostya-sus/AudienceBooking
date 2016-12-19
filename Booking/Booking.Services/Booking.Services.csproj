@@ -88,10 +88,6 @@
     <Compile Include="Services\UsersService.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Booking.Enums\Booking.Enums.csproj">
-      <Project>{CE3D5ABD-3457-434F-A525-EFC5D76E025D}</Project>
-      <Name>Booking.Enums</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Booking.Models\Booking.Models.csproj">
       <Project>{55DF4FDE-EA7C-47DB-B8E3-FEFC58EA1B47}</Project>
       <Name>Booking.Models</Name>

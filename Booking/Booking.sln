@@ -11,8 +11,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Booking.Services", "Booking
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Booking.Web", "Booking.Web\Booking.Web.csproj", "{93B1031B-29AB-432C-BDF8-8CDF1C7C904C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Booking.Enums", "Booking.Enums\Booking.Enums.csproj", "{CE3D5ABD-3457-434F-A525-EFC5D76E025D}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -36,10 +34,6 @@ Global
 		{93B1031B-29AB-432C-BDF8-8CDF1C7C904C}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
 		{93B1031B-29AB-432C-BDF8-8CDF1C7C904C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{93B1031B-29AB-432C-BDF8-8CDF1C7C904C}.Release|Any CPU.Build.0 = Release|Any CPU
-		{CE3D5ABD-3457-434F-A525-EFC5D76E025D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{CE3D5ABD-3457-434F-A525-EFC5D76E025D}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{CE3D5ABD-3457-434F-A525-EFC5D76E025D}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{CE3D5ABD-3457-434F-A525-EFC5D76E025D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

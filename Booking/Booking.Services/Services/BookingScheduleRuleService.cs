@@ -1,9 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data.Entity.Core.Objects;
 using System.Linq;
 using Booking.Models.EfModels;
-using Booking.Repositories;
 using Booking.Repositories.Interfaces;
 using Booking.Services.Interfaces;
 

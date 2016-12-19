@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Linq;
-using Booking.Enums;
-using Booking.Models;
 using Booking.Models.EfModels;
 
 namespace Booking.Repositories.Interfaces
