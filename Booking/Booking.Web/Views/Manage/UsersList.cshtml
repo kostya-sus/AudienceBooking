@@ -12,12 +12,15 @@
 @section styles{
         @Styles.Render("~/Content/Users.css")
         @Styles.Render("~/Content/PagedList.css")
+        @Styles.Render("~Content/events-popups.css")
 }
 
 @section scripts{
-@Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/jqueryval")
     @Scripts.Render("~/bundles/modernizr")
     @Scripts.Render("//code.jquery.com/ui/1.12.1/jquery-ui.js")
+    @Scripts.Render("~/Scripts/project/event-page.js")
+    @Scripts.Render("~/Scripts/project/cancel-event.js")
 }
 
 
@@ -64,7 +67,8 @@
                                 </p>
                             </td>
                             <td data-href="@Url.Action("DeleteConfirm", "Manage", new { userId = user.Id })" style="width: 125px; text-align: center">
-                                <i class="fa fa-times" aria-hidden="true" style="font-size: large;"></i>
+                                
+                                <button class="cancel-event-btn" id="btn-show-delete-popup" data-eventId="user.Id" onclick="displayDeleteUserPopup()" data-toggle="modal" data-target=".example-modal-sm"><i class="fa fa-times" aria-hidden="true" style="font-size: large;"></i></button>
                             </td>
                         </tr>
                     </tbody>

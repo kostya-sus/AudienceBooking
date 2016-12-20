@@ -28,3 +28,9 @@ function displayEventPopup(id) {
     var url = $("#display-event-popup-url").val() + "?eventId=" + id;
     $("#display-event-popup-container-" + id).load(url);
 }
+function displayDeleteUserPopup() {
+    var id = $("#btn-show-delete-popup").attr("data-eventid");
+    var eventUrl = $("#cancel-event-popup-url").val();
+    eventUrl += "?eventId=" + id;
+    $("#cancel-event-popup").load(eventUrl);
+}
