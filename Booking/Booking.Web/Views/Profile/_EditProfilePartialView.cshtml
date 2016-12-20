@@ -5,7 +5,7 @@
 <div style="background-color: white">
 
     <div id="delete" style="width: 100%; height: 30px; ">
-        @using (Html.BeginForm("Delete", "Manage", new { userId = Model.Id }))
+        @using (Html.BeginForm("DeleteConfirm", "Manage", new { userId = Model.Id }))
             {
             @Html.AntiForgeryToken()
             <input type="submit" id="delete" value=@Localization.Delete class="profile-submit" style="float: right" />

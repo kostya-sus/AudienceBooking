@@ -26,19 +26,21 @@
 
 
 <div class="page-container container" style="min-height: calc(100vh - 50px);">
-    <div style="width:800px">
+    <div>
         <h2 style="padding-top: 20px">@Localization.UserList</h2>
         <h4>@Localization.All: @Model.Count</h4>
-
-       @using (Html.BeginForm("UserList","Manage", new {page = 1}))
-       {
-        <p style="float:right">
-            @Html.TextBox("SearchString") <br />
-            <input type="submit" value="Filter" />
-        </p>
-       }
-    
-
+    </div>
+    <div style="width: 800px; display: inline-block ;">
+        @using (Html.BeginForm("UserList", "Manage", new { page = 1 }))
+        {
+            <p class="profile-input" >
+                @Html.TextBox("SearchString","", new { @class = "profile-input-edit" })
+                <span class="icon"><i class="fa fa-search"></i></span>
+            </p>
+            
+        }
+    </div>
+    <div style="width:800px">
         <div id="users">
             <table cellspacing="5" cellpadding="10">
 
@@ -46,24 +48,25 @@
 
                 {
                     <tbody>
-                    <tr>
-                        <td class='profile-link clickable-row' data-href="@Url.Action("Index", "Profile", new {userId = user.Id})" style="width: 250px">
-                            <div>
-                                @user.Name @if (user.IsAdmin)
-                                           {<div class="admin">admin</div>}
-                            </div>
-                        </td>
-                        <td class='clickable-row' style="width: 250px">
-                            <p>@user.Email</p>
-                        </td>
-                        <td class='clickable-row' style="width: 100px;">
-                            <p><i class="fa fa-calendar-o" aria-hidden="true">&nbsp;</i>@user.ActiveEventsCount
-                            </p>
-                        </td>
-                        <td class="delete-profile" style="width: 100px; text-align: center">
-                            <i class="fa fa-times" aria-hidden="true" style="font-size: large;"></i>
-                        </td>
-                    </tr>
+                        <tr>
+                            <td data-href="@Url.Action("Index", "Profile", new {userId = user.Id})" style="width: 275px;">
+                                <div>
+                                    @user.Name @if (user.IsAdmin)
+                                    {<div class="admin">admin</div>}
+                                </div>
+                            </td>
+                            <td data-href="@Url.Action("Index", "Profile", new {userId = user.Id})" style="width: 275px">
+                                <p>@user.Email</p>
+                            </td>
+                            <td data-href="@Url.Action("Index", "Profile", new {userId = user.Id})" style="width: 125px;">
+                                <p>
+                                    <i class="fa fa-calendar-o" aria-hidden="true">&nbsp;</i>@user.ActiveEventsCount
+                                </p>
+                            </td>
+                            <td data-href="@Url.Action("DeleteConfirm", "Manage", new { userId = user.Id })" style="width: 125px; text-align: center">
+                                <i class="fa fa-times" aria-hidden="true" style="font-size: large;"></i>
+                            </td>
+                        </tr>
                     </tbody>
                 }
             </table>
@@ -74,16 +77,26 @@
 
     </div>
 
+
+
 </div>
 
 <script>
-    $(document).ready(function ($) {
-        $(".profile-link").click(function () {
-            window.document.location = $(this).data("href");
-        });
-        $(".delete-profile").click(function () {
-            window.document.location = $(this).data("href");
-        });
-    });
+    window.onload = function () {
+        var table = document.getElementsByTagName('table')[0];
+
+        table.onclick = function( e ) {
+            var target = e.target,
+                link;
+
+            while ( target.tagName != 'TD' ) {
+                target = target.parentNode;
+                if (target.tagName == 'TABLE') return;
+            }
+
+            link = target.getAttribute('data-href');
+            if (link) window.document.location = link;
+        }
+    }
 </script>
 

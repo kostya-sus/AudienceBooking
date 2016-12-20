@@ -14,6 +14,7 @@ using PagedList;
 using Booking.Web.ViewModels.Users;
 using Booking.Services.Interfaces;
 using System.Collections.Generic;
+using System.Net;
 using Booking.Repositories;
 
 namespace Booking.Web.Controllers
@@ -237,26 +238,24 @@ namespace Booking.Web.Controllers
             return View();
         }
 
+        public ActionResult Delete(string userId)
+        {
+            return PartialView("_DeletePartial", userId);
+        }
 
-        public async Task<ActionResult> Delete(string userId)
+
+        public async Task<ActionResult> DeleteConfirm (string userId)
         {
             var user = await UserManager.FindByIdAsync(userId);
             if (user != null)
             {
-                var events = _scheduleService.GetEventsByAuthor(user);
-
-                foreach (var single in events)
-                {
-                    _eventService.CancelEvent(User, single.Id);
-                }
-
-
+                _eventService.CancelEventsByAuthor(user.Id);
                 var result = await UserManager.DeleteAsync(user);
 
                 if (result.Succeeded)
                 {
                     AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
-                    return RedirectToAction("Index", "Users");
+                    return RedirectToAction("Index", "Home");
                 }
             }
             return RedirectToAction("Index", "Home");
@@ -280,10 +279,12 @@ namespace Booking.Web.Controllers
                     }
                     else
                     {
+                        
                         result = UserManager.RemoveFromRole(model.Id, "Admin");
                     }
                     if (result.Succeeded)
                     {
+                        //SignInManager.AuthenticationManager.User.;
                         return RedirectToAction("Index", "Profile", new { userId = model.Id });
                     }
                     else
@@ -301,10 +302,10 @@ namespace Booking.Web.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult ChangePassword(ProfileViewModel model)
         {
-            if (!ModelState.IsValid)
+            if (ModelState.IsValid)
             {
-                return View(model);
-            }
+                
+            
             var result = UserManager.ChangePassword(User.Identity.GetUserId(), model.ChangePasswordForm.OldPassword, model.ChangePasswordForm.NewPassword);
             if (result.Succeeded)
             {
@@ -317,8 +318,9 @@ namespace Booking.Web.Controllers
 
                 return PartialView("_ResetPasswordPartial", model);
             }
+            }
             ViewData["PasswordFaild"] = Localization.Localization.Error;
-
+            
             return PartialView("_ResetPasswordPartial", model);
         }
 

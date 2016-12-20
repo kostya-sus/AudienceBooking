@@ -151,7 +151,7 @@ namespace Booking.Web.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Выберите аудиторию.
+        ///   Looks up a localized string similar to Изменить.
         /// </summary>
         public static string Change {
             get {
@@ -160,7 +160,7 @@ namespace Booking.Web.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Выберите аудиторию на 10 этаже.
+        ///   Looks up a localized string similar to Выберите аудиторию.
         /// </summary>
         public static string ChooseAudience {
             get {
@@ -696,6 +696,24 @@ namespace Booking.Web.Localization {
         public static string Today {
             get {
                 return ResourceManager.GetString("Today", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Все события, запланированные этим пользователем, будут отменены.
+        /// </summary>
+        public static string UserDeleteText {
+            get {
+                return ResourceManager.GetString("UserDeleteText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Вы уверены, что хотите удалить пользователя?.
+        /// </summary>
+        public static string UserDeleteTitle {
+            get {
+                return ResourceManager.GetString("UserDeleteTitle", resourceCulture);
             }
         }
         

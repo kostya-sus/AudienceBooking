@@ -1,0 +1,24 @@
+﻿@using Booking.Web.Localization
+@model string
+
+@using (Ajax.BeginForm("Delete", "Manage", new {userId = @Model},
+    new AjaxOptions
+    {
+        HttpMethod = "Post",
+        OnSuccess = "closeCancelEventPopup"
+    }))
+{
+    @Html.AntiForgeryToken()
+    <div class="cancel-event-container">
+        <div class="cancel-event-header">
+            <i class="fa fa-ban icon-ban" aria-hidden="true"></i>
+            <span class="cancel-event-ask-message">@Localization.UserDeleteTitle</span>
+        </div>
+        <div>@Localization.UserDeleteText</div>
+        <div class="btns-body-cancel-popup">
+            <button class="close-this-popup" data-dismiss="modal">@Localization.No</button>
+            <input type="submit" id="del-event" class="cancel-event-submit" data-id="@Model" value="@Localization.Yes"/>
+        </div>
+        <input type="hidden" id="delete-event-popup-url" value="@Url.Action("Delete", "Manage")"/>
+    </div>
+}

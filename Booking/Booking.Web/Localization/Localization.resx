@@ -354,4 +354,10 @@
   <data name="Admin" xml:space="preserve">
     <value>Администратор</value>
   </data>
+  <data name="UserDeleteText" xml:space="preserve">
+    <value>Все события, запланированные этим пользователем, будут отменены</value>
+  </data>
+  <data name="UserDeleteTitle" xml:space="preserve">
+    <value>Вы уверены, что хотите удалить пользователя?</value>
+  </data>
 </root>
